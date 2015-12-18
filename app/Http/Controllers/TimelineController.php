@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Timeline;
+use Response;
+
 class TimelineController extends Controller
 {
     /**
@@ -16,7 +19,13 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        //
+        $ret = Timeline::all();
+
+        $headers = [
+            'Access-Control-Allow-Origin'      => '*',
+            'Access-Control-Allow-Method'      => '*',
+        ];
+        return Response::json($ret, 200, $headers);
     }
 
     /**

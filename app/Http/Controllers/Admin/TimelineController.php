@@ -19,7 +19,8 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        return view('admin.timeline.index');
+        $assign['timeline'] = Timeline::orderBy('id', 'desc')->paginate();
+        return view('admin.timeline.index', $assign);
     }
 
     /**
@@ -40,7 +41,19 @@ class TimelineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, []);
+
+        $model = new Timeline();
+        $model->title   =   $request->title;
+        $model->content =   $request->content;
+        $model->content =   $request->content;
+        $model->attachment  =   $request->attachment;
+
+        if ($model->save()) {
+            return redirect()->route('admin.timeline.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

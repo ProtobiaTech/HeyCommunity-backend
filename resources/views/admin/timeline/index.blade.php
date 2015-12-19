@@ -18,16 +18,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ([1,2,3,4,5,6] as $item)
+                    @foreach ($timeline as $item)
                     <tr>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->content }}</td>
+                        <td></td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+
+            {!! $timeline->render() !!}
         </div>
     </div>
 </div>

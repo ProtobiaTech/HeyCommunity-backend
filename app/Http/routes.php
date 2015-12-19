@@ -11,8 +11,20 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'Admin\HomeController@index']);
 
-Route::resource('timeline', 'TimelineController');
-Route::resource('activity', 'ActivityController');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+
+//
+// Admin dashboard
+// ----------------------------
+Route::group(['prefix' => 'admin',], function() {
+    Route::get('/', ['as' => 'home', 'uses' => 'Admin\HomeController@index']);
+
+    Route::resource('timeline', 'Admin\TimelineController');
+    Route::resource('activity', 'Admin\ActivityController');
+});
 

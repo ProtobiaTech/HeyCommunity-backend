@@ -14,6 +14,8 @@ class CreateTimelinesTable extends Migration
     {
         Schema::create('timelines', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->index()->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
             $table->string('attachment');
             $table->text('content');

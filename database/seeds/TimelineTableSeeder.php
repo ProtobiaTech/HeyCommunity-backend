@@ -11,9 +11,12 @@ class TimelineTableSeeder extends Seeder
      */
     public function run()
     {
+        $users = \App\User::lists('id')->toArray();
+
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
             \App\Timeline::create([
+                'user_id'       =>      $faker->randomElement($users),
                 'title'         =>      $faker->sentence(),
                 'content'       =>      implode('<br>', $faker->paragraphs(random_int(1,5))),
                 'attachment'    =>      $faker->imageUrl(),

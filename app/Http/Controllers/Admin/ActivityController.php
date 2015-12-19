@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+use App\Activity;
+use Response;
+
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +19,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $ret = Activity::all();
+
+        $headers = [
+            'Access-Control-Allow-Origin'      => '*',
+        ];
+        return Response::json($ret, 200, $headers);
     }
 
     /**

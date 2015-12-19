@@ -8,7 +8,24 @@
         </div>
 
         <div class="col-sm-10">
-            {!! Form::open(array('url' => 'admin/timeline', 'method' => 'post', 'class' => 'form form-horizontal')) !!}
+            <ol class="breadcrumb">
+                <li><a href="{{ route('admin.home') }}">Home</a></li>
+                <li><a href="{{ route('admin.timeline.index') }}">Timeline</a></li>
+                <li class="active">Create</li>
+            </ol>
+
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {!! Form::open(array('url' => 'admin/timeline', 'method' => 'post', 'class' => 'form form-horizontal', 'enctype' => 'multipart/form-data')) !!}
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="title">Title</label>
                     <div class="col-sm-6">

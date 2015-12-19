@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Activity;
-use Response;
+use Response, Auth;
 
 class ActivityController extends Controller
 {
@@ -19,12 +19,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $ret = Activity::all();
-
-        $headers = [
-            'Access-Control-Allow-Origin'      => '*',
-        ];
-        return Response::json($ret, 200, $headers);
+        $assign['activities'] = Activity::orderBy('id', 'desc')->paginate();
+        return view('admin.activity.index', $assign);
     }
 
     /**
@@ -34,7 +30,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.activity.create');
     }
 
     /**
@@ -45,7 +41,30 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'     =>      'required',
+            'content'   =>      'required',
+            'avatar'    =>      'required',
+        ]);
+
+        $model = new Activity();
+        $model->title   =   $request->title;
+        $model->content =   $request->content;
+        $model->user_id     =   Auth::user()->id;
+
+        if ($model->save()) {
+            // save avatar
+            $file = $request->file('avatar');
+            $fileName = 'activity-' . $model->id . '.' . $file->getClientOriginalExtension();
+            $fileDir = 'uploads/activity/';
+            $file->move($fileDir, $fileName);
+            $model->avatar  =   '/' . $fileDir . $fileName;
+            $model->save();
+
+            return redirect()->route('admin.activity.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

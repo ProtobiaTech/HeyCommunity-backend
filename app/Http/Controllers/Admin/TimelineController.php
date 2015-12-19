@@ -50,17 +50,18 @@ class TimelineController extends Controller
         $model = new Timeline();
         $model->title   =   $request->title;
         $model->content =   $request->content;
-        $model->content =   $request->content;
         $model->user_id     =   Auth::user()->id;
 
         if ($model->save()) {
             // save attachment
-            $file = $request->file('attachment');
-            $fileName = 'timeline-' . $model->id . '.' . $file->getClientOriginalExtension();
-            $fileDir = 'uploads/timeline/';
-            $file->move($fileDir, $fileName);
-            $model->attachment  =   '/' . $fileDir . $fileName;
-            $model->save();
+            if ($request->attachment) {
+                $file = $request->file('attachment');
+                $fileName = 'timeline-' . $model->id . '.' . $file->getClientOriginalExtension();
+                $fileDir = 'uploads/timeline/';
+                $file->move($fileDir, $fileName);
+                $model->attachment  =   '/' . $fileDir . $fileName;
+                $model->save();
+            }
 
             return redirect()->route('admin.timeline.index');
         } else {

@@ -11,13 +11,6 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // administrator
-        \App\User::create([
-            'nickname'      =>  'admin',
-            'email'         =>  'admin@hey-community.online',
-            'password'      =>  bcrypt('hey-community'),
-        ]);
-
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
             \App\User::create([

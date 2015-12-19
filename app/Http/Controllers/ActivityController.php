@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Timeline;
+use App\Activity;
 use Response;
 
-class TimelineController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,12 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        return view('admin.timeline.index');
+        $ret = Activity::all();
+
+        $headers = [
+            'Access-Control-Allow-Origin'      => '*',
+        ];
+        return Response::json($ret, 200, $headers);
     }
 
     /**
@@ -29,7 +34,7 @@ class TimelineController extends Controller
      */
     public function create()
     {
-        return view('admin.timeline.create');
+        //
     }
 
     /**

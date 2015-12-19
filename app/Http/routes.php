@@ -16,13 +16,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('timeline', 'TimelineController');
+Route::resource('activity', 'ActivityController');
 
 
 //
 // Admin dashboard
 // ----------------------------
 Route::group(['prefix' => 'admin',], function() {
-    Route::get('/', ['as' => 'home', 'uses' => 'Admin\HomeController@index']);
+    Route::get('/', ['as' => 'admin.home', 'uses' => 'Admin\HomeController@index']);
 
     Route::resource('timeline', 'Admin\TimelineController');
     Route::resource('activity', 'Admin\ActivityController');

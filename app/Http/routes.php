@@ -12,9 +12,8 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
 
 Route::group(['middleware' => ['addTenant', 'addHeader']], function() {
     Route::resource('timeline', 'TimelineController');

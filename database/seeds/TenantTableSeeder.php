@@ -14,7 +14,7 @@ class TenantTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
             \App\Tenant::create([
-                'nickname'      =>  $faker->name(),
+                'site_name'     =>  $faker->name(),
                 'domain'        =>  $faker->domainName(),
                 'email'         =>  $faker->email(),
                 'phone'         =>  $faker->phoneNumber(),

@@ -20,12 +20,7 @@ class TimelineController extends Controller
     public function index()
     {
         $ret = Timeline::all();
-
-        $headers = [
-            'Access-Control-Allow-Origin'      => '*',
-            'Access-Control-Allow-Method'      => '*',
-        ];
-        return Response::json($ret, 200, $headers);
+        return $ret;
     }
 
     /**

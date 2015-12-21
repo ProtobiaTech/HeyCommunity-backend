@@ -32,5 +32,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 
         'addTenant' => \App\Http\Middleware\AddTenant::class,
+        'addHeader' => \App\Http\Middleware\AddHeader::class,
     ];
 }

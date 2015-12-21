@@ -20,11 +20,7 @@ class ActivityController extends Controller
     public function index()
     {
         $ret = Activity::all();
-
-        $headers = [
-            'Access-Control-Allow-Origin'      => '*',
-        ];
-        return Response::json($ret, 200, $headers);
+        return $ret;
     }
 
     /**

@@ -150,6 +150,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+
+        AuraIsHere\LaravelMultiTenant\LaravelMultiTenantServiceProvider::class,
     ],
 
     /*
@@ -205,6 +207,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        'TenantScope' => AuraIsHere\LaravelMultiTenant\Facades\TenantScopeFacade::class
     ],
 
 ];

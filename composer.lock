@@ -4,9 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d45be93d15ea4d83a2e890dc3cb6f5cb",
-    "content-hash": "8bb1d2dd5600f5fb7975ae7ce9b17ab4",
+    "hash": "c58367fa35edeb60d9a0639cff164e12",
+    "content-hash": "d06ff26df8a9f79bffb6728458b3a6db",
     "packages": [
+        {
+            "name": "aura-is-here/laravel-multi-tenant",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AuraEQ/laravel-multi-tenant.git",
+                "reference": "0fdbe97db9f78200d42ec1e36bafdb6e96465351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/AuraEQ/laravel-multi-tenant/0fdbe97db9f78200d42ec1e36bafdb6e96465351.zip",
+                "reference": "0fdbe97db9f78200d42ec1e36bafdb6e96465351",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.2.*|5.0.*|5.1.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "laravel/framework": "4.2.*|5.0.*|5.1.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AuraIsHere\\LaravelMultiTenant\\": "src/AuraIsHere/LaravelMultiTenant/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Caleb Fidecaro",
+                    "email": "caleb@auraeq.com"
+                }
+            ],
+            "time": "2015-11-02 23:58:20"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "v2.0.6",
@@ -596,16 +634,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.15",
+            "version": "1.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "31525caf9e8772683672fefd8a1ca0c0736020f4"
+                "reference": "183e1a610664baf6dcd6fceda415baf43cbdc031"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/thephpleague/flysystem/31525caf9e8772683672fefd8a1ca0c0736020f4.zip",
-                "reference": "31525caf9e8772683672fefd8a1ca0c0736020f4",
+                "url": "http://packagist.phpcomposer.com/files/thephpleague/flysystem/183e1a610664baf6dcd6fceda415baf43cbdc031.zip",
+                "reference": "183e1a610664baf6dcd6fceda415baf43cbdc031",
                 "shasum": ""
             },
             "require": {
@@ -619,7 +657,7 @@
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "^2.2",
                 "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.1"
+                "phpunit/phpunit": "~4.8"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -676,7 +714,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-09-30 22:26:59"
+            "time": "2015-12-19 20:16:43"
         },
         {
             "name": "maximebf/debugbar",
@@ -3262,7 +3300,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "aura-is-here/laravel-multi-tenant": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

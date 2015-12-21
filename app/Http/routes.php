@@ -16,8 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('timeline', 'TimelineController');
-Route::resource('activity', 'ActivityController');
+Route::group(['middleware' => 'addTenant'], function() {
+    Route::resource('timeline', 'TimelineController');
+    Route::resource('activity', 'ActivityController');
+});
 
 
 //

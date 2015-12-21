@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UserTableSeeder extends Seeder
+class TenantTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +13,9 @@ class UserTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
-            \App\User::create([
+            \App\Tenant::create([
                 'nickname'      =>  $faker->name(),
+                'domain'        =>  $faker->domainName(),
                 'email'         =>  $faker->email(),
                 'phone'         =>  $faker->phoneNumber(),
                 'password'      =>  bcrypt('hey community'),

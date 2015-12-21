@@ -23,7 +23,11 @@
 
 <div class="container">
     <div class="pull-right" style="margin-top:10px;">
-        <a href="{{ route('admin.auth.login')}}">Login</a>
+        @if (Auth::tenant()->guest())
+            <a href="{{ route('admin.auth.login')}}">Login</a>
+        @else
+            <a href="{{ route('admin.home')}}">Dashboard</a>
+        @endif
     </div>
 
     <div class="header text-center">
@@ -37,20 +41,34 @@
     <!-- -->
     <div style="margin-top:30px;" class="row">
         <div class="col-sm-8 col-sm-offset-2">
-            <div class="text-center">New Tenant</div>
-            <hr>
+            @if (Auth::tenant()->guest())
+                <div class="text-center">New Tenant</div>
+                <hr>
+            @else
+                <div class="text-center">Your Community</div>
+                <hr>
+                <div class="text-center">
+                    <p>
+                        App URL: <a href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a>
+                    </p>
+                    <p>
+                        <a class="btn btn-primary btn-sm" href="{{ route('admin.home') }}">Dashboard</a>
+                    </p>
+                </div>
+            @endif
         </div>
 
+        @if (Auth::tenant()->guest())
         <div class="col-sm-offset-3 col-sm-6">
             @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             {!! Form::open(array('route' => 'home.store-tenant', 'method' => 'post', 'class' => 'form form-horizontal')) !!}
@@ -96,6 +114,8 @@
                 </div>
             {!! Form::close() !!}
         </div>
+        @endif
+
     </div>
 </div>
 @endsection

@@ -50,7 +50,7 @@ class TimelineController extends Controller
         $model = new Timeline();
         $model->title   =   $request->title;
         $model->content =   $request->content;
-        $model->user_id     =   Auth::user()->id;
+        $model->user_id     =   Auth::tenant()->user()->id;
 
         if ($model->save()) {
             // save attachment

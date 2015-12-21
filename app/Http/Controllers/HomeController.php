@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Tenant;
-use Auth;
+use Auth, Hash;
 
 class HomeController extends Controller
 {
@@ -35,8 +35,9 @@ class HomeController extends Controller
         ]);
 
         $tenantModel = new Tenant($request->all());
+        $tenantModel->password = Hash::make($request->password);
         if ($tenantModel->save()) {
-            Auth::login($tenantModel);
+            Auth::tenant()->login($tenantModel);
             return redirect()->back();
         } else {
             $request->flash();

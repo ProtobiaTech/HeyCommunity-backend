@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c58367fa35edeb60d9a0639cff164e12",
-    "content-hash": "d06ff26df8a9f79bffb6728458b3a6db",
+    "hash": "d59316a907640557d12d08e4e88ac0f7",
+    "content-hash": "91dac2b1113381670d87853e39242ffa",
     "packages": [
         {
             "name": "aura-is-here/laravel-multi-tenant",
@@ -308,6 +308,42 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "hacklee/laravel5-multi-auth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hacklee/laravel5-multi-auth.git",
+                "reference": "11cc8b6ae492d2fafabdf165f6ebfbc174af8c33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/hacklee/laravel5-multi-auth/11cc8b6ae492d2fafabdf165f6ebfbc174af8c33.zip",
+                "reference": "11cc8b6ae492d2fafabdf165f6ebfbc174af8c33",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hacklee\\Multiauth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hacklee",
+                    "email": "517184100@qq.com"
+                }
+            ],
+            "description": "laravel5 mutil auth",
+            "time": "2015-03-04 11:26:16"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3301,7 +3337,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "aura-is-here/laravel-multi-tenant": 20
+        "aura-is-here/laravel-multi-tenant": 20,
+        "hacklee/laravel5-multi-auth": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

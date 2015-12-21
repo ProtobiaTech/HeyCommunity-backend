@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth, Hash;
 
-use App\User;
+use App\Tenant;
 
 class AuthController extends Controller
 {
@@ -28,15 +28,13 @@ class AuthController extends Controller
             'password'  =>  'required',
         ]);
 
-        $where = [
-            'email'     =>  $request->email,
-        ];
-        $model = User::where($where)->first();
+        $model = Tenant::where(['email' => $request->email])->first();
         if ($model && Hash::check($request->password, $model->password)) {
-            Auth::login($model);
+            Auth::tenant()->login($model);
             return redirect()->route('admin.home');
         } else {
-            return redirect()->back();
+            $request->flash();
+            return redirect()->back()->withErrors(['fail' => 'email or password error']);
         }
     }
 
@@ -44,7 +42,7 @@ class AuthController extends Controller
      */
     public function anyLogout()
     {
-        Auth::logout();
+        Auth::tenant()->logout();
         return redirect()->route('admin.home');
     }
 

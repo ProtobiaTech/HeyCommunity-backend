@@ -19,7 +19,9 @@ class CreateTenantsTable extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('password', 60);
+            $table->rememberToken();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

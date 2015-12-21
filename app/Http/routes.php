@@ -29,7 +29,7 @@ Route::get('admin/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AuthCont
 Route::post('/login', ['as' => 'admin.auth.loginHandle', 'uses' => 'Admin\AuthController@postLogin']);
 Route::any('/logout', ['as' => 'admin.auth.logout', 'uses' => 'Admin\AuthController@anyLogout']);
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin'],], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.tenant'],], function() {
     Route::resource('timeline', 'Admin\TimelineController');
     Route::resource('activity', 'Admin\ActivityController');
 });

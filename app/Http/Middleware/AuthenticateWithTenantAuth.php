@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class AuthenticateWithAdminAuth
+class AuthenticateWithTenantAuth
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AuthenticateWithAdminAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->is_admin) {
+        if (Auth::tenant()->check()) {
             return $next($request);
         } else {
             return redirect()->route('admin.auth.login');

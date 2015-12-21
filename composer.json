@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar": "^2.0",
         "laravelcollective/html": "^5.1",
-        "aura-is-here/laravel-multi-tenant": "dev-master"
+        "aura-is-here/laravel-multi-tenant": "dev-master",
+        "hacklee/laravel5-multi-auth": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

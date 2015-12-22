@@ -27,6 +27,8 @@ class CreateTenantsTable extends Migration
             $table->timestamps();
         });
 
+
+        // default data
         Model::unguard();
 
         \App\Tenant::create([

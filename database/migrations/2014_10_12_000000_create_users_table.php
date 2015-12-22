@@ -24,6 +24,20 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+
+        // default data
+        Model::unguard();
+
+        $faker = Faker\Factory::create();
+        \App\User::create([
+            'nickname'      =>      'Rod',
+            'email'         =>      'supgeek.rod@gmail.com',
+            'phone'         =>      '17090402884',
+            'password'      =>      Hash::make('19940120.'),
+        ]);
+
+        Model::reguard();
     }
 
     /**

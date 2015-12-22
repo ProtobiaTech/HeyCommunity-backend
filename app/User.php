@@ -19,7 +19,7 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
     use SoftDeletes;
-    use TenantScopedModelTrait;
+    // use TenantScopedModelTrait;
 
     /**
      * The database table used by the model.

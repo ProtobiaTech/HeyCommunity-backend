@@ -19,7 +19,7 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        $ret = Timeline::all();
+        $ret = Timeline::with('author')->paginate();
         return $ret;
     }
 

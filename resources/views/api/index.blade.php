@@ -39,7 +39,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Hey Community</div>
-                <div class="">powered by Laravel 5.0</div>
+                <p>Powered by Laravel</p>
             </div>
         </div>
     </body>

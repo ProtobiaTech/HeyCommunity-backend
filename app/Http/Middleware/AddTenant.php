@@ -24,7 +24,7 @@ class AddTenant
         } else {
             $host = $header['host'][0];
         }
-        $host = substr(strstr($host, '//', true), 2);
+        $host = substr(strstr($host, '//'), 2);
         $tenantModel = Tenant::where(['domain' => $host])->first();
 
         if ($tenantModel) {

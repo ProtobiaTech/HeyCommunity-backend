@@ -33,7 +33,7 @@
     <div class="header text-center">
         <div class="title">Hey Community</div>
         <div>
-            DEMO: <a href="demo.hey-community.online" target="_blank">demo.hey-community.online</a> <br>
+            DEMO: <a href="http://demo.hey-community.online" target="_blank">demo.hey-community.online</a> <br>
             GitHub: <a href="https://github.com/dev4living/hey-community" target="_blank">https://github.com/dev4living/hey-community</a>
         </div>
     </div>

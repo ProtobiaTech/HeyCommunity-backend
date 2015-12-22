@@ -3,6 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use Illuminate\Database\Eloquent\Model;
+
 class CreateTenantsTable extends Migration
 {
     /**
@@ -24,6 +26,23 @@ class CreateTenantsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Model::unguard();
+
+        \App\Tenant::create([
+            'site_name'         =>      'Hey Community Demo',
+            'domain'            =>      'demo.hey-community.online',
+            'email'             =>      'demo@hey-community.com',
+            'password'          =>      Hash::make('hey community'),
+        ]);
+        \App\Tenant::create([
+            'site_name'         =>      'Test Community Demo',
+            'domain'            =>      'test.hey-community.online',
+            'email'             =>      'test@hey-community.com',
+            'password'          =>      Hash::make('hey community'),
+        ]);
+
+        Model::reguard();
     }
 
     /**

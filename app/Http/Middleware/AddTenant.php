@@ -20,11 +20,16 @@ class AddTenant
     {
         $host = $request->header()['host'];
         $tenantModel = Tenant::where(['domain' => $host])->first();
+
         if ($tenantModel) {
             TenantScope::addTenant('tenant_id', $tenantModel->id);
         } else {
             if (env('APP_DEBUG')) {
-                // in debug, not addTenant
+                if (isset($_GET['tenant_id']) && $_GET['tenant_id']) {
+                    TenantScope::addTenant('tenant_id', $_GET['tenant_id']);
+                } else {
+                    TenantScope::addTenant('tenant_id', 2);
+                }
             } else {
                 TenantScope::addTenant('tenant_id', 0);
             }

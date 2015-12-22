@@ -15,7 +15,7 @@ class ActivityTableSeeder extends Seeder
         $tenants = \App\Tenant::lists('id')->toArray();
 
         $faker = Faker\Factory::create();
-        foreach (range(1, 68) as $index) {
+        foreach (range(1, 268) as $index) {
             \App\Activity::create([
                 'user_id'       =>      $faker->randomElement($users),
                 'tenant_id'     =>      $faker->randomElement($tenants),

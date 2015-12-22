@@ -4,7 +4,7 @@ return [
 
     'tenant' => [
         'driver'    =>  'eloquent',
-        'model'     =>  'App\tenant',
+        'model'     =>  'App\Tenant',
     ],
 
     'user' => [

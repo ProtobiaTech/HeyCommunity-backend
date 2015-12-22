@@ -18,7 +18,13 @@ class AddTenant
      */
     public function handle($request, Closure $next)
     {
-        $host = $request->header()['host'];
+        $header = $request->header();
+        if (isset($header['origin'])) {
+            $host = $header['origin'][0];
+        } else {
+            $host = $header['host'][0];
+        }
+        $host = substr(strstr($host, '//', true), 2);
         $tenantModel = Tenant::where(['domain' => $host])->first();
 
         if ($tenantModel) {

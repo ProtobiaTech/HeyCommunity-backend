@@ -15,10 +15,16 @@
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
 
-Route::group(['middleware' => ['addTenant', 'addHeader']], function() {
-    Route::resource('timeline', 'TimelineController');
-    Route::resource('activity', 'ActivityController');
-});
+
+//
+// Api
+// ----------------------------
+$apiRoutes = function() {
+    Route::resource('timeline', 'Api\TimelineController');
+    Route::resource('activity', 'Api\ActivityController');
+};
+Route::group(['middleware' => ['addTenant', 'addHeader'], 'domain' => 'api.hey-community.local'], $apiRoutes);
+Route::group(['middleware' => ['addTenant', 'addHeader'], 'domain' => 'api.hey-community.online'], $apiRoutes);
 
 
 //

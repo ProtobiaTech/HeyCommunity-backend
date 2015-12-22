@@ -21,6 +21,8 @@ $apiRoutes = function() {
     });
     Route::resource('timeline', 'Api\TimelineController');
     Route::resource('activity', 'Api\ActivityController');
+
+    Route::controller('tenant', 'Api\TenantController');
 };
 
 Route::group(['middleware' => ['addTenant', 'addHeader'], 'domain' => 'api.hey-community.local'], $apiRoutes);

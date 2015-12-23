@@ -19,6 +19,10 @@
     .header .title {
         font-size: 66px;
     }
+    .header .title sup {
+        font-size: 14px;
+        color: #f00;
+    }
 </style>
 
 <div class="container">
@@ -31,7 +35,10 @@
     </div>
 
     <div class="header text-center">
-        <div class="title">Hey Community</div>
+        <div class="title">Hey Community <sup>BETA</sup></div>
+        <p class="text-muted">
+            It's beta, encounter problems, please email to supgeek.rod@gmail.com <br>
+        </p>
         <div>
             DEMO: <a href="http://demo.hey-community.online" target="_blank">demo.hey-community.online</a> <br>
             GitHub: <a href="https://github.com/dev4living/hey-community" target="_blank">https://github.com/dev4living/hey-community</a>

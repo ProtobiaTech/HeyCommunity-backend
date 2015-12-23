@@ -18,6 +18,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Author</th>
                         <th>Avatar</th>
                         <th>Title</th>
                         <th>Content</th>
@@ -28,6 +29,7 @@
                     @foreach ($activities as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
+                        <td>{{ $item->author->nickname }}</td>
                         <td><img style="height:60px;" src="{{ $item->avatar }}"></td>
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->content }}</td>

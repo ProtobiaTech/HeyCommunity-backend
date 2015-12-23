@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
         'auth.tenant'   =>  \App\Http\Middleware\AuthenticateWithTenantAuth::class,
 
         'addTenant' => \App\Http\Middleware\AddTenant::class,
+        'addTenantWithAdmin' => \App\Http\Middleware\AddTenantWithAdmin::class,
         'addHeader' => \App\Http\Middleware\AddHeader::class,
     ];
 }

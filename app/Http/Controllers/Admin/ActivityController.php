@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Activity;
+use App\User;
 use Response, Auth;
 
 class ActivityController extends Controller
@@ -50,7 +51,8 @@ class ActivityController extends Controller
         $model = new Activity();
         $model->title   =   $request->title;
         $model->content =   $request->content;
-        $model->user_id     =   Auth::user()->id;
+        $model->tenant_id   =   Auth::tenant()->user()->id;
+        $model->user_id     =   2;
 
         if ($model->save()) {
             // save avatar

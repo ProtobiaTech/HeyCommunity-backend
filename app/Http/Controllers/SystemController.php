@@ -16,13 +16,20 @@ class SystemController extends Controller
      */
     public function getInstall()
     {
-        if (!File::exists(base_path() . 'install.lock')) {
+        if (!File::exists(base_path() . '/install.lock')) {
             // default user
             Model::unguard();
             \App\User::create([
                 'nickname'      =>      'Rod',
                 'email'         =>      'supgeek.rod@gmail.com',
                 'phone'         =>      '17090402884',
+                'password'      =>      Hash::make('19940120.'),
+            ]);
+
+            \App\User::create([
+                'nickname'      =>      'Robot',
+                'email'         =>      'robot@hey-community.online',
+                'phone'         =>      '12312312312',
                 'password'      =>      Hash::make('19940120.'),
             ]);
             Model::reguard();

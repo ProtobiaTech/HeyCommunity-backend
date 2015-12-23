@@ -26,26 +26,6 @@ class CreateTimelinesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-
-        // default data
-        Model::unguard();
-
-        $users = \App\User::lists('id')->toArray();
-        $tenants = \App\Tenant::lists('id')->toArray();
-
-        $faker = Faker\Factory::create();
-        foreach (range(1, 28) as $index) {
-            \App\Timeline::create([
-                'user_id'       =>      $faker->randomElement($users),
-                'tenant_id'     =>      $faker->randomElement($tenants),
-                'title'         =>      $faker->sentence(),
-                'content'       =>      implode('<br>', $faker->paragraphs(random_int(1,5))),
-                'attachment'    =>      $faker->imageUrl(),
-            ]);
-        }
-
-        Model::reguard();
     }
 
     /**

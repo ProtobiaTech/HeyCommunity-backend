@@ -33,12 +33,16 @@ Route::group(['middleware' => ['addTenant', 'addHeader'], 'domain' => 'api.hey-c
 
 
 //
-// Admin dashboard
+//
 // ----------------------------
 $routes = function() {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
 
+    Route::controller('system', 'SystemController');
+
+    // Admin dashboard
+    // ----------------------------
     Route::get('admin', ['as' => 'admin.home', 'uses' => 'Admin\HomeController@index']);
     Route::get('admin/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AuthController@getLogin']);
     Route::post('/login', ['as' => 'admin.auth.loginHandle', 'uses' => 'Admin\AuthController@postLogin']);
@@ -50,6 +54,6 @@ $routes = function() {
     });
 };
 
-Route::group(['domain' => 'dev.hey-community.local'], $routes);
 Route::group(['domain' => 'hey-community.online'], $routes);
 Route::group(['domain' => 'www.hey-community.online'], $routes);
+Route::group(['domain' => 'dev.hey-community.local'], $routes);

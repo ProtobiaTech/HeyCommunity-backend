@@ -20,7 +20,7 @@ class ActivityTableSeeder extends Seeder
                 'user_id'       =>      $faker->randomElement($users),
                 'tenant_id'     =>      $faker->randomElement($tenants),
                 'title'         =>      $faker->sentence(),
-                'content'       =>      implode('<br>', $faker->paragraphs(random_int(2, 10))),
+                'content'       =>      implode('', $faker->paragraphs(random_int(2, 10))),
                 'avatar'        =>      $faker->imageUrl(200, 200),
 
                 'start_date'    =>      $faker->dateTimeBetween('- 10 days', 'now'),

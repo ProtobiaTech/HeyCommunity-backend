@@ -5,6 +5,7 @@ Homestead.json
 .env
 
 
+install.lock
 /public/uploads
 
 

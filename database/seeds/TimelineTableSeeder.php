@@ -20,7 +20,7 @@ class TimelineTableSeeder extends Seeder
                 'user_id'       =>      $faker->randomElement($users),
                 'tenant_id'     =>      $faker->randomElement($tenants),
                 'title'         =>      $faker->sentence(),
-                'content'       =>      implode('<br>', $faker->paragraphs(random_int(1,5))),
+                'content'       =>      implode('', $faker->paragraphs(random_int(1, 5))),
                 'attachment'    =>      $faker->imageUrl(),
             ]);
         }

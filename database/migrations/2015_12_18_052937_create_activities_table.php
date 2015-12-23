@@ -29,29 +29,6 @@ class CreateActivitiesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-
-        // default data
-        Model::unguard();
-
-        $users = \App\User::lists('id')->toArray();
-        $tenants = \App\Tenant::lists('id')->toArray();
-
-        $faker = Faker\Factory::create();
-        foreach (range(1, 28) as $index) {
-            \App\Activity::create([
-                'user_id'       =>      $faker->randomElement($users),
-                'tenant_id'     =>      $faker->randomElement($tenants),
-                'title'         =>      $faker->sentence(),
-                'content'       =>      implode('<br>', $faker->paragraphs(random_int(2, 10))),
-                'avatar'        =>      $faker->imageUrl(200, 200),
-
-                'start_date'    =>      $faker->dateTimeBetween('- 10 days', 'now'),
-                'end_date'      =>      $faker->dateTimeBetween('now', '+ 30 days'),
-            ]);
-        }
-
-        Model::reguard();
     }
 
     /**

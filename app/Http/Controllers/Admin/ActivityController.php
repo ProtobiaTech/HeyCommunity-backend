@@ -51,7 +51,6 @@ class ActivityController extends Controller
         $model = new Activity();
         $model->title   =   $request->title;
         $model->content =   $request->content;
-        $model->tenant_id   =   Auth::tenant()->user()->id;
         $model->user_id     =   2;
 
         if ($model->save()) {

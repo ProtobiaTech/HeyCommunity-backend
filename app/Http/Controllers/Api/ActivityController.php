@@ -19,7 +19,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $ret = Activity::with('author')->paginate();
+        $ret = Activity::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate();
         return $ret;
     }
 

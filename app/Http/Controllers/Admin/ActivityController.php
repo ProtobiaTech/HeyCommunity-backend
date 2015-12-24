@@ -48,19 +48,19 @@ class ActivityController extends Controller
             'avatar'    =>      'required',
         ]);
 
-        $model = new Activity();
-        $model->title   =   $request->title;
-        $model->content =   $request->content;
-        $model->user_id     =   2;
+        $Activity = new Activity();
+        $Activity->title   =   $request->title;
+        $Activity->content =   $request->content;
+        $Activity->user_id     =   2;
 
-        if ($model->save()) {
+        if ($Activity->save()) {
             // save avatar
             $file = $request->file('avatar');
-            $fileName = 'activity-' . $model->id . '.' . $file->getClientOriginalExtension();
+            $fileName = 'activity-' . $Activity->id . '.' . $file->getClientOriginalExtension();
             $fileDir = 'uploads/activity/';
             $file->move($fileDir, $fileName);
-            $model->avatar  =   '/' . $fileDir . $fileName;
-            $model->save();
+            $Activity->avatar  =   '/' . $fileDir . $fileName;
+            $Activity->save();
 
             return redirect()->route('admin.activity.index');
         } else {
@@ -87,7 +87,8 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $assign['activity'] = Activity::findOrFail($id);
+        return view('admin.activity.edit', $assign);
     }
 
     /**
@@ -99,7 +100,30 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'     =>      'required',
+            'content'   =>      'required',
+        ]);
+
+        $Activity = Activity::findOrFail($id);
+        $Activity->title   =   $request->title;
+        $Activity->content =   $request->content;
+
+        if ($Activity->save()) {
+            // save avatar
+            if ($request->avatar) {
+                $file = $request->file('avatar');
+                $fileName = 'activity-' . $Activity->id . '.' . $file->getClientOriginalExtension();
+                $fileDir = 'uploads/activity/';
+                $file->move($fileDir, $fileName);
+                $Activity->avatar  =   '/' . $fileDir . $fileName;
+            }
+            $Activity->save();
+
+            return redirect()->route('admin.activity.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -110,6 +134,11 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Activity = Activity::findOrFail($id);
+        if ($Activity->delete()){
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
     }
 }

@@ -60,6 +60,9 @@
                 <div class="text-center">
                     <p>
                         domain: <a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a> <br>
+                        <small>Please DNS to 52.68.25.198 or app.hey-community.com </small>
+                    </p>
+                    <p>
                         sub_domain: <a target="_blank" href="http://{{ Auth::tenant()->user()->sub_domain }}">{{ Auth::tenant()->user()->sub_domain }}</a>
                     </p>
                     <p>

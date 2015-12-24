@@ -14,6 +14,8 @@
     <script src="{{ asset('bower-assets/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower-assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
+    <script src="{{ asset('assets/javascript/helps.js') }}"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

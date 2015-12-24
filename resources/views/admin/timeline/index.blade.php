@@ -29,11 +29,16 @@
                     @foreach ($timeline as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->author->nickname }}</td>
+                        <td style="white-space:nowrap;">{{ $item->author->nickname }}</td>
                         <td><img style="height:60px;" src="{{ $item->attachment }}"></td>
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->content }}</td>
-                        <td></td>
+                        <td style="white-space:nowrap;">
+                            <a class="btn btn-sm btn-default" href="{{ route('admin.timeline.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['admin.timeline.destroy', $item->id], 'onsubmit' => 'return myConfirmDelete()', 'style' => 'display:inline-block']) !!}
+                                {!! Form::button('<i class="fa fa-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-sm btn-danger')) !!}
+                            {!! Form::close() !!}
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

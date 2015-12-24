@@ -47,20 +47,20 @@ class TimelineController extends Controller
             'attachment'=>      '',
         ]);
 
-        $model = new Timeline();
-        $model->title   =   $request->title;
-        $model->content =   $request->content;
-        $model->user_id     =   2;
+        $Timeline = new Timeline();
+        $Timeline->title   =   $request->title;
+        $Timeline->content =   $request->content;
+        $Timeline->user_id     =   2;
 
-        if ($model->save()) {
+        if ($Timeline->save()) {
             // save attachment
             if ($request->attachment) {
                 $file = $request->file('attachment');
-                $fileName = 'timeline-' . $model->id . '.' . $file->getClientOriginalExtension();
+                $fileName = 'timeline-' . $Timeline->id . '.' . $file->getClientOriginalExtension();
                 $fileDir = 'uploads/timeline/';
                 $file->move($fileDir, $fileName);
-                $model->attachment  =   '/' . $fileDir . $fileName;
-                $model->save();
+                $Timeline->attachment  =   '/' . $fileDir . $fileName;
+                $Timeline->save();
             }
 
             return redirect()->route('admin.timeline.index');
@@ -88,7 +88,8 @@ class TimelineController extends Controller
      */
     public function edit($id)
     {
-        //
+        $assign['timeline'] = Timeline::findOrFail($id);
+        return view('admin.timeline.edit', $assign);
     }
 
     /**
@@ -100,7 +101,31 @@ class TimelineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'     =>      '',
+            'content'   =>      'required',
+            'attachment'=>      '',
+        ]);
+
+        $Timeline = Timeline::findOrFail($id);
+        $Timeline->title    =   $request->title;
+        $Timeline->content  =   $request->content;
+
+        if ($Timeline->save()) {
+            // save attachment
+            if ($request->attachment) {
+                $file = $request->file('attachment');
+                $fileName = 'timeline-' . $Timeline->id . '.' . $file->getClientOriginalExtension();
+                $fileDir = 'uploads/timeline/';
+                $file->move($fileDir, $fileName);
+                $Timeline->attachment  =   '/' . $fileDir . $fileName;
+                $Timeline->save();
+            }
+
+            return redirect()->route('admin.timeline.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -111,6 +136,11 @@ class TimelineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Timeline = Timeline::findOrFail($id);
+        if ($Timeline->delete()){
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
     }
 }

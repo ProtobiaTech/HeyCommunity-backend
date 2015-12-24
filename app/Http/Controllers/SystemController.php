@@ -80,7 +80,8 @@ class SystemController extends Controller
     public function getState(Request $request)
     {
         if ($request->has('pw') && Hash::check($request->pw, '$2y$10$8e634fQcF26g5vlSrE89IubBRYsuVmNBjf/nWPNW85F8rLWSABt6S')) {
-            $assign['users']        =   User::all();
+            $assign['users']        =   User::paginate();
+            $assign['tenants']      =   Tenant::paginate();
             $assign['timelines']    =   Activity::all();
             $assign['activities']   =   Timeline::all();
             return view('admin.home.state', $assign);

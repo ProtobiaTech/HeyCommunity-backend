@@ -13,7 +13,39 @@
                 Please <a href="{{ route('admin.auth.login') }}">Login</a>
             </div>
         @else
-            @foreach([1,2,3,4] as $item)
+            <div class="col-sm-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        User State
+                    </div>
+                    <div class="panel-body">
+                        Total: {{ $users->count() }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Timeline State
+                    </div>
+                    <div class="panel-body">
+                        Total: {{ $timelines->count() }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Activity State
+                    </div>
+                    <div class="panel-body">
+                        Total:: {{ $activities->count() }}
+                    </div>
+                </div>
+            </div>
+
             <div class="col-sm-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -24,7 +56,6 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         @endif
     </div>
 </div>

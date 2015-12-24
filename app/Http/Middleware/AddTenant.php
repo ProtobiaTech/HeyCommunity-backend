@@ -37,7 +37,7 @@ class AddTenant
                     TenantScope::addTenant('tenant_id', 2);
                 }
             } else {
-                TenantScope::addTenant('tenant_id', 0);
+                TenantScope::addTenant('tenant_id', 2);
             }
         }
 

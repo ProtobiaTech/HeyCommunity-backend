@@ -41,7 +41,10 @@
         </p>
         <div>
             DEMO: <a href="http://demo.hey-community.online" target="_blank">demo.hey-community.online</a> <br>
-            GitHub: <a href="https://github.com/dev4living/hey-community" target="_blank">https://github.com/dev4living/hey-community</a>
+            GitHub: <a href="https://github.com/dev4living/hey-community" target="_blank">https://github.com/dev4living/hey-community</a> <br>
+            Giter: <a href="https://gitter.im/dev4living/hey-community" target="_blank">https://gitter.im/dev4living/hey-community</a> <br>
+            QQ Group: 242078519
+
         </div>
     </div>
 
@@ -56,7 +59,8 @@
                 <hr>
                 <div class="text-center">
                     <p>
-                        App URL: <a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a>
+                        domain: <a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a> <br>
+                        sub_domain: <a target="_blank" href="http://{{ Auth::tenant()->user()->sub_domain }}">{{ Auth::tenant()->user()->sub_domain }}</a>
                     </p>
                     <p>
                         <a class="btn btn-primary btn-sm" href="{{ route('admin.home') }}">Dashboard</a>
@@ -89,7 +93,21 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="title">Site Domain</label>
                     <div class="col-sm-9">
-                        <input class="form-control" type="text" name="domain" value="{{ old('domain') }}" placeholder="">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon1">http://</span>
+                            <input class="form-control" type="text" name="domain" value="{{ old('domain') }}" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="title">Sub Domain</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon1">http://</span>
+                            <input class="form-control" type="text" name="sub_domain" value="{{ old('sub_domain') }}" placeholder="">
+                            <span class="input-group-addon" id="sizing-addon1">.hey-community.online</span>
+                        </div>
                     </div>
                 </div>
 

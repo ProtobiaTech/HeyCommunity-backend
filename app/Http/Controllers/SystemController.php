@@ -42,13 +42,13 @@ class SystemController extends Controller
             $tenants = [
                 [
                     'site_name'         =>      'Hey Community Demo',
-                    'domain'            =>      'demo.hey-community.online',
+                    'sub_domain'        =>      'demo.hey-community.online',
                     'email'             =>      'demo@hey-community.com',
                     'password'          =>      Hash::make('hey community'),
                 ],
                 [
                     'site_name'         =>      'Test Community Demo',
-                    'domain'            =>      'test.hey-community.online',
+                    'sub_domain'        =>      'test.hey-community.online',
                     'email'             =>      'test@hey-community.com',
                     'password'          =>      Hash::make('hey community'),
                 ],
@@ -57,6 +57,7 @@ class SystemController extends Controller
                 $tenants[] = [
                     'site_name'         =>      'Dev Community',
                     'domain'            =>      'localhost:6888',
+                    'sub_domain'        =>      'localhost:6888',
                     'email'             =>      'admin@hey-community.local',
                     'password'          =>      Hash::make('hey community'),
                 ];

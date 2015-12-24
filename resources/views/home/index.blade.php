@@ -56,7 +56,7 @@
                 <hr>
                 <div class="text-center">
                     <p>
-                        App URL: <a href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a>
+                        App URL: <a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a>
                     </p>
                     <p>
                         <a class="btn btn-primary btn-sm" href="{{ route('admin.home') }}">Dashboard</a>

@@ -54,7 +54,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::tenant()->user()->site_name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">Go to my AppSite</a></li>
+                        <li><a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">Go to my WebApp</a></li>
                         <li><a href="{{ route('admin.auth.logout') }}">Logout</a></li>
                     </ul>
                 </li>

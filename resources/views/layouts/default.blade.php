@@ -14,8 +14,6 @@
     <script src="{{ asset('bower-assets/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower-assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,8 +26,12 @@
 
 <body>
 
-@yield('content')
+    @yield('content')
 
+    <footer class="container text-center" style="margin-top:60px; padding-bottom:30px;">
+        <hr>
+        &copy;2015 <a href="http://www.dev4living.com" target="_blank">dev4living.com</a>
+    </footer>
 </body>
 </html>
 

@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Database\Eloquent\Model;
 use Hash, File;
+use App\User;
+use App\Timeline;
+use App\Activity;
+use App\Tenant;
 
 class SystemController extends Controller
 {
@@ -69,5 +73,19 @@ class SystemController extends Controller
 
         //
         return redirect()->route('home');
+    }
+
+    /**
+     */
+    public function getState(Request $request)
+    {
+        if ($request->has('pw') && Hash::check($request->pw, '$2y$10$8e634fQcF26g5vlSrE89IubBRYsuVmNBjf/nWPNW85F8rLWSABt6S')) {
+            $assign['users']        =   User::all();
+            $assign['timelines']    =   Activity::all();
+            $assign['activities']   =   Timeline::all();
+            return view('admin.home.state', $assign);
+        } else {
+            return redirect()->route('home');
+        }
     }
 }

@@ -21,6 +21,8 @@ $apiRoutes = function() {
     });
     Route::resource('timeline', 'Api\TimelineController');
     Route::resource('activity', 'Api\ActivityController');
+    Route::resource('topic',    'Api\TopicController');
+    Route::resource('talk',     'Api\TalkController');
 
     Route::controller('user', 'Api\UserController');
     Route::controller('tenant', 'Api\TenantController');

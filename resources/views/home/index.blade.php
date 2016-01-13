@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" class="no-js">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
@@ -10,8 +10,8 @@
     <script src="https://demo.mageewp.com/onetone-pro-demo-app/assets/onetone-pro/js/html5.js"></script>
     <![endif]-->
     <title>Onetone App &#8211; Just another MageeWP Sites site</title>
-    <link rel="alternate" type="application/rss+xml" title="Onetone App &raquo; Feed" href="feed/index.html" />
-    <link rel="alternate" type="application/rss+xml" title="Onetone App &raquo; Comments Feed" href="comments/feed/index.html" />
+    <link rel="alternate" type="application/rss+xml" title="Onetone App &raquo; Feed" href="feed/index.html">
+    <link rel="alternate" type="application/rss+xml" title="Onetone App &raquo; Comments Feed" href="comments/feed/index.html">
     <script type="text/javascript">
      window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/demo.mageewp.com\/onetone-pro-demo-app\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4"}};
      !function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),c.toDataURL().length>3e3):("simple"===a?d.fillText(String.fromCharCode(55357,56835),0,0):d.fillText(String.fromCharCode(55356,57135),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
@@ -31,21 +31,21 @@
 
    }
  </style>
- <link rel='stylesheet' id='layerslider-css'  href='assets/onetone-pro/plugins/LayerSlider/static/css/layerslider4c7e.css?ver=5.6.2' type='text/css' media='all' />
- <link rel='stylesheet' id='ls-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
- <link rel='stylesheet' id='rs-plugin-settings-css'  href='assets/onetone-pro/plugins/revslider/public/assets/css/settingsb97d.css?ver=5.0.8.5' type='text/css' media='all' />
+ <link rel='stylesheet' id='layerslider-css'  href='assets/onetone-pro/plugins/LayerSlider/static/css/layerslider4c7e.css?ver=5.6.2' type='text/css' media='all'>
+ <link rel='stylesheet' id='ls-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&amp;subset=latin%2Clatin-ext' type='text/css' media='all'>
+ <link rel='stylesheet' id='rs-plugin-settings-css'  href='assets/onetone-pro/plugins/revslider/public/assets/css/settingsb97d.css?ver=5.0.8.5' type='text/css' media='all'>
  <style id='rs-plugin-settings-inline-css' type='text/css'>
   .tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}.largeredbtn{font-family:"Raleway",sans-serif;font-weight:900;font-size:16px;line-height:60px;color:#fff !important;text-decoration:none;padding-left:40px;padding-right:80px;padding-top:22px;padding-bottom:22px;background:rgb(234,91,31); background:-moz-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(234,91,31,1)),color-stop(100%,rgba(227,58,12,1))); background:-webkit-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:-o-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:-ms-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:linear-gradient(to bottom,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ea5b1f',endColorstr='#e33a0c',GradientType=0 )}.largeredbtn:hover{background:rgb(227,58,12); background:-moz-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(227,58,12,1)),color-stop(100%,rgba(234,91,31,1))); background:-webkit-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:-o-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:-ms-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:linear-gradient(to bottom,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e33a0c',endColorstr='#ea5b1f',GradientType=0 )}.fullrounded img{-webkit-border-radius:400px;-moz-border-radius:400px;border-radius:400px}
 </style>
-<link rel='stylesheet' id='google-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C700%7CRaleway%3A300%2C400&amp;ver=4.4' type='text/css' media='' />
-<link rel='stylesheet' id='font-awesome-css'  href='assets/onetone-pro/plugins/font-awesome/css/font-awesome.minb2f9.css?ver=4.3.0' type='text/css' media='' />
-<link rel='stylesheet' id='bootstrap-css'  href='assets/onetone-pro/plugins/bootstrap/css/bootstrap.min7984.css?ver=3.3.4' type='text/css' media='' />
-<link rel='stylesheet' id='owl.carousel-css'  href='assets/onetone-pro/plugins/owl-carousel/assets/owl.carousel001e.css?ver=2.0.0' type='text/css' media='' />
-<link rel='stylesheet' id='owl-theme-css'  href='assets/onetone-pro/css/owl.theme3ba1.css?ver=1.3.3' type='text/css' media='' />
-<link rel='stylesheet' id='bigvideo-css'  href='assets/onetone-pro/css/bigvideo3ba1.css?ver=1.3.3' type='text/css' media='' />
-<link rel='stylesheet' id='prettyPhoto-css'  href='assets/onetone-pro/css/prettyPhotoc6bd.css?ver=3.1.5' type='text/css' media='' />
-<link rel='stylesheet' id='animate-css'  href='assets/onetone-pro/lib/shortcodes/css/animateeb11.css?ver=4.4' type='text/css' media='' />
-<link rel='stylesheet' id='onetone-main-css'  href='assets/onetone-pro/style3601.css?ver=2.2.0' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C700%7CRaleway%3A300%2C400&amp;ver=4.4' type='text/css' media=''>
+<link rel='stylesheet' id='font-awesome-css'  href='assets/onetone-pro/plugins/font-awesome/css/font-awesome.minb2f9.css?ver=4.3.0' type='text/css' media=''>
+<link rel='stylesheet' id='bootstrap-css'  href='assets/onetone-pro/plugins/bootstrap/css/bootstrap.min7984.css?ver=3.3.4' type='text/css' media=''>
+<link rel='stylesheet' id='owl.carousel-css'  href='assets/onetone-pro/plugins/owl-carousel/assets/owl.carousel001e.css?ver=2.0.0' type='text/css' media=''>
+<link rel='stylesheet' id='owl-theme-css'  href='assets/onetone-pro/css/owl.theme3ba1.css?ver=1.3.3' type='text/css' media=''>
+<link rel='stylesheet' id='bigvideo-css'  href='assets/onetone-pro/css/bigvideo3ba1.css?ver=1.3.3' type='text/css' media=''>
+<link rel='stylesheet' id='prettyPhoto-css'  href='assets/onetone-pro/css/prettyPhotoc6bd.css?ver=3.1.5' type='text/css' media=''>
+<link rel='stylesheet' id='animate-css'  href='assets/onetone-pro/lib/shortcodes/css/animateeb11.css?ver=4.4' type='text/css' media=''>
+<link rel='stylesheet' id='onetone-main-css'  href='assets/onetone-pro/style3601.css?ver=2.2.0' type='text/css' media='all'>
 <style id='onetone-main-inline-css' type='text/css'>
   header .site-name,header .site-description,header .site-tagline{ color:#CC9966;}.site{}.top-bar{display:block;}.page-title-bar{
     padding-top:;
@@ -64,11 +64,11 @@
 
   }body{margin:0px;}
 </style>
-<link rel='stylesheet' id='onetone-shortcode-css'  href='assets/onetone-pro/css/shortcode3601.css?ver=2.2.0' type='text/css' media='' />
-<link rel='stylesheet' id='onetone-onetone-shortcodes-css'  href='assets/onetone-pro/css/onetone-shortcodes3601.css?ver=2.2.0' type='text/css' media='' />
-<link rel='stylesheet' id='onetone-onetone-css'  href='assets/onetone-pro/css/onetone3601.css?ver=2.2.0' type='text/css' media='' />
-<link rel='stylesheet' id='onetone-ms-css'  href='assets/onetone-pro/css/onetone-ms3601.css?ver=2.2.0' type='text/css' media='' />
-<link rel='stylesheet' id='onetone-scheme'  href='assets/onetone-pro/css/scheme3601.html?ver=2.2.0' type='text/less' media='' />
+<link rel='stylesheet' id='onetone-shortcode-css'  href='assets/onetone-pro/css/shortcode3601.css?ver=2.2.0' type='text/css' media=''>
+<link rel='stylesheet' id='onetone-onetone-shortcodes-css'  href='assets/onetone-pro/css/onetone-shortcodes3601.css?ver=2.2.0' type='text/css' media=''>
+<link rel='stylesheet' id='onetone-onetone-css'  href='assets/onetone-pro/css/onetone3601.css?ver=2.2.0' type='text/css' media=''>
+<link rel='stylesheet' id='onetone-ms-css'  href='assets/onetone-pro/css/onetone-ms3601.css?ver=2.2.0' type='text/css' media=''>
+<link rel='stylesheet' id='onetone-scheme'  href='assets/onetone-pro/css/scheme3601.html?ver=2.2.0' type='text/less' media=''>
 <script type='text/javascript' src='assets/onetone-pro/js/jquery/jqueryc1d8.js?ver=1.11.3'></script>
 <script type='text/javascript' src='assets/onetone-pro/js/jquery/jquery-migrate.min1576.js?ver=1.2.1'></script>
 <script type='text/javascript' src='assets/onetone-pro/lib/shortcodes/js/jquery.videoBGac28.js?ver=0.2'></script>
@@ -87,12 +87,12 @@
 <script type='text/javascript' src='assets/onetone-pro/plugins/bootstrap/js/bootstrap.min7984.js?ver=3.3.4'></script>
 <script type='text/javascript' src='assets/onetone-pro/plugins/jquery.nav652a.js?ver=1.4.14%20'></script>
 <script type='text/javascript' src='assets/onetone-pro/plugins/jquery.scrollTo22d6.js?ver=1.4.14'></script>
-<link rel='https://api.w.org/' href='wp-json/index.html' />
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc0db0.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wp-includes/wlwmanifest.xml" />
-<meta name="generator" content="WordPress 4.4" />
+<link rel='https://api.w.org/' href='wp-json/index.html'>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc0db0.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 4.4">
 <link rel="icon" href="assets/onetone-pro/pics/sites/27/2015/12/APP-favicon.png" type="image/png">        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-<meta name="generator" content="Powered by Slider Revolution 5.0.8.5 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<meta name="generator" content="Powered by Slider Revolution 5.0.8.5 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
 </head>
 
 <body class="home blog page homepage">
@@ -114,9 +114,7 @@
           <div class="container">
             <div class="logo-box">
 
-              <a href="index.html">
-                <img class="site-logo normal_logo" alt="Onetone App" src="assets/onetone-pro/pics/sites/27/2015/11/logo2.png" />
-              </a>
+              <a href="#home" style="color:#fff; font-size:30px; line-height:70px;">HeyCommunity</a>
             </div>
             <button class="site-nav-toggle">
               <span class="sr-only">Toggle navigation</span>
@@ -138,7 +136,7 @@
             <div class="fxd-header">
               <div class="container">
                 <div class="logo-box">
-                  <a href="index.html"><img class="site-logo normal_logo" src="assets/onetone-pro/pics/sites/27/2015/11/logo2.png"></a>
+                  <a href="#home" style="color:#fff; font-size:30px; line-height:70px;">HeyCommunity</a>
 
 
                 </div>
@@ -174,15 +172,15 @@
                        <div class="home-container container page_container">
                         <div class="home-section-content">
                           <div id="" class=" row"><br><div class=" col-md-6" id="">
-                            <img class="alignnone size-full wp-image-8" src="assets/onetone-pro/pics/sites/27/2015/11/logo.png" alt="logo" width="200" height="70" />
                             <div style="height: 50px; text-align: left;"></div>
                             <h1 style="text-align: left; font-size: 50px; color: #fff; font-family: 'Raleway';">The Best Start Up</h1>
-                            <h1 style="text-align: left; font-size: 50px; color: #fff; font-family: 'Raleway';">For Your Elegant App.</h1>
+                            <h1 style="text-align: left; font-size: 50px; color: #fff; font-family: 'Raleway';">For Your Community App.</h1>
                             <div style="height: 50px;"></div>
-                            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee70f16,a.button-568de7ee70f16:hover{color:#fff;}a.button-568de7ee70f16 {color: #fff !important;border-color: #fff !important;}</style><a href="#" target="_self" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-cloud-download "></i>  DOWNLOAD APP</a>
+                            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee70f16,a.button-568de7ee70f16:hover{color:#fff;}a.button-568de7ee70f16 {color: #fff !important;border-color: #fff !important;}</style>
+                            <a href="https://github.com/dev4living/hey-community" target="_blank" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-github"></i>  Source Code</a>
 
                           </div><div class=" col-md-6" id="">
-                          <img src="assets/onetone-pro/pics/sites/27/2015/11/banner_phone.png" alt="banner_phone" width="452" height="455" class="alignnone size-full wp-image-9" />
+                          <img src="assets/onetone-pro/pics/sites/27/2015/11/banner_phone.png" alt="banner_phone" width="452" height="455" class="alignnone size-full wp-image-9">
 
                         </div></div>            </div>
                       </div>
@@ -346,7 +344,7 @@
 
           </div>
           <div class=" col-md-4" id="">
-            <img class="alignnone size-full wp-image-10" src="assets/onetone-pro/pics/sites/27/2015/11/phone_01.png" alt="phone_01" width="255" height="516" />
+            <img class="alignnone size-full wp-image-10" src="assets/onetone-pro/pics/sites/27/2015/11/phone_01.png" alt="phone_01" width="255" height="516">
 
           </div>
           <div class=" col-md-4" id="">
@@ -369,7 +367,7 @@
         <div class="home-section-content">
           <div id="" class=" row">
             <div class=" col-md-6" id="">
-              <img class="alignnone size-full wp-image-13" src="assets/onetone-pro/pics/sites/27/2015/11/phone_02.png" alt="phone_02" width="382" height="512" />
+              <img class="alignnone size-full wp-image-13" src="assets/onetone-pro/pics/sites/27/2015/11/phone_02.png" alt="phone_02" width="382" height="512">
 
             </div>
             <div class=" col-md-6" id="">
@@ -400,7 +398,7 @@
                 <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee73367,a.button-568de7ee73367:hover{color:#fff;}a.button-568de7ee73367 {color: #fff !important;border-color: #fff !important;}</style><a href="#" target="_self" style="" class=" magee-btn-normal button-568de7ee73367 btn-full-rounded btn-md" id="">DOWNLOAD APP</a>
 
               </div>
-              <div class="col-md-4"><img class="alignnone size-full wp-image-17" src="assets/onetone-pro/pics/sites/27/2015/11/pic03.png" alt="pic03" width="162" height="299" /></div>
+              <div class="col-md-4"><img class="alignnone size-full wp-image-17" src="assets/onetone-pro/pics/sites/27/2015/11/pic03.png" alt="pic03" width="162" height="299"></div>
             </div>
           </div>
         </div>
@@ -433,7 +431,7 @@
 
             </div>
             <div class=" col-md-6" id="">
-              <img src="assets/onetone-pro/pics/sites/27/2015/11/phone_03y.png" alt="phone_03y" width="372" height="512 class="alignnone size-full wp-image-16" />
+              <img src="assets/onetone-pro/pics/sites/27/2015/11/phone_03y.png" alt="phone_03y" width="372" height="512 class="alignnone size-full wp-image-16">
             </div>
           </div>            </div>
         </div>
@@ -447,30 +445,29 @@
           <div class="home-section-content">
             <h1><span style="color: #c8c8c8; font-size: 42px; font-family: 'Raleway';">We Have Plans</span></h1>
             <style type="text/css" scoped="scoped">.divider-568de7ee73969{ margin-top: 30px;margin-bottom:30px;width:15%;}.divider-568de7ee73969 .divider-border{border-bottom-width:; border-color:;}.divider-568de7ee73969 .double-line.divider-inner-item .divider-inner{border-top-width: ; border-bottom-width: ;}.divider-568de7ee73969 .divider-border.divider-inner-item .divider-inner{ border-bottom-width: ;} </style><div class=" divider divider-568de7ee73969 divider-border center" id="" style="margin-top:; margin-bottom:;"><div class="divider-inner divider-border"></div></div>
-            <h5><span style="color: #c8c8c8; font-family: 'Raleway';">Praesent ullamcorper nunc eget odio aliquet porta.</span></h5>
+            <h5><span style="color: #c8c8c8; font-family: 'Raleway';">Serving medium and small customers</span></h5>
             <div style="height: 70px;"></div>
             <div class="magee-pricing-table row  3_columns" id="">
               <div class="magee-pricing-box-wrap  col-md-4">
                 <div class="panel panel-default text-center  magee-pricing-box pricing-box-flat">
                   <div class="panel-heading">
                     <div class="pricing-top-icon">
-                      <i class="fa fa-heart"></i>
+                      <i class="fa fa-plane"></i>
                     </div>
-                    <h3 class="panel-title prcing-title">Personal</h3>
+                    <h3 class="panel-title prcing-title">SaaS</h3>
                   </div>
                   <div class="panel-body">
                     <div class="pricing-tag">
-                      <span class="currency">$</span><span class="price">29.99</span><span class="unit">/ month</span>
+                      <span class="currency">$</span><span class="price">00.00</span><span class="unit">/ month</span>
                     </div>
                     <ul class="pricing-list">
-                      <li>10 PSD files</li>
-                      <li>12 HTML templates</li>
-                      <li>8 Wordpress themes with setup</li>
-
+                      <li>It's beta</li>
+                      <li>Free trial ended in April 2016</li>
+                      <li>WebApp + IOS App + Android App</li>
                     </ul>
                   </div>
                   <div class="panel-footer">
-                    <a href="#" target="http://_blank" class="magee-btn-normal">Buy Now</a>
+                    <a class="magee-btn-normal">Free Trial</a>
                   </div>
                 </div>
               </div>
@@ -478,18 +475,18 @@
                 <div class="panel panel-default text-center  magee-pricing-box pricing-box-flat featured standout">
                   <div class="panel-heading">
                     <div class="pricing-top-icon">
-                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-heart"></i>
                     </div>
-                    <h3 class="panel-title prcing-title">Small Business</h3>
+                    <h3 class="panel-title prcing-title">Commercial license + Custom made</h3>
                   </div>
                   <div class="panel-body">
                     <div class="pricing-tag">
-                      <span class="currency">$</span><span class="price">39.99</span><span class="unit">/ month</span>
+                      <span class="currency">$</span><span class="price">2280.99</span><span class="unit">/ forever</span>
                     </div>
-                    <ul class="pricing-list"><li>10 PSD files</li>
-                      <li>12 HTML templates</li>
-                      <li>8 Wordpress themes with setup</li>
-
+                    <ul class="pricing-list">
+                      <li>Commercial license</li>
+                      <li>Custom made</li>
+                      <li>WebApp + IOS APP + Android APP (private)</li>
                     </ul>
                   </div>
                   <div class="panel-footer">
@@ -501,18 +498,18 @@
                 <div class="panel panel-default text-center  magee-pricing-box pricing-box-flat">
                   <div class="panel-heading">
                     <div class="pricing-top-icon">
-                      <i class="fa fa-tag"></i>
+                      <i class="fa fa-suitcase"></i>
                     </div>
-                    <h3 class="panel-title prcing-title">Enterprise</h3>
+                    <h3 class="panel-title prcing-title">Commercial license</h3>
                   </div>
                   <div class="panel-body">
                     <div class="pricing-tag">
-                      <span class="currency">$</span><span class="price">59.99</span><span class="unit">/ month</span>
+                      <span class="currency">$</span><span class="price">1520.99</span><span class="unit">/ forever</span>
                     </div>
-                    <ul class="pricing-list"><li>10 PSD files</li>
-                      <li>12 HTML templates</li>
-                      <li>8 Wordpress themes with setup</li>
-
+                    <ul class="pricing-list">
+                      <li>Commercial license</li>
+                      <li>WebApp + IOS APP + Android APP (private)</li>
+                      <li>One year technical support</li>
                     </ul>
                   </div>
                   <div class="panel-footer">
@@ -533,7 +530,7 @@
               <h1><span style="color: #c8c8c8; font-size: 42px; font-family: 'Raleway';">Some Screens</span></h1>
 
               <style type="text/css" scoped="scoped">.divider-568de7ee740e8{ margin-top: 30px;margin-bottom:30px;width:15%;}.divider-568de7ee740e8 .divider-border{border-bottom-width:; border-color:;}.divider-568de7ee740e8 .double-line.divider-inner-item .divider-inner{border-top-width: ; border-bottom-width: ;}.divider-568de7ee740e8 .divider-border.divider-inner-item .divider-inner{ border-bottom-width: ;} </style><div class=" divider divider-568de7ee740e8 divider-border center" id="" style="margin-top:; margin-bottom:;"><div class="divider-inner divider-border"></div></div>
-              <h5><span style="color: #c8c8c8; font-family: 'Raleway';">Praesent ullamcorper nunc eget odio aliquet porta.</span></h5>
+              <h5><span style="color: #c8c8c8; font-family: 'Raleway';">Elegant APP, for you create</span></h5>
 
               <div style="height: 70px;"></div>
               <div class="magee-carousel multi-carousel  carousel-568de7ee741c5" id=>
@@ -541,31 +538,31 @@
                  <div id="carousel-568de7ee741c5" class="owl-carousel owl-theme">
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/02.jpg"><img class="alignnone size-full wp-image-20" src="assets/onetone-pro/pics/sites/27/2015/11/02-169x300.jpg" alt="02" width="277" height="491" /></a>
+                    <a href="assets/onetone-pro/pics/sites/27/2015/11/02.jpg"><img class="alignnone size-full wp-image-20" src="assets/onetone-pro/pics/sites/27/2015/11/02-169x300.jpg" alt="02" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/03.jpg"><img class="alignnone size-full wp-image-21" src="assets/onetone-pro/pics/sites/27/2015/11/03-169x300.jpg" alt="03" width="277" height="491" /></a>
+                    <a href="assets/onetone-pro/pics/sites/27/2015/11/03.jpg"><img class="alignnone size-full wp-image-21" src="assets/onetone-pro/pics/sites/27/2015/11/03-169x300.jpg" alt="03" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/04.jpg"><img class="alignnone size-full wp-image-22" src="assets/onetone-pro/pics/sites/27/2015/11/04-169x300.jpg" alt="04" width="277" height="491" /></a>
+                    <a href="assets/onetone-pro/pics/sites/27/2015/11/04.jpg"><img class="alignnone size-full wp-image-22" src="assets/onetone-pro/pics/sites/27/2015/11/04-169x300.jpg" alt="04" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/05.jpg"><img class="alignnone size-full wp-image-23" src="assets/onetone-pro/pics/sites/27/2015/11/05-169x300.jpg" alt="05" width="277" height="491" /></a>
+                    <a href="assets/onetone-pro/pics/sites/27/2015/11/05.jpg"><img class="alignnone size-full wp-image-23" src="assets/onetone-pro/pics/sites/27/2015/11/05-169x300.jpg" alt="05" width="277" height="491"></a>
                   </div>
-                  <a href="assets/onetone-pro/pics/sites/27/2015/11/06.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/06-169x300.jpg" alt="06" width="277" height="491" />
+                  <a href="assets/onetone-pro/pics/sites/27/2015/11/06.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/06-169x300.jpg" alt="06" width="277" height="491">
                     <div class="item">
-                    </a><a href="assets/onetone-pro/pics/sites/27/2015/11/07.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/07-169x300.jpg" alt="07" width="277" height="491" />
+                    </a><a href="assets/onetone-pro/pics/sites/27/2015/11/07.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/07-169x300.jpg" alt="07" width="277" height="491">
                   </div></a>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/08.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/08-169x300.jpg" alt="08" width="277" height="491" /></a>
+                    <a href="assets/onetone-pro/pics/sites/27/2015/11/08.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/08-169x300.jpg" alt="08" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/01y.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/01y-169x300.jpg" alt="01y" width="277" height="491" /></a>
+                    <a href="assets/onetone-pro/pics/sites/27/2015/11/01y.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/01y-169x300.jpg" alt="01y" width="277" height="491"></a>
                   </div>
 
                 </div>
@@ -629,21 +626,21 @@
             <i id="" class=" fa fa-apple" style="color:#fff;font-size:64px;"></i>
             <h6><span style="color: #c8c8c8; font-size: 16px; font-family: 'Raleway';">Download for Apple IOS</span></h6>
             <div style="height: 25px;"></div>
-            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee748c6,a.button-568de7ee748c6:hover{color:#ffffff;}a.button-568de7ee748c6 {color: #ffffff !important;border-color: #ffffff !important;}</style><a href="#" target="_self" style="" class=" magee-btn-normal button-568de7ee748c6 btn-full-rounded btn-md" id="">DOWNLOAD</a>
+            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee748c6,a.button-568de7ee748c6:hover{color:#ffffff;}a.button-568de7ee748c6 {color: #ffffff !important;border-color: #ffffff !important;}</style><a href="#contact" style="" class=" magee-btn-normal button-568de7ee748c6 btn-full-rounded btn-md" id="">PLEASE CONTACT US</a>
 
           </div>
           <div class=" col-md-4" id="">
-            <i id="" class=" fa fa-windows" style="color:#fff;font-size:64px;"></i>
-            <h6><span style="color: #c8c8c8; font-size: 16px; font-family: 'Raleway';">Download for Windows</span></h6>
+            <i id="" class=" fa fa-safari" style="color:#fff;font-size:64px;"></i>
+            <h6><span style="color: #c8c8c8; font-size: 16px; font-family: 'Raleway';">Download for WebApp</span></h6>
             <div style="height: 25px;"></div>
-            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee74ada,a.button-568de7ee74ada:hover{color:#ffffff;}a.button-568de7ee74ada {color: #ffffff !important;border-color: #ffffff !important;}</style><a href="#" target="_self" style="" class=" magee-btn-normal button-568de7ee74ada btn-full-rounded btn-md" id="">DOWNLOAD</a>
+            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee748c6,a.button-568de7ee748c6:hover{color:#ffffff;}a.button-568de7ee748c6 {color: #ffffff !important;border-color: #ffffff !important;}</style><a href="https://github.com/dev4living/hey-community/releases" target="_blank" style="" class=" magee-btn-normal button-568de7ee748c6 btn-full-rounded btn-md" id="">DOWNLOAD</a>
 
           </div>
           <div class=" col-md-4" id="">
             <i id="" class=" fa fa-android" style="color:#fff;font-size:64px;"></i>
             <h6><span style="color: #c8c8c8; font-size: 16px; font-family: 'Raleway';">Download for Android</span></h6>
             <div style="height: 25px;"></div>
-            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee74cbd,a.button-568de7ee74cbd:hover{color:#ffffff;}a.button-568de7ee74cbd {color: #ffffff !important;border-color: #ffffff !important;}</style><a href="#" target="_self" style="" class=" magee-btn-normal button-568de7ee74cbd btn-full-rounded btn-md" id="">DOWNLOAD</a>
+            <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee748c6,a.button-568de7ee748c6:hover{color:#ffffff;}a.button-568de7ee748c6 {color: #ffffff !important;border-color: #ffffff !important;}</style><a href="#contact" style="" class=" magee-btn-normal button-568de7ee748c6 btn-full-rounded btn-md" id="">PLEASE CONTACT US</a>
 
           </div>
         </div>            </div>
@@ -695,28 +692,25 @@ background-color:#e44948;
 </style><div id="" class="magee-contact-form-wrap  contact-form-568de7ee74f24"><form action="#" class="magee-contact-form contact-form-custom" ><div class="row">
 <div class="form-group col-md-6">
   <label class="control-label sr-only" for="name">Name</label>
-  <input type="text" required="required" aria-required="true" class="form-control" name="name" id="name" placeholder="Name *">
+  <input disabled type="text" required="required" aria-required="true" class="form-control" name="name" id="name" placeholder="Name *">
 </div>
 <div class="form-group col-md-6">
   <label class="control-label sr-only" for="email">Email address</label>
-  <input type="email" required="required" aria-required="true" class="form-control" name="email" id="email" placeholder="Email *">
+  <input disabled type="email" required="required" aria-required="true" class="form-control" name="email" id="email" placeholder="Email *">
 </div>
 </div><div class="row">
 <div class="form-group col-md-12">
   <label class="control-label sr-only" for="subject">Subject</label>
-  <input type="subject" required="required" aria-required="true" class="form-control" name="subject" id="subject"  placeholder="Subject *">
+  <input disabled type="subject" required="required" aria-required="true" class="form-control" name="subject" id="subject"  placeholder="Subject *">
 </div>
 </div><div class="row">
 <div class="form-group col-md-12">
   <label class="control-label sr-only" for="">Message</label>
-  <textarea name="message" id="message" required="required" aria-required="true" rows="10" placeholder="Message *" class="form-control"></textarea>
+  <textarea disabled name="message" id="message" required="required" aria-required="true" rows="10" placeholder="Message *" class="form-control"></textarea>
 </div>
 </div><div class="row contact-failed"></div><div class="row">
 <div class="form-group col-md-12">
-  <label class="control-label sr-only" for="submit">Submit</label>
-  <input type="submit" value="Submit" id="submit" class="magee-btn-normal">
-  <input type="hidden" name="receiver" id="receiver" value="YWRtaW5AbWFnZWV3cC5jb20=">
-  <input type="hidden" name="terms" id="terms" value="no">
+  <input disabled type="submit" value="Submit" id="submit" class="magee-btn-normal btn-block">
 </div>
 </div></form><div id="failed-info" style=" display:none;">Please fill in all of the required fields</div></div>            </div>
 </div>
@@ -743,8 +737,7 @@ background-color:#e44948;
   <div class="footer-info-area" role="contentinfo">
     <div class="container">
 
-     <div class="site-info">
-       Copyright &copy; 2015, Designed by <a href="http://www.mageewp.com/">MageeWP Themes</a>.                    </div>
+     <div class="site-info">Copyright &copy;2016 HeyCommunity.</div>
 
      </div>
    </div>
@@ -770,9 +763,9 @@ background-color:#e44948;
 <script type='text/javascript' src='assets/onetone-pro/plugins/owl-carousel/owl.carousel.min.js'></script>
 <script type='text/javascript' src='assets/onetone-pro/plugins/smoothscrolle2dc.js?ver=0.9.9'></script>
 <script type='text/javascript'>
-  /* <![CDATA[ */
+ * <![CDATA[ */
   var onetone_params = {"ajaxurl":"https:\/\/demo.mageewp.com\/onetone-pro-demo-app\/wp-admin\/admin-ajax.php","themeurl":"https:\/\/demo.mageewp.com\/onetone-pro-demo-app\/wp-content\/themes\/onetone-pro","slideSpeed":"5000","sticky_header":"yes","isMobile":"0","primary_color":"#e44948"};
-  /* ]]> */
+ * ]]> */
 </script>
 <script type='text/javascript' src='assets/onetone-pro/js/onetone3601.js?ver=2.2.0'></script>
 <script type='text/javascript' src='assets/onetone-pro/js/wp-embed.mineb11.js?ver=4.4'></script>

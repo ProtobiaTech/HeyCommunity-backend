@@ -170,11 +170,12 @@
                             <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee70f16,a.button-568de7ee70f16:hover{color:#fff;}a.button-568de7ee70f16 {color: #fff !important;border-color: #fff !important;}</style>
                             <a href="https://github.com/dev4living/hey-community" target="_blank" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-github"></i>  Source Code</a>
                             &nbsp;&nbsp;
-                            <a href="http://demo.hey-community.online" target="_blank" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-paper-plane"></i> LIVE DEMO</a>
+                            <a href="http://demo.hey-community.online" target="_blank" style="" class="hidden-xs magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-paper-plane"></i> LIVE DEMO</a>
+                            <a class="visible-xs-inline-block" style="" href="http://demo.hey-community.online" target="_blank">LIVE DEMO</a>
                             <div style="color:#fff; margin-top:10px;">
                                 <div style="font-size:18px;">Contact</div>
-                                Rod: supgeek.rod(AT)gmail.com <br>
-                                Giter: https://gitter.im/dev4living/hey-community <br>
+                                Rod: <a href="#">supgeek.rod(AT)gmail.com</a> <br>
+                                Giter: <a href="https://gitter.im/dev4living/hey-community" target="_blank">https://gitter.im/dev4living/hey-community</a> <br>
                                 QQ Group: 242078519
                             </div>
 
@@ -648,8 +649,8 @@
           <style type="text/css" scoped="scoped">.divider-568de7ee74e63{ margin-top: 30px;margin-bottom:30px;width:15%;}.divider-568de7ee74e63 .divider-border{border-bottom-width:; border-color:;}.divider-568de7ee74e63 .double-line.divider-inner-item .divider-inner{border-top-width: ; border-bottom-width: ;}.divider-568de7ee74e63 .divider-border.divider-inner-item .divider-inner{ border-bottom-width: ;} </style><div class=" divider divider-568de7ee74e63 divider-border center" id="" style="margin-top:; margin-bottom:;"><div class="divider-inner divider-border"></div></div>
 
           <div>
-            Rod: supgeek.rod(AT)gmail.com <br>
-            Giter: https://gitter.im/dev4living/hey-community <br>
+            Rod: <a href="#">supgeek.rod(AT)gmail.com</a> <br>
+            Giter: <a href="https://gitter.im/dev4living/hey-community" target="_blank">https://gitter.im/dev4living/hey-community</a> <br>
             QQ Group: 242078519
           </div>
           <div style="height: 70px;"></div>

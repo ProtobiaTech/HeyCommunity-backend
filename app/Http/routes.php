@@ -28,8 +28,8 @@ $apiRoutes = function() {
     Route::controller('tenant', 'Api\TenantController');
 };
 
-Route::group(['middleware' => ['addTenant', 'addHeader'], 'domain' => 'api.hey-community.local'], $apiRoutes);
-Route::group(['middleware' => ['addTenant', 'addHeader'], 'domain' => 'api.hey-community.online'], $apiRoutes);
+Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.local'], $apiRoutes);
+Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.online'], $apiRoutes);
 
 
 

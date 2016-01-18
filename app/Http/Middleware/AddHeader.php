@@ -18,6 +18,7 @@ class AddHeader
         $response = $next($request);
         $response->header('Access-Control-Allow-Origin', env('HEADER_Access-Control-Allow-Origin'));
         $response->header('Access-Control-Allow-Method', env('HEADER_Access-Control-Allow-Method'));
+        $response->header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
         return $response;
     }

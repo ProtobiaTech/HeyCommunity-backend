@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="no-js">
+<html lang="en-US" class="no-js">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <link rel="profile" href="http://gmpg.org/xfn/11">
-  <link rel="pingback" href="xmlrpc.php">
     <!--[if lt IE 9]>
     <script src="https://demo.mageewp.com/onetone-pro-demo-app/assets/onetone-pro/js/html5.js"></script>
     <![endif]-->
-    <title>Onetone App &#8211; Just another MageeWP Sites site</title>
-    <link rel="alternate" type="application/rss+xml" title="Onetone App &raquo; Feed" href="feed/index.html">
-    <link rel="alternate" type="application/rss+xml" title="Onetone App &raquo; Comments Feed" href="comments/feed/index.html">
+    <title>HeyCommunity</title>
     <script type="text/javascript">
      window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/demo.mageewp.com\/onetone-pro-demo-app\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4"}};
      !function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),c.toDataURL().length>3e3):("simple"===a?d.fillText(String.fromCharCode(55357,56835),0,0):d.fillText(String.fromCharCode(55356,57135),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
@@ -87,12 +83,7 @@
 <script type='text/javascript' src='assets/onetone-pro/plugins/bootstrap/js/bootstrap.min7984.js?ver=3.3.4'></script>
 <script type='text/javascript' src='assets/onetone-pro/plugins/jquery.nav652a.js?ver=1.4.14%20'></script>
 <script type='text/javascript' src='assets/onetone-pro/plugins/jquery.scrollTo22d6.js?ver=1.4.14'></script>
-<link rel='https://api.w.org/' href='wp-json/index.html'>
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc0db0.php?rsd">
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wp-includes/wlwmanifest.xml">
-<meta name="generator" content="WordPress 4.4">
 <link rel="icon" href="assets/onetone-pro/pics/sites/27/2015/12/APP-favicon.png" type="image/png">        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-<meta name="generator" content="Powered by Slider Revolution 5.0.8.5 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
 </head>
 
 <body class="home blog page homepage">
@@ -114,7 +105,7 @@
           <div class="container">
             <div class="logo-box">
 
-              <a href="#home" style="color:#fff; font-size:30px; line-height:70px;">HeyCommunity</a>
+              <a href="#home" style="color:#fff; font-size:30px; line-height:70px;">HeyCommunity <sup style="font-size:14px;">Beta</sup></a>
             </div>
             <button class="site-nav-toggle">
               <span class="sr-only">Toggle navigation</span>
@@ -122,9 +113,9 @@
             </button>
             <nav class="site-nav" role="navigation">
               <ul><li  class="onetone-menuitem"><a id="onetone-home" href="#home" >
-                <span>Home</span></a></li><li  class="onetone-menuitem"><a id="onetone-brief" href="#brief" >
+                <span>Home</span></a></li><!-- <li  class="onetone-menuitem"><a id="onetone-brief" href="#brief" >
                 <span>Brief</span></a></li><li  class="onetone-menuitem"><a id="onetone-features" href="#features" >
-                <span>Features</span></a></li><li  class="onetone-menuitem"><a id="onetone-pricing" href="#pricing" >
+                <span>Features</span></a></li>--><li  class="onetone-menuitem"><a id="onetone-pricing" href="#pricing" >
                 <span>Pricing</span></a></li><li  class="onetone-menuitem"><a id="onetone-screenshots" href="#screenshots" >
                 <span>Screenshots</span></a></li><li  class="onetone-menuitem"><a id="onetone-download" href="#download" >
                 <span>Download</span></a></li><li  class="onetone-menuitem"><a id="onetone-contact" href="#contact" >
@@ -136,7 +127,7 @@
             <div class="fxd-header">
               <div class="container">
                 <div class="logo-box">
-                  <a href="#home" style="color:#fff; font-size:30px; line-height:70px;">HeyCommunity</a>
+                  <a href="#home" style="color:#fff; font-size:30px; line-height:70px;">HeyCommunity <sup style="font-size:14px;">Beta</sup></a>
 
 
                 </div>
@@ -146,9 +137,9 @@
                 </button>
                 <nav class="site-nav" role="navigation">
                   <ul><li  class="onetone-menuitem"><a id="onetone-home" href="#home" >
-                    <span>Home</span></a></li><li  class="onetone-menuitem"><a id="onetone-brief" href="#brief" >
+                    <span>Home</span></a></li><!-- <li  class="onetone-menuitem"><a id="onetone-brief" href="#brief" >
                     <span>Brief</span></a></li><li  class="onetone-menuitem"><a id="onetone-features" href="#features" >
-                    <span>Features</span></a></li><li  class="onetone-menuitem"><a id="onetone-pricing" href="#pricing" >
+                    <span>Features</span></a></li>--><li  class="onetone-menuitem"><a id="onetone-pricing" href="#pricing" >
                     <span>Pricing</span></a></li><li  class="onetone-menuitem"><a id="onetone-screenshots" href="#screenshots" >
                     <span>Screenshots</span></a></li><li  class="onetone-menuitem"><a id="onetone-download" href="#download" >
                     <span>Download</span></a></li><li  class="onetone-menuitem"><a id="onetone-contact" href="#contact" >
@@ -172,15 +163,21 @@
                        <div class="home-container container page_container">
                         <div class="home-section-content">
                           <div id="" class=" row"><br><div class=" col-md-6" id="">
-                            <div style="height: 50px; text-align: left;"></div>
+                            <div style="height: 20px; text-align: left;"></div>
                             <h1 style="text-align: left; font-size: 50px; color: #fff; font-family: 'Raleway';">The Best Start Up</h1>
                             <h1 style="text-align: left; font-size: 50px; color: #fff; font-family: 'Raleway';">For Your Community App.</h1>
                             <div style="height: 50px;"></div>
                             <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee70f16,a.button-568de7ee70f16:hover{color:#fff;}a.button-568de7ee70f16 {color: #fff !important;border-color: #fff !important;}</style>
                             <a href="https://github.com/dev4living/hey-community" target="_blank" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-github"></i>  Source Code</a>
+                            <div style="color:#fff; margin-top:10px;">
+                                <div style="font-size:18px;">Contact</div>
+                                Rod: supgeek.rod(AT)gmail.com <br>
+                                Giter: https://gitter.im/dev4living/hey-community <br>
+                                QQ Group: 242078519
+                            </div>
 
                           </div><div class=" col-md-6" id="">
-                          <img src="assets/onetone-pro/pics/sites/27/2015/11/banner_phone.png" alt="banner_phone" width="452" height="455" class="alignnone size-full wp-image-9">
+                          <img src="assets/home/heyCommunity-3p.png" alt="HeyCommunity" width="452" height="455" class="alignnone size-full wp-image-9">
 
                         </div></div>            </div>
                       </div>
@@ -189,7 +186,7 @@
                     <style>
                       section#brief .section-title{text-align:center ;}section#brief .section-title{font-size:10px;font-weight:normal;} section#brief .home-section-content,section#brief .home-section-content p{font-size:14px;font-weight:normal;}section#brief .home-section-content{text-align:center}section#brief {background-attachment:fixed;background-position:50% 0;background-repeat:repeat;background-color:#161616;padding:90px 0 50px;} </style>
 
-                      <section id="brief" class="section  onetone-parallax onetone-brief ">
+                      <section id="brief" class="hide section  onetone-parallax onetone-brief ">
                        <div class="home-container container page_container">
                         <div class="home-section-content">
                           <h1><span style="color: #c8c8c8; font-size: 42px; font-family: 'Raleway';">Way We Work</span></h1>
@@ -327,7 +324,7 @@
 <style>
   section#features .section-title{text-align:center ;}section#features .section-title{font-size:10px;font-weight:normal;} section#features .home-section-content,section#features .home-section-content p{font-size:14px;font-weight:normal;}section#features .home-section-content{text-align:center}section#features {background-attachment:fixed;background-position:50% 0;background-repeat:repeat;background-color:#222222;padding:90px 0 50px;} </style>
 
-  <section id="features" class="section  onetone-parallax onetone-features ">
+  <section id="features" class="hide section  onetone-parallax onetone-features ">
     <div class="home-container container page_container">
       <div class="home-section-content">
         <h1><span style="color: #c8c8c8; font-size: 42px; font-family: 'Raleway';">Amazing Features</span></h1>
@@ -362,7 +359,7 @@
     <style>
       section#section-4 .section-title{text-align:center ;}section#section-4 .section-title{font-size:10px;font-weight:normal;} section#section-4 .home-section-content,section#section-4 .home-section-content p{font-size:14px;font-weight:normal;}section#section-4 .home-section-content{text-align:left}section#section-4 {background-attachment:fixed;background-position:50% 0;background-repeat:repeat;background-color:#161616;padding:90px 0 50px;} </style>
 
-      <section id="section-4" class="section  onetone-parallax onetone-section-4 ">
+      <section id="section-4" class="hide section  onetone-parallax onetone-section-4 ">
        <div class="home-container container page_container">
         <div class="home-section-content">
           <div id="" class=" row">
@@ -409,7 +406,7 @@
   <style>
     section#section-5 .section-title{text-align:center ;}section#section-5 .section-title{font-size:10px;font-weight:normal;} section#section-5 .home-section-content,section#section-5 .home-section-content p{font-size:14px;font-weight:normal;}section#section-5 .home-section-content{text-align:left}section#section-5 {background-attachment:fixed;background-position:50% 0;background-repeat:repeat;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;background:url(assets/onetone-pro/pics/sites/27/2015/11/BANNER03.jpg)  no-repeat top left scroll;background-color:#222222;padding:90px 0 50px;} </style>
 
-    <section id="section-5" class="section  onetone-parallax onetone-section-5 ">
+    <section id="section-5" class="hide section  onetone-parallax onetone-section-5 ">
       <div class="home-container container page_container">
         <div class="home-section-content">
           <div id="" class=" row">
@@ -538,31 +535,23 @@
                  <div id="carousel-568de7ee741c5" class="owl-carousel owl-theme">
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/02.jpg"><img class="alignnone size-full wp-image-20" src="assets/onetone-pro/pics/sites/27/2015/11/02-169x300.jpg" alt="02" width="277" height="491"></a>
+                    <a><img class="alignnone size-full wp-image-20" src="assets/home/timeline.PNG" alt="timeline" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/03.jpg"><img class="alignnone size-full wp-image-21" src="assets/onetone-pro/pics/sites/27/2015/11/03-169x300.jpg" alt="03" width="277" height="491"></a>
+                    <a><img class="alignnone size-full wp-image-20" src="assets/home/activity.PNG" alt="activity" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/04.jpg"><img class="alignnone size-full wp-image-22" src="assets/onetone-pro/pics/sites/27/2015/11/04-169x300.jpg" alt="04" width="277" height="491"></a>
+                    <a><img class="alignnone size-full wp-image-20" src="assets/home/user.PNG" alt="user" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/05.jpg"><img class="alignnone size-full wp-image-23" src="assets/onetone-pro/pics/sites/27/2015/11/05-169x300.jpg" alt="05" width="277" height="491"></a>
-                  </div>
-                  <a href="assets/onetone-pro/pics/sites/27/2015/11/06.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/06-169x300.jpg" alt="06" width="277" height="491">
-                    <div class="item">
-                    </a><a href="assets/onetone-pro/pics/sites/27/2015/11/07.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/07-169x300.jpg" alt="07" width="277" height="491">
-                  </div></a>
-
-                  <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/08.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/08-169x300.jpg" alt="08" width="277" height="491"></a>
+                    <a><img class="alignnone size-full wp-image-20" src="assets/home/topic.PNG" alt="topic" width="277" height="491"></a>
                   </div>
 
                   <div class="item">
-                    <a href="assets/onetone-pro/pics/sites/27/2015/11/01y.jpg"><img class="alignnone size-medium wp-image-27" src="assets/onetone-pro/pics/sites/27/2015/11/01y-169x300.jpg" alt="01y" width="277" height="491"></a>
+                    <a><img class="alignnone size-full wp-image-20" src="assets/home/talk.PNG" alt="talk" width="277" height="491"></a>
                   </div>
 
                 </div>
@@ -656,6 +645,11 @@
           <h1><span style="color: #c8c8c8; font-size: 42px; font-family: 'Raleway';">Get In Touch With Us</span></h1>
           <style type="text/css" scoped="scoped">.divider-568de7ee74e63{ margin-top: 30px;margin-bottom:30px;width:15%;}.divider-568de7ee74e63 .divider-border{border-bottom-width:; border-color:;}.divider-568de7ee74e63 .double-line.divider-inner-item .divider-inner{border-top-width: ; border-bottom-width: ;}.divider-568de7ee74e63 .divider-border.divider-inner-item .divider-inner{ border-bottom-width: ;} </style><div class=" divider divider-568de7ee74e63 divider-border center" id="" style="margin-top:; margin-bottom:;"><div class="divider-inner divider-border"></div></div>
 
+          <div>
+            Rod: supgeek.rod(AT)gmail.com <br>
+            Giter: https://gitter.im/dev4living/hey-community <br>
+            QQ Group: 242078519
+          </div>
           <div style="height: 70px;"></div>
 
           <style type="text/css">

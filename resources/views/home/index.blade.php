@@ -28,12 +28,12 @@
    }
  </style>
  <link rel='stylesheet' id='layerslider-css'  href='assets/onetone-pro/plugins/LayerSlider/static/css/layerslider4c7e.css?ver=5.6.2' type='text/css' media='all'>
- <link rel='stylesheet' id='ls-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&amp;subset=latin%2Clatin-ext' type='text/css' media='all'>
+ <link rel='stylesheet' id='ls-google-fonts-css'  href='https://fonts.useso.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&amp;subset=latin%2Clatin-ext' type='text/css' media='all'>
  <link rel='stylesheet' id='rs-plugin-settings-css'  href='assets/onetone-pro/plugins/revslider/public/assets/css/settingsb97d.css?ver=5.0.8.5' type='text/css' media='all'>
  <style id='rs-plugin-settings-inline-css' type='text/css'>
   .tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}.largeredbtn{font-family:"Raleway",sans-serif;font-weight:900;font-size:16px;line-height:60px;color:#fff !important;text-decoration:none;padding-left:40px;padding-right:80px;padding-top:22px;padding-bottom:22px;background:rgb(234,91,31); background:-moz-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(234,91,31,1)),color-stop(100%,rgba(227,58,12,1))); background:-webkit-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:-o-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:-ms-linear-gradient(top,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); background:linear-gradient(to bottom,rgba(234,91,31,1) 0%,rgba(227,58,12,1) 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ea5b1f',endColorstr='#e33a0c',GradientType=0 )}.largeredbtn:hover{background:rgb(227,58,12); background:-moz-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(227,58,12,1)),color-stop(100%,rgba(234,91,31,1))); background:-webkit-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:-o-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:-ms-linear-gradient(top,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); background:linear-gradient(to bottom,rgba(227,58,12,1) 0%,rgba(234,91,31,1) 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#e33a0c',endColorstr='#ea5b1f',GradientType=0 )}.fullrounded img{-webkit-border-radius:400px;-moz-border-radius:400px;border-radius:400px}
 </style>
-<link rel='stylesheet' id='google-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C700%7CRaleway%3A300%2C400&amp;ver=4.4' type='text/css' media=''>
+<link rel='stylesheet' id='google-fonts-css'  href='http://fonts.useso.com/css?family=Open+Sans%3A300%2C400%2C700%7CRaleway%3A300%2C400&amp;ver=4.4' type='text/css' media=''>
 <link rel='stylesheet' id='font-awesome-css'  href='assets/onetone-pro/plugins/font-awesome/css/font-awesome.minb2f9.css?ver=4.3.0' type='text/css' media=''>
 <link rel='stylesheet' id='bootstrap-css'  href='assets/onetone-pro/plugins/bootstrap/css/bootstrap.min7984.css?ver=3.3.4' type='text/css' media=''>
 <link rel='stylesheet' id='owl.carousel-css'  href='assets/onetone-pro/plugins/owl-carousel/assets/owl.carousel001e.css?ver=2.0.0' type='text/css' media=''>
@@ -169,6 +169,8 @@
                             <div style="height: 50px;"></div>
                             <style type="text/css"> .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}a.button-568de7ee70f16,a.button-568de7ee70f16:hover{color:#fff;}a.button-568de7ee70f16 {color: #fff !important;border-color: #fff !important;}</style>
                             <a href="https://github.com/dev4living/hey-community" target="_blank" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-github"></i>  Source Code</a>
+                            &nbsp;&nbsp;
+                            <a href="http://demo.hey-community.online" target="_blank" style="" class=" magee-btn-normal button-568de7ee70f16 btn-full-rounded btn-xl" id=""><i class="fa fa-paper-plane"></i> LIVE DEMO</a>
                             <div style="color:#fff; margin-top:10px;">
                                 <div style="font-size:18px;">Contact</div>
                                 Rod: supgeek.rod(AT)gmail.com <br>

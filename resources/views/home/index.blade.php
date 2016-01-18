@@ -157,9 +157,10 @@
                   <section class="post-main" role="main" id="content">
                     <article class="page type-page homepage" id="" role="article">
                      <style>
-                      section#home .section-title{text-align:center ;}section#home .section-title{font-size:10px;font-weight:normal;} section#home .home-section-content,section#home .home-section-content p{font-size:14px;font-weight:normal;}section#home .home-section-content{text-align:left}section#home {background-attachment:fixed;background-position:50% 0;background-repeat:repeat;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;background:url(assets/onetone-pro/pics/sites/27/2015/11/banner0011.jpg)  no-repeat top center scroll;padding:180px 0 50px;} </style>
+                      section#home .section-title{text-align:center ;}section#home .section-title{font-size:10px;font-weight:normal;} section#home .home-section-content,section#home .home-section-content p{font-size:14px;font-weight:normal;}section#home .home-section-content{text-align:left}section#home {background-attachment:fixed;background-position:50% 0;background-repeat:repeat;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;background:url(assets/onetone-pro/pics/sites/27/2015/11/banner0011.jpg)  no-repeat top center scroll;padding:60px 0 50px;} </style>
 
                       <section id="home" class="section  onetone-parallax onetone-home ">
+                        <div class="hidden-xs" style="height:120px"></div>
                        <div class="home-container container page_container">
                         <div class="home-section-content">
                           <div id="" class=" row"><br><div class=" col-md-6" id="">

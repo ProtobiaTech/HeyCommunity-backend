@@ -84,6 +84,8 @@
 <script type='text/javascript' src='assets/onetone-pro/plugins/jquery.nav652a.js?ver=1.4.14%20'></script>
 <script type='text/javascript' src='assets/onetone-pro/plugins/jquery.scrollTo22d6.js?ver=1.4.14'></script>
 <link rel="icon" href="assets/onetone-pro/pics/sites/27/2015/12/APP-favicon.png" type="image/png">        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+    @include('layouts.common')
 </head>
 
 <body class="home blog page homepage">

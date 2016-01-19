@@ -12,21 +12,61 @@ use Hash, Auth;
 
 class UserController extends Controller
 {
-    public function anySignIn(Request $request)
+    /**
+     * Sign in
+     */
+    public function postSignIn(Request $request)
     {
         $this->validate($request, [
             'phone'     =>  'required',
             'password'  =>  'required',
         ]);
 
-        $model = User::where(['phone' => $request->phone])->first();
-        if ($model && Hash::check($request->password, $model->password)) {
-            Auth::user()->login($model);
-            return $model;
+        $User = User::where(['phone' => $request->phone])->first();
+        if ($User && Hash::check($request->password, $User->password)) {
+            Auth::user()->login($User);
+            return $User;
         } else {
-            // return not 200
-            return [];
+            return response(null, 403);
         }
+    }
+
+    /**
+     * Sign up
+     */
+    public function postSignUp(Request $request)
+    {
+        $this->validate($request, [
+            'nickname'  =>  'required|unique:users',
+            'phone'     =>  'required|unique:users',
+            'password'  =>  'required',
+        ]);
+
+        $User = new User;
+        $User->nickname     =   $request->nickname;
+        $User->avatar       =   '/assets/images/userAvatar-default.png';
+        $User->phone        =   $request->phone;
+        $User->password     =   Hash::make($request->password);
+
+        if ($User->save()) {
+            Auth::user()->login($User);
+            return $User;
+        } else {
+            return response($User, 500);
+        }
+    }
+
+    /**
+     * SignUp verify captcha
+     */
+    public function postSignUpVerifyCaptcha(Request $request)
+    {
+        $this->validate($request, [
+            'phone'     =>  'required|unique:users',
+            'captcha'   =>  'required',
+        ]);
+
+        // validate captcha
     }
 
     /**

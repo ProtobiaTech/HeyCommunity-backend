@@ -1,8 +1,11 @@
 <?php
-// dev
-header('Access-Control-Allow-Origin: *');
+
+if (isset($_SERVER['HTTP_REFERER'])) {
+    header('Access-Control-Allow-Origin: ' . substr($_SERVER['HTTP_REFERER'], 0, -1));
+}
 header("Access-Control-Allow-Method: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Credentials: true");
 
 /**
  * Laravel - A PHP Framework For Web Artisans

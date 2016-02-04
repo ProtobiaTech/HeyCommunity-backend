@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_SERVER['HTTP_REFERER'])) {
-    header('Access-Control-Allow-Origin: ' . substr($_SERVER['HTTP_REFERER'], 0, -1));
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
 }
 header("Access-Control-Allow-Method: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");

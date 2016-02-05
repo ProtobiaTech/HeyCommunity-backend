@@ -11,7 +11,6 @@ use App\Activity;
 use App\ActivityComment;
 use App\ActivityAttend;
 use App\ActivityLike;
-use Response;
 use Auth;
 
 class ActivityController extends Controller

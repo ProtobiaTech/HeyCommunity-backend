@@ -19,7 +19,7 @@ $apiRoutes = function() {
     Route::get('/', function() {
         return view('api.index');
     });
-    Route::resource('timeline', 'Api\TimelineController');
+    Route::controller('timeline', 'Api\TimelineController');
     Route::controller('activity', 'Api\ActivityController');
     Route::resource('topic',    'Api\TopicController');
     Route::resource('talk',     'Api\TalkController');

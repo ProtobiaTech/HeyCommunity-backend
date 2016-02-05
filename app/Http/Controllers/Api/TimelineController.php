@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Timeline;
-use Response;
+use Auth;
 
 class TimelineController extends Controller
 {
@@ -17,7 +17,7 @@ class TimelineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
         $ret = Timeline::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate();
         return $ret;
@@ -39,9 +39,19 @@ class TimelineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(Request $request)
     {
-        //
+        $this->validate($request, [
+            'content'       =>      'required|min:10',
+            'attachment'    =>      'required',
+        ]);
+
+        $Timeline = new Timeline;
+        $Timeline->user_id      =       Auth::user()->user()->id;
+        $Timeline->content      =       $request->content;
+        $Timeline->attachment   =       $request->attachment;
+        $Timeline->save();
+        return $Timeline;
     }
 
     /**
@@ -87,5 +97,20 @@ class TimelineController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     *
+     */
+    public function postLike(Request $request)
+    {
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        $Timeline = Timeline::findOrFail($request->id);
+        $Timeline->increment('like_num');
+
+        return $Timeline;
     }
 }

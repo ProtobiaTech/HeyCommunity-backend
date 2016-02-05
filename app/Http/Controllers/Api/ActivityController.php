@@ -12,6 +12,7 @@ use App\ActivityComment;
 use App\ActivityAttend;
 use App\ActivityLike;
 use Auth;
+use Storage;
 
 class ActivityController extends Controller
 {
@@ -52,11 +53,18 @@ class ActivityController extends Controller
             'end_date'      =>      'required',
         ]);
 
+        // print_r($request->file('avatar'));
+
+        $file = $request->file('avatar');
+        $uploadPath = '/uploads/activity/';
+        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+        $file->move(public_path() . $uploadPath, $fileName);
+
         $Activity = new Activity;
         $Activity->user_id      =       Auth::user()->user()->id;
         $Activity->title        =       $request->title;
         $Activity->content      =       $request->content;
-        $Activity->avatar       =       $request->avatar;
+        $Activity->avatar       =       $uploadPath . $fileName;
         $Activity->start_date   =       $request->start_date;
         $Activity->end_date     =       $request->end_date;
         $Activity->save();

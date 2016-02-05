@@ -29,7 +29,8 @@ $apiRoutes = function() {
 };
 
 Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.local'], $apiRoutes);
-Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.online'], $apiRoutes);
+Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.cn'], $apiRoutes);
+Route::group(['middleware' => ['addTenant'], 'domain' => 'superods-macbook.local'], $apiRoutes);
 
 
 
@@ -57,6 +58,6 @@ $routes = function() {
     });
 };
 
-Route::group(['domain' => 'hey-community.online'], $routes);
-Route::group(['domain' => 'www.hey-community.online'], $routes);
+Route::group(['domain' => 'hey-community.cn'], $routes);
+Route::group(['domain' => 'www.hey-community.cn'], $routes);
 Route::group(['domain' => 'dev.hey-community.local'], $routes);

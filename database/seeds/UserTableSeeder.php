@@ -12,6 +12,15 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+
+        \App\User::create([
+            'nickname'      =>  'Rod',
+            'avatar'        =>  $faker->imageUrl(),
+            'email'         =>  'supgeek.rod@gmail.com',
+            'phone'         =>  '17090402884',
+            'password'      =>  bcrypt('123123'),
+        ]);
+
         foreach (range(1, 68) as $index) {
             \App\User::create([
                 'nickname'      =>  $faker->name(),

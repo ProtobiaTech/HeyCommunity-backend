@@ -15,7 +15,7 @@
 //
 // Api
 // ----------------------------
-$apiRoutes = function() {
+Route::group(['middleware' => ['addTenant'], 'prefix' => 'api'], function() {
     Route::get('/', function() {
         return view('api.index');
     });
@@ -26,20 +26,14 @@ $apiRoutes = function() {
 
     Route::controller('user', 'Api\UserController');
     Route::controller('tenant', 'Api\TenantController');
-};
-
-Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.local'], $apiRoutes);
-Route::group(['middleware' => ['addTenant'], 'domain' => 'api.hey-community.cn'], $apiRoutes);
-Route::group(['middleware' => ['addTenant'], 'domain' => 'superods-macbook.local'], $apiRoutes);
-
-
+});
 
 
 
 //
-//
+// Base and Admin
 // ----------------------------
-$routes = function() {
+Route::group([], function() {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
 
@@ -56,8 +50,4 @@ $routes = function() {
         Route::resource('timeline', 'Admin\TimelineController');
         Route::resource('activity', 'Admin\ActivityController');
     });
-};
-
-Route::group(['domain' => 'hey-community.cn'], $routes);
-Route::group(['domain' => 'www.hey-community.cn'], $routes);
-Route::group(['domain' => 'dev.hey-community.local'], $routes);
+});

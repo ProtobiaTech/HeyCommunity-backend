@@ -34,6 +34,5 @@ class Kernel extends HttpKernel
 
         'addTenant' => \App\Http\Middleware\AddTenant::class,
         'addTenantWithAdmin' => \App\Http\Middleware\AddTenantWithAdmin::class,
-        'addHeader' => \App\Http\Middleware\AddHeader::class,
     ];
 }

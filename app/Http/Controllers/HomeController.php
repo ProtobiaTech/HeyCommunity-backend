@@ -23,6 +23,14 @@ class HomeController extends Controller
     }
 
     /**
+     *
+     */
+    public function createTenant(Request $request)
+    {
+        return view('home.create-tenant');
+    }
+
+    /**
      */
     public function storeTenant(Request $request)
     {
@@ -38,7 +46,7 @@ class HomeController extends Controller
         $Tenant = new Tenant();
 
         $Tenant->site_name      =   $request->site_name;
-        $Tenant->sub_domain     =   $request->sub_domain . '.hey-community.online';
+        $Tenant->sub_domain     =   $request->sub_domain . '.hey-community.cn';
         if ($request->domain) {
             $Tenant->domain     =   $request->domain;
         }

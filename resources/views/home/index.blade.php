@@ -114,14 +114,20 @@
               <i class="fa fa-bars fa-2x"></i>
             </button>
             <nav class="site-nav" role="navigation">
-              <ul><li  class="onetone-menuitem"><a id="onetone-home" href="#home" >
+              <ul>
+                <li  class="onetone-menuitem"><a id="onetone-create-tenant" target="_blank" href="/create-tenant" >
+                <span style="color:#f00">New Tenant</span></a></li>
+                <li  class="onetone-menuitem"><a id="onetone-home" href="#home" >
                 <span>Home</span></a></li><!-- <li  class="onetone-menuitem"><a id="onetone-brief" href="#brief" >
                 <span>Brief</span></a></li><li  class="onetone-menuitem"><a id="onetone-features" href="#features" >
                 <span>Features</span></a></li>--><li  class="onetone-menuitem"><a id="onetone-pricing" href="#pricing" >
                 <span>Pricing</span></a></li><li  class="onetone-menuitem"><a id="onetone-screenshots" href="#screenshots" >
                 <span>Screenshots</span></a></li><li  class="onetone-menuitem"><a id="onetone-download" href="#download" >
                 <span>Download</span></a></li><li  class="onetone-menuitem"><a id="onetone-contact" href="#contact" >
-                <span>Contact</span></a></li></ul>                        </nav>
+                <span>Contact</span></a></li>
+              </ul>
+            </nav>
+
               </div>
             </div>
 
@@ -138,7 +144,10 @@
                   <i class="fa fa-bars fa-2x"></i>
                 </button>
                 <nav class="site-nav" role="navigation">
-                  <ul><li  class="onetone-menuitem"><a id="onetone-home" href="#home" >
+                  <ul>
+                    <li  class="onetone-menuitem"><a id="onetone-create-tenant" target="_blank" href="/create-tenant" >
+                    <span style="color:#f00">New Tenant</span></a></li>
+                    <li  class="onetone-menuitem"><a id="onetone-home" href="#home" >
                     <span>Home</span></a></li><!-- <li  class="onetone-menuitem"><a id="onetone-brief" href="#brief" >
                     <span>Brief</span></a></li><li  class="onetone-menuitem"><a id="onetone-features" href="#features" >
                     <span>Features</span></a></li>--><li  class="onetone-menuitem"><a id="onetone-pricing" href="#pricing" >

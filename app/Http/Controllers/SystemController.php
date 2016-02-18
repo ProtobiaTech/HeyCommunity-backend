@@ -27,14 +27,14 @@ class SystemController extends Controller
                 'nickname'      =>      'Rod',
                 'email'         =>      'supgeek.rod@gmail.com',
                 'phone'         =>      '17090402884',
-                'password'      =>      Hash::make('19940120.'),
+                'password'      =>      Hash::make('hey community'),
             ]);
 
             \App\User::create([
                 'nickname'      =>      'Robot',
                 'email'         =>      'robot@hey-community.online',
                 'phone'         =>      '12312312312',
-                'password'      =>      Hash::make('19940120.'),
+                'password'      =>      Hash::make('hey community'),
             ]);
             Model::reguard();
 

@@ -20,6 +20,13 @@ class UserTableSeeder extends Seeder
             'phone'         =>  '17090402884',
             'password'      =>  bcrypt('123123'),
         ]);
+        \App\User::create([
+            'nickname'      =>      'Robot',
+            'avatar'        =>  $faker->imageUrl(),
+            'email'         =>      'robot@hey-community.online',
+            'phone'         =>      '12312312312',
+            'password'      =>      Hash::make('hey community'),
+        ]);
 
         foreach (range(1, 68) as $index) {
             \App\User::create([

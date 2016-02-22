@@ -18,14 +18,14 @@ class UserTableSeeder extends Seeder
             'avatar'        =>  $faker->imageUrl(),
             'email'         =>  'supgeek.rod@gmail.com',
             'phone'         =>  '17090402884',
-            'password'      =>  bcrypt('123123'),
+            'password'      =>  bcrypt('112233'),
         ]);
         \App\User::create([
-            'nickname'      =>      'Robot',
-            'avatar'        =>  $faker->imageUrl(),
-            'email'         =>      'robot@hey-community.online',
-            'phone'         =>      '12312312312',
-            'password'      =>      Hash::make('hey community'),
+            'nickname'      =>      'Test User',
+            'avatar'        =>      $faker->imageUrl(),
+            'email'         =>      'test@hey-community.cn',
+            'phone'         =>      '12312341234',
+            'password'      =>      Hash::make('123123'),
         ]);
 
         foreach (range(1, 68) as $index) {

@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
             'nickname'      =>      'Test User',
             'avatar'        =>      $faker->imageUrl(),
             'email'         =>      'test@hey-community.cn',
-            'phone'         =>      '12312341234',
+            'phone'         =>      '12312345678',
             'password'      =>      Hash::make('123123'),
         ]);
 

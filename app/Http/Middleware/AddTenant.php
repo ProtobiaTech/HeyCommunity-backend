@@ -33,10 +33,10 @@ class AddTenant
                 if (isset($_GET['tenant_id']) && $_GET['tenant_id']) {
                     TenantScope::addTenant('tenant_id', $_GET['tenant_id']);
                 } else {
-                    TenantScope::addTenant('tenant_id', 2);
+                    TenantScope::addTenant('tenant_id', 1);
                 }
             } else {
-                TenantScope::addTenant('tenant_id', 2);
+                TenantScope::addTenant('tenant_id', 1);
             }
         }
 

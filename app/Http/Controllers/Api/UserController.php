@@ -15,6 +15,17 @@ class UserController extends Controller
     /**
      * Sign in
      */
+    public function getSignOut()
+    {
+        if (Auth::user()->check()) {
+            AUth::user()->logout();
+        }
+        return null;
+    }
+
+    /**
+     * Sign in
+     */
     public function postSignIn(Request $request)
     {
         $this->validate($request, [
@@ -27,7 +38,7 @@ class UserController extends Controller
             Auth::user()->login($User);
             return $User;
         } else {
-            return response(null, 403);
+            return response('phone or password err', 403);
         }
     }
 
@@ -70,68 +81,14 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Reponse the user info
      */
-    public function create()
+    public function getUserInfo()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if (Auth::user()->check()) {
+            return Auth::user()->user();
+        } else {
+            return null;
+        }
     }
 }

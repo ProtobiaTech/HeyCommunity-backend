@@ -26,14 +26,17 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        $faker = Faker\Factory::create();
+        Model::unguard();
+
         \App\User::create([
             'nickname'      =>      'Admin',
-            'avatar'        =>      $faker->imageUrl(),
+            'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'admin@hey-community.cn',
             'phone'         =>      '12312341234',
             'password'      =>      Hash::make('admin1234'),
         ]);
+
+        Model::reguard();
     }
 
     /**

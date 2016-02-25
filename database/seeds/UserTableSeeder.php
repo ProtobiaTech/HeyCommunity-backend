@@ -14,15 +14,15 @@ class UserTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         \App\User::create([
-            'nickname'      =>  'Rod',
-            'avatar'        =>  $faker->imageUrl(),
-            'email'         =>  'supgeek.rod@gmail.com',
-            'phone'         =>  '17090402884',
-            'password'      =>  bcrypt('112233'),
+            'nickname'      =>      'Rod',
+            'avatar'        =>      '/assets/images/userAvatar-default.png',
+            'email'         =>      'supgeek.rod@gmail.com',
+            'phone'         =>      '17090402884',
+            'password'      =>      bcrypt('123123'),
         ]);
         \App\User::create([
             'nickname'      =>      'Test User',
-            'avatar'        =>      $faker->imageUrl(),
+            'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'test@hey-community.cn',
             'phone'         =>      '12312345678',
             'password'      =>      Hash::make('123123'),

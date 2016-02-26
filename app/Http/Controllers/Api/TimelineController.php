@@ -42,7 +42,7 @@ class TimelineController extends Controller
     public function postStore(Request $request)
     {
         $this->validate($request, [
-            'content'       =>      'required|min:10',
+            'content'       =>      'required',
             'attachment'    =>      'required',
         ]);
 

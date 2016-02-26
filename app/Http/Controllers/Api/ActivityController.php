@@ -47,7 +47,7 @@ class ActivityController extends Controller
     {
         $this->validate($request, [
             'title'         =>      'required',
-            'content'       =>      'required|min:10',
+            'content'       =>      'required',
             'avatar'        =>      'required',
             'start_date'    =>      'required',
             'end_date'      =>      'required',

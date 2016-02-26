@@ -13,6 +13,14 @@ use Auth;
 class TimelineController extends Controller
 {
     /**
+     * construct
+     */
+    public function __construct()
+    {
+        $this->middleware('auth.user', ['only' => ['postStore']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

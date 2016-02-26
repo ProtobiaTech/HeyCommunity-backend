@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 
         'auth.tenant'   =>  \App\Http\Middleware\AuthenticateWithTenantAuth::class,
+        'auth.user'     =>  \App\Http\Middleware\AuthenticateWithUserAuth::class,
 
         'addTenant' => \App\Http\Middleware\AddTenant::class,
         'addTenantWithAdmin' => \App\Http\Middleware\AddTenantWithAdmin::class,

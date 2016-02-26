@@ -17,6 +17,14 @@ use Storage;
 class ActivityController extends Controller
 {
     /**
+     * construct
+     */
+    public function __construct()
+    {
+        $this->middleware('auth.user', ['only' => ['postStore', 'postLike', 'postAttend', 'postCommentPublish']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

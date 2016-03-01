@@ -27,7 +27,7 @@ class TimelineController extends Controller
      */
     public function getIndex()
     {
-        $ret = Timeline::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate();
+        $ret = Timeline::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(5);
         return $ret;
     }
 

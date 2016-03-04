@@ -16,7 +16,7 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
         $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate();
         return $ret;
@@ -49,9 +49,9 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        return Topic::with(['author', 'comments'])->findOrFail($id);
     }
 
     /**

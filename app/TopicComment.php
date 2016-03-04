@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
 
-class Topic extends Model
+class TopicComment extends Model
 {
     use SoftDeletes;
     use TenantScopedModelTrait;
@@ -20,11 +20,4 @@ class Topic extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    /**
-     * Related Comments
-     */
-    public function comments()
-    {
-        return $this->hasMany('App\TopicComment', 'topic_id')->with('author');
-    }
 }

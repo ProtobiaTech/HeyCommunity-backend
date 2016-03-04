@@ -8,9 +8,20 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Topic;
+use App\TopicComment;
+
+use Auth;
 
 class TopicController extends Controller
 {
+    /**
+     * construct
+     */
+    public function __construct()
+    {
+        $this->middleware('auth.user', ['only' => ['postStore', 'postCommentPublish']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,9 +49,26 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'         =>      'required',
+            'content'       =>      'required',
+            'avatar'        =>      'required',
+        ]);
+
+        $file = $request->file('avatar');
+        $uploadPath = '/uploads/topic/';
+        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+        $file->move(public_path() . $uploadPath, $fileName);
+
+        $Topic = new Topic;
+        $Topic->user_id     =       Auth::user()->user()->id;
+        $Topic->title       =       $request->title;
+        $Topic->content     =       $request->content;
+        $Topic->avatar      =       $uploadPath . $fileName;
+        $Topic->save();
+        return $Topic;
     }
 
     /**
@@ -87,4 +115,27 @@ class TopicController extends Controller
     {
         //
     }
+
+    /**
+     *
+     */
+    public function postCommentPublish(Request $request)
+    {
+        $this->validate($request, [
+            'id'        =>      'required',
+            'content'   =>      'required',
+        ]);
+
+        $Topic = Topic::findOrFail($request->id);
+        $TopicComment = new TopicComment;
+
+        $TopicComment->topic_id     =   $request->id;
+        $TopicComment->user_id      =   Auth::user()->user()->id;
+        $TopicComment->content      =   $request->content;
+        $TopicComment->save();
+        // $Topic->increment('comment_num');
+
+        return $Topic;
+    }
+
 }

@@ -18,7 +18,7 @@ class TopicController extends Controller
      */
     public function getIndex()
     {
-        $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate();
+        $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
         return $ret;
     }
 

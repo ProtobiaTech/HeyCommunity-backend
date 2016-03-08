@@ -34,13 +34,6 @@ Route::group(['middleware' => ['addTenant'], 'prefix' => 'api'], function() {
 // Base and Admin
 // ----------------------------
 Route::group([], function() {
-    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-    Route::controller('/', 'HomeController');
-    Route::get('create-tenant', ['as' => 'home.create-tenant', 'uses' => 'HomeController@createTenant']);
-    Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
-
-    Route::controller('system', 'SystemController');
-
     // Admin dashboard
     // ----------------------------
     Route::get('admin', ['as' => 'admin.home', 'uses' => 'Admin\HomeController@index']);
@@ -52,4 +45,12 @@ Route::group([], function() {
         Route::resource('timeline', 'Admin\TimelineController');
         Route::resource('activity', 'Admin\ActivityController');
     });
+
+    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    Route::get('create-tenant', ['as' => 'home.create-tenant', 'uses' => 'HomeController@createTenant']);
+    Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
+    Route::controller('/', 'HomeController');
+
+    Route::controller('system', 'SystemController');
+
 });

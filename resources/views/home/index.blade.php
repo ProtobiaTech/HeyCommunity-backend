@@ -24,79 +24,102 @@
 
                 <div class="col-md-6">
                     <div class="panel panel-default panel-new-tenant">
-                        <div class="panel-body">
-                            <p class="text-center caption">New Community</p>
+                        @if (Auth::tenant()->guest())
+                            <div class="panel-body">
+                                <p class="text-center caption">New Community</p>
 
-                            @if (count($errors) > 0)
-                            <div class="alert alert-danger" style="margin:0 15px;">
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
-
-                            {!! Form::open(array('route' => 'home.store-tenant', 'method' => 'post', 'class' => 'form')) !!}
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" type="text" name="site_name" value="{{ old('site_name') }}" placeholder="Site Name">
-                                    </div>
+                                @if (count($errors) > 0)
+                                <div class="alert alert-danger" style="margin:0 15px;">
+                                    <strong>Whoops!</strong> There were some problems with your input.
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
+                                @endif
 
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon1">http://</span>
-                                            <input class="form-control" type="text" name="domain" value="{{ old('domain') }}" placeholder="site-domain.com">
+                                {!! Form::open(array('route' => 'home.store-tenant', 'method' => 'post', 'class' => 'form')) !!}
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" type="text" name="site_name" value="{{ old('site_name') }}" placeholder="Site Name">
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="sizing-addon1">http://</span>
-                                            <input class="form-control" type="text" name="sub_domain" value="{{ old('sub_domain') }}" placeholder="sub-domain">
-                                            <span class="input-group-addon" id="sizing-addon1">.hey-community.cn</span>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon1">http://</span>
+                                                <input class="form-control" type="text" name="domain" value="{{ old('domain') }}" placeholder="site-domain.com">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Admin Email">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="sizing-addon1">http://</span>
+                                                <input class="form-control" type="text" name="sub_domain" value="{{ old('sub_domain') }}" placeholder="sub-domain">
+                                                <span class="input-group-addon" id="sizing-addon1">.hey-community.cn</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" placeholder="Admin Phone">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Admin Email">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input class="form-control" type="password" name="password" value="{{ old('password') }}" placeholder="Password">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" placeholder="Admin Phone">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-12" style="margin-top:2px;">
-                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input class="form-control" type="password" name="password" value="{{ old('password') }}" placeholder="Password">
+                                        </div>
                                     </div>
-                                </div>
-                            {!! Form::close() !!}
 
-                        </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="margin-top:2px;">
+                                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                        </div>
+                                    </div>
+                                {!! Form::close() !!}
 
-                        <div style="margin:-15px 30px 20px;">
-                            <hr style="margin:15px 0;">
-                            <div>
-                                You have a community? <a href="{{ route('admin.auth.login')}}">Sign-in</a>
                             </div>
-                        </div>
+
+                            <div style="margin:-15px 30px 20px;">
+                                <hr style="margin:15px 0;">
+                                <div>
+                                    You have a community? <a href="{{ route('admin.auth.login')}}">Sign-in.</a>
+                                </div>
+                            </div>
+                        @else
+                            <div class="panel-body">
+                                <p class="text-center caption">You have a community</p>
+                                <div style="margin:0 30px;">
+                                    <p>
+                                        domain: <a target="_blank" href="http://{{ Auth::tenant()->user()->domain }}">{{ Auth::tenant()->user()->domain }}</a> <br>
+                                        <small>Please DNS app.hey-community.cn </small>
+                                    </p>
+                                    <p>
+                                        sub_domain: <a target="_blank" href="http://{{ Auth::tenant()->user()->sub_domain }}">{{ Auth::tenant()->user()->sub_domain }}</a>
+                                    </p>
+
+                                    <hr style="margin:15px 0;">
+                                    <div>
+                                        Into the <a class="" href="{{ route('admin.home') }}">Dashboard</a>, or <a href="{{ route('admin.auth.logout') }}">Sign-out</a>
+                                    </div>
+                                </div>
+
+                                <p>
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -43,7 +43,7 @@ class AuthController extends Controller
     public function anyLogout()
     {
         Auth::tenant()->logout();
-        return redirect()->route('admin.home');
+        return redirect()->route('home');
     }
 
 }

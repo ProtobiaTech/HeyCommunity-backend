@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'proxima-nova';
+    src: url(' //instagramstatic-a.akamaihd.net/h1/webfonts/proximanova-light-webfont.eot/63c84728610f.eot');
+    src: url(' //instagramstatic-a.akamaihd.net/h1/webfonts/proximanova-light-webfont.eot/63c84728610f.eot?#iefix') format("embedded-opentype"),
+         url(' //instagramstatic-a.akamaihd.net/h1/webfonts/proximanova-light-webfont.woff/66bbe029f180.woff') format("woff"),
+         url(' //instagramstatic-a.akamaihd.net/h1/webfonts/proximanova-light-webfont.ttf/eb408516399b.ttf') format("truetype"),
+         url(' //instagramstatic-a.akamaihd.net/h1/webfonts/proximanova-light-webfont.svg/858f6a9b7ef3.svg#ProximaNovaLight') format("svg");
+    font-weight: 300;
+    font-style: normal;
+}
+
+body {
+    background-color: #fafafa !important;
+    font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+}
+
+#main-body {
+    max-width: 930px;
+    margin: 40px auto 0;
+}
+
+#main-body .phone-box {
+    width: 454px;
+    height: 618px;
+    background-image: url('../images/phone.png');
+}
+
+#main-body .phone-box iframe {
+    position: relative;
+    top: 93px;
+    left: 132px;
+    width: 343px;
+    height: 610px;
+    border: 0;
+    transform: scale(0.7);
+    transform-origin:0 0;
+}
+
+#main-body .panel-new-tenant {
+    margin-top: 60px;
+    margin-left: 20px;
+    background-color: #fff;
+    border-radius: 1px;
+    border-color: #eee;
+}
+
+#main-body .panel-new-tenant .caption {
+    font-size: 18px;
+}
+
+#main-body .panel-new-tenant .form .form-group .col-sm-12 {
+    margin-bottom: 8px;
+}
+
+nav {
+
+}
+
+nav a {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: 800;
+}
+

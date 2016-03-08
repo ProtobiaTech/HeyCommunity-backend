@@ -17,6 +17,17 @@ body {
     font-weight: normal;
 }
 
+.banner-box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #2b2d2e;
+    color: #fff;
+    z-index: 99;
+}
+
 #main-body {
     max-width: 930px;
     margin: 40px auto 0;
@@ -26,6 +37,13 @@ body {
     width: 454px;
     height: 618px;
     background-image: url('../images/phone.png');
+}
+
+
+@media (min-width: 768px) {
+    #main-body .row-1 {
+        margin: 0 30px 15px;
+    }
 }
 
 #main-body .phone-box iframe {
@@ -41,14 +59,25 @@ body {
 
 #main-body .panel-new-tenant {
     margin-top: 60px;
-    margin-left: 20px;
     background-color: #fff;
     border-radius: 1px;
     border-color: #eee;
 }
 
+@media (min-width: 992px) {
+    #main-body .panel-new-tenant {
+        margin-left: 20px;
+    }
+}
+
 #main-body .panel-new-tenant .caption {
     font-size: 18px;
+}
+
+#main-body .panel-new-tenant .form-control,
+#main-body .panel-new-tenant .input-group-addon {
+    border-color: #ddd;
+    box-shadow: none !important;
 }
 
 #main-body .panel-new-tenant .form .form-group .col-sm-12 {
@@ -61,7 +90,7 @@ nav {
 
 nav a {
     display: inline-block;
-    margin-right: 15px;
-    font-weight: 800;
+    margin-right: 20px;
+    font-weight: 600;
 }
 

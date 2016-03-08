@@ -3,26 +3,33 @@
 <head>
     <link rel="stylesheet" type="text/css" href="assets/style/home.css">
     <link rel="stylesheet" type="text/css" href="bower-assets/bootstrap/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
+    @include('layouts.common')
     <div id="main-body">
+        <div class="visible-sm-block visible-xs-block banner-box text-center">
+            HeyCommunity <br>
+            DEMO: <a href="http://demo.hey-community.cn">demo.hey-community.cn</a>
+        </div>
         <div class="container-fluid">
-            <div class="row" style="margin:0 30px 15px;">
-                <div class="col-sm-6">
+            <div class="row row-1">
+                <div class="col-md-6 hidden-sm hidden-xs">
                     <div class="phone-box">
                         <iframe src="http://demo.hey-community.cn"></iframe>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="panel panel-default panel-new-tenant">
                         <div class="panel-body">
                             <p class="text-center caption">New Community</p>
 
                             @if (count($errors) > 0)
                             <div class="alert alert-danger" style="margin:0 15px;">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <strong>Whoops!</strong> There were some problems with your input.
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -94,8 +101,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12">
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-xs-12 hidden-sm hidden-xs">
                     <div class="pull-right">
                         &copy; 2016 Dev4living
                     </div>
@@ -103,7 +110,20 @@
                         <a href="">ABOUT US</a>
                         <a href="">SUPPORT</a>
                         <a href="">BLOG</a>
+                        <a href="">OPEN RESOURCE</a>
                     </nav>
+                </div>
+
+                <div class="col-xs-12 visible-sm-block visible-xs-block text-center">
+                    <nav class="" style="max-width:60%; margin:0 auto;">
+                        <a href="">ABOUT US</a>
+                        <a href="">SUPPORT</a>
+                        <a href="">BLOG</a>
+                        <a href="">OPEN RESOURCE</a>
+                    </nav>
+                    <div>
+                        &copy; 2016 Dev4living
+                    </div>
                 </div>
             </div>
         </div>

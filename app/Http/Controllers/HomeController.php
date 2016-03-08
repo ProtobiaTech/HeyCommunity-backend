@@ -25,6 +25,23 @@ class HomeController extends Controller
     /**
      *
      */
+    public function getAboutUs()
+    {
+        return view('home.about-us');
+    }
+
+
+    /**
+     *
+     */
+    public function getOpenResource()
+    {
+        return view('home.open-resource');
+    }
+
+    /**
+     *
+     */
     public function createTenant(Request $request)
     {
         return view('home.create-tenant');

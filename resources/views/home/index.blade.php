@@ -104,25 +104,21 @@
             <div class="row" style="margin-bottom:10px;">
                 <div class="col-xs-12 hidden-sm hidden-xs">
                     <div class="pull-right">
-                        &copy; 2016 Dev4living
+                        &copy;2016 Dev4living
                     </div>
                     <nav>
-                        <a href="">ABOUT US</a>
-                        <a href="">SUPPORT</a>
-                        <a href="">BLOG</a>
-                        <a href="">OPEN RESOURCE</a>
+                        <a href="{{ url('about-us') }}">ABOUT US</a>
+                        <a href="{{ url('open-resource') }}">OPEN RESOURCE</a>
                     </nav>
                 </div>
 
                 <div class="col-xs-12 visible-sm-block visible-xs-block text-center">
                     <nav class="" style="max-width:60%; margin:0 auto;">
-                        <a href="">ABOUT US</a>
-                        <a href="">SUPPORT</a>
-                        <a href="">BLOG</a>
-                        <a href="">OPEN RESOURCE</a>
+                        <a href="{{ url('about-us') }}">ABOUT US</a>
+                        <a href="{{ url('open-resource') }}">OPEN RESOURCE</a>
                     </nav>
                     <div>
-                        &copy; 2016 Dev4living
+                        &copy;2016 Dev4living
                     </div>
                 </div>
             </div>

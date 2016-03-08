@@ -49,8 +49,7 @@ Route::group([], function() {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::get('create-tenant', ['as' => 'home.create-tenant', 'uses' => 'HomeController@createTenant']);
     Route::post('store-tenant', ['as' => 'home.store-tenant', 'uses' => 'HomeController@storeTenant']);
-    Route::controller('/', 'HomeController');
 
     Route::controller('system', 'SystemController');
-
+    Route::controller('/', 'HomeController');
 });

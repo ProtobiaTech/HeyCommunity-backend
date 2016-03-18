@@ -7,18 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
 
-class ActivityLike extends Model
+class TimelineLike extends Model
 {
     use SoftDeletes;
     use TenantScopedModelTrait;
-
-    /**
-     * Related User
-     */
-    public function activity()
-    {
-        return $this->belongsTo('App\Activity', 'activity_id');
-    }
 
     /**
      * Related User

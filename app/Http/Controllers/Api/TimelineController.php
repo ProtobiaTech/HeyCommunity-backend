@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Timeline;
+use App\TimelineLike;
 use Auth;
 
 class TimelineController extends Controller
@@ -27,7 +28,12 @@ class TimelineController extends Controller
      */
     public function getIndex()
     {
-        $ret = Timeline::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
+        $ret['timelines'] = Timeline::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        if (Auth::user()->check()) {
+            $ret['likes'] = TimelineLike::where('user_id', Auth::user()->user()->id)->get()->lists('timeline_id');
+        } else {
+            $ret['likes'] = [];
+        }
         return $ret;
     }
 
@@ -121,8 +127,19 @@ class TimelineController extends Controller
             'id'        =>      'required',
         ]);
 
+        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id])->first();
         $Timeline = Timeline::findOrFail($request->id);
-        $Timeline->increment('like_num');
+
+        if ($TimelineLike) {
+            $TimelineLike->delete();
+            $Timeline->decrement('like_num');
+        } else {
+            $TimelineLike = new TimelineLike;
+            $TimelineLike->user_id      =       Auth::user()->user()->id;
+            $TimelineLike->timeline_id  =       $request->id;
+            $TimelineLike->save();
+            $Timeline->increment('like_num');
+        }
 
         return $Timeline;
     }

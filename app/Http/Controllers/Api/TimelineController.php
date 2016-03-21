@@ -28,7 +28,7 @@ class TimelineController extends Controller
      */
     public function getIndex()
     {
-        $ret['timelines'] = Timeline::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        $ret['timelines'] = Timeline::with(['author', 'author_like'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
         if (Auth::user()->check()) {
             $ret['likes'] = TimelineLike::where('user_id', Auth::user()->user()->id)->get()->lists('timeline_id');
         } else {

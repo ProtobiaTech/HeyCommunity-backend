@@ -19,4 +19,12 @@ class Timeline extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    /**
+     *
+     */
+    public function author_like()
+    {
+        return $this->hasMany('App\TimelineLike')->with('author');
+    }
 }

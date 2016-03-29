@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use Hash, Auth;
+use Dev4living\LeanCloudSMS\LeanCloudSMS;
 
 class UserController extends Controller
 {
@@ -68,6 +69,27 @@ class UserController extends Controller
     }
 
     /**
+     * Get signUp captcha
+     */
+    public function anyGetCaptcha(Request $request)
+    {
+        $this->validate($request, [
+            'phone'     =>  'required|unique:users',
+        ]);
+
+        $config['header'] = explode('|', env('LEANCLOUD_REQUEST_SMS_HEADER'));
+        $data = '{"mobilePhoneNumber": "' . $request->phone . '"}';
+
+        $ret = LeanCloudSMS::init($config)->requestSmsCode($data);
+        $ret = json_decode($ret, true);
+        if (isset($ret['error'])) {
+            return response($ret['error'], 500);
+        } else {
+            return $ret;
+        }
+    }
+
+    /**
      * SignUp verify captcha
      */
     public function postSignUpVerifyCaptcha(Request $request)
@@ -77,7 +99,18 @@ class UserController extends Controller
             'captcha'   =>  'required',
         ]);
 
-        // validate captcha
+        $config['header'] = explode('|', env('LEANCLOUD_VERIFY_SMS_HEADER'));
+        $data = [
+            'mobilePhoneNumber'     =>  $request->phone,
+            'verifyCode'            =>  $request->captcha,
+        ];
+        $ret = LeanCloudSMS::init($config)->verifySmsCode($data);
+        $ret = json_decode($ret, true);
+        if (isset($ret['error'])) {
+            return response($ret['error'], 500);
+        } else {
+            return $ret;
+        }
     }
 
     /**

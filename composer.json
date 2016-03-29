@@ -10,7 +10,8 @@
         "barryvdh/laravel-debugbar": "^2.0",
         "laravelcollective/html": "^5.1",
         "aura-is-here/laravel-multi-tenant": "dev-master",
-        "kbwebs/multiauth": "~1.0"
+        "kbwebs/multiauth": "~1.0",
+        "dev4living/lean-cloud-sms-php": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

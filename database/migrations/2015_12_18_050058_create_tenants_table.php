@@ -38,6 +38,15 @@ class CreateTenantsTable extends Migration
             'password'      =>  bcrypt('hey community'),
         ]);
 
+        \App\Tenant::create([
+            'site_name'     =>  'Dev Community',
+            'domain'        =>  'demo.hey-community.local',
+            'sub_domain'    =>  'dev.hey-community.cn',
+            'email'         =>  'dev@hey-community.cn',
+            'phone'         =>  '12312341234',
+            'password'      =>  bcrypt('hey community'),
+        ]);
+
         Model::reguard();
     }
 

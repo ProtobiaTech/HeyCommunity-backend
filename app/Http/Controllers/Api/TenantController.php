@@ -17,7 +17,11 @@ class TenantController extends Controller
     public function getTenantInfo(Request $request)
     {
         $header = $request->header();
-        $host = $header['host'][0];
+        if (isset($header['domain'])) {
+            $host = substr(strstr($header['domain'][0], '//'), 2);
+        } else {
+            $host = 'demo.hey-community.cn';
+        }
         $model = Tenant::where('domain', $host)->orwhere('sub_domain', $host)->first();
 
         return $model;

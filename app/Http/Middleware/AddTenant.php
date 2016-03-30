@@ -19,7 +19,11 @@ class AddTenant
     public function handle($request, Closure $next)
     {
         $header = $request->header();
-        $host = $header['host'][0];
+        if (isset($header['domain'])) {
+            $host = substr(strstr($header['domain'][0], '//'), 2);
+        } else {
+            $host = 'demo.hey-community.cn';
+        }
 
         $Tenant = Tenant::where(['domain' => $host])->first();
         if (!$Tenant) {

@@ -124,4 +124,24 @@ class UserController extends Controller
             return null;
         }
     }
+
+    /**
+     * Update avatar
+     */
+    public function postUpdateAvatar(Request $request)
+    {
+        $this->validate($request, [
+            'avatar'       =>      'required',
+        ]);
+
+        $file = $request->file('avatar');
+        $uploadPath = '/uploads/user/avatar/';
+        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+        $file->move(public_path() . $uploadPath, $fileName);
+
+        $User = Auth::user()->user();
+        $User->avatar = $uploadPath . $fileName;
+        $User->save();
+        return $User;
+    }
 }

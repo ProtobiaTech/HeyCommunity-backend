@@ -113,9 +113,13 @@ class TimelineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function postDestroy(Request $request)
     {
-        //
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        return Timeline::destroy($request->id);
     }
 
     /**

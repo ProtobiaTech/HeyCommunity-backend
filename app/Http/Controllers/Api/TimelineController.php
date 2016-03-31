@@ -20,6 +20,7 @@ class TimelineController extends Controller
     public function __construct()
     {
         $this->middleware('auth.user', ['only' => ['postStore', 'postLike', 'postDestroy']]);
+        $this->middleware('auth.userAdmin', ['only' => ['postDestroy']]);
     }
 
     /**

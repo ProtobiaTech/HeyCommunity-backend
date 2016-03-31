@@ -19,7 +19,8 @@ class TopicController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth.user', ['only' => ['postStore', 'postCommentPublish']]);
+        $this->middleware('auth.user', ['only' => ['postStore', 'postCommentPublish', 'postDestroy']]);
+        $this->middleware('auth.userAdmin', ['only' => ['postDestroy']]);
     }
 
     /**
@@ -111,9 +112,13 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function postDestroy(Request $request)
     {
-        //
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        return Topic::destroy($request->id);
     }
 
     /**

@@ -30,8 +30,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 
-        'auth.tenant'   =>  \App\Http\Middleware\AuthenticateWithTenantAuth::class,
-        'auth.user'     =>  \App\Http\Middleware\AuthenticateWithUserAuth::class,
+        'auth.tenant'       =>  \App\Http\Middleware\AuthenticateWithTenantAuth::class,
+        'auth.user'         =>  \App\Http\Middleware\AuthenticateWithUserAuth::class,
+        'auth.userAdmin'    =>  \App\Http\Middleware\AuthenticateAdminWithUserAuth::class,
 
         'addTenant' => \App\Http\Middleware\AddTenant::class,
         'addTenantWithAdmin' => \App\Http\Middleware\AddTenantWithAdmin::class,

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Timeline;
 use App\TimelineLike;
+use App\TimelineComment;
 use Auth;
 
 class TimelineController extends Controller
@@ -18,7 +19,7 @@ class TimelineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth.user', ['only' => ['postStore']]);
+        $this->middleware('auth.user', ['only' => ['postStore', 'postLike', 'postDestroy']]);
     }
 
     /**
@@ -28,7 +29,7 @@ class TimelineController extends Controller
      */
     public function getIndex()
     {
-        $ret['timelines'] = Timeline::with(['author', 'author_like'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
         if (Auth::user()->check()) {
             $ret['likes'] = TimelineLike::where('user_id', Auth::user()->user()->id)->get()->lists('timeline_id');
         } else {
@@ -81,7 +82,7 @@ class TimelineController extends Controller
      */
     public function getShow($id)
     {
-        return Timeline::with(['author'])->findOrFail($id);
+        return Timeline::with(['author', 'comments'])->findOrFail($id);
     }
 
     /**
@@ -144,6 +145,28 @@ class TimelineController extends Controller
             $TimelineLike->save();
             $Timeline->increment('like_num');
         }
+
+        return $Timeline;
+    }
+
+    /**
+     *
+     */
+    public function postCommentPublish(Request $request)
+    {
+        $this->validate($request, [
+            'id'        =>      'required',
+            'content'   =>      'required',
+        ]);
+
+        $Timeline = Timeline::findOrFail($request->id);
+        $TimelineComment = new TimelineComment;
+
+        $TimelineComment->timeline_id   =   $request->id;
+        $TimelineComment->user_id       =   Auth::user()->user()->id;
+        $TimelineComment->content       =   $request->content;
+        $TimelineComment->save();
+        // $Timeline->increment('comment_num');
 
         return $Timeline;
     }

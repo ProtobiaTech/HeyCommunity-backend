@@ -55,19 +55,21 @@ class TopicController extends Controller
         $this->validate($request, [
             'title'         =>      'required',
             'content'       =>      'required',
-            'avatar'        =>      'required',
+            // 'avatar'        =>      'required',
         ]);
 
+        /*
         $file = $request->file('avatar');
         $uploadPath = '/uploads/topic/';
         $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
         $file->move(public_path() . $uploadPath, $fileName);
+        */
 
         $Topic = new Topic;
         $Topic->user_id     =       Auth::user()->user()->id;
         $Topic->title       =       $request->title;
         $Topic->content     =       $request->content;
-        $Topic->avatar      =       $uploadPath . $fileName;
+        // $Topic->avatar      =       $uploadPath . $fileName;
         $Topic->save();
         return $Topic;
     }

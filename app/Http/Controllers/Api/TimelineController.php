@@ -133,7 +133,7 @@ class TimelineController extends Controller
             'id'        =>      'required',
         ]);
 
-        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id])->first();
+        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => Auth::user()->user()->id])->first();
         $Timeline = Timeline::findOrFail($request->id);
 
         if ($TimelineLike) {

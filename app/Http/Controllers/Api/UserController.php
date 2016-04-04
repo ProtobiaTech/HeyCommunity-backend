@@ -116,12 +116,16 @@ class UserController extends Controller
     /**
      * Reponse the user info
      */
-    public function getUserInfo()
+    public function getUserInfo($id = null)
     {
-        if (Auth::user()->check()) {
-            return Auth::user()->user();
+        if ($id) {
+            return User::findOrFail($id);
         } else {
-            return null;
+            if (Auth::user()->check()) {
+                return Auth::user()->user();
+            } else {
+                return null;
+            }
         }
     }
 

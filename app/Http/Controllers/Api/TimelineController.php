@@ -28,9 +28,14 @@ class TimelineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        if ($request->where) {
+            $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        } else {
+            $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        }
+
         if (Auth::user()->check()) {
             $ret['likes'] = TimelineLike::where('user_id', Auth::user()->user()->id)->get()->lists('timeline_id');
         } else {

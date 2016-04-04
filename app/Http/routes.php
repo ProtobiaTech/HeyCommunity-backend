@@ -22,7 +22,8 @@ Route::group(['middleware' => ['addTenant'], 'prefix' => 'api'], function() {
     Route::controller('timeline', 'Api\TimelineController');
     Route::controller('activity', 'Api\ActivityController');
     Route::controller('topic',    'Api\TopicController');
-    Route::resource('talk',     'Api\TalkController');
+    Route::controller('notice',   'Api\NoticeController');
+    Route::controller('talk',     'Api\TalkController');
 
     Route::controller('user', 'Api\UserController');
     Route::controller('tenant', 'Api\TenantController');

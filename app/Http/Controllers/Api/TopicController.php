@@ -28,9 +28,13 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
+        if ($request->where) {
+            $ret = Topic::with('author')->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
+        }
         return $ret;
     }
 

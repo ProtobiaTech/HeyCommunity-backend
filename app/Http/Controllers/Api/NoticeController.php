@@ -19,7 +19,7 @@ class NoticeController extends Controller
      */
     public function getIndex()
     {
-        return Notice::paginate(10)->toArray();
+        return Notice::with(['author', 'type'])->paginate(10)->toArray();
     }
 
     /**

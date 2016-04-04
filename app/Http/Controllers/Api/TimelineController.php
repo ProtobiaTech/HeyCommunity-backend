@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Timeline;
 use App\TimelineLike;
 use App\TimelineComment;
+use App\Notice;
 use Auth;
 
 class TimelineController extends Controller
@@ -150,6 +151,13 @@ class TimelineController extends Controller
             $TimelineLike->timeline_id  =       $request->id;
             $TimelineLike->save();
             $Timeline->increment('like_num');
+
+            // notice
+            $Notice = new Notice;
+            $Notice->user_id            =       Auth::user()->user()->id;
+            $Notice->type_id            =       10;     // timeline_like
+            $Notice->entity_id          =       $Timeline->id;
+            $Notice->save();
         }
 
         return $Timeline;
@@ -173,6 +181,13 @@ class TimelineController extends Controller
         $TimelineComment->content       =   $request->content;
         $TimelineComment->save();
         // $Timeline->increment('comment_num');
+
+        // notice
+        $Notice = new Notice;
+        $Notice->user_id            =       Auth::user()->user()->id;
+        $Notice->type_id            =       11;     // timeline_like
+        $Notice->entity_id          =       $Timeline->id;
+        $Notice->save();
 
         return $Timeline;
     }

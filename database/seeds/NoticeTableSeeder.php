@@ -23,6 +23,7 @@ class NoticeTableSeeder extends Seeder
             $timelineId = $faker->randomElement($timelines);
 
             \App\Notice::create([
+                'initiator_user_id'     =>      $faker->randomElement($users),
                 'user_id'       =>      $faker->randomElement($users),
                 'tenant_id'     =>      with(\App\Timeline::find($timelineId))->tenant_id,
                 'type_id'       =>      $faker->randomElement($noticeTypes),

@@ -88,13 +88,32 @@ class NoticeController extends Controller
     }
 
     /**
+     *
+     */
+    public function postCheck(Request $request)
+    {
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        $Notice = Notice::findOrFail($request->id);
+        $Notice->is_checked = true;
+        $Notice->save();
+        return $Notice;
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function postDestroy(Request $request)
     {
-        //
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        return Notice::destroy($request->id);
     }
 }

@@ -21,6 +21,14 @@ class Notice extends Model
     }
 
     /**
+     * Related Initiator
+     */
+    public function initiator()
+    {
+        return $this->belongsTo('App\User', 'initiator_user_id');
+    }
+
+    /**
      * Related NoticeType
      */
     public function type()

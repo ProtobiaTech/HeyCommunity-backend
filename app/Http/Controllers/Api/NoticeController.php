@@ -27,7 +27,9 @@ class NoticeController extends Controller
      */
     public function getIndex()
     {
-        return Notice::with(['author', 'type'])->where('user_id', Auth::user()->user()->id)->paginate(10)->toArray();
+        return Notice::with(['author', 'type'])->where('user_id', Auth::user()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)->toArray();
     }
 
     /**
@@ -86,13 +88,32 @@ class NoticeController extends Controller
     }
 
     /**
+     *
+     */
+    public function postCheck(Request $request)
+    {
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        $Notice = Notice::findOrFail($request->id);
+        $Notice->is_checked = true;
+        $Notice->save();
+        return $Notice;
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function postDestroy(Request $request)
     {
-        //
+        $this->validate($request, [
+            'id'        =>      'required',
+        ]);
+
+        return Notice::destroy($request->id);
     }
 }

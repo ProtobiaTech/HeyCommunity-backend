@@ -13,13 +13,23 @@ use Auth;
 class NoticeController extends Controller
 {
     /**
+     * construct
+     */
+    public function __construct()
+    {
+        $this->middleware('auth.user', ['only' => ['getIndex']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function getIndex()
     {
-        return Notice::with(['author', 'type'])->paginate(10)->toArray();
+        return Notice::with(['author', 'type'])->where('user_id', Auth::user()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)->toArray();
     }
 
     /**

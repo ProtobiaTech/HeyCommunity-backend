@@ -21,6 +21,7 @@ class CreateTopicCommentsTable extends Migration
 
             $table->integer('topic_id')->index()->unsigned();
             $table->foreign('topic_id')->references('id')->on('topics');
+            $table->integer('parent_id')->index()->unsigned()->default(0);
             $table->text('content');
 
             $table->softDeletes();

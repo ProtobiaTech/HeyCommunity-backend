@@ -21,6 +21,7 @@ class CreateTimelineCommentsTable extends Migration
 
             $table->integer('timeline_id')->index()->unsigned();
             $table->foreign('timeline_id')->references('id')->on('timelines');
+            $table->integer('parent_id')->index()->unsigned()->default(0);
             $table->text('content');
 
             $table->softDeletes();

@@ -22,7 +22,8 @@ class CreateTimelinesTable extends Migration
             $table->string('title');
             $table->string('attachment');
             $table->text('content');
-            $table->integer('like_num');
+            $table->integer('like_num')->default(0);
+            $table->integer('comment_num')->default(0);
 
             $table->softDeletes();
             $table->timestamps();

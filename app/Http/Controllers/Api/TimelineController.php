@@ -89,7 +89,7 @@ class TimelineController extends Controller
      */
     public function getShow($id)
     {
-        return Timeline::with(['author', 'comments'])->findOrFail($id);
+        return Timeline::with(['author', 'comments', 'author_like'])->findOrFail($id);
     }
 
     /**

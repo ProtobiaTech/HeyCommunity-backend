@@ -32,11 +32,23 @@ class TimelineController extends Controller
     public function getIndex(Request $request)
     {
         if ($request->where) {
+            // uhome api
             $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+        } else if ($request->type) {
+            if ($request->type === 'refresh') {
+                $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])
+                    ->where('id', '>', $request->id)
+                    ->orderBy('created_at', 'asc')->orderBy('id', 'asc')->limit(10)->get()->toArray();
+            } else if ($request->type === 'infinite') {
+                $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])
+                    ->where('id', '<', $request->id)
+                    ->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get()->toArray();
+            }
         } else {
-            $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
+            $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get()->toArray();
         }
 
+        // likes
         if (Auth::user()->check()) {
             $ret['likes'] = TimelineLike::where('user_id', Auth::user()->user()->id)->get()->lists('timeline_id');
         } else {

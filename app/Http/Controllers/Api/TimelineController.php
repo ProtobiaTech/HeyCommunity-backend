@@ -203,6 +203,6 @@ class TimelineController extends Controller
         $Notice->entity_id          =       $Timeline->id;
         $Notice->save();
 
-        return $Timeline;
+        return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
     }
 }

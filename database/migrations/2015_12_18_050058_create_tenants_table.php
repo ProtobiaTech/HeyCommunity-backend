@@ -15,11 +15,11 @@ class CreateTenantsTable extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('site_name');
-            $table->string('domain')->unique()->nullable();
-            $table->string('sub_domain')->unique();
-            $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('site_name', 191);
+            $table->string('domain', 191)->unique()->nullable();
+            $table->string('sub_domain', 191)->unique();
+            $table->string('email', 191)->unique();
+            $table->string('phone', 191);
             $table->string('password', 60);
             $table->rememberToken();
 

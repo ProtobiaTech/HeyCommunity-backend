@@ -21,7 +21,7 @@ class CreateActivityCommentsTable extends Migration
             $table->integer('tenant_id')->index()->unsigned();
             $table->foreign('tenant_id')->references('id')->on('tenants');
 
-            $table->string('content');
+            $table->string('content', 191);
 
             $table->softDeletes();
             $table->timestamps();

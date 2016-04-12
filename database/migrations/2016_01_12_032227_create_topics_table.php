@@ -18,8 +18,8 @@ class CreateTopicsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('tenant_id')->index()->unsigned();
             $table->foreign('tenant_id')->references('id')->on('tenants');
-            $table->string('title');
-            $table->string('avatar');
+            $table->string('title', 191);
+            $table->string('avatar', 191);
             $table->text('content');
             $table->integer('thumb_up_num')->default(0);
             $table->integer('thumb_down_num')->default(0);

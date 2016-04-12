@@ -19,8 +19,8 @@ class CreateTimelinesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('tenant_id')->index()->unsigned();
             $table->foreign('tenant_id')->references('id')->on('tenants');
-            $table->string('title');
-            $table->string('attachment');
+            $table->string('title', 191);
+            $table->string('attachment', 191);
             $table->text('content');
             $table->integer('like_num')->default(0);
             $table->integer('comment_num')->default(0);

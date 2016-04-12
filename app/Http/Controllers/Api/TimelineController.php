@@ -173,7 +173,7 @@ class TimelineController extends Controller
             $Notice->save();
         }
 
-        return $Timeline;
+        return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
     }
 
     /**

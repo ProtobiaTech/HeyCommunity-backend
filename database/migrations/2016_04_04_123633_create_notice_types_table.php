@@ -15,7 +15,7 @@ class CreateNoticeTypesTable extends Migration
     {
         Schema::create('notice_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name', 191);
 
             $table->softDeletes();
             $table->timestamps();

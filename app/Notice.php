@@ -35,4 +35,12 @@ class Notice extends Model
     {
         return $this->belongsTo('App\NoticeType', 'type_id');
     }
+
+    /**
+     * Related Entity
+     */
+    public function entity()
+    {
+        return $this->belongsTo('App\Timeline', 'entity_id')->with('author');
+    }
 }

@@ -30,12 +30,14 @@ class TopicController extends Controller
      */
     public function getIndex(Request $request)
     {
-        if ($request->where) {
-            $ret = Topic::with('author')->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get();
-        } else {
-            $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get();
+        $builder =  Topic::with('author')->orderBy('id', 'desc')->limit(10);
+        if ($request->type === 'refresh') {
+            $builder->where('id', '>', $request->id);
+        } else if ($request->type === 'infinite') {
+            $builder->where('id', '<', $request->id);
         }
-        return $ret;
+
+        return $builder->get();
     }
 
     /**

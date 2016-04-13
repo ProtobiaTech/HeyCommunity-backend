@@ -27,9 +27,9 @@ class NoticeController extends Controller
      */
     public function getIndex()
     {
-        return Notice::with(['initiator', 'type'])->where('user_id', Auth::user()->user()->id)
+        return Notice::with(['initiator', 'type', 'entity'])->where('user_id', Auth::user()->user()->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(10)->toArray();
+            ->get()->toArray();
     }
 
     /**

@@ -31,9 +31,9 @@ class TopicController extends Controller
     public function getIndex(Request $request)
     {
         if ($request->where) {
-            $ret = Topic::with('author')->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
+            $ret = Topic::with('author')->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get();
         } else {
-            $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10);
+            $ret = Topic::with('author')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get();
         }
         return $ret;
     }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Topic;
 use App\TopicComment;
+use App\Notice;
 
 use Auth;
 
@@ -30,7 +31,7 @@ class TopicController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $builder =  Topic::with('author')->orderBy('id', 'desc')->limit(10);
+        $builder =  Topic::with(['author', 'comments'])->orderBy('id', 'desc')->limit(10);
         if ($request->type === 'refresh') {
             $builder->where('id', '>', $request->id);
         } else if ($request->type === 'infinite') {
@@ -146,9 +147,18 @@ class TopicController extends Controller
         $TopicComment->user_id      =   Auth::user()->user()->id;
         $TopicComment->content      =   $request->content;
         $TopicComment->save();
-        // $Topic->increment('comment_num');
+        $Topic->increment('comment_num');
 
-        return $Topic;
+        // notice
+        $Notice = new Notice;
+        $Notice->user_id            =       $Topic->user_id;
+        $Notice->initiator_user_id  =       Auth::user()->user()->id;
+        $Notice->type_id            =       21;     // topic_comment
+        $Notice->entity_id          =       $Topic->id;
+        $Notice->save();
+
+
+        return $Topic->with(['author', 'comments'])->findOrFail($Topic->id);
     }
 
 }

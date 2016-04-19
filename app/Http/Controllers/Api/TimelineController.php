@@ -193,13 +193,13 @@ class TimelineController extends Controller
         $TimelineComment->user_id       =   Auth::user()->user()->id;
         $TimelineComment->content       =   $request->content;
         $TimelineComment->save();
-        // $Timeline->increment('comment_num');
+        $Timeline->increment('comment_num');
 
         // notice
         $Notice = new Notice;
         $Notice->user_id            =       $Timeline->user_id;
         $Notice->initiator_user_id  =       Auth::user()->user()->id;
-        $Notice->type_id            =       11;     // timeline_like
+        $Notice->type_id            =       11;     // timeline_comment
         $Notice->entity_id          =       $Timeline->id;
         $Notice->save();
 

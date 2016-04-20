@@ -26,7 +26,6 @@ class CreateNoticesTable extends Migration
 
             $table->integer('type_id')->index()->unsigned();
             $table->foreign('type_id')->references('id')->on('notice_types');
-            $table->integer('entity_id')->index()->unsigned();
             $table->integer('is_checked')->unsigned()->default(0);
 
             $table->softDeletes();

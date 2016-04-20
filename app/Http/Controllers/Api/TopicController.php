@@ -154,7 +154,6 @@ class TopicController extends Controller
         $Notice->user_id            =       $Topic->user_id;
         $Notice->initiator_user_id  =       Auth::user()->user()->id;
         $Notice->type_id            =       21;     // topic_comment
-        $Notice->entity_id          =       $Topic->id;
         $Notice->noticeable_id      =       $Topic->id;
         $Notice->noticeable_type    =       Topic::class;
         $Notice->save();

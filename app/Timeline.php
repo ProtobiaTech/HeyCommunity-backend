@@ -35,4 +35,12 @@ class Timeline extends Model
     {
         return $this->hasMany('App\TimelineComment', 'timeline_id')->with('author');
     }
+
+    /**
+     * Related Notice
+     */
+    public function notices()
+    {
+        return $this->morphMany('App\Notice', 'noticeable');
+    }
 }

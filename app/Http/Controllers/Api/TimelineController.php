@@ -170,6 +170,8 @@ class TimelineController extends Controller
             $Notice->initiator_user_id  =       Auth::user()->user()->id;
             $Notice->type_id            =       10;     // timeline_like
             $Notice->entity_id          =       $Timeline->id;
+            $Notice->noticeable_id      =       $Timeline->id;
+            $Notice->noticeable_type    =       Timeline::class;
             $Notice->save();
         }
 
@@ -201,6 +203,8 @@ class TimelineController extends Controller
         $Notice->initiator_user_id  =       Auth::user()->user()->id;
         $Notice->type_id            =       11;     // timeline_comment
         $Notice->entity_id          =       $Timeline->id;
+        $Notice->noticeable_id      =       $Timeline->id;
+        $Notice->noticeable_type    =       Timeline::class;
         $Notice->save();
 
         return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);

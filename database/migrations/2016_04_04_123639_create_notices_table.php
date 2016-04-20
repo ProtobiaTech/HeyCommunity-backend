@@ -21,6 +21,9 @@ class CreateNoticesTable extends Migration
             $table->integer('tenant_id')->index()->unsigned();
             $table->foreign('tenant_id')->references('id')->on('tenants');
 
+            $table->integer('noticeable_id')->index()->unsigned();
+            $table->string('noticeable_type', 191)->index();
+
             $table->integer('type_id')->index()->unsigned();
             $table->foreign('type_id')->references('id')->on('notice_types');
             $table->integer('entity_id')->index()->unsigned();

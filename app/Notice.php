@@ -39,8 +39,8 @@ class Notice extends Model
     /**
      * Related Entity
      */
-    public function entity()
+    public function noticeable()
     {
-        return $this->belongsTo('App\Timeline', 'entity_id')->with('author');
+        return $this->morphTo();
     }
 }

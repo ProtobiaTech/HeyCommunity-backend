@@ -27,4 +27,12 @@ class Topic extends Model
     {
         return $this->hasMany('App\TopicComment', 'topic_id')->with('author');
     }
+
+    /**
+     * Related Notice
+     */
+    public function notices()
+    {
+        return $this->morphMany('App\Notice', 'noticeable');
+    }
 }

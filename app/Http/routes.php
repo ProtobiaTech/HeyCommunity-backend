@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//
+// Api
+// ----------------------------
+Route::group(['middleware' => [], 'prefix' => 'api'], function() {
+    Route::get('/', function() {
+        return view('api.index');
+    });
+
+    Route::controller('timeline', 'Api\TimelineController');
+    Route::controller('activity', 'Api\ActivityController');
+    Route::controller('topic',    'Api\TopicController');
+    Route::controller('notice',   'Api\NoticeController');
+    Route::controller('talk',     'Api\TalkController');
+    Route::controller('system',   'Api\SystemController');
+
+    Route::controller('wechat', 'Api\WeChatController');
+
+    Route::controller('user', 'Api\UserController');
 });

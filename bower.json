@@ -1,0 +1,25 @@
+{
+  "name": "hey-community-backend",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Rod <rod@protobia.tech>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower-assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.5",
+    "font-awesome": "fontawesome#~4.5.0",
+    "jquery": "~2.1.4",
+    "bootswatch": "~3.3.6"
+  }
+}

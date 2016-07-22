@@ -30,33 +30,22 @@ class TimelineController extends Controller
      */
     public function getIndex(Request $request)
     {
-        if ($request->where) {
-            // uhome api
-            $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->where($request->where['key'], $request->where['value'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
-        } else if ($request->type) {
-            if ($request->type === 'refresh') {
-                $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])
-                    ->where('id', '>', $request->id)
-                    ->orderBy('created_at', 'asc')->orderBy('id', 'asc')->limit(10)->get()->toArray();
-            } else if ($request->type === 'infinite') {
-                $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])
-                    ->where('id', '<', $request->id)
-                    ->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get()->toArray();
-            }
-        } else {
-            $ret['timelines'] = Timeline::with(['author', 'author_like', 'comments'])->orderBy('created_at', 'desc')->orderBy('id', 'desc')->limit(10)->get()->toArray();
+        $query = Timeline::with(['author', 'author_like', 'comments'])
+            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->limit(10);
+
+        if ($request->type === 'refresh') {
+            $query->where('id', '>', $request->id);
+        } else if ($request->type === 'infinite') {
+            $query->where('id', '<', $request->id);
         }
 
-        // likes
-        if (Auth::check()) {
-            $ret['likes'] = TimelineLike::where('user_id', Auth::user()->user()->id)->get()->lists('timeline_id');
-        } else {
-            $ret['likes'] = [];
-        }
+        $timelines = $query->get()->each(function($item, $key) {
+            $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => 1])->count() ? true : false;
+        })->toArray();
 
-        // del items
-        $ret['delItems'] = Timeline::onlyTrashed()->lists('id')->toArray();
-        return $ret;
+        return $timelines;
     }
 
     /**
@@ -162,15 +151,17 @@ class TimelineController extends Controller
     }
 
     /**
+     * set timeline is like
      *
+     * @return
      */
-    public function postLike(Request $request)
+    public function postSetLike(Request $request)
     {
         $this->validate($request, [
             'id'        =>      'required',
         ]);
 
-        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => Auth::user()->user()->id])->first();
+        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => Auth::user()->id])->first();
         $Timeline = Timeline::findOrFail($request->id);
 
         if ($TimelineLike) {

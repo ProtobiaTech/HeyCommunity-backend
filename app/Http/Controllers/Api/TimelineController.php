@@ -20,7 +20,7 @@ class TimelineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth.user', ['only' => ['postStore', 'postLike', 'postDestroy']]);
+        $this->middleware('auth', ['only' => ['postStore', 'postSetLike', 'postDestroy']]);
     }
 
     /**
@@ -169,22 +169,26 @@ class TimelineController extends Controller
             $Timeline->decrement('like_num');
         } else {
             $TimelineLike = new TimelineLike;
-            $TimelineLike->user_id      =       Auth::user()->user()->id;
+            $TimelineLike->user_id      =       Auth::user()->id;
             $TimelineLike->timeline_id  =       $request->id;
             $TimelineLike->save();
             $Timeline->increment('like_num');
 
             // notice
+            /*
             $Notice = new Notice;
             $Notice->user_id            =       $Timeline->user_id;
-            $Notice->initiator_user_id  =       Auth::user()->user()->id;
+            $Notice->initiator_user_id  =       1;
             $Notice->type_id            =       10;     // timeline_like
             $Notice->noticeable_id      =       $Timeline->id;
             $Notice->noticeable_type    =       Timeline::class;
             $Notice->save();
+             */
         }
 
-        return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
+        $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
+        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => 1])->count() ? true : false;
+        return $Timeline;
     }
 
     /**

@@ -88,9 +88,9 @@ class TimelineController extends Controller
             $Timeline->content      =       $request->content;
         }
 
-        $Timeline->user_id      =       Auth::user()->user()->id;
+        $Timeline->user_id      =       Auth::user()->id;
         $Timeline->save();
-        return $Timeline;
+        return Timeline::with(['author', 'comments', 'author_like'])->findOrFail($Timeline->id);
     }
 
     /**
@@ -141,10 +141,10 @@ class TimelineController extends Controller
 
         $Timeline = Timeline::findOrFail($request->id);
 
-        if ($Timeline->user_id === Auth::user()->user()->id) {
-            return $Timeline->delete() ? 'success' : response('fail', 500);
-        } elseif (Auth::user()->user()->id === Auth::user()->user()->id) {
-            return $Timeline->delete() ? 'success' : response('fail', 500);
+        if ($Timeline->user_id === Auth::user()->id) {
+            return $Timeline->delete() ? ['success'] : response('fail', 500);
+        } elseif (Auth::user()->id === Auth::user()->id) {
+            return $Timeline->delete() ? ['success'] : response('fail', 500);
         }
 
         return abort(403, 'Insufficient permissions');
@@ -205,7 +205,7 @@ class TimelineController extends Controller
         $TimelineComment = new TimelineComment;
 
         $TimelineComment->timeline_id   =   $request->id;
-        $TimelineComment->user_id       =   Auth::user()->user()->id;
+        $TimelineComment->user_id       =   Auth::user()->id;
         $TimelineComment->content       =   $request->content;
         $TimelineComment->save();
         $Timeline->increment('comment_num');
@@ -213,7 +213,7 @@ class TimelineController extends Controller
         // notice
         $Notice = new Notice;
         $Notice->user_id            =       $Timeline->user_id;
-        $Notice->initiator_user_id  =       Auth::user()->user()->id;
+        $Notice->initiator_user_id  =       Auth::user()->id;
         $Notice->type_id            =       11;     // timeline_comment
         $Notice->noticeable_id      =       $Timeline->id;
         $Notice->noticeable_type    =       Timeline::class;

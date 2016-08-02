@@ -194,22 +194,23 @@ class TimelineController extends Controller
     /**
      *
      */
-    public function postCommentPublish(Request $request)
+    public function postStoreComment(Request $request)
     {
         $this->validate($request, [
-            'id'        =>      'required',
-            'content'   =>      'required',
+            'timeline_id'       =>      'required',
+            'content'           =>      'required',
         ]);
 
-        $Timeline = Timeline::findOrFail($request->id);
+        $Timeline = Timeline::findOrFail($request->timeline_id);
         $TimelineComment = new TimelineComment;
 
-        $TimelineComment->timeline_id   =   $request->id;
+        $TimelineComment->timeline_id   =   $request->timeline_id;
         $TimelineComment->user_id       =   Auth::user()->id;
         $TimelineComment->content       =   $request->content;
         $TimelineComment->save();
         $Timeline->increment('comment_num');
 
+        /*
         // notice
         $Notice = new Notice;
         $Notice->user_id            =       $Timeline->user_id;
@@ -218,7 +219,8 @@ class TimelineController extends Controller
         $Notice->noticeable_id      =       $Timeline->id;
         $Notice->noticeable_type    =       Timeline::class;
         $Notice->save();
+         */
 
-        return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
+        return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
     }
 }

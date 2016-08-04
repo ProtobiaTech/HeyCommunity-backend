@@ -24,7 +24,7 @@ class UserController extends Controller
     /**
      * Sign in
      */
-    public function getSignOut()
+    public function getLogOut()
     {
         if (Auth::user()->check()) {
             AUth::user()->logout();
@@ -33,9 +33,9 @@ class UserController extends Controller
     }
 
     /**
-     * Sign in
+     * Log in
      */
-    public function postSignIn(Request $request)
+    public function postLogIn(Request $request)
     {
         $this->validate($request, [
             'phone'     =>  'required',
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         $User = User::where(['phone' => $request->phone])->first();
         if ($User && Hash::check($request->password, $User->password)) {
-            Auth::user()->login($User);
+            Auth::login($User);
             return $User;
         } else {
             return response('phone or password err', 403);
@@ -69,7 +69,7 @@ class UserController extends Controller
         $User->password     =   Hash::make($request->password);
 
         if ($User->save()) {
-            Auth::user()->login($User);
+            Auth::login($User);
             return $User;
         } else {
             return response($User, 500);

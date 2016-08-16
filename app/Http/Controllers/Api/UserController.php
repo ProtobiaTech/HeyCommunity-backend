@@ -3,37 +3,43 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\User;
 use Hash, Auth;
-use Dev4living\LeanCloudSMS\LeanCloudSMS;
+use App\User;
 
 class UserController extends Controller
 {
     /**
-     * construct
+     * The construct
+     *
+     * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth.user', ['only' => ['postVerifyPassword', 'postSetNewPassword']]);
+        $this->middleware('auth', ['only' => ['postLogOut']]);
+        $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn']]);
     }
 
     /**
-     * Sign in
+     * log out
+     *
+     * @return string True string
      */
-    public function getLogOut()
+    public function postLogOut()
     {
-        if (Auth::user()->check()) {
-            AUth::user()->logout();
+        if (Auth::check()) {
+            AUth::logout();
         }
-        return null;
+        return json_encode(true);
     }
 
     /**
      * Log in
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object|string User model or failure info
      */
     public function postLogIn(Request $request)
     {
@@ -45,7 +51,7 @@ class UserController extends Controller
         $User = User::where(['phone' => $request->phone])->first();
         if ($User && Hash::check($request->password, $User->password)) {
             Auth::login($User);
-            return $User;
+            return Auth::user();
         } else {
             return response('phone or password err', 403);
         }
@@ -53,6 +59,9 @@ class UserController extends Controller
 
     /**
      * Sign up
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object|string User model or failure info
      */
     public function postSignUp(Request $request)
     {
@@ -77,170 +86,31 @@ class UserController extends Controller
     }
 
     /**
-     * Get captcha
-     */
-    public function anyGetCaptcha(Request $request)
-    {
-        $this->validate($request, [
-            'phone'     =>  'required',
-            //@todo fix by sign up 'phone'     =>  'required|unique:users',
-        ]);
-
-        $config['header'] = explode('|', env('LEANCLOUD_REQUEST_SMS_HEADER'));
-        $data = '{"mobilePhoneNumber": "' . $request->phone . '"}';
-
-        $ret = LeanCloudSMS::init($config)->requestSmsCode($data);
-        $ret = json_decode($ret, true);
-        if (isset($ret['error'])) {
-            return response($ret['error'], 500);
-        } else {
-            return $ret;
-        }
-    }
-
-    /**
-     * Verify captcha
-     */
-    public function postVerifyCaptcha(Request $request)
-    {
-        $this->validate($request, [
-            'phone'     =>  'required',
-            //@todo fix by sign up 'phone'     =>  'required|unique:users',
-            'captcha'   =>  'required',
-        ]);
-
-        $config['header'] = explode('|', env('LEANCLOUD_VERIFY_SMS_HEADER'));
-        $data = [
-            'mobilePhoneNumber'     =>  $request->phone,
-            'verifyCode'            =>  $request->captcha,
-        ];
-        $ret = LeanCloudSMS::init($config)->verifySmsCode($data);
-        $ret = json_decode($ret, true);
-        if (isset($ret['error'])) {
-            return response($ret['error'], 500);
-        } else {
-            return $ret;
-            // @todo set verifyed
-        }
-    }
-
-    /**
+     * Get the user info
      *
+     * @return object|string User model or failure info
      */
-    public function postVerifyPassword(Request $request)
+    public function getMyInfo()
     {
-        $this->validate($request, [
-            'password'      =>  'required',
-        ]);
-
-        $User = Auth::user()->user();
-        if ($User && Hash::check($request->password, $User->password)) {
-            return $User;
+        if (Auth::check()) {
+            return Auth::user();
         } else {
-            return response('verify fail', 400);
+            return response('', 404);
         }
     }
 
     /**
+     * Get the specified user info
      *
+     * @param integer $id The user id
+     * @return object User model
      */
-    public function postResetPassword(Request $request)
+    public function getGetUser($id)
     {
         $this->validate($request, [
-            'phone'         =>  'required',
-            'new_password'      =>  'required',
+            'id'  =>  'required|integer',
         ]);
 
-
-        $User = User::where(['phone' => $request->phone])->firstOrFail();
-        $User->password = Hash::make($request->new_password);
-
-        if ($User->save()) {
-            return $User;
-        } else {
-            return response('fail', 500);
-        }
-    }
-
-    /**
-     *
-     */
-    public function postSetNewPassword(Request $request)
-    {
-        $this->validate($request, [
-            'old_password'      =>  'required',
-            'new_password'      =>  'required',
-        ]);
-
-
-        $User = Auth::user()->user();
-        if ($User && Hash::check($request->old_password, $User->password)) {
-            $User->password = Hash::make($request->new_password);
-            $User->save();
-
-            return $User;
-        } else {
-            return response('verify fail', 400);
-        }
-    }
-
-    /**
-     * SignUp verify captcha
-     */
-    public function postSignUpVerifyCaptcha(Request $request)
-    {
-        $this->validate($request, [
-            'phone'     =>  'required|unique:users',
-            'captcha'   =>  'required',
-        ]);
-
-        $config['header'] = explode('|', env('LEANCLOUD_VERIFY_SMS_HEADER'));
-        $data = [
-            'mobilePhoneNumber'     =>  $request->phone,
-            'verifyCode'            =>  $request->captcha,
-        ];
-        $ret = LeanCloudSMS::init($config)->verifySmsCode($data);
-        $ret = json_decode($ret, true);
-        if (isset($ret['error'])) {
-            return response($ret['error'], 500);
-        } else {
-            return $ret;
-        }
-    }
-
-    /**
-     * Reponse the user info
-     */
-    public function getUser($id = null)
-    {
-        if ($id) {
-            return User::findOrFail($id);
-        } else {
-            if (Auth::user()->check()) {
-                return Auth::user()->user();
-            } else {
-                return response([], 404);
-            }
-        }
-    }
-
-    /**
-     * Update avatar
-     */
-    public function postUpdateAvatar(Request $request)
-    {
-        $this->validate($request, [
-            'avatar'       =>      'required',
-        ]);
-
-        $file = $request->file('avatar');
-        $uploadPath = '/uploads/user/avatar/';
-        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
-        $file->move(public_path() . $uploadPath, $fileName);
-
-        $User = Auth::user()->user();
-        $User->avatar = $uploadPath . $fileName;
-        $User->save();
-        return $User;
+        return User::findOrFail($id);
     }
 }

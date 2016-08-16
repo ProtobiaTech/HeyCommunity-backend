@@ -11,6 +11,7 @@
 |
 */
 
+
 //
 // Api
 // ----------------------------
@@ -25,8 +26,4 @@ Route::group(['middleware' => [], 'prefix' => 'api'], function() {
     Route::controller('system', 'Api\SystemController');
 
     Route::controller('wechat', 'Api\WeChatController');
-});
-
-Route::get('/', function() {
-    return view('api.index');
 });

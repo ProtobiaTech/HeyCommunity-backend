@@ -11,7 +11,9 @@ class UserTest extends TestCase
     use DatabaseTransactions;
 
     /**
+     * test user, signup login and logout
      *
+     * @return void
      */
     public function testSignUpAndLogInAndLouOut()
     {

@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postLogOut']]);
+        $this->middleware('auth', ['only' => []]);
         $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn']]);
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
         if (Auth::check()) {
             AUth::logout();
         }
-        return json_encode(true);
+        return [true];
     }
 
     /**

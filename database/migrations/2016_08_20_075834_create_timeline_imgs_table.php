@@ -2,9 +2,8 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Eloquent\Model;
 
-class CreateTimelinesTable extends Migration
+class CreateTimelineImgsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +12,12 @@ class CreateTimelinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('timelines', function (Blueprint $table) {
+        Schema::create('timeline_imgs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('content');
-            $table->string('imgs', 191);
-            $table->integer('like_num')->default(0);
-            $table->integer('view_num')->default(0);
-            $table->integer('comment_num')->default(0);
+
+            $table->string('uri', 191);
 
             $table->softDeletes();
             $table->timestamps();
@@ -35,6 +31,6 @@ class CreateTimelinesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('timelines');
+        Schema::drop('timeline_imgs');
     }
 }

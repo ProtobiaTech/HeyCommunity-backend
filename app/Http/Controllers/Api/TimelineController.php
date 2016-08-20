@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Timeline;
 use App\TimelineLike;
+use App\TimelineImg;
 use App\TimelineComment;
 use App\Notice;
 
@@ -21,7 +22,7 @@ class TimelineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postStore', 'postSetLike', 'postDestroy']]);
+        $this->middleware('auth', ['only' => ['postStore',  'postStoreImg', 'postSetLike', 'postDestroy']]);
     }
 
     /**
@@ -45,6 +46,9 @@ class TimelineController extends Controller
 
         $timelines = $query->get()->each(function($item, $key) {
             $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => 1])->count() ? true : false;
+            if ($item->imgs) {
+                $item->imgs = TimelineImg::getImgs($item->imgs);
+            }
         })->toArray();
 
         return $timelines;
@@ -60,27 +64,22 @@ class TimelineController extends Controller
     {
         $this->validate($request, [
             'content'       =>      'required_without:attachment',
-            'attachment'    =>      'required_without:content',
+            'imgs'          =>      'required_without:content',
         ]);
 
         $Timeline = new Timeline;
 
-        // have attachment
-        if ($request->attachment) {
-            $file = $request->file('attachment');
-            $uploadPath = '/uploads/timeline/';
-            $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
-            $file->move(public_path() . $uploadPath, $fileName);
-
-            $Timeline->attachment   =       $uploadPath . $fileName;
-        }
-
         // have content
         if ($request->content) {
-            $Timeline->content      =       $request->content;
+            $Timeline->content  =   $request->content;
         }
 
-        $Timeline->user_id      =       Auth::user()->id;
+        // have imgs
+        if ($request->imgs) {
+            $Timeline->imgs     =   $request->imgs;
+        }
+
+        $Timeline->user_id      =   Auth::user()->id;
         $Timeline->save();
 
         return Timeline::with(['author', 'comments', 'author_like'])->findOrFail($Timeline->id);
@@ -209,5 +208,30 @@ class TimelineController extends Controller
          */
 
         return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
+    }
+
+    /**
+     *
+     */
+    public function postStoreImg(Request $request)
+    {
+        $files = $request->file('uploads');
+
+        $ret = [];
+        foreach($files as $k => $file) {
+            $uploadPath = '/uploads/timeline/';
+            $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+            if ($file->move(public_path() . $uploadPath, $fileName)) {
+                $TimelineImg = new TimelineImg();
+                $TimelineImg->user_id   =   Auth::user()->id;
+                $TimelineImg->uri       =   $uploadPath . $fileName;
+                $TimelineImg->save();
+
+                $ret['imgs'][$k]['id']  = $TimelineImg->id;
+                $ret['imgs'][$k]['uri'] = $uploadPath . $fileName;
+            }
+        }
+
+        return $ret;
     }
 }

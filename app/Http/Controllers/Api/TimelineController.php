@@ -45,7 +45,11 @@ class TimelineController extends Controller
         }
 
         $timelines = $query->get()->each(function($item, $key) {
-            $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => 1])->count() ? true : false;
+            if (Auth::guest()) {
+                $item->is_like = false;
+            } else {
+                $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => Auth::user()->id])->count() ? true : false;
+            }
             if ($item->imgs) {
                 $item->imgs = TimelineImg::getImgs($item->imgs);
             }
@@ -170,7 +174,10 @@ class TimelineController extends Controller
         }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
-        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => 1])->count() ? true : false;
+        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->id])->count() ? true : false;
+        if ($Timeline->imgs) {
+            $Timeline->imgs = TimelineImg::getImgs($Timeline->imgs);
+        }
         return $Timeline;
     }
 

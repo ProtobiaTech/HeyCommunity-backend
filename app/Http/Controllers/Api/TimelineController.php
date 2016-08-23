@@ -214,7 +214,12 @@ class TimelineController extends Controller
         $Notice->save();
          */
 
-        return $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
+        $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
+        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->id])->count() ? true : false;
+        if ($Timeline->imgs) {
+            $Timeline->imgs = TimelineImg::getImgs($Timeline->imgs);
+        }
+        return $Timeline;
     }
 
     /**

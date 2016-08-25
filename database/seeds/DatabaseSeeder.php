@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(UserTableSeeder::class);
+        $this->call(TimelineImgTableSeeder::class);
         $this->call(TimelineTableSeeder::class);
         $this->call(TimelineCommentTableSeeder::class);
 

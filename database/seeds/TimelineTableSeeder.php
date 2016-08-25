@@ -17,11 +17,11 @@ class TimelineTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         foreach (range(1, 668) as $index) {
             $imgs = null;
-            if (random_int(1, 3) === 3) {
-                $ram = random_int(1, 5);
-                if ($ram === 5) {
+            if (random_int(1, 4) > 1) {
+                $ram = random_int(1, 7);
+                if ($ram === 7) {
                     $count = 3;
-                } else if ($ram > 2) {
+                } else if ($ram > 4) {
                     $count = 2;
                 } else {
                     $count = 1;

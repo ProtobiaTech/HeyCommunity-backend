@@ -16,8 +16,15 @@ class TimelineCommentTableSeeder extends Seeder
         $timelines = \App\Timeline::lists('id')->toArray();
 
         $faker = Faker\Factory::create();
+
+        $tlComment = [];
         foreach (range(1, 868) as $index) {
             $timelineId = $faker->randomElement($timelines);
+            if (isset($tlComment[$timelineId])) {
+                $tlComment[$timelineId]++;
+            } else {
+                $tlComment[$timelineId] = 1;
+            }
 
             $data[] = [
                 'user_id'       =>      $faker->randomElement($users),
@@ -29,5 +36,9 @@ class TimelineCommentTableSeeder extends Seeder
             ];
         }
         \App\TimelineComment::insert($data);
+
+        foreach ($tlComment as $key => $value) {
+            \App\Timeline::where('id', $key)->update(['comment_num' => $value]);
+        }
     }
 }

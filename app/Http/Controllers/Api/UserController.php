@@ -86,6 +86,36 @@ class UserController extends Controller
     }
 
     /**
+     * Update
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object User model or failure info
+     */
+    public function postUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'nickname'  =>      'string|min:3|unique:users',
+            'gender'    =>      'integer|max:2',
+            'bio'       =>      'string',
+        ]);
+
+        $User = Auth::user();
+        if ($request->has('nickname')) {
+            $User->nickname = $request->nickname;
+        }
+        if ($request->has('gender')) {
+            $User->gender = $request->gender;
+        }
+        if ($request->has('bio')) {
+            $User->bio = $request->bio;
+        }
+        $User->save();
+
+        return $User;
+    }
+
+
+    /**
      * Get the user info
      *
      * @return object|string User model or failure info

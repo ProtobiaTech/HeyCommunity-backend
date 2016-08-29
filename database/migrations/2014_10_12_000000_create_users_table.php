@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('wx_open_id', 191)->nullable();
             $table->string('nickname', 191);
             $table->string('avatar', 191);
+            $table->string('bio', 191);
+            $table->integer('gender');
             $table->string('email', 191)->nullable();
             $table->string('phone', 191)->nullable();
             $table->string('password', 60);
@@ -27,19 +29,6 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Model::unguard();
-
-        \App\User::create([
-            'nickname'      =>      'Admin',
-            'avatar'        =>      '/assets/images/userAvatar-default.png',
-            'email'         =>      'admin@hey-community.cn',
-            'phone'         =>      '12312341234',
-            'password'      =>      Hash::make('admin1234'),
-            'is_admin'      =>      1,
-        ]);
-
-        Model::reguard();
     }
 
     /**

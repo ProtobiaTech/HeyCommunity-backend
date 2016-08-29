@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
             'nickname'      =>      'Test User',
             'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'test@hey-community.cn',
-            'phone'         =>      '12312345678',
+            'phone'         =>      '12312341234',
             'password'      =>      Hash::make('123123'),
         ]);
 

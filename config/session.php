@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => 1200000,
+    'lifetime' => 120,
 
     'expire_on_close' => false,
 
@@ -149,18 +149,5 @@ return [
     */
 
     'secure' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | HTTP Access Only
-    |--------------------------------------------------------------------------
-    |
-    | Setting this value to true will prevent JavaScript from accessing the
-    | value of the cookie and the cookie will only be accessible through
-    | the HTTP protocol. You are free to modify this option if needed.
-    |
-    */
-
-    'http_only' => true,
 
 ];

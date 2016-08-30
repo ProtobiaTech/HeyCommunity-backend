@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Image;
 use Hash, Auth;
 use App\User;
 
@@ -114,6 +115,42 @@ class UserController extends Controller
         return $User;
     }
 
+    /**
+     * Update Avatar
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object User model or failure info
+     */
+    public function postUpdateAvatar(Request $request)
+    {
+        $this->validate($request, [
+            'uploads'   =>      'required',
+        ]);
+
+
+        $files = $request->file('uploads');
+        $file = $files[0];
+
+        $uploadPath = '/uploads/avatars/';
+        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+        $path = public_path() . $uploadPath . $fileName;
+
+        $image = Image::make($file->getRealPath());
+        $imageWidth = $image->width();
+        $imageHeight = $image->height();
+        $resize = $imageWidth < $imageHeight ? $imageWidth : $imageHeight;
+
+        $ret = $image->crop($resize, $resize, 0, 0)->save($path);
+        if ($ret) {
+            $User = Auth::user();
+            $User->avatar = $uploadPath . $fileName;
+            $User->save();
+
+            return $User;
+        } else {
+            abort('Avatar update failed');
+        }
+    }
 
     /**
      * Get the user info

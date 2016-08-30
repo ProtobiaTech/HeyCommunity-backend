@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Image;
+use Image, File;
 use Hash, Auth;
 use App\User;
 
@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => []]);
+        $this->middleware('auth', ['only' => ['postUpdate', 'postUpdateAvatar']]);
         $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn']]);
     }
 
@@ -133,14 +133,18 @@ class UserController extends Controller
 
         $uploadPath = '/uploads/avatars/';
         $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
-        $path = public_path() . $uploadPath . $fileName;
+        $path = public_path() . $uploadPath;
+        $filePath = public_path() . $uploadPath . $fileName;
+        if (!File::exists($path)) {
+            File::makeDirectory($path);
+        }
 
         $image = Image::make($file->getRealPath());
         $imageWidth = $image->width();
         $imageHeight = $image->height();
         $resize = $imageWidth < $imageHeight ? $imageWidth : $imageHeight;
 
-        $ret = $image->crop($resize, $resize, 0, 0)->save($path);
+        $ret = $image->crop($resize, $resize, 0, 0)->save($filePath);
         if ($ret) {
             $User = Auth::user();
             $User->avatar = $uploadPath . $fileName;

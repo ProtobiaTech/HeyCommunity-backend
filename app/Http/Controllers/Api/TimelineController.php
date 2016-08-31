@@ -12,6 +12,7 @@ use App\TimelineLike;
 use App\TimelineImg;
 use App\TimelineComment;
 use App\Notice;
+use App\Events\TriggerNoticeEvent;
 
 class TimelineController extends Controller
 {
@@ -161,16 +162,7 @@ class TimelineController extends Controller
             $TimelineLike->save();
             $Timeline->increment('like_num');
 
-            // notice
-            /*
-            $Notice = new Notice;
-            $Notice->user_id            =       $Timeline->user_id;
-            $Notice->initiator_user_id  =       1;
-            $Notice->type_id            =       10;     // timeline_like
-            $Notice->noticeable_id      =       $Timeline->id;
-            $Notice->noticeable_type    =       Timeline::class;
-            $Notice->save();
-             */
+            event(new TriggerNoticeEvent($Timeline, 'timeline_like'));
         }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
@@ -203,16 +195,7 @@ class TimelineController extends Controller
         $TimelineComment->save();
         $Timeline->increment('comment_num');
 
-        /*
-        // notice
-        $Notice = new Notice;
-        $Notice->user_id            =       $Timeline->user_id;
-        $Notice->initiator_user_id  =       Auth::user()->id;
-        $Notice->type_id            =       11;     // timeline_comment
-        $Notice->noticeable_id      =       $Timeline->id;
-        $Notice->noticeable_type    =       Timeline::class;
-        $Notice->save();
-         */
+        event(new TriggerNoticeEvent($Timeline, 'timeline_comment'));
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
         $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->id])->count() ? true : false;

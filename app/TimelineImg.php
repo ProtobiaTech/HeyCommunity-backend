@@ -3,9 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TimelineImg extends Model
 {
+    use SoftDeletes;
+
+    /**
+     *
+     */
     public static function getImgs($imgs)
     {
         $imgs = json_decode($imgs);

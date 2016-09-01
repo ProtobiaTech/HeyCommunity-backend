@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Notice;
+use App\TimelineImg;
 use Auth;
 
 class NoticeController extends Controller
@@ -28,7 +29,12 @@ class NoticeController extends Controller
     {
         return Notice::with(['initiator', 'type', 'entity'])//->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
-            ->get()->toArray();
+            ->get()
+            ->each(function($item, $key) {
+                $imgs = $item->entity->imgs;
+                $item->entity->images = TimelineImg::getImgs($imgs);
+            })
+            ->toArray();
     }
 
     /**
@@ -100,7 +106,7 @@ class NoticeController extends Controller
             $Notice->is_checked = true;
             $Notice->save();
         }
-        return $request->ids;
+        return $this->getIndex();
     }
 
     /**
@@ -115,6 +121,7 @@ class NoticeController extends Controller
             'id'        =>      'required',
         ]);
 
-        return Notice::destroy($request->id);
+        Notice::destroy($request->id);
+        return $this->getIndex();
     }
 }

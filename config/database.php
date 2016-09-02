@@ -64,6 +64,18 @@ return [
             'strict'    => false,
         ],
 
+        'heyCommunity_v1' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', 'localhost'),
+            'database'  => env('DB_DATABASE_V1', 'heycommunity'),
+            'username'  => env('DB_USERNAME_V1', 'root'),
+            'password'  => env('DB_PASSWORD_V1', ''),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),

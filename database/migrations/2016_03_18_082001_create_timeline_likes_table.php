@@ -14,6 +14,8 @@ class CreateTimelineLikesTable extends Migration
     {
         Schema::create('timeline_likes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tenant_id')->index()->unsigned();
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->integer('timeline_id')->index()->unsigned();
             $table->foreign('timeline_id')->references('id')->on('timelines');
             $table->integer('user_id')->index()->unsigned();

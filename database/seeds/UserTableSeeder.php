@@ -11,9 +11,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
         \App\User::create([
+            'tenant_id'     =>      1,
             'nickname'      =>      'Rod',
             'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'supgeek.rod@gmail.com',
@@ -21,6 +20,7 @@ class UserTableSeeder extends Seeder
             'password'      =>      bcrypt('123123'),
         ]);
         \App\User::create([
+            'tenant_id'     =>      1,
             'nickname'      =>      'Test User',
             'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'test@hey-community.cn',
@@ -28,8 +28,12 @@ class UserTableSeeder extends Seeder
             'password'      =>      Hash::make('123123'),
         ]);
 
+        $tenants = \App\Tenant::lists('id')->toArray();
+
+        $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
             $data[] = [
+                'tenant_id'     =>  $faker->randomElement($tenants),
                 'nickname'      =>  $faker->name(),
                 'avatar'        =>  $faker->imageUrl(),
                 'email'         =>  $faker->email(),

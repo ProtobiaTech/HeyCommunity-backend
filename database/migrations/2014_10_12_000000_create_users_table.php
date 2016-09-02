@@ -15,6 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tenant_id')->index()->unsigned();
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->string('wx_open_id', 191)->nullable();
             $table->string('nickname', 191);
             $table->string('avatar', 191);

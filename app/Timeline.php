@@ -22,7 +22,7 @@ class Timeline extends Model
      */
     public function author_like()
     {
-        return $this->hasMany('App\TimelineLike')->with('author');
+        return $this->hasMany('App\TimelineLike')->orderBy('created_at', 'desc')->with('author');
     }
 
     /**
@@ -30,7 +30,7 @@ class Timeline extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\TimelineComment', 'timeline_id')->with('author');
+        return $this->hasMany('App\TimelineComment', 'timeline_id')->orderBy('created_at', 'desc')->with('author');
     }
 
     /**

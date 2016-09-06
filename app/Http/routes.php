@@ -15,7 +15,7 @@
 //
 // Api
 // ----------------------------
-Route::group(['middleware' => [], 'prefix' => 'api'], function() {
+Route::group(['middleware' => ['tenantDataFilter'], 'prefix' => 'api'], function() {
     Route::get('/', function() {
         return view('api.index');
     });

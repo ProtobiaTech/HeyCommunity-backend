@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\User;
+use App\Tenant;
 use App\Timeline;
 use App\TimelineImg;
 use App\TimelineLike;
@@ -45,8 +46,26 @@ class MigrateToV2 extends Command
     {
         //
         //
+        Tenant::insert($this->getDatas(Tenant::on('heyCommunity_v1')->withTrashed()->get(), [
+            'id',
+            'site_name',
+            'domain',
+            'sub_domain',
+            'email',
+            'phone',
+            'password',
+            'remember_token',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+        ]));
+
+
+        //
+        //
         User::insert($this->getDatas(User::on('heyCommunity_v1')->withTrashed()->get(), [
             'id',
+            'tenant_id' => 'value:1',
             'wx_open_id',
             'nickname',
             'avatar',
@@ -66,16 +85,17 @@ class MigrateToV2 extends Command
         //
         //
         Timeline::insert($this->getDatas(Timeline::on('heyCommunity_v1')->withTrashed()->get(), [
-             'id',
-             'user_id',
-             'content',
-             'imgs' => 'field:attachment',
-             'like_num',
-             'view_num'     =>  null,
-             'comment_num',
-             'deleted_at',
-             'created_at',
-             'updated_at',
+            'id',
+            'tenant_id',
+            'user_id',
+            'content',
+            'imgs' => 'field:attachment',
+            'like_num',
+            'view_num'     =>  null,
+            'comment_num',
+            'deleted_at',
+            'created_at',
+            'updated_at',
         ]));
 
 
@@ -85,7 +105,8 @@ class MigrateToV2 extends Command
         foreach ($timelines as $timeline) {
             $timelineImg = new TimelineImg();
             $timelineImg->user_id   =   $timeline->user_id;
-            $timelineImg->uri        =   $timeline->imgs;
+            $timelineImg->tenant_id =   $timeline->tenant_id;
+            $timelineImg->uri       =   $timeline->imgs;
             $timelineImg->save();
 
             $timeline->imgs = json_encode([$timelineImg->id]);
@@ -96,26 +117,28 @@ class MigrateToV2 extends Command
         //
         //
         TimelineLike::insert($this->getDatas(TimelineLike::on('heyCommunity_v1')->withTrashed()->get(), [
-             'id',
-             'user_id',
-             'timeline_id',
-             'deleted_at',
-             'created_at',
-             'updated_at',
+            'id',
+            'tenant_id',
+            'user_id',
+            'timeline_id',
+            'deleted_at',
+            'created_at',
+            'updated_at',
         ]));
 
 
         //
         //
         TimelineComment::insert($this->getDatas(TimelineLike::on('heyCommunity_v1')->withTrashed()->get(), [
-             'id',
-             'user_id',
-             'timeline_id',
-             'parent_id',
-             'content',
-             'deleted_at',
-             'created_at',
-             'updated_at',
+            'id',
+            'tenant_id',
+            'user_id',
+            'timeline_id',
+            'parent_id',
+            'content',
+            'deleted_at',
+            'created_at',
+            'updated_at',
         ]));
     }
 
@@ -136,6 +159,9 @@ class MigrateToV2 extends Command
                     if (substr($fieldOld, 0, 6) === 'field:') {
                         $field = substr($fieldOld, 6);
                         $datas[$k][$fieldNew] = $model->$field;
+                    } else if (substr($fieldOld, 0, 6) === 'value:') {
+                        $value = substr($fieldOld, 6);
+                        $datas[$k][$fieldNew] = $value;
                     } else {
                         $datas[$k][$fieldNew] = $fieldOld;
                     }

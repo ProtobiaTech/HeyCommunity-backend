@@ -27,6 +27,7 @@ class CreateTenantsTable extends Migration
             $table->timestamps();
         });
 
+        /*
         Model::unguard();
 
         \App\Tenant::create([
@@ -48,6 +49,7 @@ class CreateTenantsTable extends Migration
         ]);
 
         Model::reguard();
+         */
     }
 
     /**

@@ -32,7 +32,7 @@ class Timeline extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\TimelineComment', 'timeline_id')->with('author');
+        return $this->hasMany('App\TimelineComment', 'timeline_id')->orderBy('updated_at', 'desc')->with('author');
     }
 
     /**

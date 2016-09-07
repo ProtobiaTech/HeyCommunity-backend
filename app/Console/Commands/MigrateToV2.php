@@ -129,7 +129,7 @@ class MigrateToV2 extends Command
 
         //
         //
-        TimelineComment::insert($this->getDatas(TimelineLike::on('heyCommunity_v1')->withTrashed()->get(), [
+        TimelineComment::insert($this->getDatas(TimelineComment::on('heyCommunity_v1')->withTrashed()->get(), [
             'id',
             'tenant_id',
             'user_id',

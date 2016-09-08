@@ -73,8 +73,13 @@ class WeChatController extends Controller
 
             $User = User::where('wx_open_id', $openId)->first();
             if (!$User) {
+                preg_match('/^http[s]?:\/\/([^\/]*)\//', urldecode($request->state), $tenantDomain);
+                $domain = $tenantDomain[1];
+                $Tenant = Tenant::where(['domain' => $domain])->orWhere(['sub_domain' => $domain])->first();
+
                 $User = new User;
                 $User->wx_open_id   =   $openId;
+                $User->tenant_id    =   $Tenant->id;
                 $User->nickname     =   $userInfo['nickname'];
                 $User->avatar       =   $userInfo['headimgurl'];
                 $User->save();

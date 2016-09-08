@@ -83,13 +83,17 @@ class MigrateToV2 extends Command
         //
         $timelines = Timeline::withTrashed()->get();
         foreach ($timelines as $timeline) {
-            $timelineImg = new TimelineImg();
-            $timelineImg->user_id   =   $timeline->user_id;
-            $timelineImg->uri        =   $timeline->imgs;
-            $timelineImg->save();
+            if ($timeline->imgs) {
+                $timelineImg = new TimelineImg();
+                $timelineImg->user_id   =   $timeline->user_id;
+                $timelineImg->uri       =   $timeline->imgs;
+                $timelineImg->save();
 
-            $timeline->imgs = json_encode([$timelineImg->id]);
-            $timeline->save();
+                $timeline->imgs = json_encode([$timelineImg->id]);
+                $timeline->save();
+            } else {
+                continue;
+            }
         }
 
 
@@ -107,7 +111,7 @@ class MigrateToV2 extends Command
 
         //
         //
-        TimelineComment::insert($this->getDatas(TimelineLike::on('heyCommunity_v1')->withTrashed()->get(), [
+        TimelineComment::insert($this->getDatas(TimelineComment::on('heyCommunity_v1')->withTrashed()->get(), [
              'id',
              'user_id',
              'timeline_id',

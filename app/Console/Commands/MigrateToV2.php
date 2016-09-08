@@ -85,8 +85,9 @@ class MigrateToV2 extends Command
         foreach ($timelines as $timeline) {
             if ($timeline->imgs) {
                 $timelineImg = new TimelineImg();
-                $timelineImg->user_id   =   $timeline->user_id;
-                $timelineImg->uri       =   $timeline->imgs;
+                $timelineImg->user_id       =   $timeline->user_id;
+                $timelineImg->timeline_id   =   $timeline->id;
+                $timelineImg->uri           =   $timeline->imgs;
                 $timelineImg->save();
 
                 $timeline->imgs = json_encode([$timelineImg->id]);

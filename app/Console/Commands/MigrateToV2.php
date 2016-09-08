@@ -103,14 +103,19 @@ class MigrateToV2 extends Command
         //
         $timelines = Timeline::withTrashed()->get();
         foreach ($timelines as $timeline) {
-            $timelineImg = new TimelineImg();
-            $timelineImg->user_id   =   $timeline->user_id;
-            $timelineImg->tenant_id =   $timeline->tenant_id;
-            $timelineImg->uri       =   $timeline->imgs;
-            $timelineImg->save();
+            if ($timeline->imgs) {
+                $timelineImg = new TimelineImg();
+                $timelineImg->user_id       =   $timeline->user_id;
+                $timelineImg->tenant_id =   $timeline->tenant_id;
+                $timelineImg->timeline_id   =   $timeline->id;
+                $timelineImg->uri           =   $timeline->imgs;
+                $timelineImg->save();
 
-            $timeline->imgs = json_encode([$timelineImg->id]);
-            $timeline->save();
+                $timeline->imgs = json_encode([$timelineImg->id]);
+                $timeline->save();
+            } else {
+                continue;
+            }
         }
 
 

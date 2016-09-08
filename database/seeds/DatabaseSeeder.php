@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TenantTableSeeder::class);
         $this->call(UserTableSeeder::class);
-        $this->call(TimelineImgTableSeeder::class);
         $this->call(TimelineTableSeeder::class);
+        $this->call(TimelineImgTableSeeder::class);
         $this->call(TimelineCommentTableSeeder::class);
 
         Model::reguard();

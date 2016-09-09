@@ -104,11 +104,10 @@ class MigrateToV2 extends Command
             $User->save();
         }
 
-        /*
         Model::unguard();
-        User::where('id', '>', 0)->update(['wx_open_id' => null, 'phone' => null]);
+        User::where('id', 61)->update(['tenant_id' => 30]);
+        // User::where('id', '>', 0)->update(['wx_open_id' => null, 'phone' => null]);
         Model::reguard();
-         */
 
 
         //

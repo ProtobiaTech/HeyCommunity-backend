@@ -78,12 +78,13 @@ class WeChatController extends Controller
                 $domain = $tenantDomain[1];
                 $Tenant = Tenant::where(['domain' => $domain])->orWhere(['sub_domain' => $domain])->first();
 
-                $User = new User;
-                $User->wx_open_id   =   $openId;
-                $User->tenant_id    =   $Tenant->id;
-                $User->nickname     =   $userInfo['nickname'];
-                $User->avatar       =   $userInfo['headimgurl'];
-                $User->save();
+                if ($Tenant) {
+                    $User = new User;
+                    $User->wx_open_id   =   $openId;
+                    $User->nickname     =   $userInfo['nickname'];
+                    $User->avatar       =   $userInfo['headimgurl'];
+                    $User->save();
+                }
             }
 
             $loginUrl = urldecode($request->state) . 'api/wechat/login?token=' . $openId;
@@ -103,7 +104,9 @@ class WeChatController extends Controller
         ]);
 
         $User = User::where('wx_open_id', $request->token)->first();
-        Auth::login($User);
+        if ($User) {
+            Auth::login($User);
+        }
 
         return redirect()->to('/?noWeChatOAuth=true');
     }

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\Tenant;
@@ -27,6 +28,11 @@ class MigrateToV2 extends Command
      */
     protected $description = 'migrate v1 to v2';
 
+    protected $tenants = [2, 14, 30];
+
+    protected $users = [4, 15, 28, 39, 40, 43, 61, 62];
+
+    protected $timelines = [];
     /**
      * Create a new command instance.
      *
@@ -46,7 +52,7 @@ class MigrateToV2 extends Command
     {
         //
         //
-        Tenant::insert($this->getDatas(Tenant::on('heyCommunity_v1')->withTrashed()->get(), [
+        Tenant::insert($this->getDatas(Tenant::on('heyCommunity_v1')->withTrashed()->whereIn('id', $this->tenants)->get(), [
             'id',
             'site_name',
             'domain',
@@ -63,9 +69,9 @@ class MigrateToV2 extends Command
 
         //
         //
-        User::insert($this->getDatas(User::on('heyCommunity_v1')->withTrashed()->get(), [
+        User::insert($this->getDatas(User::on('heyCommunity_v1')->withTrashed()->whereIn('id', $this->users)->get(), [
             'id',
-            'tenant_id' => 'value:1',
+            'tenant_id' => 'value:30',
             'wx_open_id',
             'nickname',
             'avatar',
@@ -82,9 +88,32 @@ class MigrateToV2 extends Command
         ]));
 
 
+        $users = [
+            ['user_id' => 4, 'tenant_id' => 2],
+            ['user_id' => 15, 'tenant_id' => 2],
+            ['user_id' => 28, 'tenant_id' => 2],
+            ['user_id' => 61, 'tenant_id' => 2],
+            ['user_id' => 62, 'tenant_id' => 2],
+            ['user_id' => 39, 'tenant_id' => 14],
+            ['user_id' => 40, 'tenant_id' => 14],
+            ['user_id' => 43, 'tenant_id' => 14],
+        ];
+        foreach ($users as $user) {
+            $User = User::findOrFail($user['user_id']);
+            $User->tenant_id = $user['tenant_id'];
+            $User->save();
+        }
+
+        /*
+        Model::unguard();
+        User::where('id', '>', 0)->update(['wx_open_id' => null, 'phone' => null]);
+        Model::reguard();
+         */
+
+
         //
         //
-        Timeline::insert($this->getDatas(Timeline::on('heyCommunity_v1')->withTrashed()->get(), [
+        Timeline::insert($this->getDatas(Timeline::on('heyCommunity_v1')->withTrashed()->whereIn('user_id', $this->users)->whereIn('tenant_id', $this->tenants)->get(), [
             'id',
             'tenant_id',
             'user_id',
@@ -97,6 +126,7 @@ class MigrateToV2 extends Command
             'created_at',
             'updated_at',
         ]));
+        $this->timelines = Timeline::whereIn('user_id', $this->users)->whereIn('tenant_id', $this->tenants)->get()->lists('id');
 
 
         //
@@ -117,11 +147,20 @@ class MigrateToV2 extends Command
                 continue;
             }
         }
+        Model::unguard();
+        Timeline::withTrashed()->where('tenant_id', '2')->whereIn('user_id', [61, 62])->update(['user_id' => 4]);
+        Timeline::withTrashed()->where('tenant_id', '30')->whereIn('user_id', [62, 4])->update(['user_id' => 61]);
+        Timeline::withTrashed()->where('tenant_id', '14')->whereIn('user_id', [61, 62, 4])->update(['user_id' => 39]);
+
+        TimelineImg::withTrashed()->where('tenant_id', '2')->whereIn('user_id', [61, 62])->update(['user_id' => 4]);
+        TimelineImg::withTrashed()->where('tenant_id', '30')->whereIn('user_id', [62, 4])->update(['user_id' => 61]);
+        TimelineImg::withTrashed()->where('tenant_id', '14')->whereIn('user_id', [61, 62, 4])->update(['user_id' => 39]);
+        Model::reguard();
 
 
         //
         //
-        TimelineLike::insert($this->getDatas(TimelineLike::on('heyCommunity_v1')->withTrashed()->get(), [
+        TimelineLike::insert($this->getDatas(TimelineLike::on('heyCommunity_v1')->withTrashed()->where('timeline_id', $this->timelines)->whereIn('timeline_id', $this->timelines)->whereIn('user_id', $this->users)->whereIn('tenant_id', $this->tenants)->get(), [
             'id',
             'tenant_id',
             'user_id',
@@ -130,11 +169,16 @@ class MigrateToV2 extends Command
             'created_at',
             'updated_at',
         ]));
+        Model::unguard();
+        TimelineLike::withTrashed()->where('tenant_id', '2')->whereIn('user_id', [61, 62])->update(['user_id' => 4]);
+        TimelineLike::withTrashed()->where('tenant_id', '30')->whereIn('user_id', [62, 4])->update(['user_id' => 61]);
+        TimelineLike::withTrashed()->where('tenant_id', '14')->whereIn('user_id', [61, 62, 4])->update(['user_id' => 39]);
+        Model::reguard();
 
 
         //
         //
-        TimelineComment::insert($this->getDatas(TimelineComment::on('heyCommunity_v1')->withTrashed()->get(), [
+        TimelineComment::insert($this->getDatas(TimelineComment::on('heyCommunity_v1')->withTrashed()->whereIn('user_id', $this->users)->whereIn('tenant_id', $this->tenants)->get(), [
             'id',
             'tenant_id',
             'user_id',
@@ -145,6 +189,11 @@ class MigrateToV2 extends Command
             'created_at',
             'updated_at',
         ]));
+        Model::unguard();
+        TimelineComment::withTrashed()->where('tenant_id', '2')->whereIn('user_id', [61, 62])->update(['user_id' => 4]);
+        TimelineComment::withTrashed()->where('tenant_id', '30')->whereIn('user_id', [62, 4])->update(['user_id' => 61]);
+        TimelineComment::withTrashed()->where('tenant_id', '14')->whereIn('user_id', [61, 62, 4])->update(['user_id' => 39]);
+        Model::reguard();
     }
 
     /**

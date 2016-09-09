@@ -19,7 +19,7 @@ class CreateTenantsTable extends Migration
             $table->string('domain', 191)->unique()->nullable();
             $table->string('sub_domain', 191)->unique();
             $table->string('email', 191)->unique();
-            $table->string('phone', 191);
+            $table->string('phone', 191)->unique();
             $table->string('password', 60);
             $table->rememberToken();
 

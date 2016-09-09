@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Debugbar;
 use Auth;
 use App\User;
+use App\Tenant;
 
 class WeChatController extends Controller
 {

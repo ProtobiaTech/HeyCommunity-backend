@@ -65,6 +65,9 @@ class MigrateToV2 extends Command
             'created_at',
             'updated_at',
         ]));
+        Model::unguard();
+        Tenant::where('id', 14)->update(['sub_domain' => 'hxtrans.hey-community.com']);
+        Model::reguard();
 
 
         //
@@ -135,8 +138,7 @@ class MigrateToV2 extends Command
             if ($timeline->imgs) {
                 $timelineImg = new TimelineImg();
                 $timelineImg->user_id       =   $timeline->user_id;
-                $timelineImg->tenant_id =   $timeline->tenant_id;
-                $timelineImg->timeline_id   =   $timeline->id;
+                $timelineImg->tenant_id     =   $timeline->tenant_id;
                 $timelineImg->uri           =   $timeline->imgs;
                 $timelineImg->save();
 

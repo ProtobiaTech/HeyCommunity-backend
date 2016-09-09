@@ -27,7 +27,6 @@ class TimelineImgTableSeeder extends Seeder
                 'tenant_id'     =>      $faker->randomElement($tenants),
                 'id'            =>      $imgId,
                 'user_id'       =>      $faker->randomElement($users),
-                'timeline_id'   =>      $timelineId,
                 'uri'           =>      $faker->imageUrl(),
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),

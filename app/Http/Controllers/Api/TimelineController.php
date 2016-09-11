@@ -68,7 +68,7 @@ class TimelineController extends Controller
     public function postStore(Request $request)
     {
         $this->validate($request, [
-            'content'       =>      'required_without:attachment',
+            'content'       =>      'required_without:imgs',
             'imgs'          =>      'required_without:content',
         ]);
 

@@ -25,7 +25,6 @@ class TimelineImgTableSeeder extends Seeder
             $data[] = [
                 'id'            =>      $imgId,
                 'user_id'       =>      $faker->randomElement($users),
-                'timeline_id'   =>      $timelineId,
                 'uri'           =>      $faker->imageUrl(),
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),

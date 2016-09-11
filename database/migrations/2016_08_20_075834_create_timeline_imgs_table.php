@@ -16,8 +16,6 @@ class CreateTimelineImgsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('timeline_id')->index()->unsigned();
-            $table->foreign('timeline_id')->references('id')->on('timelines');
             $table->string('uri', 191);
 
             $table->softDeletes();

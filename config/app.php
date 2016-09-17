@@ -150,6 +150,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         AuraIsHere\LaravelMultiTenant\LaravelMultiTenantServiceProvider::class,
+        Overtrue\LaravelWechat\ServiceProvider::class,
     ],
 
     /*
@@ -203,6 +204,7 @@ return [
          */
         'Image'         =>  Intervention\Image\Facades\Image::class,
         'TenantScope'   =>  AuraIsHere\LaravelMultiTenant\Facades\TenantScopeFacade::class,
+        'Wechat'        =>  Overtrue\LaravelWechat\Facade::class,
     ],
 
 ];

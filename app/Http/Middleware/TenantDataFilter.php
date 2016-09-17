@@ -20,7 +20,7 @@ class TenantDataFilter
     {
         if (!$this->setTenantByHost($request)) {
             if (!$this->setTenantByReferer($request)) {
-                if (!$this->setTenantByState($request)) {
+                if (!$this->setTenantByParams($request)) {
                     abort(404, 'the tenant does not exist');
                 }
             }
@@ -69,11 +69,11 @@ class TenantDataFilter
     /**
      *
      */
-    public function setTenantByState($request) {
-        $state = $request->state;
+    public function setTenantByParams($request) {
+        $domain = $request->domain;
 
         if ($state) {
-            preg_match('/^http[s]?:\/\/([^\/]*)\//', urldecode($state), $tenantDomain);
+            preg_match('/^http[s]?:\/\/([^\/]*)\//', urldecode($domain), $tenantDomain);
             $domain = $tenantDomain[1];
             $Tenant = Tenant::where('domain', $domain)->orWhere('sub_domain', $domain)->first();
 

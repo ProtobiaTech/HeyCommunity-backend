@@ -68,23 +68,6 @@ class WeChatController extends Controller
     /**
      *
      */
-    public function _getOAuth(Request $request)
-    {
-        $referer = $request->header()['referer'][0];
-        preg_match('/^http[s]?:\/\/[^\/]*\//', $referer, $tenantDomain);
-
-
-        $APPID = 'wxc0913740d9e16659';
-        $REDIRECT_URI = urlencode(redirect()->to('api/wechat/get-wechat-user')->getTargetUrl());
-        $SCOPE = 'snsapi_userinfo';
-        $STATE = urlencode($tenantDomain[0]);
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$APPID}&redirect_uri={$REDIRECT_URI}&response_type=code&scope={$SCOPE}&state={$STATE}#wechat_redirect";
-        return redirect()->to($url);
-    }
-
-    /**
-     *
-     */
     public function getGetWechatUser(Request $request)
     {
         $options = [
@@ -94,10 +77,10 @@ class WeChatController extends Controller
         ];
 
         $app = new Application($options);
-        $user = $app->oauth->user();
+        $user = $app->oauth->setRequest($request)->user();
 
         if ($user) {
-            $User = User::where('wx_open_id', $openId)->first();
+            $User = User::where('wx_open_id', $user->getId())->first();
             if (!$User) {
                 $Tenant = Tenant::where(['domain' => $request->domain])->orWhere(['sub_domain' => $request->domain])->first();
 
@@ -146,53 +129,7 @@ class WeChatController extends Controller
         return redirect()->to('/?noWeChatOAuth=true');
     }
 
-    /**
-     *
-     */
     public function getSendMessage()
-    {
-        $appId = 'wxc0913740d9e16659';
-        $secret = 'bb1dee0ae8135120b187aedd5c48f9ca';
-
-        $getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$secret}";
-        $accessTokenRets = json_decode(file_get_contents($getAccessTokenUrl), true);
-
-        if (isset($accessTokenRets['access_token'])) {
-            $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$accessTokenRets['access_token']}";
-
-            $client = new Client();
-            $res = $client->request('POST', $url, [
-                'form_params'   =>  [
-                    'touser'        =>  'o3qIdv5qCjl25ssmS2LA1u4MKuY4',
-                    'template_id'   =>  '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI',
-                    'url'           =>  'http://demo.hey-community.com',
-                    'data'  =>  [
-                        'first'     =>  [
-                            'value'     =>      'Rod: 好漂亮的手表，是 Apple Watch 吗？',
-                            'color'     =>      '#173177',
-                        ],
-                        'subject'     =>  [
-                            'value'     =>      'Rod 对你的动态进行了评论',
-                            'color'     =>      '#333',
-                        ],
-                        'sender'     =>  [
-                            'value'     =>      'Rod',
-                            'color'     =>      '#333',
-                        ],
-                        'remark'     =>  [
-                            'value'     =>      '这是来自XXX社区的消息，点击了解详情',
-                            'color'     =>      '#333',
-                        ],
-                    ]
-                ]
-            ]);
-
-            $result= $res->getBody()->getContents();
-            dd($res, $result);
-        }
-    }
-
-    public function getSendWechatMessage()
     {
         $options = [
             'debug'     => true,
@@ -205,7 +142,7 @@ class WeChatController extends Controller
 
         $userId = 'o3qIdv5qCjl25ssmS2LA1u4MKuY4';
         $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
-        $url = 'http://overtrue.me';
+        $url = 'http://www.hey-community.com';
         $color = '#FF0000';
 
         $data = array(
@@ -216,6 +153,5 @@ class WeChatController extends Controller
                 );
         $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
         var_dump($result);
-
     }
 }

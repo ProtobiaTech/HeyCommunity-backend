@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Debugbar;
+use GuzzleHttp\Client;
+
 use Auth;
 use App\User;
 use App\Tenant;
@@ -18,7 +18,6 @@ class WeChatController extends Controller
      */
     public function getCheckSignature(Request $request)
     {
-        Debugbar::disable();
         $signature  =   $request->signature;
         $timestamp  =   $request->timestamp;
         $nonce      =   $request->nonce;
@@ -34,7 +33,6 @@ class WeChatController extends Controller
         }else{
             return response('false', 400);
         }
-        Debugbar::enable();
     }
 
     /**
@@ -112,78 +110,48 @@ class WeChatController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function sendMessage()
     {
-        //
-    }
+        $appId = 'wxc0913740d9e16659';
+        $secret = 'bb1dee0ae8135120b187aedd5c48f9ca';
+        $code  = $request->code;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$secret}";
+        $accessTokenRets = json_decode(file_get_contents($getAccessTokenUrl), true);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if (isset($accessTokenRets['access_token'])) {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$accessTokenRets['access_token']}";
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            $client = new Client();
+            $res = $client->request('POST', $url, [
+                'touser'        =>  'o3qIdv5qCjl25ssmS2LA1u4MKuY4',
+                'template_id'   =>  '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI',
+                'url'           =>  'http://demo.hey-community.com',
+                'data'  =>  [
+                    'first'     =>  [
+                        'value'     =>      'Rod: 好漂亮的手表，是 Apple Watch 吗？',
+                        'color'     =>      '#173177',
+                    ],
+                    'subject'     =>  [
+                        'value'     =>      'Rod 对你的动态进行了评论',
+                        'color'     =>      '#333',
+                    ],
+                    'sender'     =>  [
+                        'value'     =>      'Rod',
+                        'color'     =>      '#333',
+                    ],
+                    'remark'     =>  [
+                        'value'     =>      '这是来自XXX社区的消息，点击了解详情',
+                        'color'     =>      '#333',
+                    ],
+                ]
+            ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $result= $res->getBody();
+            dd($result);
+        }
     }
 }

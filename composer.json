@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "intervention/image": "^2.3",
-        "aura-is-here/laravel-multi-tenant": "dev-master"
+        "aura-is-here/laravel-multi-tenant": "dev-master",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

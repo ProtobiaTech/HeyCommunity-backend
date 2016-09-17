@@ -21,19 +21,26 @@ class WeChatController extends Controller
      */
     public function getOAuth(Request $request)
     {
-        $options = [
-            'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
-        ];
+        if (Auth::guest()) {
+            $options = [
+                'debug'     => true,
+                'app_id'    => env('WECHAT_APPID'),
+                'secret'    => env('WECHAT_SECRET'),
+            ];
 
-        $app = new Application($options);
+            $domain = 'http://' . $request->header()['host'][0];
+            $redirect = 'http://cloud.hey-community.com/api/wechat/get-wechat-user?domain=' . $domain;
 
-        $response = $app->oauth->scopes(['snsapi_userinfo'])
-                        ->setRequest($request)
-                        ->redirect();
+            $app = new Application($options);
+            $response = $app->oauth->scopes(['snsapi_userinfo'])
+                            ->setRequest($request)
+                            ->redirect($redirect);
 
-        return $response;
+            return $response;
+        } else {
+            return back();
+        }
+
     }
 
     /**
@@ -80,38 +87,45 @@ class WeChatController extends Controller
      */
     public function getGetWechatUser(Request $request)
     {
-        $appId = 'wxc0913740d9e16659';
-        $secret = 'bb1dee0ae8135120b187aedd5c48f9ca';
-        $code  = $request->code;
-        $getAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appId}&secret={$secret}&code={$code}&grant_type=authorization_code";
+        $options = [
+            'debug'     => true,
+            'app_id'    => env('WECHAT_APPID'),
+            'secret'    => env('WECHAT_SECRET'),
+        ];
 
-        $accessTokenRets = json_decode(file_get_contents($getAccessTokenUrl), true);
+        $app = new Application($options);
+        $user = $app->oauth->user();
 
-        if (isset($accessTokenRets['access_token'])) {
-            $accessToken = $accessTokenRets['access_token'];
-            $openId = $accessTokenRets['openid'];
-            $getUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openId}&lang=zh_CN";
-            $userInfo = json_decode(file_get_contents($getUserInfoUrl), true);
-
+        if ($user) {
             $User = User::where('wx_open_id', $openId)->first();
             if (!$User) {
-                preg_match('/^http[s]?:\/\/([^\/]*)\//', urldecode($request->state), $tenantDomain);
-                $domain = $tenantDomain[1];
-                $Tenant = Tenant::where(['domain' => $domain])->orWhere(['sub_domain' => $domain])->first();
+                $Tenant = Tenant::where(['domain' => $request->domain])->orWhere(['sub_domain' => $request->domain])->first();
 
                 if ($Tenant) {
                     $User = new User;
-                    $User->wx_open_id   =   $openId;
-                    $User->nickname     =   $userInfo['nickname'];
-                    $User->avatar       =   $userInfo['headimgurl'];
+                    $User->wx_open_id   =   $user->getId();
+                    $User->nickname     =   $user->getNickname();
+                    $User->avatar       =   $user->getAvatar();
+
+                    $number = random_int(0, 3);
+                    if ($number === 0) {
+                        $User->bio          =   'My name is ' . $user->getNickname;
+                    } else if ($number === 1) {
+                        $User->bio          =   'I\'m ' . $user->getNickname;
+                    } else if ($number === 2) {
+                        $User->bio          =   $user->getNickname . ' is me';
+                    } else if ($number === 3) {
+                        $User->bio          =   'I love there';
+                    }
+
                     $User->save();
                 }
             }
 
-            $loginUrl = urldecode($request->state) . 'api/wechat/login?token=' . $openId;
-            return redirect()->to($loginUrl);
+            $redirect = $request->domain . '/api/wechat/login?wx_open_id=' . $user->getId();
+            return redirect($redirect);
         } else {
-            return $accessTokenRets;
+            abort(500, 'wechat login fail');
         }
     }
 
@@ -121,10 +135,10 @@ class WeChatController extends Controller
     public function getLogin(Request $request)
     {
         $this->validate($request, [
-            'token'     =>  'required',
+            'wx_open_id'     =>  'required',
         ]);
 
-        $User = User::where('wx_open_id', $request->token)->first();
+        $User = User::where('wx_open_id', $request->wx_open_id)->first();
         if ($User) {
             Auth::login($User);
         }

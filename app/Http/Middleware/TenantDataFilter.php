@@ -72,8 +72,8 @@ class TenantDataFilter
     public function setTenantByParams($request) {
         $domain = $request->domain;
 
-        if ($state) {
-            preg_match('/^http[s]?:\/\/([^\/]*)\//', urldecode($domain), $tenantDomain);
+        if ($domain) {
+            preg_match('/^http[s]?:\/\/([^\/]*)[\/]?/', urldecode($domain), $tenantDomain);
             $domain = $tenantDomain[1];
             $Tenant = Tenant::where('domain', $domain)->orWhere('sub_domain', $domain)->first();
 

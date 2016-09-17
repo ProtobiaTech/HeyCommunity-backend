@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use GuzzleHttp\Client;
+use EasyWeChat\Foundation\Application;
 
 use Auth;
 use App\User;
@@ -13,6 +15,27 @@ use App\Tenant;
 
 class WeChatController extends Controller
 {
+    /**
+     *
+     *
+     */
+    public function getOAuth(Request $request)
+    {
+        $options = [
+            'debug'     => true,
+            'app_id'    => env('WECHAT_APPID'),
+            'secret'    => env('WECHAT_SECRET'),
+        ];
+
+        $app = new Application($options);
+
+        $response = $app->oauth->scopes(['snsapi_userinfo'])
+                        ->setRequest($request)
+                        ->redirect();
+
+        return $response;
+    }
+
     /**
      *
      */
@@ -38,7 +61,7 @@ class WeChatController extends Controller
     /**
      *
      */
-    public function getOAuth(Request $request)
+    public function _getOAuth(Request $request)
     {
         $referer = $request->header()['referer'][0];
         preg_match('/^http[s]?:\/\/[^\/]*\//', $referer, $tenantDomain);
@@ -112,46 +135,73 @@ class WeChatController extends Controller
     /**
      *
      */
-    public function sendMessage()
+    public function getSendMessage()
     {
         $appId = 'wxc0913740d9e16659';
         $secret = 'bb1dee0ae8135120b187aedd5c48f9ca';
-        $code  = $request->code;
 
         $getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$secret}";
         $accessTokenRets = json_decode(file_get_contents($getAccessTokenUrl), true);
 
         if (isset($accessTokenRets['access_token'])) {
-
             $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$accessTokenRets['access_token']}";
 
             $client = new Client();
             $res = $client->request('POST', $url, [
-                'touser'        =>  'o3qIdv5qCjl25ssmS2LA1u4MKuY4',
-                'template_id'   =>  '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI',
-                'url'           =>  'http://demo.hey-community.com',
-                'data'  =>  [
-                    'first'     =>  [
-                        'value'     =>      'Rod: 好漂亮的手表，是 Apple Watch 吗？',
-                        'color'     =>      '#173177',
-                    ],
-                    'subject'     =>  [
-                        'value'     =>      'Rod 对你的动态进行了评论',
-                        'color'     =>      '#333',
-                    ],
-                    'sender'     =>  [
-                        'value'     =>      'Rod',
-                        'color'     =>      '#333',
-                    ],
-                    'remark'     =>  [
-                        'value'     =>      '这是来自XXX社区的消息，点击了解详情',
-                        'color'     =>      '#333',
-                    ],
+                'form_params'   =>  [
+                    'touser'        =>  'o3qIdv5qCjl25ssmS2LA1u4MKuY4',
+                    'template_id'   =>  '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI',
+                    'url'           =>  'http://demo.hey-community.com',
+                    'data'  =>  [
+                        'first'     =>  [
+                            'value'     =>      'Rod: 好漂亮的手表，是 Apple Watch 吗？',
+                            'color'     =>      '#173177',
+                        ],
+                        'subject'     =>  [
+                            'value'     =>      'Rod 对你的动态进行了评论',
+                            'color'     =>      '#333',
+                        ],
+                        'sender'     =>  [
+                            'value'     =>      'Rod',
+                            'color'     =>      '#333',
+                        ],
+                        'remark'     =>  [
+                            'value'     =>      '这是来自XXX社区的消息，点击了解详情',
+                            'color'     =>      '#333',
+                        ],
+                    ]
                 ]
             ]);
 
-            $result= $res->getBody();
-            dd($result);
+            $result= $res->getBody()->getContents();
+            dd($res, $result);
         }
+    }
+
+    public function getSendWechatMessage()
+    {
+        $options = [
+            'debug'     => true,
+            'app_id'    => env('WECHAT_APPID'),
+            'secret'    => env('WECHAT_SECRET'),
+        ];
+
+        $app = new Application($options);
+        $notice = $app->notice;
+
+        $userId = 'o3qIdv5qCjl25ssmS2LA1u4MKuY4';
+        $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
+        $url = 'http://overtrue.me';
+        $color = '#FF0000';
+
+        $data = array(
+                 "first"        =>  "Rodv2: 快 TM 加班加点写代码，早日发布 HeyCommunity !!!",
+                 "subject"      =>  "Rodv2 评论了你的 Timeline",
+                 "sender"       =>  "HeyCommunity V2",
+                 "remark"       =>  "这是来自XXX社区的消息，点击了解详情",
+                );
+        $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
+        var_dump($result);
+
     }
 }

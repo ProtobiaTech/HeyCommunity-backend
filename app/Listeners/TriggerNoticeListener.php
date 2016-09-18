@@ -63,7 +63,7 @@ class TriggerNoticeListener
         $app = new Application($options);
         $notice = $app->notice;
 
-        $userId = $this->event->entity->author->wx_open_id;
+        $userId = $this->event->target->author->wx_open_id;
         $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
         if (Auth::user()->tenant->domain) {
             $url = 'http://' . Auth::user()->tenant->domain;

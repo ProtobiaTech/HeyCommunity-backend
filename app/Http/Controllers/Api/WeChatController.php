@@ -28,7 +28,7 @@ class WeChatController extends Controller
                 'secret'    => env('WECHAT_SECRET'),
             ];
 
-            $domain = 'http://' . $request->header()['host'][0];
+            $domain = $request->header()['host'][0];
             $redirect = 'http://cloud.hey-community.com/api/wechat/get-wechat-user?domain=' . $domain;
 
             $app = new Application($options);
@@ -105,7 +105,7 @@ class WeChatController extends Controller
                 }
             }
 
-            $redirect = $request->domain . '/api/wechat/login?wx_open_id=' . $user->getId();
+            $redirect = 'http://' . $request->domain . '/api/wechat/login?wx_open_id=' . $user->getId();
             return redirect($redirect);
         } else {
             abort(500, 'wechat login fail');

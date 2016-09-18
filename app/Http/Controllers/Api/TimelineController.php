@@ -268,8 +268,8 @@ class TimelineController extends Controller
             $posterPath = $uploadPath . $thumbnailImage;
 
             $ffmpeg = \FFMpeg\FFMpeg::create([
-                'ffmpeg.binaries'  => env('BIN_FFMPEG', '/usr/local/bin/ffmpeg'),
-                'ffprobe.binaries' => env('BIN_FFPROBE', '/usr/local/bin/ffprobe'),
+                'ffmpeg.binaries'  => env('BIN_FFMPEG', '/usr/bin/ffmpeg'),
+                'ffprobe.binaries' => env('BIN_FFPROBE', '/usr/bin/ffprobe'),
             ]);
             $video = $ffmpeg->open(public_path() . $videoPath);
             $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(0))->save(public_path() . $posterPath);

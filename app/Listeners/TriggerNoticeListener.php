@@ -44,7 +44,6 @@ class TriggerNoticeListener
         $Notice->save();
 
         // send wechat notice
-            $this->sendWechatNotice();
         if ($this->event->target->author->wx_open_id) {
             $this->sendWechatNotice();
         }
@@ -65,7 +64,6 @@ class TriggerNoticeListener
         $notice = $app->notice;
 
         $userId = $this->event->entity->author->wx_open_id;
-        // $userId = 'o3qIdv5qCjl25ssmS2LA1u4MKuY4';
         $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
         $url = 'http://' . Auth::user()->tenant->domain;
         $color = '#FF0000';

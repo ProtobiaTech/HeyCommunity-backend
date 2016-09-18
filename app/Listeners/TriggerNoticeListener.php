@@ -65,7 +65,11 @@ class TriggerNoticeListener
 
         $userId = $this->event->entity->author->wx_open_id;
         $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
-        $url = 'http://' . Auth::user()->tenant->domain;
+        if (Auth::user()->tenant->domain) {
+            $url = 'http://' . Auth::user()->tenant->domain;
+        } else {
+            $url = 'http://' . Auth::user()->tenant->sub_domain;
+        }
         $color = '#FF0000';
 
         $data = [

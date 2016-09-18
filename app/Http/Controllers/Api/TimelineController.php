@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Thumbnail;
 use Auth;
 use App\Timeline;
 use App\TimelineLike;
 use App\TimelineImg;
+use App\TimelineVideo;
 use App\TimelineComment;
 use App\Notice;
 use App\Events\TriggerNoticeEvent;
@@ -68,8 +70,9 @@ class TimelineController extends Controller
     public function postStore(Request $request)
     {
         $this->validate($request, [
-            'content'       =>      'required_without:imgs',
-            'imgs'          =>      'required_without:content',
+            'content'       =>      'required_without:video|required_without:imgs',
+            'imgs'          =>      'required_without:video|required_without:content',
+            'video'         =>      'required_without:imgs|required_without:content',
         ]);
 
         $Timeline = new Timeline;
@@ -84,8 +87,26 @@ class TimelineController extends Controller
             $Timeline->imgs     =   $request->imgs;
         }
 
+        // have video
+        if ($request->video) {
+            $TimelineVideo = TimelineVideo::findOrFail($request->video);
+            $Timeline->video    =   $TimelineVideo->uri;
+            $Timeline->poster   =   $TimelineVideo->poster;
+        }
+
         $Timeline->user_id      =   Auth::user()->id;
-        $Timeline->save();
+
+        if ($Timeline->save()) {
+            if (isset($TimelineVideo)) {
+                $TimelineVideo->timeline_id = $Timeline->id;
+                $TimelineVideo->save();
+            }
+
+            if ($Timeline->imgs) {
+                $imgs = json_decode($Timeline->imgs);
+                TimelineImg::whereIn('id', $imgs)->update(['timeline_id' => $Timeline->id]);
+            }
+        }
 
         return Timeline::with(['author', 'comments', 'author_like'])->findOrFail($Timeline->id);
     }
@@ -228,5 +249,41 @@ class TimelineController extends Controller
         }
 
         return $ret;
+    }
+
+    /**
+     *
+     */
+    public function postStoreVideo(Request $request)
+    {
+        $files = $request->file('uploads');
+        $file = $files[0];
+
+        $uploadPath = '/uploads/timeline/';
+        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+
+        if ($file->move(public_path() . $uploadPath, $fileName)) {
+            $videoPath = $uploadPath . $fileName;
+            $thumbnailImage = $fileName . '.jpg';
+            $posterPath = $uploadPath . $thumbnailImage;
+
+            $ffmpeg = \FFMpeg\FFMpeg::create([
+                'ffmpeg.binaries'  => env('BIN_FFMPEG', '/usr/local/bin/ffmpeg'),
+                'ffprobe.binaries' => env('BIN_FFPROBE', '/usr/local/bin/ffprobe'),
+            ]);
+            $video = $ffmpeg->open(public_path() . $videoPath);
+            $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(0))->save(public_path() . $posterPath);
+
+            $TimelineVideo = new TimelineVideo();
+            $TimelineVideo->user_id   =   Auth::user()->id;
+            $TimelineVideo->uri       =   $videoPath;
+
+            $TimelineVideo->poster    =   $posterPath;
+            $TimelineVideo->save();
+
+            return $TimelineVideo;
+        }
+
+        return response('upload video failed', 500);
     }
 }

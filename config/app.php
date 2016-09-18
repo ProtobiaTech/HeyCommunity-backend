@@ -145,6 +145,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Lakshmajim\Thumbnail\ThumbnailServiceProvider::class,
 
     ],
 
@@ -198,7 +199,7 @@ return [
          *
          */
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Thumbnail' => Lakshmajim\Thumbnail\Facade\Thumbnail::class,
     ],
 
 ];

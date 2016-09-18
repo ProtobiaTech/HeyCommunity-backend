@@ -24,7 +24,7 @@ class TimelineImg extends Model
             }
             return $ret;
         } else {
-            return $imgs;
+            return [];
         }
     }
 }

@@ -92,11 +92,11 @@ class WeChatController extends Controller
 
                     $number = random_int(0, 3);
                     if ($number === 0) {
-                        $User->bio          =   'My name is ' . $user->getNickname;
+                        $User->bio          =   'My name is ' . $user->getNickname();
                     } else if ($number === 1) {
-                        $User->bio          =   'I\'m ' . $user->getNickname;
+                        $User->bio          =   'I\'m ' . $user->getNickname();
                     } else if ($number === 2) {
-                        $User->bio          =   $user->getNickname . ' is me';
+                        $User->bio          =   $user->getNickname() . ' is me';
                     } else if ($number === 3) {
                         $User->bio          =   'I love there';
                     }

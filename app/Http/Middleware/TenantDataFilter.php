@@ -73,13 +73,16 @@ class TenantDataFilter
         $domain = $request->domain;
 
         if ($domain) {
-            preg_match('/^[http[s]?:\/\/]?([^\/]*)[\/]?/', urldecode($domain), $tenantDomain);
-            $domain = $tenantDomain[1];
-            $Tenant = Tenant::where('domain', $domain)->orWhere('sub_domain', $domain)->first();
+            $ret = preg_match('/^([^\/]*)[\/]?/', urldecode($domain));
 
-            if ($Tenant) {
-                TenantScope::addTenant('tenant_id', $Tenant->id);
-                return true;
+            if ($ret) {
+                $Tenant = Tenant::where('domain', $domain)->orWhere('sub_domain', $domain)->first();
+                if ($Tenant) {
+                    TenantScope::addTenant('tenant_id', $Tenant->id);
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }

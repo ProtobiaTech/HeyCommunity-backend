@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "add665d24541de28ed49c9b2d9a213f9",
     "content-hash": "c41b7538abd75b7f503448a6c1ae6f93",
+=======
+    "hash": "fc98b7bdc4a7f568f7bc42d0bcd9ca2f",
+    "content-hash": "689d88b816538c50779474240aaf0494",
+>>>>>>> dev-master
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -65,6 +70,7 @@
             "time": "2016-03-02 13:49:15"
         },
         {
+<<<<<<< HEAD
             "name": "aura-is-here/laravel-multi-tenant",
             "version": "dev-master",
             "source": {
@@ -104,6 +110,8 @@
             "time": "2016-02-01 06:21:54"
         },
         {
+=======
+>>>>>>> dev-master
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
             "source": {
@@ -430,6 +438,7 @@
             "time": "2012-11-02 14:49:47"
         },
         {
+<<<<<<< HEAD
             "name": "guzzlehttp/guzzle",
             "version": "6.2.1",
             "source": {
@@ -543,6 +552,8 @@
             "time": "2016-05-18 16:56:05"
         },
         {
+=======
+>>>>>>> dev-master
             "name": "guzzlehttp/psr7",
             "version": "1.3.1",
             "source": {
@@ -1278,6 +1289,7 @@
                 "php"
             ],
             "time": "2016-09-16 12:04:44"
+<<<<<<< HEAD
         },
         {
             "name": "overtrue/laravel-wechat",
@@ -1428,6 +1440,8 @@
                 "weixin-sdk"
             ],
             "time": "2016-08-08 13:37:53"
+=======
+>>>>>>> dev-master
         },
         {
             "name": "paragonie/random_compat",
@@ -1552,6 +1566,7 @@
             "time": "2016-03-08 00:47:06"
         },
         {
+<<<<<<< HEAD
             "name": "pimple/pimple",
             "version": "v3.0.2",
             "source": {
@@ -1598,6 +1613,8 @@
             "time": "2015-09-11 15:10:35"
         },
         {
+=======
+>>>>>>> dev-master
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -2545,6 +2562,7 @@
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
             "time": "2016-09-06 07:26:07"
+<<<<<<< HEAD
         },
         {
             "name": "symfony/psr-http-message-bridge",
@@ -2599,6 +2617,8 @@
                 "psr-7"
             ],
             "time": "2015-05-29 17:57:12"
+=======
+>>>>>>> dev-master
         },
         {
             "name": "symfony/routing",
@@ -2990,6 +3010,45 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
+        },
+        {
+            "name": "lakshmajim/thumbnail",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lakshmajim/Thumbnail.git",
+                "reference": "a6a3ab39182931a2823e8f7fb0a034d0ec3dfd38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/lakshmajim/Thumbnail/a6a3ab39182931a2823e8f7fb0a034d0ec3dfd38.zip",
+                "reference": "a6a3ab39182931a2823e8f7fb0a034d0ec3dfd38",
+                "shasum": ""
+            },
+            "require": {
+                "php-ffmpeg/php-ffmpeg": "~0.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lakshmajim\\Thumbnail\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lakshmajim",
+                    "email": "lakshmaji9@gmail.com"
+                }
+            ],
+            "description": "Thumbnails for videos",
+            "keywords": [
+                "Thumbnails"
+            ],
+            "time": "2016-05-18 10:33:10"
         },
         {
             "name": "mockery/mockery",

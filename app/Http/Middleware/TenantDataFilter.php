@@ -21,7 +21,7 @@ class TenantDataFilter
         if (!$this->setTenantByHost($request)) {
             if (!$this->setTenantByReferer($request)) {
                 if (!$this->setTenantByParams($request)) {
-                    abort(404, 'the tenant does not exist');
+                    TenantScope::addTenant('tenant_id', 1);
                 }
             }
         }

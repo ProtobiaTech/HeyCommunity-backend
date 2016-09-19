@@ -16,9 +16,12 @@ class TimelineTableSeeder extends Seeder
 
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
+            $userId = $faker->randomElement($users);
+            $tenantId = with(\App\User::findOrFail($userId))->tenant_id;
+
             $data[] = [
-                'tenant_id'     =>      $faker->randomElement($tenants),
-                'user_id'       =>      $faker->randomElement($users),
+                'tenant_id'     =>      $tenantId,
+                'user_id'       =>      $userId,
                 'content'       =>      implode('', $faker->paragraphs(random_int(1, 5))),
                 'imgs'          =>      null,
 

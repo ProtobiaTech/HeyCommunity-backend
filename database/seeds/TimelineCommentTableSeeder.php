@@ -21,6 +21,10 @@ class TimelineCommentTableSeeder extends Seeder
         $tlComment = [];
         foreach (range(1, 868) as $index) {
             $timelineId = $faker->randomElement($timelines);
+            $Timeline = with(\App\Timeline::findOrFail($timelineId));
+            $tenantId = $Timeline->tenant_id;
+            $userId = $Timeline->user_id;
+
             if (isset($tlComment[$timelineId])) {
                 $tlComment[$timelineId]++;
             } else {
@@ -28,8 +32,8 @@ class TimelineCommentTableSeeder extends Seeder
             }
 
             $data[] = [
-                'tenant_id'     =>  $faker->randomElement($tenants),
-                'user_id'       =>      $faker->randomElement($users),
+                'tenant_id'     =>      $tenantId,
+                'user_id'       =>      $userId,
                 'timeline_id'   =>      $timelineId,
                 'content'       =>      implode('', $faker->paragraphs(random_int(1, 2))),
 

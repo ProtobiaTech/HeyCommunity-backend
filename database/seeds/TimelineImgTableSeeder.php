@@ -21,10 +21,11 @@ class TimelineImgTableSeeder extends Seeder
         $imgs = [];
         foreach (range(1, 66) as $index) {
             $timelineId = $faker->randomElement($timelines);
+            $tenantId = with(\App\Timeline::findOrFail($timelineId))->tenant_id;
             $imgId = $index;
 
             $data[] = [
-                'tenant_id'     =>      $faker->randomElement($tenants),
+                'tenant_id'     =>      $tenantId,
                 'id'            =>      $imgId,
                 'user_id'       =>      $faker->randomElement($users),
                 'uri'           =>      $faker->imageUrl(),

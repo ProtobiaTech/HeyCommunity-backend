@@ -21,6 +21,7 @@ class CreateTenantsTable extends Migration
             $table->string('email', 191)->unique();
             $table->string('phone', 191)->unique();
             $table->string('password', 60);
+            $table->integer('is_bind_wechat')->default(0);
             $table->rememberToken();
 
             $table->softDeletes();

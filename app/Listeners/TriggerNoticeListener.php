@@ -11,6 +11,7 @@ use EasyWeChat\Foundation\Application;
 use Auth;
 use App\Notice;
 use App\NoticeType;
+use App\Tenant;
 
 class TriggerNoticeListener
 {
@@ -56,8 +57,8 @@ class TriggerNoticeListener
     {
         $options = [
             'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
+            'app_id'    => Tenant::getWeChatAppId(),
+            'secret'    => Tenant::getWeChatAppSecret(),
         ];
 
         $app = new Application($options);

@@ -24,8 +24,8 @@ class WeChatController extends Controller
         if (Auth::guest()) {
             $options = [
                 'debug'     => true,
-                'app_id'    => env('WECHAT_APPID'),
-                'secret'    => env('WECHAT_SECRET'),
+                'app_id'    => Tenant::getWeChatAppId(),
+                'secret'    => Tenant::getWeChatAppSecret(),
             ];
 
             $domain = $request->header()['host'][0];
@@ -72,8 +72,8 @@ class WeChatController extends Controller
     {
         $options = [
             'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
+            'app_id'    => Tenant::getWeChatAppId(),
+            'secret'    => Tenant::getWeChatAppSecret(),
         ];
 
         $app = new Application($options);
@@ -127,31 +127,5 @@ class WeChatController extends Controller
         }
 
         return redirect()->to('/?noWeChatOAuth=true');
-    }
-
-    public function getSendMessage()
-    {
-        $options = [
-            'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
-        ];
-
-        $app = new Application($options);
-        $notice = $app->notice;
-
-        $userId = 'o3qIdv5qCjl25ssmS2LA1u4MKuY4';
-        $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
-        $url = 'http://www.hey-community.com';
-        $color = '#FF0000';
-
-        $data = array(
-                 "first"        =>  "Rodv2: 快 TM 加班加点写代码，早日发布 HeyCommunity !!!",
-                 "subject"      =>  "Rodv2 评论了你的 Timeline",
-                 "sender"       =>  "HeyCommunity V2",
-                 "remark"       =>  "这是来自XXX社区的消息，点击了解详情",
-                );
-        $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
-        var_dump($result);
     }
 }

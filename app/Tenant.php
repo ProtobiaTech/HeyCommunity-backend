@@ -14,7 +14,7 @@ class Tenant extends Model
      */
     public function info()
     {
-        $this->hasOne('App\TenantInfo');
+        return $this->hasOne('App\TenantInfo');
     }
 
     /**

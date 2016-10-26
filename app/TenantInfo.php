@@ -16,6 +16,6 @@ class TenantInfo extends Model
      */
     public function tenant()
     {
-        $this->belongsTo('App\Tenant', 'tenant_id');
+        return $this->belongsTo('App\Tenant', 'tenant_id');
     }
 }

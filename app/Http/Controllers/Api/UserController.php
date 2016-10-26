@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Image, File;
 use Hash, Auth;
 use App\User;
+use Validator;
 
 class UserController extends Controller
 {
@@ -66,11 +67,14 @@ class UserController extends Controller
      */
     public function postSignUp(Request $request)
     {
-        $this->validate($request, [
-            'nickname'  =>  'required|unique:users',
-            'phone'     =>  'required|unique:users',
+        $validator = Validator::make($request->all(), [
+            'nickname'  =>  'required|UniqueInTenantUser:users',
+            'phone'     =>  'required|UniqueInTenantUser:users',
             'password'  =>  'required',
         ]);
+        if ($validator->fails()) {
+            return response($validator->errors(), 422);
+        }
 
         $User = new User;
         $User->nickname     =   $request->nickname;

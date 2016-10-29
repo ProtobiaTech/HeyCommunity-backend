@@ -15,13 +15,16 @@ class TenantTableSeeder extends Seeder
 
         foreach (range(1, 3) as $index) {
             $domain = $faker->unique()->domainName();
-            \App\Tenant::create([
+            $Tenant = \App\Tenant::create([
                 'site_name'     =>  $faker->name(),
                 'domain'        =>  $domain,
                 'sub_domain'    =>  'sub.' . $domain,
                 'email'         =>  $faker->email(),
                 'phone'         =>  $faker->phoneNumber(),
                 'password'      =>  bcrypt('hey community'),
+            ]);
+            \App\TenantInfo::create([
+                'tenant_id' => $Tenant->id,
             ]);
         }
     }

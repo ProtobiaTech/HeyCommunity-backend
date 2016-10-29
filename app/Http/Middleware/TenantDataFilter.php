@@ -22,6 +22,7 @@ class TenantDataFilter
             if (!$this->setTenantByReferer($request)) {
                 if (!$this->setTenantByParams($request)) {
                     TenantScope::addTenant('tenant_id', 1);
+                    $GLOBALS['Tenant'] = Tenant::find(1);
                 }
             }
         }
@@ -38,6 +39,7 @@ class TenantDataFilter
 
         if ($Tenant) {
             TenantScope::addTenant('tenant_id', $Tenant->id);
+            $GLOBALS['Tenant'] = $Tenant;
             return true;
         } else {
             return false;
@@ -57,6 +59,7 @@ class TenantDataFilter
             $Tenant = Tenant::where('domain', $referer)->orWhere('sub_domain', $referer)->first();
             if ($Tenant) {
                 TenantScope::addTenant('tenant_id', $Tenant->id);
+                $GLOBALS['Tenant'] = $Tenant;
                 return true;
             } else {
                 return false;
@@ -79,6 +82,7 @@ class TenantDataFilter
                 $Tenant = Tenant::where('domain', $domain)->orWhere('sub_domain', $domain)->first();
                 if ($Tenant) {
                     TenantScope::addTenant('tenant_id', $Tenant->id);
+                    $GLOBALS['Tenant'] = $Tenant;
                     return true;
                 } else {
                     return false;

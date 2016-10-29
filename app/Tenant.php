@@ -22,7 +22,7 @@ class Tenant extends Model
      */
     public static function getWeChatAppId()
     {
-        $Tenant = Tenant::first();
+        $Tenant = $GLOBALS['Tenant'];
         if ($Tenant->enable_wechat_pa) {
             return $Tenant->info->wx_app_id;
         } else {
@@ -35,7 +35,7 @@ class Tenant extends Model
      */
     public static function getWeChatAppSecret()
     {
-        $Tenant = Tenant::first();
+        $Tenant = $GLOBALS['Tenant'];
         if ($Tenant->enable_wechat_pa) {
             return $Tenant->info->wx_app_secret;
         } else {

@@ -82,7 +82,7 @@ class WeChatController extends Controller
         if ($user) {
             $User = User::where('wx_open_id', $user->getId())->first();
             if (!$User) {
-                $Tenant = Tenant::first();
+                $Tenant = $GLOBALS['Tenant'];
 
                 if ($Tenant) {
                     $User = new User;

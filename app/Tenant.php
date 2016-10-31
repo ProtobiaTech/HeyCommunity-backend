@@ -42,4 +42,17 @@ class Tenant extends Model
             return env('WECHAT_SECRET');
         }
     }
+
+    /**
+     *
+     */
+    public static function getWechatTempNoticeId()
+    {
+        $Tenant = $GLOBALS['Tenant'];
+        if ($Tenant->enable_wechat_pa && $Tenant->info->wx_temp_notice_id) {
+            return $Tenant->info->wx_temp_notice_id;
+        } else {
+            return env('WECHAT_TEMP_NOTICE_ID');
+        }
+    }
 }

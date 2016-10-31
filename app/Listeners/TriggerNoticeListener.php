@@ -65,7 +65,7 @@ class TriggerNoticeListener
         $notice = $app->notice;
 
         $userId = $this->event->target->author->wx_open_id;
-        $templateId = '2tyXWaj3fRdWxpYtUDEbKtSpEoVWSgKe_QSclp986jI';
+        $templateId = Tenant::getWechatTempNoticeId();
         if (Auth::user()->tenant->domain) {
             $url = 'http://' . Auth::user()->tenant->domain;
         } else {

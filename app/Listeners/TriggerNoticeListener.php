@@ -76,7 +76,7 @@ class TriggerNoticeListener
         $data = [
             'first'        =>  $this->getWechatNoticeFirst(),
             'subject'      =>  $this->getWechatNoticeSubject(),
-            'sender'       =>  "HeyCommunity Robot",
+            'sender'       =>  "HEY社区 机器人",
             'remark'       =>  '这是来自 ' . Auth::user()->tenant->site_name . ' 的消息，点击了解详情',
         ];
 
@@ -108,11 +108,11 @@ class TriggerNoticeListener
         $str = Auth::user()->nickname . ' ';
         $noticeType = NoticeType::getIdByName($this->event->noticeTypeName);
         if ($noticeType == 10) {
-            $str .= 'Like Your Timeline';
+            $str .= '喜欢你的公园动态';
         } else if ($noticeType == 11) {
-            $str .= 'Comment Your Timeline';
+            $str .= '评论了你的公园动态';
         } else if ($noticeType == 12) {
-            $str .= 'Reply Your Timeline Comment';
+            $str .= '在公园动态中回复了你';
         }
         return $str;
     }

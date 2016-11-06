@@ -10,6 +10,13 @@ class Tenant extends Model
     use SoftDeletes;
 
     /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token', 'enable_wechat_pa', 'email', 'phone', 'created_at', 'updated_at', 'deleted_at'];
+
+    /**
      *
      */
     public function info()

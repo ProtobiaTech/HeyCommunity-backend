@@ -24,4 +24,5 @@ Route::group(['middleware' => ['tenantDataFilter'], 'prefix' => 'api'], function
     Route::controller('timeline', 'Api\TimelineController');
     Route::controller('notice', 'Api\NoticeController');
     Route::controller('wechat', 'Api\WeChatController');
+    Route::controller('system', 'Api\SystemController');
 });

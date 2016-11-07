@@ -183,7 +183,9 @@ class TimelineController extends Controller
             $TimelineLike->save();
             $Timeline->increment('like_num');
 
-            event(new TriggerNoticeEvent($TimelineLike, $Timeline, 'timeline_like'));
+            if ($Timeline->user_id !== Auth::user()->id) {
+                event(new TriggerNoticeEvent($TimelineLike, $Timeline, 'timeline_like'));
+            }
         }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
@@ -221,9 +223,14 @@ class TimelineController extends Controller
         $Timeline->increment('comment_num');
 
         if ($TimelineComment->parent_id > 0) {
+            if ($TimelineComment->parent->user_id !== Auth::user()->id) {
+                event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
+            }
             event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment_comment'));
         } else {
-            event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
+            if ($Timeline->user_id !== Auth::user()->id) {
+                event(new TriggerNoticeEvent($TimelineComment, $TimelineComment->parent, 'timeline_comment'));
+            }
         }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);

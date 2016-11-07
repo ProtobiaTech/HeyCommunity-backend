@@ -18,4 +18,12 @@ class TimelineComment extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    /**
+     *
+     */
+    public function parent()
+    {
+        return $this->belongsTo('App\TimelineComment', 'parent_id')->with('author');
+    }
 }

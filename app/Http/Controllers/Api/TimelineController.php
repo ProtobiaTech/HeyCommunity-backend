@@ -203,13 +203,17 @@ class TimelineController extends Controller
     public function postStoreComment(Request $request)
     {
         $this->validate($request, [
-            'timeline_id'       =>      'required',
-            'content'           =>      'required',
+            'timeline_id'           =>      'required',
+            'timeline_comment_id'   =>      '',
+            'content'               =>      'required',
         ]);
 
         $Timeline = Timeline::findOrFail($request->timeline_id);
         $TimelineComment = new TimelineComment;
 
+        if ($request->timeline_comment_id) {
+            $TimelineComment->parent_id   =   $request->timeline_comment_id;
+        }
         $TimelineComment->timeline_id   =   $request->timeline_id;
         $TimelineComment->user_id       =   Auth::user()->id;
         $TimelineComment->content       =   $request->content;

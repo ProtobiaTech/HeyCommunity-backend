@@ -224,12 +224,11 @@ class TimelineController extends Controller
 
         if ($TimelineComment->parent_id > 0) {
             if ($TimelineComment->parent->user_id !== Auth::user()->id) {
-                event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
+                event(new TriggerNoticeEvent($TimelineComment, $TimelineComment->parent, 'timeline_comment_comment'));
             }
-            event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment_comment'));
         } else {
             if ($Timeline->user_id !== Auth::user()->id) {
-                event(new TriggerNoticeEvent($TimelineComment, $TimelineComment->parent, 'timeline_comment'));
+                event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
             }
         }
 

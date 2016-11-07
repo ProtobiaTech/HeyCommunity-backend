@@ -91,7 +91,7 @@ class TriggerNoticeListener
         $str = Auth::user()->nickname . ': ';
         $noticeType = NoticeType::getIdByName($this->event->noticeTypeName);
         if ($noticeType == 10) {
-            $str .= 'I Like Your Timeline';
+            $str .= '喜欢 ❤️';
         } else if ($noticeType == 11) {
             $str .= $this->event->entity->content;
         } else if ($noticeType == 12) {

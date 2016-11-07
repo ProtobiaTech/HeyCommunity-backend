@@ -220,7 +220,11 @@ class TimelineController extends Controller
         $TimelineComment->save();
         $Timeline->increment('comment_num');
 
-        event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
+        if ($TimelineComment->parent_id > 0) {
+            event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment_comment'));
+        } else {
+            event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
+        }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
         $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->id])->count() ? true : false;

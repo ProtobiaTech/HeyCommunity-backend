@@ -40,8 +40,10 @@ class TriggerNoticeListener
         $Notice->user_id            =       $this->event->target->user_id;
         $Notice->initiator_user_id  =       Auth::user()->id;
         $Notice->type_id            =       NoticeType::getIdByName($this->event->noticeTypeName);
-        $Notice->entity_id          =       $this->event->target->id;
-        $Notice->entity_type        =       get_class($this->event->target);
+        $Notice->entity_id          =       $this->event->entity->id;
+        $Notice->entity_type        =       get_class($this->event->entity);
+        $Notice->target_id          =       $this->event->target->id;
+        $Notice->target_type        =       get_class($this->event->target);
         $Notice->save();
 
         // send wechat notice

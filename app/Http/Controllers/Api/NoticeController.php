@@ -27,12 +27,13 @@ class NoticeController extends Controller
      */
     public function getIndex()
     {
-        return Notice::with(['initiator', 'type', 'entity'])->where('user_id', Auth::user()->id)
+        return Notice::with(['initiator', 'type', 'entity', 'target'])->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
             ->get()
             ->each(function($item, $key) {
-                $imgs = $item->entity->imgs;
-                $item->entity->images = TimelineImg::getImgs($imgs);
+                if ($item->target->images) {
+                    $item->images = $item->target->images;
+                }
             })
             ->toArray();
     }

@@ -40,4 +40,12 @@ class Timeline extends Model
     {
         return $this->morphMany('App\Notice', 'noticeable');
     }
+
+    /**
+     *
+     */
+    public function images()
+    {
+        return $this->hasMany('App\TimelineImg', 'timeline_id');
+    }
 }

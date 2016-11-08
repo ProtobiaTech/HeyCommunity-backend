@@ -40,4 +40,12 @@ class Notice extends Model
     {
         return $this->morphTo()->withTrashed();
     }
+
+    /**
+     * Related Entity
+     */
+    public function target()
+    {
+        return $this->morphTo()->withTrashed();
+    }
 }

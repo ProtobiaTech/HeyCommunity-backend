@@ -27,9 +27,10 @@ class TriggerNoticeEvent extends Event
      *
      * @return void
      */
-    public function __construct(Timeline $entity, $typeName)
+    public function __construct($entity, $target, $typeName)
     {
         $this->entity = $entity;
+        $this->target = $target;
         $this->noticeTypeName = $typeName;
     }
 

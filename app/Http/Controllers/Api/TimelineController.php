@@ -149,9 +149,7 @@ class TimelineController extends Controller
 
         $Timeline = Timeline::findOrFail($request->id);
 
-        if ($Timeline->user_id === Auth::user()->id) {
-            return $Timeline->delete() ? ['success'] : response('fail', 500);
-        } elseif (Auth::user()->id === Auth::user()->id) {
+        if ($Timeline->user_id === Auth::user()->id || Auth::user()->is_admin) {
             return $Timeline->delete() ? ['success'] : response('fail', 500);
         }
 

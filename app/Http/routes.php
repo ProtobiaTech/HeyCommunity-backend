@@ -23,5 +23,6 @@ Route::group(['middleware' => [], 'prefix' => 'api'], function() {
     Route::controller('user', 'Api\UserController');
     Route::controller('timeline', 'Api\TimelineController');
     Route::controller('notice', 'Api\NoticeController');
+    Route::controller('wechat', 'Api\WeChatController');
     Route::controller('system', 'Api\SystemController');
 });

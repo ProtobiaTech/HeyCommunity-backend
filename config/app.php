@@ -145,6 +145,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Overtrue\LaravelWechat\ServiceProvider::class,
 
     ],
 
@@ -197,7 +198,8 @@ return [
         /**
          *
          */
-        'Image' => Intervention\Image\Facades\Image::class,
+        'Image'     =>  Intervention\Image\Facades\Image::class,
+        'Wechat'    =>  Overtrue\LaravelWechat\Facade::class,
     ],
 
 ];

@@ -31,7 +31,7 @@ class UserTableSeeder extends Seeder
         foreach (range(1, 68) as $index) {
             $data[] = [
                 'nickname'      =>  $faker->name(),
-                'avatar'        =>  $faker->imageUrl(),
+                'avatar'        =>  $faker->imageUrl(300, 300, 'people'),
                 'email'         =>  $faker->email(),
                 'phone'         =>  $faker->phoneNumber(),
                 'password'      =>  bcrypt('hey community'),

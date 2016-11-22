@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Topic extends Model
+class TopicComment extends Model
 {
     use SoftDeletes;
 
@@ -18,10 +18,18 @@ class Topic extends Model
     }
 
     /**
+     * Related User
+     */
+    public function topic()
+    {
+        return $this->belongsTo('App\Topic', 'topic_id');
+    }
+
+    /**
      * Related TopicComment
      */
-    public function comments()
+    public function parent()
     {
-        return $this->hasMany('App\TopicComment', 'topic_id')->with('author');
+        return $this->belongsTo('App\TopicComment', 'parent_id')->with('author');
     }
 }

@@ -14,11 +14,11 @@ class TimelineTableSeeder extends Seeder
         $users = \App\User::lists('id')->toArray();
 
         $faker = Faker\Factory::create();
-        foreach (range(1, 668) as $index) {
+        foreach (range(1, 68) as $index) {
             $data[] = [
                 'user_id'       =>      $faker->randomElement($users),
                 'content'       =>      implode('', $faker->paragraphs(random_int(1, 5))),
-                'attachment'    =>      random_int(0, 1) ? $faker->imageUrl() : null,
+                'imgs'          =>      null,
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),
                 'updated_at'    =>  $faker->dateTimeThisMonth(),

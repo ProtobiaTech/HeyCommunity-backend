@@ -12,16 +12,15 @@ class TopicTableSeeder extends Seeder
     public function run()
     {
         $users = \App\User::lists('id')->toArray();
+        $topicNodes = \App\TopicNode::lists('id')->toArray();
 
         $faker = Faker\Factory::create();
-        foreach (range(1, 268) as $index) {
+        foreach (range(1, 128) as $index) {
             $data[] = [
                 'user_id'       =>      $faker->randomElement($users),
-                'title'         =>      $faker->sentence(),
-                'content'       =>      implode('', $faker->paragraphs(random_int(1, 5))),
-                'avatar'        =>      $faker->imageUrl(),
-                'is_top'        =>      random_int(0, 1),
-                'is_excellent'  =>      random_int(0, 1),
+                'topic_node_id' =>      $faker->randomElement($topicNodes),
+                'title'         =>      $faker->sentence(6),
+                'content'       =>      implode('', $faker->paragraphs(random_int(4, 9))),
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),
                 'updated_at'    =>  $faker->dateTimeThisMonth(),

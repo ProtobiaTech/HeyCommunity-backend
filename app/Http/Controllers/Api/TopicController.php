@@ -7,21 +7,32 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Topic;
-use App\TopicComment;
-use App\Notice;
-
 use Auth;
+use App\Topic;
+use App\TopicNode;
+use App\TopicThumb;
+use App\TopicStar;
+use App\TopicComment;
 
 class TopicController extends Controller
 {
     /**
-     * construct
+     * The construct
+     *
+     * @return void
      */
     public function __construct()
     {
-        $this->middleware('auth.user', ['only' => ['postStore', 'postCommentPublish', 'postDestroy']]);
-        $this->middleware('auth.userAdmin', ['only' => ['postToggleTop', 'postToggleExcellent']]);
+        $this->middleware('auth', ['except' => ['getNodes', 'getIndex', 'getShow']]);
+    }
+
+    /**
+     *
+     */
+    public function getNodes()
+    {
+        $nodes = TopicNode::where(['parent_id' => 0])->with('childNodes')->get();
+        return $nodes;
     }
 
     /**
@@ -31,24 +42,37 @@ class TopicController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $builder =  Topic::with(['author', 'comments'])->orderBy('id', 'desc')->limit(10);
-        if ($request->type === 'refresh') {
-            $builder->where('id', '>', $request->id);
-        } else if ($request->type === 'infinite') {
-            $builder->where('id', '<', $request->id);
+        $this->validate($request, [
+            'type'      =>  'required|string',
+            'node_id'   =>  'required|integer',
+        ]);
+
+        $query = Topic::with('author', 'comments')->limit(10);
+
+        // type
+        if ($request->type === 'hot') {
+            $query->orderBy('comment_num', 'desc');
+            $query->orderBy('thumb_up_num', 'desc');
+            $query->orderBy('updated_at', 'desc');
+        } else {
+            $query->orderBy('updated_at', 'desc');
         }
 
-        return $builder->get();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
         //
+        if ($request->node_id !== '0') {
+            $query->where('topic_node_id', $request->node_id);
+        }
+
+        //
+        if ($request->type === 'refresh') {
+            $query->where('id', '>', $request->id);
+        } else if ($request->type === 'infinite') {
+            $query->where('id', '<', $request->id);
+        }
+
+        $topics = $query->get()->toArray();
+
+        return $topics;
     }
 
     /**
@@ -60,25 +84,22 @@ class TopicController extends Controller
     public function postStore(Request $request)
     {
         $this->validate($request, [
-            'title'         =>      'required',
-            'content'       =>      'required',
-            // 'avatar'        =>      'required',
+            'title'         =>      'required|string',
+            'content'       =>      'required|string',
+            'topic_node_id' =>      'required|integer',
         ]);
 
-        /*
-        $file = $request->file('avatar');
-        $uploadPath = '/uploads/topic/';
-        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
-        $file->move(public_path() . $uploadPath, $fileName);
-        */
-
         $Topic = new Topic;
-        $Topic->user_id     =       Auth::user()->user()->id;
-        $Topic->title       =       $request->title;
-        $Topic->content     =       $request->content;
-        // $Topic->avatar      =       $uploadPath . $fileName;
-        $Topic->save();
-        return $Topic;
+        $Topic->title           =   $request->title;
+        $Topic->content         =   $request->content;
+        $Topic->topic_node_id   =   $request->topic_node_id;
+        $Topic->user_id         =   Auth::user()->id;
+
+        if ($Topic->save()) {
+            return $Topic;
+        } else {
+            return response('fail', 500);
+        }
     }
 
     /**
@@ -87,20 +108,107 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getShow($id)
+    public function getShow(Request $request)
     {
-        return Topic::with(['author', 'comments'])->findOrFail($id);
+        $this->validate($request, [
+             'id'   =>      'required',
+        ]);
+
+        $Topic = Topic::findOrFail($request->id);
+        return $Topic;
     }
 
     /**
-     * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function postSetThumb(Request $request)
     {
+        $this->validate($request, [
+             'id'       =>      'required|integer',
+             'value'    =>      'required|string',
+        ]);
+
+        $where = [
+            'user_id'   =>  Auth::user()->id,
+            'topic_id'  =>  $request->id
+        ];
+
         //
+        $oldValue = 'null';
+        $TopicThumb = TopicThumb::where($where)->first();
+        if ($TopicThumb) {
+            $oldValue = $TopicThumb->value == TopicThumb::VALUE_UP ? 'up' : 'down';
+            $TopicThumb->delete();
+        }
+        $case = $request->value . ':' . $oldValue;
+
+        //
+        $newValue = $request->value === 'up' ? TopicThumb::VALUE_UP : TopicThumb::VALUE_DOWN;
+
+        //
+        $TopicThumb = new TopicThumb;
+        $TopicThumb->user_id = Auth::user()->id;
+        $TopicThumb->topic_id = $request->id;
+        $TopicThumb->value = $newValue;
+
+        if ($TopicThumb->save()) {
+            $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
+
+            switch ($case) {
+                case 'up:null':
+                    $Topic->increment('thumb_up_num');
+                    break;
+                case 'down:null':
+                    $Topic->increment('thumb_down_num');
+                    break;
+                case 'up:down':
+                    $Topic->increment('thumb_up_num');
+                    $Topic->decrement('thumb_down_num');
+                    break;
+                case 'down:up':
+                    $Topic->increment('thumb_down_num');
+                    $Topic->decrement('thumb_up_num');
+                    break;
+                default:
+                    break;
+            }
+
+            return $Topic;
+        } else {
+            return response('fail', 500);
+        }
+    }
+
+    /**
+     *
+     */
+    public function postSetStar(Request $request)
+    {
+        $this->validate($request, [
+             'id'   =>      'required',
+        ]);
+
+        $where = [
+            'user_id'   =>  Auth::user()->id,
+            'topic_id'  =>  $request->id
+        ];
+
+        $oldTopicStar = TopicStar::where($where)->first();
+
+        $TopicStar = new TopicStar;
+        $TopicStar->user_id = Auth::user()->id;
+        $TopicStar->topic_Id = $request->id;
+        $TopicStar->save();
+
+        $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
+
+        if ($oldTopicStar) {
+            $oldTopicStar->delete();
+        } else {
+            $Topic->increment('star_num');
+        }
+
+        return $Topic;
     }
 
     /**
@@ -110,7 +218,7 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function postUpdate(Request $request, $id)
     {
         //
     }
@@ -127,115 +235,51 @@ class TopicController extends Controller
             'id'        =>      'required',
         ]);
 
-        if (Auth::user()->check() && Auth::user()->user()->is_admin) {
-            return Topic::destroy($request->id);
-        } else {
-            $Topic = Topic::findOrFail($request->id);
-            if ($Topic->user_id === Auth::user()->user()->id) {
-                return Topic::destroy($request->id);
-            } else {
-                return response('Insufficient permissions', 403);
-            }
+        $Topic = Topic::findOrFail($request->id);
+
+        if ($Topic->user_id === Auth::user()->id || Auth::user()->is_admin) {
+            return $Topic->delete() ? ['success'] : response('fail', 500);
         }
+
+        return abort(403, 'Insufficient permissions');
     }
 
     /**
      *
      */
-    public function postCommentPublish(Request $request)
+    public function postStoreComment(Request $request)
     {
         $this->validate($request, [
-            'id'        =>      'required',
-            'content'   =>      'required',
+            'topic_id'              =>      'required|integer',
+            'topic_comment_id'      =>      'integer',
+            'content'               =>      'required|string',
         ]);
 
-        $Topic = Topic::findOrFail($request->id);
+        $Topic = Topic::findOrFail($request->topic_id);
         $TopicComment = new TopicComment;
 
-        $TopicComment->topic_id     =   $request->id;
-        $TopicComment->user_id      =   Auth::user()->user()->id;
+        if ($request->topic_comment_id) {
+            $TopicComment->parent_id   =   $request->topic_comment_id;
+        }
+        $TopicComment->topic_id     =   $request->topic_id;
+        $TopicComment->user_id      =   Auth::user()->id;
         $TopicComment->content      =   $request->content;
         $TopicComment->save();
         $Topic->increment('comment_num');
 
-        // notice
-        $Notice = new Notice;
-        $Notice->user_id            =       $Topic->user_id;
-        $Notice->initiator_user_id  =       Auth::user()->user()->id;
-        $Notice->type_id            =       21;     // topic_comment
-        $Notice->noticeable_id      =       $Topic->id;
-        $Notice->noticeable_type    =       Topic::class;
-        $Notice->save();
-
-
-        return $Topic->with(['author', 'comments'])->findOrFail($Topic->id);
-    }
-
-    /**
-     *
-     */
-    public function postVoteUp(Request $request)
-    {
-        $this->validate($request, [
-            'id'        =>      'required',
-        ]);
-
-        $Topic = Topic::with(['author', 'comments'])->findOrFail($request->id);
-        $Topic->increment('vote_up_num');
-        return $Topic;
-    }
-
-    /**
-     *
-     */
-    public function postVoteDown(Request $request)
-    {
-        $this->validate($request, [
-            'id'        =>      'required',
-        ]);
-
-        $Topic = Topic::with(['author', 'comments'])->findOrFail($request->id);
-        $Topic->increment('vote_down_num');
-        return $Topic;
-    }
-
-    /**
-     *
-     */
-    public function postToggleTop(Request $request)
-    {
-        $this->validate($request, [
-            'id'        =>      'required',
-        ]);
-
-        $Topic = Topic::with(['author', 'comments'])->findOrFail($request->id);
-        if ($Topic->is_top == 1) {
-            $Topic->is_top = 0;
-        } else if ($Topic->is_top == 0) {
-            $Topic->is_top = 1;
+        /** @todo send notice
+        if ($TopicComment->parent_id > 0) {
+            if ($TopicComment->parent->user_id !== Auth::user()->id) {
+                event(new TriggerNoticeEvent($TopicComment, $TopicComment->parent, 'topic_comment_comment'));
+            }
+        } else {
+            if ($Topic->user_id !== Auth::user()->id) {
+                event(new TriggerNoticeEvent($TopicComment, $Topic, 'topic_comment'));
+            }
         }
-        $Topic->save();
+        */
 
-        return $Topic;
-    }
-
-    /**
-     *
-     */
-    public function postToggleExcellent(Request $request)
-    {
-        $this->validate($request, [
-            'id'        =>      'required',
-        ]);
-
-        $Topic = Topic::with(['author', 'comments'])->findOrFail($request->id);
-        if ($Topic->is_excellent == 1) {
-            $Topic->is_excellent = 0;
-        } else if ($Topic->is_excellent == 0) {
-            $Topic->is_excellent = 1;
-        }
-        $Topic->save();
-
+        $Topic = Topic::with(['author', 'comments'])->findOrFail($request->topic_id);
         return $Topic;
     }
 }

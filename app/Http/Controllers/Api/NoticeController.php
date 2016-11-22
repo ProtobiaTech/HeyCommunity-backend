@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use App\Notice;
+use App\TimelineImg;
 use Auth;
 
 class NoticeController extends Controller
@@ -17,7 +17,7 @@ class NoticeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth.user', ['only' => ['getIndex']]);
+        $this->middleware('auth', ['except' => []]);
     }
 
     /**
@@ -27,9 +27,15 @@ class NoticeController extends Controller
      */
     public function getIndex()
     {
-        return Notice::with(['initiator', 'type', 'noticeable'])->where('user_id', Auth::user()->user()->id)
+        return Notice::with(['initiator', 'type', 'entity', 'target'])->where('user_id', Auth::user()->id)
             ->orderBy('created_at', 'desc')
-            ->get()->toArray();
+            ->get()
+            ->each(function($item, $key) {
+                if ($item->target->images) {
+                    $item->images = $item->target->images;
+                }
+            })
+            ->toArray();
     }
 
     /**
@@ -93,13 +99,15 @@ class NoticeController extends Controller
     public function postCheck(Request $request)
     {
         $this->validate($request, [
-            'id'        =>      'required',
+            'ids'        =>      'required',
         ]);
 
-        $Notice = Notice::findOrFail($request->id);
-        $Notice->is_checked = true;
-        $Notice->save();
-        return $Notice;
+        foreach ($request->ids as $id) {
+            $Notice = Notice::findOrFail($id);
+            $Notice->is_checked = true;
+            $Notice->save();
+        }
+        return $this->getIndex();
     }
 
     /**
@@ -114,6 +122,7 @@ class NoticeController extends Controller
             'id'        =>      'required',
         ]);
 
-        return Notice::destroy($request->id);
+        Notice::destroy($request->id);
+        return $this->getIndex();
     }
 }

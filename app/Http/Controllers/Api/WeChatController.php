@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Debugbar;
+
+use GuzzleHttp\Client;
+use EasyWeChat\Foundation\Application;
+
 use Auth;
 use App\User;
 
@@ -14,10 +16,37 @@ class WeChatController extends Controller
 {
     /**
      *
+     *
+     */
+    public function getOAuth(Request $request)
+    {
+        if (Auth::guest()) {
+            $options = [
+                'debug'     => true,
+                'app_id'    => env('WECHAT_APPID'),
+                'secret'    => env('WECHAT_SECRET'),
+            ];
+
+            $domain = $request->header()['host'][0];
+            $redirect = 'http://cloud.hey-community.com/api/wechat/get-wechat-user?domain=' . $domain;
+
+            $app = new Application($options);
+            $response = $app->oauth->scopes(['snsapi_userinfo'])
+                            ->setRequest($request)
+                            ->redirect($redirect);
+
+            return $response;
+        } else {
+            return back();
+        }
+
+    }
+
+    /**
+     *
      */
     public function getCheckSignature(Request $request)
     {
-        Debugbar::disable();
         $signature  =   $request->signature;
         $timestamp  =   $request->timestamp;
         $nonce      =   $request->nonce;
@@ -33,24 +62,6 @@ class WeChatController extends Controller
         }else{
             return response('false', 400);
         }
-        Debugbar::enable();
-    }
-
-    /**
-     *
-     */
-    public function getOAuth(Request $request)
-    {
-        $referer = $request->header()['referer'][0];
-        preg_match('/^http[s]?:\/\/[^\/]*\//', $referer, $tenantDomain);
-
-
-        $APPID = 'wxc0913740d9e16659';
-        $REDIRECT_URI = urlencode(redirect()->to('api/wechat/get-wechat-user')->getTargetUrl());
-        $SCOPE = 'snsapi_userinfo';
-        $STATE = urlencode($tenantDomain[0]);
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$APPID}&redirect_uri={$REDIRECT_URI}&response_type=code&scope={$SCOPE}&state={$STATE}#wechat_redirect";
-        return redirect()->to($url);
     }
 
     /**
@@ -58,32 +69,41 @@ class WeChatController extends Controller
      */
     public function getGetWechatUser(Request $request)
     {
-        $appId = 'wxc0913740d9e16659';
-        $secret = 'bb1dee0ae8135120b187aedd5c48f9ca';
-        $code  = $request->code;
-        $getAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appId}&secret={$secret}&code={$code}&grant_type=authorization_code";
+        $options = [
+            'debug'     => true,
+            'app_id'    => env('WECHAT_APPID'),
+            'secret'    => env('WECHAT_SECRET'),
+        ];
 
-        $accessTokenRets = json_decode(file_get_contents($getAccessTokenUrl), true);
+        $app = new Application($options);
+        $user = $app->oauth->setRequest($request)->user();
 
-        if (isset($accessTokenRets['access_token'])) {
-            $accessToken = $accessTokenRets['access_token'];
-            $openId = $accessTokenRets['openid'];
-            $getUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token={$accessToken}&openid={$openId}&lang=zh_CN";
-            $userInfo = json_decode(file_get_contents($getUserInfoUrl), true);
-
-            $User = User::where('wx_open_id', $openId)->first();
+        if ($user) {
+            $User = User::where('wx_open_id', $user->getId())->first();
             if (!$User) {
                 $User = new User;
-                $User->wx_open_id   =   $openId;
-                $User->nickname     =   $userInfo['nickname'];
-                $User->avatar       =   $userInfo['headimgurl'];
+                $User->wx_open_id   =   $user->getId();
+                $User->nickname     =   $user->getNickname();
+                $User->avatar       =   $user->getAvatar();
+
+                $number = random_int(0, 3);
+                if ($number === 0) {
+                    $User->bio          =   'My name is ' . $user->getNickname();
+                } else if ($number === 1) {
+                    $User->bio          =   'I\'m ' . $user->getNickname();
+                } else if ($number === 2) {
+                    $User->bio          =   $user->getNickname() . ' is me';
+                } else if ($number === 3) {
+                    $User->bio          =   'I love there';
+                }
+
                 $User->save();
             }
 
-            $loginUrl = urldecode($request->state) . 'api/wechat/login?token=' . $openId;
-            return redirect()->to($loginUrl);
+            $redirect = 'http://' . $request->domain . '/api/wechat/login?wx_open_id=' . $user->getId();
+            return redirect($redirect);
         } else {
-            return $accessTokenRets;
+            abort(500, 'wechat login fail');
         }
     }
 
@@ -93,88 +113,14 @@ class WeChatController extends Controller
     public function getLogin(Request $request)
     {
         $this->validate($request, [
-            'token'     =>  'required',
+            'wx_open_id'     =>  'required',
         ]);
 
-        $User = User::where('wx_open_id', $request->token)->first();
-        Auth::user()->login($User);
+        $User = User::where('wx_open_id', $request->wx_open_id)->first();
+        if ($User) {
+            Auth::login($User);
+        }
 
         return redirect()->to('/?noWeChatOAuth=true');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

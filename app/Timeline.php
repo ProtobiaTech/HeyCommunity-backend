@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Timeline extends Model
@@ -23,7 +22,7 @@ class Timeline extends Model
      */
     public function author_like()
     {
-        return $this->hasMany('App\TimelineLike')->with('author');
+        return $this->hasMany('App\TimelineLike')->orderBy('created_at', 'desc')->with('author');
     }
 
     /**
@@ -31,7 +30,7 @@ class Timeline extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\TimelineComment', 'timeline_id')->with('author');
+        return $this->hasMany('App\TimelineComment', 'timeline_id')->orderBy('created_at', 'desc')->with('author', 'parent');
     }
 
     /**
@@ -40,5 +39,13 @@ class Timeline extends Model
     public function notices()
     {
         return $this->morphMany('App\Notice', 'noticeable');
+    }
+
+    /**
+     *
+     */
+    public function images()
+    {
+        return $this->hasMany('App\TimelineImg', 'timeline_id');
     }
 }

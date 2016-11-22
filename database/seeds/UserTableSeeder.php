@@ -24,14 +24,14 @@ class UserTableSeeder extends Seeder
             'nickname'      =>      'Test User',
             'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'test@hey-community.cn',
-            'phone'         =>      '12312345678',
+            'phone'         =>      '12312341234',
             'password'      =>      Hash::make('123123'),
         ]);
 
         foreach (range(1, 68) as $index) {
             $data[] = [
                 'nickname'      =>  $faker->name(),
-                'avatar'        =>  $faker->imageUrl(),
+                'avatar'        =>  $faker->imageUrl(300, 300, 'people'),
                 'email'         =>  $faker->email(),
                 'phone'         =>  $faker->phoneNumber(),
                 'password'      =>  bcrypt('hey community'),

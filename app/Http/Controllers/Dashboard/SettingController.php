@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use Auth;
 use App\User;
+use App\System;
 
 class SettingController extends Controller
 {
@@ -17,41 +18,41 @@ class SettingController extends Controller
      */
     public function getIndex()
     {
-        return redirect('/dashboard/setting/tenant-info');
+        return redirect('/dashboard/setting/system-info');
     }
 
     /**
      *
      */
-    public function getTenantInfo()
+    public function getSystemInfo()
     {
-        $assign['tenant'] = Auth::user()->user();
-        return view('dashboard.setting.tenant-info', $assign);
+        $assign['system'] = System::findOrFail(1);
+        return view('dashboard.setting.system-info', $assign);
     }
 
     /**
      *
      */
-    public function getEditTenantInfo()
+    public function getEditSystemInfo()
     {
-        $assign['tenant'] = Auth::user()->user();
-        return view('dashboard.setting.edit-tenant-info', $assign);
+        $assign['system'] = System::findOrFail(1);
+        return view('dashboard.setting.edit-system-info', $assign);
     }
 
     /**
      *
      */
-    public function postUpdateTenantInfo(Request $request)
+    public function postUpdateSystemInfo(Request $request)
     {
         $this->validate($request, [
-            'site_name'         =>      'required|min:2',
+            'community_name'         =>      'required|min:2',
         ]);
 
-        $Tenant = Auth::user()->user();
-        $Tenant->site_name = $request->site_name;
+        $system = System::findOrFail(1);
+        $system->community_name = $request->community_name;
 
-        if ($Tenant->save()) {
-            return redirect('/dashboard/setting/tenant-info');
+        if ($system->save()) {
+            return redirect('/dashboard/setting/system-info');
         } else {
             return back()->withInput();
         }
@@ -62,7 +63,7 @@ class SettingController extends Controller
      */
     public function getWechatPa()
     {
-        $assign['tenant'] = Auth::user()->user();
+        $assign['system'] = System::findOrFail(1);
         return view('dashboard.setting.wechat-pa', $assign);
     }
 
@@ -71,7 +72,7 @@ class SettingController extends Controller
      */
     public function getEditWechatPa()
     {
-        $assign['tenant'] = Auth::user()->user();
+        $assign['system'] = System::findOrFail(1);
         return view('dashboard.setting.edit-wechat-pa', $assign);
     }
 
@@ -88,21 +89,20 @@ class SettingController extends Controller
             'wx_verify_file'    =>  'max:1'
         ]);
 
-        $Tenant = Auth::user()->user();
-        $Tenant->enable_wechat_pa = $request->enable_wechat_pa;
-        $Tenant->info->wx_app_id = $request->wx_app_id;
-        $Tenant->info->wx_app_secret = $request->wx_app_secret;
-        $Tenant->info->wx_temp_notice_id = $request->wx_temp_notice_id;
+        $System = System::findOrFail(1);
+        $System->enable_wechat_pa = $request->enable_wechat_pa;
+        $System->wx_app_id = $request->wx_app_id;
+        $System->wx_app_secret = $request->wx_app_secret;
+        $System->wx_temp_notice_id = $request->wx_temp_notice_id;
 
         // save verify file
         if ($request->hasFile('wx_verify_file')) {
-            $path = env('WECHAT_PA_VERIFY_FILE_PATH', '/var/www/');
+            $path = env('WECHAT_PA_VERIFY_FILE_PATH', base_path('../'));
             $file= $request->file('wx_verify_file');
             $file->move($path, $file->getClientOriginalName());
         }
 
-        $Tenant->save();
-        $Tenant->info->save();
+        $System->save();
         return redirect('/dashboard/setting/wechat-pa');
     }
 
@@ -144,7 +144,7 @@ class SettingController extends Controller
     /**
      *
      */
-    public function getSearchAdministrator(Request $request)
+    public function anySearchAdministrator(Request $request)
     {
         $this->validate($request, [
             'search_key'        =>      'min:1',
@@ -162,7 +162,7 @@ class SettingController extends Controller
     /**
      *
      */
-    public function postAddAdministratorHandler(Request $request)
+    public function postAddAdministrator(Request $request)
     {
         $this->validate($request, [
             'id'                =>      'required|min:1',
@@ -177,7 +177,7 @@ class SettingController extends Controller
     /**
      *
      */
-    public function postDestroyAdministratorHandler(Request $request)
+    public function postDestroyAdministrator(Request $request)
     {
         $this->validate($request, [
             'id'                =>      'required|min:1',

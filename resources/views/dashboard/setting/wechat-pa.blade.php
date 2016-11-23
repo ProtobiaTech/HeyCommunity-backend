@@ -25,40 +25,32 @@
 
                 <table class="table table-striped">
                     <tr>
+                        <th style="width:10em;">{{ trans('dashboard.Enabled') }}</th>
+                        <td>{{ $system->enable_wechat_pa ? 'Yes' : 'No'}}</td>
+                    </tr>
+                    <tr>
                         <th style="width:10em;">App ID</th>
-                        <td>
-                            @if ($tenant->info && $tenant->info->wx_app_id)
-                              {{ (substr($tenant->info->wx_app_id, 0, -8) . '********') }}
-                            @else
-                              null
-                            @endif
-                        </td>
+                        @if ($system->wx_app_id)
+                            <td>{{ (substr($system->wx_app_id, 0, -8) . '********') }}</td>
+                        @else
+                            <td>null</td>
+                        @endif
                     </tr>
                     <tr>
                         <th style="width:10em;">App Secret</th>
-                        <td>
-                            @if ($tenant->info && $tenant->info->wx_app_secret)
-                              {{ (substr($tenant->info->wx_app_secret, 0, -12) . '************') }}
-                            @else
-                              null
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th style="width:10em;">{{ trans('dashboard.Enabled') }}</th>
-                        <td>
-                          {{ $tenant->enable_wechat_pa ? 'Yes' : 'No'}}
-                        </td>
+                        @if ($system->wx_app_secret)
+                            <td>{{ (substr($system->wx_app_secret, 0, -12) . '************') }}</td>
+                        @else
+                            <td>null</td>
+                        @endif
                     </tr>
                     <tr>
                         <th style="width:10em;">{{ trans('dashboard.TempNotice') }} Id</th>
-                        <td>
-                            @if ($tenant->info && $tenant->info->wx_temp_notice_id)
-                              {{ $tenant->info->wx_temp_notice_id }}
-                            @else
-                              null
-                            @endif
-                        </td>
+                        @if ($system->wx_temp_notice_id)
+                            <td>{{ (substr($system->wx_temp_notice_id, 0, -12) . '************') }}</td>
+                        @else
+                            <td>null</td>
+                        @endif
                     </tr>
                 </table>
             </div>

@@ -1,13 +1,19 @@
 <?php
 
 return [
+    'The email or password is incorrect'    =>      '邮箱或密码错误',
+    'Login failed'                      =>          '登录失败',
+
     'The Trends'                        =>          '社区趋势',
     'Home'                              =>          '首页',
+    'Trend'                             =>          '趋势',
     'Dashboard'                         =>          '仪表盘',
     'Data'                              =>          '数据',
     'Setting'                           =>          '设置',
     'Guide'                             =>          '指南',
     'Logout'                            =>          '登出',
+    'Login'                             =>          '登入',
+    'SignUp'                            =>          '注册',
     'Go to domain WebApp'               =>          '访问我的 WebApp',
     'Go to sub_domain WebApp'           =>          '访问子域名的 WebApp',
 
@@ -47,6 +53,7 @@ return [
     'Sub Domain'                        =>          '子域名',
     'Email'                             =>          '邮箱',
     'Phone'                             =>          '手机',
+    'Password'                          =>          '密码',
     'WeChat PA Info'                    =>          '微信公众帐号信息',
     'Edit WeChat PA Info'               =>          '微信公众帐号信息',
     'WeChat Public Account Info'        =>          '微信公众帐号信息',

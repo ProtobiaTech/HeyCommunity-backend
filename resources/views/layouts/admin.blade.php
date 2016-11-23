@@ -44,25 +44,23 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Home') }}</a></li>
+                <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Trend') }}</a></li>
 
-                @if (Auth::check())
+                @if (Auth::admin()->check())
                 <li class="{{ Request::is('dashboard/data*') ? 'active' : ''}}"><a href="{{ url('dashboard/data') }}">{{ trans('dashboard.Data') }}</a></li>
                 <li class="{{ Request::is('dashboard/setting*') ? 'active' : ''}}"><a href="{{ url('dashboard/setting') }}">{{ trans('dashboard.Setting') }}</a></li>
                 @endif
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                @if (Auth::guest())
-                <li class="{{ Request::is('sign-up') ? 'active' : ''}}"><a href="{{ url('dashboard/sign-up') }}">{{ trans('dashboard.SignUp') }}</a></li>
+                @if (Auth::admin()->guest())
                 <li class="{{ Request::is('log-in') ? 'active' : ''}}"><a href="{{ url('dashboard/log-in') }}">{{ trans('dashboard.Login') }}</a></li>
                 @else
                 <li class="{{ Request::is('dashboard/guide*') ? 'active' : ''}}"><a href="{{ url('/dashboard/guide') }}"><span class="text-danger"><i class="glyphicon glyphicon-lamp"></i> {{ trans('dashboard.Guide') }}</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->site_name }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::admin()->user()->nickname }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a target="_blank" href="http://{{ Auth::user()->domain }}">{{ trans('dashboard.Go to domain WebApp') }}</a></li>
-                        <li><a target="_blank" href="http://{{ Auth::user()->sub_domain }}">{{ trans('dashboard.Go to sub_domain WebApp') }}</a></li>
+                        <li><a target="_blank" href="/">{{ trans('dashboard.Go to domain WebApp') }}</a></li>
                         <li><a href="{{ url('dashboard/log-out') }}">{{ trans('dashboard.Logout') }}</a></li>
                     </ul>
                 </li>

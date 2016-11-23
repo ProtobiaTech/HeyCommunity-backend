@@ -32,7 +32,10 @@ Route::group(['middleware' => [], 'prefix' => 'api'], function() {
 //
 // Dashboard
 // ----------------------------
-Route::group(['middleware' => [], 'prefix' => 'dashboard'], function() {
+Route::get('/dashboard/log-in', 'Dashboard\HomeController@getLogIn');
+Route::post('/dashboard/log-in', 'Dashboard\HomeController@postLogIn');
+Route::get('/dashboard/log-out', 'Dashboard\HomeController@getLogOut');
+Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function() {
     Route::controller('guide', 'Dashboard\GuideController');
     Route::controller('data', 'Dashboard\DataController');
     Route::controller('setting', 'Dashboard\SettingController');

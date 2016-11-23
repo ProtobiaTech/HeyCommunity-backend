@@ -20,7 +20,7 @@ class WeChatController extends Controller
      */
     public function getOAuth(Request $request)
     {
-        if (Auth::guest()) {
+        if (Auth::user()->guest()) {
             $options = [
                 'debug'     => true,
                 'app_id'    => env('WECHAT_APPID'),
@@ -118,7 +118,7 @@ class WeChatController extends Controller
 
         $User = User::where('wx_open_id', $request->wx_open_id)->first();
         if ($User) {
-            Auth::login($User);
+            Auth::user()->login($User);
         }
 
         return redirect()->to('/?noWeChatOAuth=true');

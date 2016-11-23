@@ -25,7 +25,7 @@ class SettingController extends Controller
      */
     public function getTenantInfo()
     {
-        $assign['tenant'] = Auth::user();
+        $assign['tenant'] = Auth::user()->user();
         return view('dashboard.setting.tenant-info', $assign);
     }
 
@@ -34,7 +34,7 @@ class SettingController extends Controller
      */
     public function getEditTenantInfo()
     {
-        $assign['tenant'] = Auth::user();
+        $assign['tenant'] = Auth::user()->user();
         return view('dashboard.setting.edit-tenant-info', $assign);
     }
 
@@ -47,7 +47,7 @@ class SettingController extends Controller
             'site_name'         =>      'required|min:2',
         ]);
 
-        $Tenant = Auth::user();
+        $Tenant = Auth::user()->user();
         $Tenant->site_name = $request->site_name;
 
         if ($Tenant->save()) {
@@ -62,7 +62,7 @@ class SettingController extends Controller
      */
     public function getWechatPa()
     {
-        $assign['tenant'] = Auth::user();
+        $assign['tenant'] = Auth::user()->user();
         return view('dashboard.setting.wechat-pa', $assign);
     }
 
@@ -71,7 +71,7 @@ class SettingController extends Controller
      */
     public function getEditWechatPa()
     {
-        $assign['tenant'] = Auth::user();
+        $assign['tenant'] = Auth::user()->user();
         return view('dashboard.setting.edit-wechat-pa', $assign);
     }
 
@@ -88,7 +88,7 @@ class SettingController extends Controller
             'wx_verify_file'    =>  'max:1'
         ]);
 
-        $Tenant = Auth::user();
+        $Tenant = Auth::user()->user();
         $Tenant->enable_wechat_pa = $request->enable_wechat_pa;
         $Tenant->info->wx_app_id = $request->wx_app_id;
         $Tenant->info->wx_app_secret = $request->wx_app_secret;
@@ -111,7 +111,7 @@ class SettingController extends Controller
      */
     public function getWechatNotice()
     {
-        $assign['tenant'] = Auth::user();
+        $assign['tenant'] = Auth::user()->user();
         return view('dashboard.setting.wechat-notice', $assign);
     }
 
@@ -120,7 +120,7 @@ class SettingController extends Controller
      */
     public function getEditWechatNotice()
     {
-        $assign['tenant'] = Auth::user();
+        $assign['tenant'] = Auth::user()->user();
         return view('dashboard.setting.edit-wechat-pa', $assign);
     }
 

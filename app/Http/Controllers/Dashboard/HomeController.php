@@ -47,9 +47,6 @@ class HomeController extends Controller
             'password'  =>      'required|string',
         ]);
 
-        Auth::admin()->loginUsingId(1);
-        return redirect()->to('dashboard');
-
         if (Auth::admin()->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->to('dashboard');
         } else {

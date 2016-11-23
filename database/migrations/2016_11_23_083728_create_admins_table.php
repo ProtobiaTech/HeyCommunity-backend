@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateAdminsTable extends Migration
 {
@@ -22,6 +23,14 @@ class CreateAdminsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Model::unguard();
+        \App\Admin::create([
+            'nickname'          =>  'Admin',
+            'email'             =>  'admin@hey-community.com',
+            'password'          =>  bcrypt('hey community'),
+        ]);
+        Model::reguard();
     }
 
     /**

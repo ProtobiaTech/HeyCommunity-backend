@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +147,10 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Overtrue\LaravelWechat\ServiceProvider::class,
 
+        /**
+         *
+         */
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -200,6 +204,8 @@ return [
          */
         'Image'     =>  Intervention\Image\Facades\Image::class,
         'Wechat'    =>  Overtrue\LaravelWechat\Facade::class,
+        'Form'      =>  Collective\Html\FormFacade::class,
+        'Html'      =>  Collective\Html\HtmlFacade::class,
     ],
 
 ];

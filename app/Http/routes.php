@@ -27,3 +27,15 @@ Route::group(['middleware' => [], 'prefix' => 'api'], function() {
     Route::controller('wechat', 'Api\WeChatController');
     Route::controller('system', 'Api\SystemController');
 });
+
+
+//
+// Dashboard
+// ----------------------------
+Route::group(['middleware' => [], 'prefix' => 'dashboard'], function() {
+    Route::controller('guide', 'Dashboard\GuideController');
+    Route::controller('data', 'Dashboard\DataController');
+    Route::controller('setting', 'Dashboard\SettingController');
+    Route::controller('trend', 'Dashboard\TrendController');
+    Route::controller('/', 'Dashboard\HomeController');
+});

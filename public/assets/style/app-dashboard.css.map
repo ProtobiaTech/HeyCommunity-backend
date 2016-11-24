@@ -1,0 +1,1 @@
+{"version":3,"sources":["app/common/dashboard.scss"],"names":[],"mappings":"AAEA;EACI,gBAAgB,EACnB;;AAKD;EACI,iBAAiB,EACpB","file":"app-dashboard.css","sourcesContent":["//\n//\n#section-sidenav {\n    margin-top: 0px;\n}\n\n\n//\n//\n#section-mainbody {\n    margin-top: 60px;\n}\n"],"sourceRoot":"/source/"}

@@ -28,7 +28,7 @@ class WeChatController extends Controller
             ];
 
             $domain = $request->header()['host'][0];
-            $redirect = 'http://cloud.hey-community.com/api/wechat/get-wechat-user?domain=' . $domain;
+            $redirect = 'http://' . $domain . '/api/wechat/get-wechat-user?domain=' . $domain;
 
             $app = new Application($options);
             $response = $app->oauth->scopes(['snsapi_userinfo'])

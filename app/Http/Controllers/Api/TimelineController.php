@@ -276,6 +276,7 @@ class TimelineController extends Controller
 
         if ($file->move(public_path() . $uploadPath, $fileName)) {
             $videoPath = $uploadPath . $fileName;
+            /*
             $thumbnailImage = $fileName . '.jpg';
             $posterPath = $uploadPath . $thumbnailImage;
 
@@ -285,12 +286,13 @@ class TimelineController extends Controller
             ]);
             $video = $ffmpeg->open(public_path() . $videoPath);
             $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(0))->save(public_path() . $posterPath);
+            */
 
             $TimelineVideo = new TimelineVideo();
             $TimelineVideo->user_id   =   Auth::user()->user()->id;
             $TimelineVideo->uri       =   $videoPath;
 
-            $TimelineVideo->poster    =   $posterPath;
+            $TimelineVideo->poster    =   '/assets/images/video-poster.png';
             $TimelineVideo->save();
 
             return $TimelineVideo;

@@ -44,9 +44,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Trend') }}</a></li>
-
                 @if (Auth::admin()->check())
+                <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Trend') }}</a></li>
                 <li class="{{ Request::is('dashboard/data*') ? 'active' : ''}}"><a href="{{ url('dashboard/data') }}">{{ trans('dashboard.Data') }}</a></li>
                 <li class="{{ Request::is('dashboard/setting*') ? 'active' : ''}}"><a href="{{ url('dashboard/setting') }}">{{ trans('dashboard.Setting') }}</a></li>
                 @endif

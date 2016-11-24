@@ -26,9 +26,9 @@ class CreateAdminsTable extends Migration
 
         Model::unguard();
         \App\Admin::create([
-            'nickname'          =>  'Admin',
-            'email'             =>  'admin@hey-community.com',
-            'password'          =>  bcrypt('hey community'),
+            'nickname'          =>  env('ADMIN_NICKNAME', 'Admin'),
+            'email'             =>  env('ADMIN_EMAIL', 'admin@hey-community.com'),
+            'password'          =>  bcrypt(env('ADMIN_PASSWORD', 'hey community')),
         ]);
         Model::reguard();
     }

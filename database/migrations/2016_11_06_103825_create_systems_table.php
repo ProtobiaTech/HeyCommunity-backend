@@ -28,7 +28,7 @@ class CreateSystemsTable extends Migration
         Model::unguard();
         \App\System::create([
             'id'                =>  1,
-            'community_name'    =>  'New Community',
+            'community_name'    =>  env('COMMUNITY_NAME', 'New Community'),
         ]);
         Model::reguard();
     }

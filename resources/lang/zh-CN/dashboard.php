@@ -58,6 +58,7 @@ return [
     'Edit WeChat PA Info'               =>          '微信公众帐号信息',
     'WeChat Public Account Info'        =>          '微信公众帐号信息',
     'Edit WeChat Public Account Info'   =>          '编辑微信公众帐号信息',
+    'Please define the environment variables to modify the relevant information'        =>  '请通过定义环境变量的方式去修改相关设定',
     'Enabled'                           =>          '启用',
     'TempNotice'                        =>          '模板消息',
     'MP_verify file'                    =>          '微信验证文件',

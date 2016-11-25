@@ -23,8 +23,8 @@ class WeChatController extends Controller
         if (Auth::user()->guest()) {
             $options = [
                 'debug'     => true,
-                'app_id'    => env('WECHAT_APPID'),
-                'secret'    => env('WECHAT_SECRET'),
+                'app_id'    => env('WECHATPA_APPID'),
+                'secret'    => env('WECHATPA_SECRET'),
             ];
 
             $domain = $request->header()['host'][0];
@@ -71,8 +71,8 @@ class WeChatController extends Controller
     {
         $options = [
             'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
+            'app_id'    => env('WECHATPA_APPID'),
+            'secret'    => env('WECHATPA_SECRET'),
         ];
 
         $app = new Application($options);

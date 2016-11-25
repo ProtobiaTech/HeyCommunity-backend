@@ -58,13 +58,13 @@ class TriggerNoticeListener
     {
         $options = [
             'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
+            'app_id'    => env('WECHATPA_APPID'),
+            'secret'    => env('WECHATPA_SECRET'),
         ];
         $app = new Application($options);
         $notice = $app->notice;
         $userId = $this->event->target->author->wx_open_id;
-        $templateId = env('WECHAT_TEMP_NOTICE_ID');
+        $templateId = env('WECHATPA_TEMP_NOTICE_ID');
         $url = 'http://' . request()->header()['host'][0];
         $color = '#FF0000';
         $data = [

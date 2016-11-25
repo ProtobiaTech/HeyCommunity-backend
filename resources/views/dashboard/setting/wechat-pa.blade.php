@@ -26,30 +26,34 @@
                 <table class="table table-striped">
                     <tr>
                         <th style="width:10em;">{{ trans('dashboard.Enabled') }}</th>
-                        <td>{{ $system->enable_wechat_pa ? 'Yes' : 'No'}}</td>
+                        @if (env('WECHATPA_ENABLE') === true)
+                            <td>Yes</td>
+                        @else
+                            <td>No</td>
+                        @endif
                     </tr>
                     <tr>
                         <th style="width:10em;">App ID</th>
-                        @if ($system->wx_app_id)
-                            <td>{{ (substr($system->wx_app_id, 0, -8) . '********') }}</td>
+                        @if (env('WECHATPA_APPID'))
+                            <td>{{ (substr(env('WECHATPA_APPID'), 0, -8)) . '********' }}</td>
                         @else
-                            <td>null</td>
+                            <td>Null</td>
                         @endif
                     </tr>
                     <tr>
                         <th style="width:10em;">App Secret</th>
-                        @if ($system->wx_app_secret)
-                            <td>{{ (substr($system->wx_app_secret, 0, -12) . '************') }}</td>
+                        @if (env('WECHATPA_SECRET'))
+                            <td>{{ (substr(env('WECHATPA_SECRET'), 0, -12) . '************') }}</td>
                         @else
-                            <td>null</td>
+                            <td>Null</td>
                         @endif
                     </tr>
                     <tr>
                         <th style="width:10em;">{{ trans('dashboard.TempNotice') }} Id</th>
-                        @if ($system->wx_temp_notice_id)
-                            <td>{{ (substr($system->wx_temp_notice_id, 0, -12) . '************') }}</td>
+                        @if (env('WECHATPA_TEMP_NOTICE_ID'))
+                            <td>{{ (substr(env('WECHATPA_TEMP_NOTICE_ID'), 0, -12) . '************') }}</td>
                         @else
-                            <td>null</td>
+                            <td>Null</td>
                         @endif
                     </tr>
                 </table>

@@ -63,8 +63,7 @@ class SettingController extends Controller
      */
     public function getWechatPa()
     {
-        $assign['system'] = System::findOrFail(1);
-        return view('dashboard.setting.wechat-pa', $assign);
+        return view('dashboard.setting.wechat-pa');
     }
 
     /**
@@ -72,8 +71,7 @@ class SettingController extends Controller
      */
     public function getEditWechatPa()
     {
-        $assign['system'] = System::findOrFail(1);
-        return view('dashboard.setting.edit-wechat-pa', $assign);
+        return view('dashboard.setting.edit-wechat-pa');
     }
 
     /**
@@ -82,27 +80,22 @@ class SettingController extends Controller
     public function postUpdateWechatPa(Request $request)
     {
         $this->validate($request, [
+            /*
             'enable_wechat_pa'  =>  'required',
             'wx_app_id'         =>  'required_if:enable_wechat_pa,1|min:15',
             'wx_app_secret'     =>  'required_if:enable_wechat_pa,1|min:20',
             'wx_temp_notice_id' =>  'required_if:enable_wechat_pa,1|min:35',
-            'wx_verify_file'    =>  'max:1'
+             */
+            'wx_verify_file'    =>  'required|max:1'
         ]);
-
-        $System = System::findOrFail(1);
-        $System->enable_wechat_pa = $request->enable_wechat_pa;
-        $System->wx_app_id = $request->wx_app_id;
-        $System->wx_app_secret = $request->wx_app_secret;
-        $System->wx_temp_notice_id = $request->wx_temp_notice_id;
 
         // save verify file
         if ($request->hasFile('wx_verify_file')) {
-            $path = env('WECHAT_PA_VERIFY_FILE_PATH', base_path('../'));
+            $path = base_path('../');
             $file= $request->file('wx_verify_file');
             $file->move($path, $file->getClientOriginalName());
         }
 
-        $System->save();
         return redirect('/dashboard/setting/wechat-pa');
     }
 

@@ -248,7 +248,7 @@ class TimelineController extends Controller
         $ret = [];
         foreach($files as $k => $file) {
             $uploadPath = '/uploads/timeline/';
-            $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+            $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
             if ($file->move(public_path() . $uploadPath, $fileName)) {
                 $TimelineImg = new TimelineImg();
                 $TimelineImg->user_id   =   Auth::user()->user()->id;
@@ -272,7 +272,7 @@ class TimelineController extends Controller
         $file = $files[0];
 
         $uploadPath = '/uploads/timeline/';
-        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+        $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
 
         if ($file->move(public_path() . $uploadPath, $fileName)) {
             $videoPath = $uploadPath . $fileName;

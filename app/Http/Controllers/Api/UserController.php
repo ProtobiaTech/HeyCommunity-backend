@@ -132,13 +132,13 @@ class UserController extends Controller
         $file = $files[0];
 
         $uploadPath = '/uploads/avatars/';
-        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
         $path = public_path() . $uploadPath;
-        $filePath = public_path() . $uploadPath . $fileName;
         if (!File::exists($path)) {
             File::makeDirectory($path);
         }
 
+        $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
+        $filePath = public_path() . $uploadPath . $fileName;
         $image = Image::make($file->getRealPath());
         $imageWidth = $image->width();
         $imageHeight = $image->height();

@@ -2,6 +2,8 @@
 
 return [
     'The email or password is incorrect'    =>      '邮箱或密码错误',
+    'Delete the node will also delete the topic under the node, are you sure?'      =>      '删除节点的同时也会删除该节点下的所有话题，你确定要这样做？',
+
     'Login failed'                      =>          '登录失败',
 
     'The Trends'                        =>          '社区趋势',
@@ -17,6 +19,17 @@ return [
     'SignUp'                            =>          '注册',
     'Go to domain WebApp'               =>          '访问我的 WebApp',
     'Go to sub_domain WebApp'           =>          '访问子域名的 WebApp',
+
+    'Nodes'                             =>          '节点',
+    'Node'                              =>          '节点',
+    'RootNode'                          =>          '根节点',
+    'New Node'                          =>          '新节点',
+    'Parent Node'                       =>          '父节点',
+    'Node Name'                         =>          '节点名称',
+    'Add Node'                          =>          '添加节点',
+    'Rename Node'                       =>          '重命名节点',
+    'Root Node'                         =>          '根节点',
+
 
     'Timeline'                          =>          '公园',
     'Topic'                             =>          '话题',
@@ -42,6 +55,7 @@ return [
     'Thumb Up Num'                      =>          '点赞数',
     'Thumb Down Num'                    =>          '反赞数',
 
+    'Close'                             =>          '关闭',
     'Edit'                              =>          '编辑',
     'Add'                               =>          '添加',
     'Delete'                            =>          '删除',

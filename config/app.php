@@ -152,6 +152,7 @@ return [
         /**
          *
          */
+        'Baum\Providers\BaumServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
     ],
 

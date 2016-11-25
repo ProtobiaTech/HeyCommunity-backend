@@ -31,7 +31,7 @@ class TopicController extends Controller
      */
     public function getNodes()
     {
-        $nodes = TopicNode::where(['parent_id' => 0])->with('childNodes')->get();
+        $nodes = TopicNode::roots()->with('childNodes')->get();
         return $nodes;
     }
 

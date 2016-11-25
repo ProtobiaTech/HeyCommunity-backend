@@ -9,6 +9,7 @@ return [
     'Trend'                             =>          '趋势',
     'Dashboard'                         =>          '仪表盘',
     'Data'                              =>          '数据',
+    'List'                              =>          '列表',
     'Setting'                           =>          '设置',
     'Guide'                             =>          '指南',
     'Logout'                            =>          '登出',
@@ -36,6 +37,10 @@ return [
     'Bio'                               =>          '签名',
     'Gender'                            =>          '性别',
     'Timeline Num'                      =>          '公园动态数',
+    'Title'                             =>          '标题',
+    'Star Num'                          =>          '标题',
+    'Thumb Up Num'                      =>          '点赞数',
+    'Thumb Down Num'                    =>          '反赞数',
 
     'Edit'                              =>          '编辑',
     'Add'                               =>          '添加',

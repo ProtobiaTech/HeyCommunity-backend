@@ -38,6 +38,9 @@ Route::get('/dashboard/log-out', 'Dashboard\HomeController@getLogOut');
 Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function() {
     Route::controller('guide', 'Dashboard\GuideController');
     Route::controller('data', 'Dashboard\DataController');
+    Route::controller('timeline', 'Dashboard\TimelineController');
+    Route::controller('user', 'Dashboard\UserController');
+    Route::controller('topic', 'Dashboard\TopicController');
     Route::controller('setting', 'Dashboard\SettingController');
     Route::controller('trend', 'Dashboard\TrendController');
     Route::controller('/', 'Dashboard\HomeController');

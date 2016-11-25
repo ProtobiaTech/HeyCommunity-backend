@@ -46,7 +46,9 @@
             <ul class="nav navbar-nav">
                 @if (Auth::admin()->check())
                 <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Trend') }}</a></li>
-                <li class="{{ Request::is('dashboard/data*') ? 'active' : ''}}"><a href="{{ url('dashboard/data') }}">{{ trans('dashboard.Data') }}</a></li>
+                <li class="{{ Request::is('dashboard/timeline*') ? 'active' : ''}}"><a href="{{ url('dashboard/timeline') }}">{{ trans('dashboard.Timeline') }}</a></li>
+                <li class="{{ Request::is('dashboard/topic*') ? 'active' : ''}}"><a href="{{ url('dashboard/topic') }}">{{ trans('dashboard.Topic') }}</a></li>
+                <li class="{{ Request::is('dashboard/user*') ? 'active' : ''}}"><a href="{{ url('dashboard/user') }}">{{ trans('dashboard.User') }}</a></li>
                 <li class="{{ Request::is('dashboard/setting*') ? 'active' : ''}}"><a href="{{ url('dashboard/setting') }}">{{ trans('dashboard.Setting') }}</a></li>
                 @endif
             </ul>

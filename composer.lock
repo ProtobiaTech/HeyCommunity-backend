@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a6ab1a6ddace1450a26de01a332f1026",
-    "content-hash": "6a40551095f1b60fbf31b0e214f4abf5",
+    "hash": "020b70732df76c75acc9bae44c831c40",
+    "content-hash": "22c7ad0d6bdd7af302f6d8c5716e006e",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -398,6 +398,54 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "edvinaskrucas/notification",
+            "version": "5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edvinaskrucas/notification.git",
+                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/edvinaskrucas/notification/04cac9a31f5497633ffd05581210fa1a4d6fe6e9.zip",
+                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "^5.1",
+                "illuminate/support": "^5.1",
+                "php": "^5.5|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Krucas\\Notification": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edvinas Kručas",
+                    "email": "edv.krucas@gmail.com"
+                }
+            ],
+            "description": "Package for Laravel for helping to manage flash / instant notifications / messages.",
+            "keywords": [
+                "flash",
+                "instant",
+                "laravel",
+                "messages",
+                "notifications"
+            ],
+            "time": "2016-01-19 14:26:18"
         },
         {
             "name": "evenement/evenement",

@@ -27,6 +27,17 @@
 </head>
 
 <body>
+<div id="section-notification" style="position:absolute; top:80px; right:20px; z-index:999;">
+  <script>
+  $(document).ready(function() {
+    setTimeout(function() {
+      $('#section-notification').fadeOut();
+    }, 3000);
+  });
+  </script>
+  {!! Notification::showAll() !!}
+</div>
+
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">

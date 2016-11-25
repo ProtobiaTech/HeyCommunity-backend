@@ -154,6 +154,7 @@ return [
          */
         'Baum\Providers\BaumServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
+        Krucas\Notification\NotificationServiceProvider::class,
     ],
 
     /*
@@ -209,6 +210,7 @@ return [
         'Wechat'    =>  Overtrue\LaravelWechat\Facade::class,
         'Form'      =>  Collective\Html\FormFacade::class,
         'Html'      =>  Collective\Html\HtmlFacade::class,
+        'Notification' => Krucas\Notification\Facades\Notification::class,
     ],
 
 ];

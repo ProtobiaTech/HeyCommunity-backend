@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Notification;
 use App\Topic;
 use App\TopicNode;
 
@@ -26,7 +27,6 @@ class TopicController extends Controller
      */
     public function getNodes()
     {
-
         $assign['rootNodes'] = TopicNode::roots()->get();
         return view('dashboard.topic.nodes', $assign);
     }
@@ -43,6 +43,7 @@ class TopicController extends Controller
         $Node = TopicNode::findOrFail($request->id);
         $r = $Node->moveLeft();
 
+        Notification::success(trans('dashboard.Successful Operation'));
         return redirect()->to('dashboard/topic/nodes?edit=true');
     }
 
@@ -58,6 +59,7 @@ class TopicController extends Controller
         $Node = TopicNode::findOrFail($request->id);
         $r = $Node->moveRight();
 
+        Notification::success(trans('dashboard.Successful Operation'));
         return redirect()->to('dashboard/topic/nodes?edit=true');
     }
 
@@ -74,6 +76,7 @@ class TopicController extends Controller
         Topic::destroy($Node->topics->lists('id')->toArray());
         $Node->delete();
 
+        Notification::success(trans('dashboard.Successful Operation'));
         return redirect()->to('dashboard/topic/nodes?edit=true');
     }
 
@@ -96,6 +99,7 @@ class TopicController extends Controller
             $TopicNode->makeRoot();
         }
 
+        Notification::success(trans('dashboard.Successful Operation'));
         return redirect()->to('dashboard/topic/nodes?edit=true');
     }
 
@@ -111,6 +115,7 @@ class TopicController extends Controller
 
         TopicNode::findOrFail($request->id)->update(['name' => $request->name]);
 
+        Notification::success(trans('dashboard.Successful Operation'));
         return redirect()->to('dashboard/topic/nodes?edit=true');
     }
 }

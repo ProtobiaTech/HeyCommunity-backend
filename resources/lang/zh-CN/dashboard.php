@@ -3,6 +3,8 @@
 return [
     'The email or password is incorrect'    =>      '邮箱或密码错误',
     'Delete the node will also delete the topic under the node, are you sure?'      =>      '删除节点的同时也会删除该节点下的所有话题，你确定要这样做？',
+    'Successful Operation'              =>          '操作成功',
+    'Operation Failure'                 =>          '操作失败',
 
     'Login failed'                      =>          '登录失败',
 

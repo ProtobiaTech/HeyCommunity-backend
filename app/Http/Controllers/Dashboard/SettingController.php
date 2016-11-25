@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use Notification;
 use App\User;
 use App\System;
 
@@ -52,8 +53,10 @@ class SettingController extends Controller
         $system->community_name = $request->community_name;
 
         if ($system->save()) {
+            Notification::success(trans('dashboard.Successful Operation'));
             return redirect('/dashboard/setting/system-info');
         } else {
+            Notification::error(trans('dashboard.Operation Failure'));
             return back()->withInput();
         }
     }
@@ -96,6 +99,7 @@ class SettingController extends Controller
             $file->move($path, $file->getClientOriginalName());
         }
 
+        Notification::success(trans('dashboard.Successful Operation'));
         return redirect('/dashboard/setting/wechat-pa');
     }
 
@@ -163,7 +167,12 @@ class SettingController extends Controller
 
         $User = User::findOrFail($request->id);
         $User->is_admin = true;
-        $User->save();
+        if ($User->save()) {
+            Notification::success(trans('dashboard.Successful Operation'));
+        } else {
+            Notification::error(trans('dashboard.Operation Failure'));
+        }
+
         return redirect()->to('/dashboard/setting/administrator');
     }
 
@@ -178,7 +187,12 @@ class SettingController extends Controller
 
         $User = User::findOrFail($request->id);
         $User->is_admin = false;
-        $User->save();
+        if ($User->save()) {
+            Notification::success(trans('dashboard.Successful Operation'));
+        } else {
+            Notification::error(trans('dashboard.Operation Failure'));
+        }
+
         return redirect()->to('/dashboard/setting/administrator');
     }
 }

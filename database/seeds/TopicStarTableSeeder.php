@@ -23,7 +23,7 @@ class TopicStarTableSeeder extends Seeder
     {
         //
         $users = \App\User::lists('id')->toArray();
-        $topics = \App\Topic::lists('id')->toArray();
+        $topics = \App\Topic::get()->toArray();
 
         $faker = Faker\Factory::create();
 
@@ -32,7 +32,8 @@ class TopicStarTableSeeder extends Seeder
         foreach (range(1, 328) as $index) {
             do {
                 $userId = $faker->randomElement($users);
-                $topicId = $faker->randomElement($topics);
+                $topicId = $faker->randomElement($topics)['id'];
+                $tenantId = $faker->randomElement($topics)['tenant_id'];
             } while ($this->sameData($userId, $topicId, $data));
 
             if (isset($topicStarNum[$topicId])) {
@@ -42,6 +43,7 @@ class TopicStarTableSeeder extends Seeder
             }
 
             $data[] = [
+                'tenant_id'     =>      $tenantId,
                 'user_id'       =>      $userId,
                 'topic_id'      =>      $topicId,
 

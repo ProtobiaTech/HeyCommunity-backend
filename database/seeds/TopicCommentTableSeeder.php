@@ -14,6 +14,7 @@ class TopicCommentTableSeeder extends Seeder
         //
         $users = \App\User::lists('id')->toArray();
         $topics = \App\Topic::lists('id')->toArray();
+        $tenants = \App\Tenant::lists('id')->toArray();
 
         $faker = Faker\Factory::create();
 
@@ -28,6 +29,7 @@ class TopicCommentTableSeeder extends Seeder
             }
 
             $data[] = [
+                'tenant_id'     =>      $faker->randomElement($tenants),
                 'user_id'       =>      $faker->randomElement($users),
                 'topic_id'      =>      $topicId,
                 'content'       =>      implode('', $faker->paragraphs(random_int(1, 3))),
@@ -45,6 +47,7 @@ class TopicCommentTableSeeder extends Seeder
         foreach (range(1, 368) as $index) {
             $topicComment = $faker->randomElement($topicComments);
             $topicId = $topicComment['topic_id'];
+            $tenantId = $topicComment['tenant_id'];
             if (isset($topicCommentsNum[$topicId])) {
                 $topicCommentsNum[$topicId]++;
             } else {
@@ -52,6 +55,7 @@ class TopicCommentTableSeeder extends Seeder
             }
 
             $data[] = [
+                'tenant_id'     =>      $tenantId,
                 'user_id'       =>      $faker->randomElement($users),
                 'topic_id'      =>      $topicId,
                 'parent_id'     =>      $topicComment['id'],

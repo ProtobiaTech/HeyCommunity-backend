@@ -13,17 +13,16 @@ class TimelineCommentTableSeeder extends Seeder
     {
         //
         $users = \App\User::lists('id')->toArray();
-        $timelines = \App\Timeline::lists('id')->toArray();
-        $tenants = \App\Tenant::lists('id')->toArray();
+        $timelines = \App\Timeline::get()->toArray();
 
         $faker = Faker\Factory::create();
 
         $tlComment = [];
         foreach (range(1, 868) as $index) {
-            $timelineId = $faker->randomElement($timelines);
-            $Timeline = with(\App\Timeline::findOrFail($timelineId));
-            $tenantId = $Timeline->tenant_id;
-            $userId = $Timeline->user_id;
+            $timeline   = $faker->randomElement($timelines);
+            $timelineId = $timeline['id'];
+            $tenantId = $timeline['tenant_id'];
+            $userId = $timeline['user_id'];
 
             if (isset($tlComment[$timelineId])) {
                 $tlComment[$timelineId]++;

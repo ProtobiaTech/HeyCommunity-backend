@@ -15,6 +15,8 @@ class CreateTopicNodesTable extends Migration
     {
         Schema::create('topic_nodes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tenant_id')->index()->unsigned();
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->string('name', 191);
             $table->text('description');
             $table->integer('parent_id')->nullable()->index();
@@ -25,17 +27,6 @@ class CreateTopicNodesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Model::unguard();
-
-
-        //
-        $node = \App\TopicNode::create([
-            'name'      =>      env('LOCALE') === 'zh-CN' ? '默认' : 'Default',
-        ]);
-        $node->makeRoot();
-
-        Model::reguard();
     }
 
     /**

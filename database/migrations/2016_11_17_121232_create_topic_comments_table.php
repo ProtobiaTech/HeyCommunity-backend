@@ -14,6 +14,8 @@ class CreateTopicCommentsTable extends Migration
     {
         Schema::create('topic_comments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tenant_id')->index()->unsigned();
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('topic_id')->index()->unsigned();

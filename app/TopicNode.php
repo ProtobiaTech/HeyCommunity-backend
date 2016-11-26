@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use AuraIsHere\LaravelMultiTenant\Traits\TenantScopedModelTrait;
 
 use Baum\Node;
 
 class TopicNode extends Node
 {
     use SoftDeletes;
+    use TenantScopedModelTrait;
 
     /**
      * Related TopicNode

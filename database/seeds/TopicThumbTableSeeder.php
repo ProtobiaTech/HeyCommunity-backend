@@ -25,13 +25,14 @@ class TopicThumbTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         $users = \App\User::lists('id')->toArray();
-        $topics = \App\Topic::lists('id')->toArray();
+        $topics = \App\Topic::get()->toArray();
 
         $data = [];
         foreach (range(1, 388) as $index) {
             do {
                 $userId = $faker->randomElement($users);
-                $topicId = $faker->randomElement($topics);
+                $topicId = $faker->randomElement($topics)['id'];
+                $tenantId = $faker->randomElement($topics)['tenant_id'];
             } while ($this->sameData($userId, $topicId, $data));
 
             $value = $faker->randomElement([1, 2]);
@@ -51,6 +52,7 @@ class TopicThumbTableSeeder extends Seeder
             }
 
             $data[] = [
+                'tenant_id'     =>      $tenantId,
                 'user_id'       =>      $faker->randomElement($users),
                 'topic_id'      =>      $topicId,
                 'value'         =>      $value,

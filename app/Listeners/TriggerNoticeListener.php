@@ -38,7 +38,7 @@ class TriggerNoticeListener
         // save notice in db
         $Notice = new Notice();
         $Notice->user_id            =       $this->event->target->user_id;
-        $Notice->initiator_user_id  =       Auth::user()->id;
+        $Notice->initiator_user_id  =       Auth::user()->user()->id;
         $Notice->type_id            =       NoticeType::getIdByName($this->event->noticeTypeName);
         $Notice->entity_id          =       $this->event->entity->id;
         $Notice->entity_type        =       get_class($this->event->entity);

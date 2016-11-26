@@ -10,7 +10,11 @@
         "intervention/image": "^2.3",
         "aura-is-here/laravel-multi-tenant": "dev-master",
         "overtrue/laravel-wechat": "~3.0",
-        "php-ffmpeg/php-ffmpeg": "^0.6.1"
+        "php-ffmpeg/php-ffmpeg": "^0.6.1",
+        "laravelcollective/html": "5.1",
+        "kbwebs/multiauth": "~1.0",
+        "baum/baum": "~1.1",
+        "edvinaskrucas/notification": "5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

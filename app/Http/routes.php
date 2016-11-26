@@ -22,7 +22,28 @@ Route::group(['middleware' => ['tenantDataFilter'], 'prefix' => 'api'], function
 
     Route::controller('user', 'Api\UserController');
     Route::controller('timeline', 'Api\TimelineController');
+    Route::controller('topic', 'Api\TopicController');
     Route::controller('notice', 'Api\NoticeController');
     Route::controller('wechat', 'Api\WeChatController');
     Route::controller('system', 'Api\SystemController');
 });
+
+
+//
+// Dashboard
+// ----------------------------
+/*
+Route::get('/dashboard/log-in', 'Dashboard\HomeController@getLogIn');
+Route::post('/dashboard/log-in', 'Dashboard\HomeController@postLogIn');
+Route::get('/dashboard/log-out', 'Dashboard\HomeController@getLogOut');
+Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function() {
+    Route::controller('guide', 'Dashboard\GuideController');
+    Route::controller('data', 'Dashboard\DataController');
+    Route::controller('timeline', 'Dashboard\TimelineController');
+    Route::controller('user', 'Dashboard\UserController');
+    Route::controller('topic', 'Dashboard\TopicController');
+    Route::controller('setting', 'Dashboard\SettingController');
+    Route::controller('trend', 'Dashboard\TrendController');
+    Route::controller('/', 'Dashboard\HomeController');
+});
+*/

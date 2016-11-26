@@ -20,15 +20,15 @@ class WeChatController extends Controller
      */
     public function getOAuth(Request $request)
     {
-        if (Auth::guest()) {
+        if (Auth::user()->guest()) {
             $options = [
                 'debug'     => true,
-                'app_id'    => env('WECHAT_APPID'),
-                'secret'    => env('WECHAT_SECRET'),
+                'app_id'    => env('WECHATPA_APPID'),
+                'secret'    => env('WECHATPA_SECRET'),
             ];
 
             $domain = $request->header()['host'][0];
-            $redirect = 'http://cloud.hey-community.com/api/wechat/get-wechat-user?domain=' . $domain;
+            $redirect = 'http://' . $domain . '/api/wechat/get-wechat-user?domain=' . $domain;
 
             $app = new Application($options);
             $response = $app->oauth->scopes(['snsapi_userinfo'])
@@ -71,8 +71,8 @@ class WeChatController extends Controller
     {
         $options = [
             'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
+            'app_id'    => env('WECHATPA_APPID'),
+            'secret'    => env('WECHATPA_SECRET'),
         ];
 
         $app = new Application($options);
@@ -118,7 +118,7 @@ class WeChatController extends Controller
 
         $User = User::where('wx_open_id', $request->wx_open_id)->first();
         if ($User) {
-            Auth::login($User);
+            Auth::user()->login($User);
         }
 
         return redirect()->to('/?noWeChatOAuth=true');

@@ -48,10 +48,10 @@ class TimelineController extends Controller
         }
 
         $timelines = $query->get()->each(function($item, $key) {
-            if (Auth::guest()) {
+            if (Auth::user()->guest()) {
                 $item->is_like = false;
             } else {
-                $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => Auth::user()->id])->count() ? true : false;
+                $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => Auth::user()->user()->id])->count() ? true : false;
             }
             if ($item->imgs) {
                 $item->imgs = TimelineImg::getImgs($item->imgs);
@@ -94,7 +94,7 @@ class TimelineController extends Controller
             $Timeline->poster   =   $TimelineVideo->poster;
         }
 
-        $Timeline->user_id      =   Auth::user()->id;
+        $Timeline->user_id      =   Auth::user()->user()->id;
 
         if ($Timeline->save()) {
             if (isset($TimelineVideo)) {
@@ -149,7 +149,7 @@ class TimelineController extends Controller
 
         $Timeline = Timeline::findOrFail($request->id);
 
-        if ($Timeline->user_id === Auth::user()->id || Auth::user()->is_admin) {
+        if ($Timeline->user_id === Auth::user()->user()->id || Auth::user()->user()->is_admin) {
             return $Timeline->delete() ? ['success'] : response('fail', 500);
         }
 
@@ -168,7 +168,7 @@ class TimelineController extends Controller
             'id'        =>      'required',
         ]);
 
-        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => Auth::user()->id])->first();
+        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => Auth::user()->user()->id])->first();
         $Timeline = Timeline::findOrFail($request->id);
 
         if ($TimelineLike) {
@@ -176,18 +176,18 @@ class TimelineController extends Controller
             $Timeline->decrement('like_num');
         } else {
             $TimelineLike = new TimelineLike;
-            $TimelineLike->user_id      =       Auth::user()->id;
+            $TimelineLike->user_id      =       Auth::user()->user()->id;
             $TimelineLike->timeline_id  =       $request->id;
             $TimelineLike->save();
             $Timeline->increment('like_num');
 
-            if ($Timeline->user_id !== Auth::user()->id) {
+            if ($Timeline->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TimelineLike, $Timeline, 'timeline_like'));
             }
         }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->id);
-        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->id])->count() ? true : false;
+        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->user()->id])->count() ? true : false;
         if ($Timeline->imgs) {
             $Timeline->imgs = TimelineImg::getImgs($Timeline->imgs);
         }
@@ -215,23 +215,23 @@ class TimelineController extends Controller
             $TimelineComment->parent_id   =   $request->timeline_comment_id;
         }
         $TimelineComment->timeline_id   =   $request->timeline_id;
-        $TimelineComment->user_id       =   Auth::user()->id;
+        $TimelineComment->user_id       =   Auth::user()->user()->id;
         $TimelineComment->content       =   $request->content;
         $TimelineComment->save();
         $Timeline->increment('comment_num');
 
         if ($TimelineComment->parent_id > 0) {
-            if ($TimelineComment->parent->user_id !== Auth::user()->id) {
+            if ($TimelineComment->parent->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TimelineComment, $TimelineComment->parent, 'timeline_comment_comment'));
             }
         } else {
-            if ($Timeline->user_id !== Auth::user()->id) {
+            if ($Timeline->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TimelineComment, $Timeline, 'timeline_comment'));
             }
         }
 
         $Timeline = $Timeline->with(['author', 'author_like', 'comments'])->findOrFail($request->timeline_id);
-        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->id])->count() ? true : false;
+        $Timeline->is_like = TimelineLike::where(['timeline_id' => $Timeline->id, 'user_id' => Auth::user()->user()->id])->count() ? true : false;
         if ($Timeline->imgs) {
             $Timeline->imgs = TimelineImg::getImgs($Timeline->imgs);
         }
@@ -248,10 +248,10 @@ class TimelineController extends Controller
         $ret = [];
         foreach($files as $k => $file) {
             $uploadPath = '/uploads/timeline/';
-            $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+            $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
             if ($file->move(public_path() . $uploadPath, $fileName)) {
                 $TimelineImg = new TimelineImg();
-                $TimelineImg->user_id   =   Auth::user()->id;
+                $TimelineImg->user_id   =   Auth::user()->user()->id;
                 $TimelineImg->uri       =   $uploadPath . $fileName;
                 $TimelineImg->save();
 
@@ -272,10 +272,11 @@ class TimelineController extends Controller
         $file = $files[0];
 
         $uploadPath = '/uploads/timeline/';
-        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
+        $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
 
         if ($file->move(public_path() . $uploadPath, $fileName)) {
             $videoPath = $uploadPath . $fileName;
+            /*
             $thumbnailImage = $fileName . '.jpg';
             $posterPath = $uploadPath . $thumbnailImage;
 
@@ -285,12 +286,13 @@ class TimelineController extends Controller
             ]);
             $video = $ffmpeg->open(public_path() . $videoPath);
             $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(0))->save(public_path() . $posterPath);
+            */
 
             $TimelineVideo = new TimelineVideo();
-            $TimelineVideo->user_id   =   Auth::user()->id;
+            $TimelineVideo->user_id   =   Auth::user()->user()->id;
             $TimelineVideo->uri       =   $videoPath;
 
-            $TimelineVideo->poster    =   $posterPath;
+            $TimelineVideo->poster    =   '/assets/images/video-poster.png';
             $TimelineVideo->save();
 
             return $TimelineVideo;

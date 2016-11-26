@@ -13,20 +13,23 @@ class TopicNodeTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $data = [
-            ['id' => 2, 'name' => 'Node 2'],
-            ['id' => 3, 'name' => 'Node 3'],
-            ['id' => 4, 'name' => 'Node 4'],
-        ];
-        \App\TopicNode::insert($data);
+        $rootNodes = [];
 
-        $data = [];
+        $Node = \App\TopicNode::create(['name' => 'Node 1']);
+        $rootNodes[] = $Node->makeRoot();
+
+        $Node = \App\TopicNode::create(['name' => 'Node 2']);
+        $rootNodes[] = $Node->makeRoot();
+
+        $Node = \App\TopicNode::create(['name' => 'Node 3']);
+        $rootNodes[] = $Node->makeRoot();
+
         foreach (range(1, 6) as $index) {
-            $data[] = [
-                'parent_id'     =>      $faker->randomElement([1,2,3,4]),
+            $Node = \App\TopicNode::create([
                 'name'          =>      $faker->word(),
-            ];
+            ]);
+
+            $Node->makeChildOf($rootNodes[array_rand($rootNodes)]);
         }
-        \App\TopicNode::insert($data);
     }
 }

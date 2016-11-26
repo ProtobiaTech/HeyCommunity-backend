@@ -15,26 +15,26 @@ class CreateTopicNodesTable extends Migration
     {
         Schema::create('topic_nodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->index()->default(0);
             $table->string('name', 191);
             $table->text('description');
+            $table->integer('parent_id')->nullable()->index();
+            $table->integer('lft')->nullable()->index();
+            $table->integer('rgt')->nullable()->index();
+            $table->integer('depth')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
         });
 
-        $nodes = [
-            ['id' => 1, 'parent_id' => 0, 'name' => 'Default'],
-        ];
-
         Model::unguard();
-        foreach ($nodes as $node) {
-            \App\TopicNode::create([
-                'id'        =>      $node['id'],
-                'parent_id' =>      $node['parent_id'],
-                'name'      =>      $node['name'],
-            ]);
-        }
+
+
+        //
+        $node = \App\TopicNode::create([
+            'name'      =>      env('LOCALE') === 'zh-CN' ? '默认' : 'Default',
+        ]);
+        $node->makeRoot();
+
         Model::reguard();
     }
 

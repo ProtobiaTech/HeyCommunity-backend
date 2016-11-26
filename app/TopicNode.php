@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TopicNode extends Model
+use Baum\Node;
+
+class TopicNode extends Node
 {
     use SoftDeletes;
 
@@ -15,5 +17,13 @@ class TopicNode extends Model
     public function childNodes()
     {
         return $this->hasMany('App\TopicNode', 'parent_id', 'id');
+    }
+
+    /**
+     * Related TopicNode
+     */
+    public function topics()
+    {
+        return $this->hasMany('App\Topic', 'topic_node_id');
     }
 }

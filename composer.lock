@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f49645ee51d9cf1d5235c4deddf721e2",
-    "content-hash": "cf0753ec7a8b106de8697c6395f15c5a",
+    "hash": "020b70732df76c75acc9bae44c831c40",
+    "content-hash": "22c7ad0d6bdd7af302f6d8c5716e006e",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -63,6 +63,61 @@
                 "driver"
             ],
             "time": "2016-03-02 13:49:15"
+        },
+        {
+            "name": "baum/baum",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/etrepat/baum.git",
+                "reference": "9290bed862d329aaaef666a71e0a2734afc28286"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/etrepat/baum/9290bed862d329aaaef666a71e0a2734afc28286.zip",
+                "reference": "9290bed862d329aaaef666a71e0a2734afc28286",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.*",
+                "illuminate/database": "5.*",
+                "illuminate/events": "5.*",
+                "illuminate/filesystem": "5.*",
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "d11wtq/boris": "~1.0.10",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Baum": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Estanislau Trepat",
+                    "email": "estanis@etrepat.com",
+                    "homepage": "http://etrepat.com"
+                }
+            ],
+            "description": "Baum is an implementation of the Nested Set pattern for Eloquent models.",
+            "keywords": [
+                "Laravel 4",
+                "database",
+                "eloquent",
+                "laravel",
+                "laravel 5",
+                "nested set"
+            ],
+            "time": "2015-03-04 12:07:54"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -343,6 +398,54 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "edvinaskrucas/notification",
+            "version": "5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edvinaskrucas/notification.git",
+                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/edvinaskrucas/notification/04cac9a31f5497633ffd05581210fa1a4d6fe6e9.zip",
+                "reference": "04cac9a31f5497633ffd05581210fa1a4d6fe6e9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "^5.1",
+                "illuminate/support": "^5.1",
+                "php": "^5.5|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Krucas\\Notification": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edvinas Kručas",
+                    "email": "edv.krucas@gmail.com"
+                }
+            ],
+            "description": "Package for Laravel for helping to manage flash / instant notifications / messages.",
+            "keywords": [
+                "flash",
+                "instant",
+                "laravel",
+                "messages",
+                "notifications"
+            ],
+            "time": "2016-01-19 14:26:18"
         },
         {
             "name": "evenement/evenement",
@@ -769,6 +872,56 @@
             "time": "2015-12-05 17:17:57"
         },
         {
+            "name": "kbwebs/multiauth",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kbwebs/MultiAuth.git",
+                "reference": "be6b2780fc63b92a956a332f781e43023cfb8233"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/Kbwebs/MultiAuth/be6b2780fc63b92a956a332f781e43023cfb8233.zip",
+                "reference": "be6b2780fc63b92a956a332f781e43023cfb8233",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "~5.1",
+                "illuminate/console": "~5.1",
+                "illuminate/database": "~5.1",
+                "illuminate/filesystem": "~5.1",
+                "illuminate/support": "~5.1",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kbwebs\\MultiAuth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kasper Basse",
+                    "email": "kasperbasse@gmail.com"
+                }
+            ],
+            "description": "MultiAuth for Laravel 5.1",
+            "keywords": [
+                "auth",
+                "laravel",
+                "login",
+                "multi",
+                "multiauth",
+                "signin",
+                "user"
+            ],
+            "time": "2015-09-12 08:04:15"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.1.43",
             "source": {
@@ -896,6 +1049,56 @@
                 "laravel"
             ],
             "time": "2016-08-26 11:44:21"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "28a91965be7579aa159171e75cb66ee9e927c882"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/LaravelCollective/html/28a91965be7579aa159171e75cb66ee9e927c882.zip",
+                "reference": "28a91965be7579aa159171e75cb66ee9e927c882",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.1.*",
+                "illuminate/routing": "5.1.*",
+                "illuminate/session": "5.1.*",
+                "illuminate/support": "5.1.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                }
+            ],
+            "time": "2015-06-18 02:13:55"
         },
         {
             "name": "league/flysystem",

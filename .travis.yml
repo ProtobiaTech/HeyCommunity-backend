@@ -1,0 +1,13 @@
+language: php
+php:
+  - 5.6
+before_script:
+  - mysql -e 'create database `dev_heycommunity`;'
+  - composer self-update
+  - composer install -n
+  - cp .env.travis .env
+  - php artisan key:generate
+  - php artisan migrate:refresh --seed -n
+  # - ./vendor/bin/codecept build
+script: 
+  #- ./vendor/bin/codecept run

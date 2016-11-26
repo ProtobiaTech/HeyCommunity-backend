@@ -27,3 +27,21 @@ Route::group(['middleware' => [], 'prefix' => 'api'], function() {
     Route::controller('wechat', 'Api\WeChatController');
     Route::controller('system', 'Api\SystemController');
 });
+
+
+//
+// Dashboard
+// ----------------------------
+Route::get('/dashboard/log-in', 'Dashboard\HomeController@getLogIn');
+Route::post('/dashboard/log-in', 'Dashboard\HomeController@postLogIn');
+Route::get('/dashboard/log-out', 'Dashboard\HomeController@getLogOut');
+Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function() {
+    Route::controller('guide', 'Dashboard\GuideController');
+    Route::controller('data', 'Dashboard\DataController');
+    Route::controller('timeline', 'Dashboard\TimelineController');
+    Route::controller('user', 'Dashboard\UserController');
+    Route::controller('topic', 'Dashboard\TopicController');
+    Route::controller('setting', 'Dashboard\SettingController');
+    Route::controller('trend', 'Dashboard\TrendController');
+    Route::controller('/', 'Dashboard\HomeController');
+});

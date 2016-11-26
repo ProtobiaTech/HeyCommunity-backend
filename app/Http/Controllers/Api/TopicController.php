@@ -31,7 +31,7 @@ class TopicController extends Controller
      */
     public function getNodes()
     {
-        $nodes = TopicNode::where(['parent_id' => 0])->with('childNodes')->get();
+        $nodes = TopicNode::roots()->with('childNodes')->get();
         return $nodes;
     }
 
@@ -93,7 +93,7 @@ class TopicController extends Controller
         $Topic->title           =   $request->title;
         $Topic->content         =   $request->content;
         $Topic->topic_node_id   =   $request->topic_node_id;
-        $Topic->user_id         =   Auth::user()->id;
+        $Topic->user_id         =   Auth::user()->user()->id;
 
         if ($Topic->save()) {
             return $Topic;
@@ -129,7 +129,7 @@ class TopicController extends Controller
         ]);
 
         $where = [
-            'user_id'   =>  Auth::user()->id,
+            'user_id'   =>  Auth::user()->user()->id,
             'topic_id'  =>  $request->id
         ];
 
@@ -147,7 +147,7 @@ class TopicController extends Controller
 
         //
         $TopicThumb = new TopicThumb;
-        $TopicThumb->user_id = Auth::user()->id;
+        $TopicThumb->user_id = Auth::user()->user()->id;
         $TopicThumb->topic_id = $request->id;
         $TopicThumb->value = $newValue;
 
@@ -189,14 +189,14 @@ class TopicController extends Controller
         ]);
 
         $where = [
-            'user_id'   =>  Auth::user()->id,
+            'user_id'   =>  Auth::user()->user()->id,
             'topic_id'  =>  $request->id
         ];
 
         $oldTopicStar = TopicStar::where($where)->first();
 
         $TopicStar = new TopicStar;
-        $TopicStar->user_id = Auth::user()->id;
+        $TopicStar->user_id = Auth::user()->user()->id;
         $TopicStar->topic_Id = $request->id;
         $TopicStar->save();
 
@@ -237,7 +237,7 @@ class TopicController extends Controller
 
         $Topic = Topic::findOrFail($request->id);
 
-        if ($Topic->user_id === Auth::user()->id || Auth::user()->is_admin) {
+        if ($Topic->user_id === Auth::user()->user()->id || Auth::user()->user()->is_admin) {
             return $Topic->delete() ? ['success'] : response('fail', 500);
         }
 
@@ -262,18 +262,18 @@ class TopicController extends Controller
             $TopicComment->parent_id   =   $request->topic_comment_id;
         }
         $TopicComment->topic_id     =   $request->topic_id;
-        $TopicComment->user_id      =   Auth::user()->id;
+        $TopicComment->user_id      =   Auth::user()->user()->id;
         $TopicComment->content      =   $request->content;
         $TopicComment->save();
         $Topic->increment('comment_num');
 
         /** @todo send notice
         if ($TopicComment->parent_id > 0) {
-            if ($TopicComment->parent->user_id !== Auth::user()->id) {
+            if ($TopicComment->parent->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TopicComment, $TopicComment->parent, 'topic_comment_comment'));
             }
         } else {
-            if ($Topic->user_id !== Auth::user()->id) {
+            if ($Topic->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TopicComment, $Topic, 'topic_comment'));
             }
         }

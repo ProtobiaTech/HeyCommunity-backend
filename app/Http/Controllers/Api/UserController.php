@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function postLogOut()
     {
-        if (Auth::check()) {
+        if (Auth::user()->check()) {
             AUth::logout();
         }
         return [true];
@@ -51,8 +51,8 @@ class UserController extends Controller
 
         $User = User::where(['phone' => $request->phone])->first();
         if ($User && Hash::check($request->password, $User->password)) {
-            Auth::login($User);
-            return Auth::user();
+            Auth::user()->login($User);
+            return Auth::user()->user();
         } else {
             return response('phone or password err', 403);
         }
@@ -79,7 +79,7 @@ class UserController extends Controller
         $User->password     =   Hash::make($request->password);
 
         if ($User->save()) {
-            Auth::login($User);
+            Auth::user()->login($User);
             return $User;
         } else {
             return response($User, 500);
@@ -100,7 +100,7 @@ class UserController extends Controller
             'bio'       =>      'string',
         ]);
 
-        $User = Auth::user();
+        $User = Auth::user()->user();
         if ($request->has('nickname')) {
             $User->nickname = $request->nickname;
         }
@@ -132,13 +132,13 @@ class UserController extends Controller
         $file = $files[0];
 
         $uploadPath = '/uploads/avatars/';
-        $fileName   = str_random(6) . '_' . $file->getClientOriginalName();
         $path = public_path() . $uploadPath;
-        $filePath = public_path() . $uploadPath . $fileName;
         if (!File::exists($path)) {
             File::makeDirectory($path);
         }
 
+        $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
+        $filePath = public_path() . $uploadPath . $fileName;
         $image = Image::make($file->getRealPath());
         $imageWidth = $image->width();
         $imageHeight = $image->height();
@@ -146,7 +146,7 @@ class UserController extends Controller
 
         $ret = $image->crop($resize, $resize, 0, 0)->save($filePath);
         if ($ret) {
-            $User = Auth::user();
+            $User = Auth::user()->user();
             $User->avatar = $uploadPath . $fileName;
             $User->save();
 
@@ -163,8 +163,8 @@ class UserController extends Controller
      */
     public function getMyInfo()
     {
-        if (Auth::check()) {
-            return Auth::user();
+        if (Auth::user()->check()) {
+            return Auth::user()->user();
         } else {
             return response('', 404);
         }

@@ -37,7 +37,7 @@ class TriggerNoticeListener
         // save notice in db
         $Notice = new Notice();
         $Notice->user_id            =       $this->event->target->user_id;
-        $Notice->initiator_user_id  =       Auth::user()->id;
+        $Notice->initiator_user_id  =       Auth::user()->user()->id;
         $Notice->type_id            =       NoticeType::getIdByName($this->event->noticeTypeName);
         $Notice->entity_id          =       $this->event->entity->id;
         $Notice->entity_type        =       get_class($this->event->entity);
@@ -58,13 +58,13 @@ class TriggerNoticeListener
     {
         $options = [
             'debug'     => true,
-            'app_id'    => env('WECHAT_APPID'),
-            'secret'    => env('WECHAT_SECRET'),
+            'app_id'    => env('WECHATPA_APPID'),
+            'secret'    => env('WECHATPA_SECRET'),
         ];
         $app = new Application($options);
         $notice = $app->notice;
         $userId = $this->event->target->author->wx_open_id;
-        $templateId = env('WECHAT_TEMP_NOTICE_ID');
+        $templateId = env('WECHATPA_TEMP_NOTICE_ID');
         $url = 'http://' . request()->header()['host'][0];
         $color = '#FF0000';
         $data = [
@@ -81,7 +81,7 @@ class TriggerNoticeListener
      */
     public function getWechatNoticeFirst()
     {
-        $str = Auth::user()->nickname . ': ';
+        $str = Auth::user()->user()->nickname . ': ';
         $noticeType = NoticeType::getIdByName($this->event->noticeTypeName);
         if ($noticeType == 10) {
             $str .= '喜欢 ❤️';
@@ -98,7 +98,7 @@ class TriggerNoticeListener
      */
     public function getWechatNoticeSubject()
     {
-        $str = Auth::user()->nickname . ' ';
+        $str = Auth::user()->user()->nickname . ' ';
         $noticeType = NoticeType::getIdByName($this->event->noticeTypeName);
         if ($noticeType == 10) {
             $str .= '喜欢你的公园动态';

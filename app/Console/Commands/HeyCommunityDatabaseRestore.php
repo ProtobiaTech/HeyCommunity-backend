@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 
 use Excel;
 
-class MigrateRestore extends Command
+class HeyCommunityDatabaseRestore extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'migrate:restore {file : the excel file}';
+    protected $signature = 'HeyCommunity:database-restore {file : the excel file}';
 
     /**
      * The console command description.
@@ -137,7 +137,19 @@ class MigrateRestore extends Command
             $modelName = '\\App\\' . $sheetTitle;
             $model = new $modelName;
 
-            $model->insert($this->getData($table->toArray(), $sheetTitle));
+            $ret = $this->getData($table->toArray(), $sheetTitle);
+            $data = $ret['data'];
+            $state = $ret['state'];
+            $model->insert($data);
+
+            // export
+            $str = ' - restore ' . $sheetTitle;
+            $i = floor(strlen($str) / 8);
+            for ($i; $i < 6; $i++) {
+                $str .= "\t";
+            }
+            $str .= count($data);
+            $this->info($str);
         }
 
         $this->info('restore successful');
@@ -178,15 +190,6 @@ class MigrateRestore extends Command
             $state = 'skip';
         }
 
-        // export
-        $str = ' - restore ' . $tableName;
-        $i = floor(strlen($str) / 8);
-        for ($i; $i < 6; $i++) {
-            $str .= "\t";
-        }
-        $str .= "$state \n";
-        $this->info($str);
-
-        return $newData;
+        return ['data' => $newData, 'state' => $state];
     }
 }

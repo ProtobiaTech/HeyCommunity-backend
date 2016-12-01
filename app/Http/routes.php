@@ -29,6 +29,14 @@ Route::group(['middleware' => ['tenantDataFilter'], 'prefix' => 'api'], function
 });
 
 
+
+//
+// Home
+// ----------------------------
+Route::controller('/', 'HomeController');
+
+
+
 //
 // Dashboard
 // ----------------------------

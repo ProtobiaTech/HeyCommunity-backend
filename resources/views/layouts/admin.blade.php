@@ -55,7 +55,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                @if (Auth::admin()->check())
+                @if (Auth::tenant()->check())
                 <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Trend') }}</a></li>
                 <li class="{{ Request::is('dashboard/timeline*') ? 'active' : ''}}"><a href="{{ url('dashboard/timeline') }}">{{ trans('dashboard.Timeline') }}</a></li>
                 <li class="{{ Request::is('dashboard/topic*') ? 'active' : ''}}"><a href="{{ url('dashboard/topic') }}">{{ trans('dashboard.Topic') }}</a></li>
@@ -65,12 +65,12 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                @if (Auth::admin()->guest())
+                @if (Auth::tenant()->guest())
                 <li class="{{ Request::is('log-in') ? 'active' : ''}}"><a href="{{ url('dashboard/log-in') }}">{{ trans('dashboard.Login') }}</a></li>
                 @else
                 <li class="{{ Request::is('dashboard/guide*') ? 'active' : ''}}"><a href="{{ url('/dashboard/guide') }}"><span class="text-danger"><i class="glyphicon glyphicon-lamp"></i> {{ trans('dashboard.Guide') }}</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::admin()->user()->nickname }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::tenant()->user()->nickname }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a target="_blank" href="/">{{ trans('dashboard.Go to domain WebApp') }}</a></li>
                         <li><a href="{{ url('dashboard/log-out') }}">{{ trans('dashboard.Logout') }}</a></li>
@@ -104,7 +104,7 @@
 
 <!-- DaoVoice -->
 <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/86480a80.js","daovoice");</script>
-@if (Auth::admin()->guest())
+@if (Auth::tenant()->guest())
   <script>
     daovoice('init', {
       app_id: "86480a80",
@@ -118,10 +118,10 @@
       private_deployment: "1",
       domain: "{{ $_SERVER['HTTP_HOST'] }}",
       ip: "{{ $_SERVER['SERVER_ADDR'] . ':' . $_SERVER['SERVER_PORT'] }}",
-      email: "{{ Auth::admin()->user()->email }}",
-      user_id: "{{ Auth::admin()->user()->id }}",
-      signed_up: {{ Auth::admin()->user()->created_at->getTimestamp() }},
-      name: "{{ Auth::admin()->user()->nickname }}",
+      email: "{{ Auth::tenant()->user()->email }}",
+      user_id: "{{ Auth::tenant()->user()->id }}",
+      signed_up: {{ Auth::tenant()->user()->created_at->getTimestamp() }},
+      name: "{{ Auth::tenant()->user()->nickname }}",
     });
     daovoice('update');
   </script>

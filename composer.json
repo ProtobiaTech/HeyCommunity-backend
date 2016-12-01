@@ -14,7 +14,8 @@
         "laravelcollective/html": "5.1",
         "kbwebs/multiauth": "~1.0",
         "baum/baum": "~1.1",
-        "edvinaskrucas/notification": "5.*"
+        "edvinaskrucas/notification": "5.*",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

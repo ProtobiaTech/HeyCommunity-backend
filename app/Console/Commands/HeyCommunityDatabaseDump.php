@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Excel;
 use DB;
 
-class MigrateDump extends Command
+class HeyCommunityDatabaseDump extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'migrate:dump';
+    protected $signature = 'HeyCommunity:database-dump';
 
     /**
      * The console command description.

@@ -24,13 +24,6 @@ class CreateSystemsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Model::unguard();
-        \App\System::create([
-            'id'                =>  1,
-            'community_name'    =>  env('COMMUNITY_NAME', 'New Community'),
-        ]);
-        Model::reguard();
     }
 
     /**

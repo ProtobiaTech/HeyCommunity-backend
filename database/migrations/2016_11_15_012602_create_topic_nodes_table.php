@@ -25,17 +25,6 @@ class CreateTopicNodesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Model::unguard();
-
-
-        //
-        $node = \App\TopicNode::create([
-            'name'      =>      env('LOCALE') === 'zh-CN' ? '默认' : 'Default',
-        ]);
-        $node->makeRoot();
-
-        Model::reguard();
     }
 
     /**

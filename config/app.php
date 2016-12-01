@@ -155,6 +155,7 @@ return [
         'Baum\Providers\BaumServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -211,6 +212,7 @@ return [
         'Form'      =>  Collective\Html\FormFacade::class,
         'Html'      =>  Collective\Html\HtmlFacade::class,
         'Notification' => Krucas\Notification\Facades\Notification::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

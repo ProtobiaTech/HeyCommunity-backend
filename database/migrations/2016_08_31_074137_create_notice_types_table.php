@@ -20,26 +20,6 @@ class CreateNoticeTypesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        $noticeTypes = [
-            ['id' => 10, 'name' => 'timeline_like'],
-            ['id' => 11, 'name' => 'timeline_comment'],
-            ['id' => 12, 'name' => 'timeline_comment_comment'],
-
-            ['id' => 20, 'name' => 'topic_like'],
-            ['id' => 21, 'name' => 'topic_comment'],
-            ['id' => 22, 'name' => 'topic_comment_comment'],
-        ];
-        Model::unguard();
-
-        foreach ($noticeTypes as $type) {
-            \App\NoticeType::create([
-                'id'        =>      $type['id'],
-                'name'      =>      $type['name'],
-            ]);
-        }
-
-        Model::reguard();
     }
 
     /**

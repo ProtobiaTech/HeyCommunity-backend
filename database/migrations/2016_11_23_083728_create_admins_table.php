@@ -23,14 +23,6 @@ class CreateAdminsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Model::unguard();
-        \App\Admin::create([
-            'nickname'          =>  env('ADMIN_NICKNAME', 'Admin'),
-            'email'             =>  env('ADMIN_EMAIL', 'admin@hey-community.com'),
-            'password'          =>  bcrypt(env('ADMIN_PASSWORD', 'hey community')),
-        ]);
-        Model::reguard();
     }
 
     /**

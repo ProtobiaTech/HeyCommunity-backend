@@ -8,13 +8,13 @@
     <meta name="keywords" content="HeyCommunity, hey-community, SNS, 社区, 社交网络, 开源社区, 开源社交, 社群">
     <meta name="description" content="HeyCommunity 是为中小社群量身打造的线上社区解决方案，其构建的 app 可适用于 iOS / android / windowPhone / Browser 等终端。让人欣喜的是其 app 是开源的 GPLv3 授权，我们为有需要的用户提供定制开发和运营服务">
 
-    <link href="{{ asset('/backend-assets/bower-assets/bootswatch/flatly/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/backend-assets/bower-assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/backend-assets/assets/style/app-dashboard.css') }}" rel="stylesheet">
-    <script src="{{ asset('/backend-assets/bower-assets/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('/backend-assets/bower-assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <link href="{{ asset('/bower-assets/bootswatch/flatly/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/bower-assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/style/app-dashboard.css') }}" rel="stylesheet">
+    <script src="{{ asset('/bower-assets/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('/bower-assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('/backend-assets/assets/javascript/helps.js') }}"></script>
+    <script src="{{ asset('/assets/javascript/helps.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,7 +70,7 @@
                 @else
                 <li class="{{ Request::is('dashboard/guide*') ? 'active' : ''}}"><a href="{{ url('/dashboard/guide') }}"><span class="text-danger"><i class="glyphicon glyphicon-lamp"></i> {{ trans('dashboard.Guide') }}</span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::tenant()->user()->nickname }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::tenant()->user()->site_name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a target="_blank" href="/">{{ trans('dashboard.Go to domain WebApp') }}</a></li>
                         <li><a href="{{ url('dashboard/log-out') }}">{{ trans('dashboard.Logout') }}</a></li>

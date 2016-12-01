@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class AuthenticateAdmin
+class AuthenticateTenant
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AuthenticateAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::admin()->guest()) {
+        if (Auth::tenant()->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {

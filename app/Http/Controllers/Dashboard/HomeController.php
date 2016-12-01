@@ -24,7 +24,7 @@ class HomeController extends Controller
      *
      */
     public function getLogOut() {
-        Auth::admin()->logout();
+        Auth::tenant()->logout();
 
         return redirect()->to('dashboard/index');
     }
@@ -47,7 +47,7 @@ class HomeController extends Controller
             'password'  =>      'required|string',
         ]);
 
-        if (Auth::admin()->attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::tenant()->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->to('dashboard');
         } else {
             return back()->withInput()->withErrors(['fail' => trans('dashboard.The email or password is incorrect')]);

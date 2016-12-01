@@ -31,20 +31,12 @@ Route::group(['middleware' => ['tenantDataFilter'], 'prefix' => 'api'], function
 
 
 //
-// Home
-// ----------------------------
-Route::controller('/', 'HomeController');
-
-
-
-//
 // Dashboard
 // ----------------------------
-/*
 Route::get('/dashboard/log-in', 'Dashboard\HomeController@getLogIn');
 Route::post('/dashboard/log-in', 'Dashboard\HomeController@postLogIn');
 Route::get('/dashboard/log-out', 'Dashboard\HomeController@getLogOut');
-Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function() {
+Route::group(['middleware' => ['auth.tenant'], 'prefix' => 'dashboard'], function() {
     Route::controller('guide', 'Dashboard\GuideController');
     Route::controller('data', 'Dashboard\DataController');
     Route::controller('timeline', 'Dashboard\TimelineController');
@@ -54,4 +46,10 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
     Route::controller('trend', 'Dashboard\TrendController');
     Route::controller('/', 'Dashboard\HomeController');
 });
-*/
+
+
+
+//
+// Home
+// ----------------------------
+Route::controller('/', 'HomeController');

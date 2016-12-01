@@ -8,9 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
-use Notification;
 use App\User;
-use App\System;
 
 class SettingController extends Controller
 {
@@ -19,44 +17,42 @@ class SettingController extends Controller
      */
     public function getIndex()
     {
-        return redirect('/dashboard/setting/system-info');
+        return redirect('/dashboard/setting/tenant-info');
     }
 
     /**
      *
      */
-    public function getSystemInfo()
+    public function getTenantInfo()
     {
-        $assign['system'] = System::findOrFail(1);
-        return view('dashboard.setting.system-info', $assign);
+        $assign['tenant'] = Auth::tenant()->user();
+        return view('dashboard.setting.tenant-info', $assign);
     }
 
     /**
      *
      */
-    public function getEditSystemInfo()
+    public function getEditTenantInfo()
     {
-        $assign['system'] = System::findOrFail(1);
-        return view('dashboard.setting.edit-system-info', $assign);
+        $assign['tenant'] = Auth::tenant()->user();
+        return view('dashboard.setting.edit-tenant-info', $assign);
     }
 
     /**
      *
      */
-    public function postUpdateSystemInfo(Request $request)
+    public function postUpdateTenantInfo(Request $request)
     {
         $this->validate($request, [
-            'community_name'         =>      'required|min:2',
+            'site_name'         =>      'required|min:2',
         ]);
 
-        $system = System::findOrFail(1);
-        $system->community_name = $request->community_name;
+        $Tenant = Auth::tenant()->user();
+        $Tenant->site_name = $request->site_name;
 
-        if ($system->save()) {
-            Notification::success(trans('dashboard.Successful Operation'));
-            return redirect('/dashboard/setting/system-info');
+        if ($Tenant->save()) {
+            return redirect('/dashboard/setting/tenant-info');
         } else {
-            Notification::error(trans('dashboard.Operation Failure'));
             return back()->withInput();
         }
     }
@@ -66,7 +62,8 @@ class SettingController extends Controller
      */
     public function getWechatPa()
     {
-        return view('dashboard.setting.wechat-pa');
+        $assign['tenant'] = Auth::tenant()->user();
+        return view('dashboard.setting.wechat-pa', $assign);
     }
 
     /**
@@ -74,7 +71,8 @@ class SettingController extends Controller
      */
     public function getEditWechatPa()
     {
-        return view('dashboard.setting.edit-wechat-pa');
+        $assign['tenant'] = Auth::tenant()->user();
+        return view('dashboard.setting.edit-wechat-pa', $assign);
     }
 
     /**
@@ -83,14 +81,18 @@ class SettingController extends Controller
     public function postUpdateWechatPa(Request $request)
     {
         $this->validate($request, [
-            /*
             'enable_wechat_pa'  =>  'required',
             'wx_app_id'         =>  'required_if:enable_wechat_pa,1|min:15',
             'wx_app_secret'     =>  'required_if:enable_wechat_pa,1|min:20',
             'wx_temp_notice_id' =>  'required_if:enable_wechat_pa,1|min:35',
-             */
-            'wx_verify_file'    =>  'required|max:1'
+            'wx_verify_file'    =>  'max:1'
         ]);
+
+        $Tenant = Auth::tenant()->user();
+        $Tenant->enable_wechat_pa = $request->enable_wechat_pa;
+        $Tenant->info->wx_app_id = $request->wx_app_id;
+        $Tenant->info->wx_app_secret = $request->wx_app_secret;
+        $Tenant->info->wx_temp_notice_id = $request->wx_temp_notice_id;
 
         // save verify file
         if ($request->hasFile('wx_verify_file')) {
@@ -99,7 +101,8 @@ class SettingController extends Controller
             $file->move($path, $file->getClientOriginalName());
         }
 
-        Notification::success(trans('dashboard.Successful Operation'));
+        $Tenant->save();
+        $Tenant->info->save();
         return redirect('/dashboard/setting/wechat-pa');
     }
 
@@ -108,7 +111,7 @@ class SettingController extends Controller
      */
     public function getWechatNotice()
     {
-        $assign['tenant'] = Auth::user()->user();
+        $assign['tenant'] = Auth::tenant()->user();
         return view('dashboard.setting.wechat-notice', $assign);
     }
 
@@ -117,7 +120,7 @@ class SettingController extends Controller
      */
     public function getEditWechatNotice()
     {
-        $assign['tenant'] = Auth::user()->user();
+        $assign['tenant'] = Auth::tenant()->user();
         return view('dashboard.setting.edit-wechat-pa', $assign);
     }
 
@@ -133,7 +136,7 @@ class SettingController extends Controller
     /**
      *
      */
-    public function getAddAdministrator()
+    public function anyAddAdministrator()
     {
         return view('dashboard.setting.add-administrator');
     }
@@ -141,7 +144,7 @@ class SettingController extends Controller
     /**
      *
      */
-    public function anySearchAdministrator(Request $request)
+    public function postSearchAdministrator(Request $request)
     {
         $this->validate($request, [
             'search_key'        =>      'min:1',
@@ -167,12 +170,7 @@ class SettingController extends Controller
 
         $User = User::findOrFail($request->id);
         $User->is_admin = true;
-        if ($User->save()) {
-            Notification::success(trans('dashboard.Successful Operation'));
-        } else {
-            Notification::error(trans('dashboard.Operation Failure'));
-        }
-
+        $User->save();
         return redirect()->to('/dashboard/setting/administrator');
     }
 
@@ -187,12 +185,7 @@ class SettingController extends Controller
 
         $User = User::findOrFail($request->id);
         $User->is_admin = false;
-        if ($User->save()) {
-            Notification::success(trans('dashboard.Successful Operation'));
-        } else {
-            Notification::error(trans('dashboard.Operation Failure'));
-        }
-
+        $User->save();
         return redirect()->to('/dashboard/setting/administrator');
     }
 }

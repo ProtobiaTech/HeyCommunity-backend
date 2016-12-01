@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<script src="{{ asset('/bower-assets/chart.js/dist/Chart.min.js') }}"></script>
+<script src="{{ asset('bower-assets/chart.js/dist/Chart.min.js') }}"></script>
 <div class="container">
     <div class="text-center">
         <br><br>

@@ -8,12 +8,12 @@
   <meta name="description" content="HeyCommunity 是为中小社群量身打造的线上社区解决方案，其构建的 app 可适用于 iOS / android / windowPhone / Browser 等终端。让人欣喜的是其 app 是开源的 GPLv3 授权，我们为有需要的用户提供定制开发和运营服务">
 
   <title>HeyCommunity</title>
-  <link href="ionic-assets/css/site8e29.css?25" rel="stylesheet">
-  <link rel="stylesheet" href="ionic-assets/css/ionicons.min.css">
-  <link rel="stylesheet" type="text/css" href="ionic-assets/css/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="ionic-assets/css/slick-theme.css"/>
+  <link href="/ionic-assets/css/site8e29.css?25" rel="stylesheet">
+  <link rel="stylesheet" href="/ionic-assets/css/ionicons.min.css">
+  <link rel="stylesheet" type="text/css" href="/ionic-assets/css/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/ionic-assets/css/slick-theme.css"/>
 
-  <script src="{{ url('bower-assets/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ url('/bower-assets/jquery/dist/jquery.min.js') }}"></script>
   <script>
     $(function() {
       setTimeout(function(){
@@ -23,7 +23,7 @@
   </script>
 
   <!-- -->
-  <script type="text/javascript" src="ionic-assets/js/slick.js"></script>
+  <script type="text/javascript" src="/ionic-assets/js/slick.js"></script>
   <script>
   $(document).ready(function() {
     $('#slider').slick({
@@ -108,6 +108,7 @@
         <li><a class="nav-link {{ Request::is('cloud') ? 'active' : '' }}" href="{{ url('/cloud') }}">云社区</a></li>
         <li class="hide"><a class="nav-link {{ Request::is('business') ? 'active' : '' }}" href="{{ url('business') }}">商业解决方案</a></li>
         <li><a class="nav-link {{ Request::is('open-sources') ? 'active' : '' }}" href="{{ url('open-sources') }}">开源软件</a></li>
+        <li><a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="{{ url('blog') }}">博客</a></li>
         <li><a class="nav-link {{ Request::is('about-us') ? 'active' : '' }}" href="{{ url('about-us') }}">关于我们</a></li>
 
         @if (Auth::tenant()->check())
@@ -211,8 +212,8 @@
   </div>
 </footer>
 
-<script src="ionic-assets/js/bootstrap.min.js"></script>
-<script src="ionic-assets/js/sitec4ca.js?1"></script>
+<script src="/ionic-assets/js/bootstrap.min.js"></script>
+<script src="/ionic-assets/js/sitec4ca.js?1"></script>
 
 <!-- DaoVoice -->
 <script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/86480a80.js","daovoice");</script>

@@ -52,4 +52,5 @@ Route::group(['middleware' => ['auth.tenant'], 'prefix' => 'dashboard'], functio
 //
 // Home
 // ----------------------------
+Route::resource('blog', 'OfficialBlogController');
 Route::controller('/', 'HomeController');

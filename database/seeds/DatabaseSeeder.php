@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TopicStarTableSeeder::class);
         $this->call(TopicThumbTableSeeder::class);
 
+        $this->call(OfficialBlogTableSeeder::class);
+
         Model::reguard();
     }
 }

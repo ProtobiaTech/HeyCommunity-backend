@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'admin'], function() {
     Route::controller('user', 'Admin\UserController');
     Route::controller('topic', 'Admin\TopicController');
     Route::controller('trend', 'Admin\TrendController');
+    Route::resource('blog', 'Admin\OfficialBlogController');
     Route::controller('/', 'Admin\HomeController');
 });
 

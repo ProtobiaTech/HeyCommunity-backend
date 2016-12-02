@@ -60,6 +60,7 @@
                 <li class="{{ Request::is('admin/timeline*') ? 'active' : ''}}"><a href="{{ url('admin/timeline') }}">{{ trans('dashboard.Timeline') }}</a></li>
                 <li class="{{ Request::is('admin/topic*') ? 'active' : ''}}"><a href="{{ url('admin/topic') }}">{{ trans('dashboard.Topic') }}</a></li>
                 <li class="{{ Request::is('admin/user*') ? 'active' : ''}}"><a href="{{ url('admin/user') }}">{{ trans('dashboard.User') }}</a></li>
+                <li class="{{ Request::is('admin/blog*') ? 'active' : ''}}"><a href="{{ url('admin/blog') }}">{{ trans('dashboard.Blog') }}</a></li>
                 @endif
             </ul>
 

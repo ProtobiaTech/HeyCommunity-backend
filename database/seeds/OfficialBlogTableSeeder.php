@@ -13,10 +13,12 @@ class OfficialBlogTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
+            $text = implode('', $faker->paragraphs(random_int(4, 9)));
             $data[] = [
                 'admin_id'      =>  1,
                 'title'         =>      $faker->sentence(6),
-                'content'       =>      implode('', $faker->paragraphs(random_int(4, 9))),
+                'content'       =>      $text,
+                'md_content'    =>      $text,
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),
                 'updated_at'    =>  $faker->dateTimeThisMonth(),

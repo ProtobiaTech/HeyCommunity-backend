@@ -159,6 +159,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        'Douyasi\Editor\EditorServiceProvider',
     ],
 
     /*

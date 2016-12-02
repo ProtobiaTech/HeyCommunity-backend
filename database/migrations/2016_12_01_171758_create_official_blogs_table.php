@@ -18,6 +18,7 @@ class CreateOfficialBlogsTable extends Migration
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->string('title', 191);
             $table->text('content');
+            $table->text('md_content');
             $table->integer('thumb_up_num')->default(0);
             $table->integer('thumb_down_num')->default(0);
             $table->integer('view_num')->default(0);

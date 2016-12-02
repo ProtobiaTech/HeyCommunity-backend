@@ -5,6 +5,7 @@ return [
     'Delete the node will also delete the topic under the node, are you sure?'      =>      '删除节点的同时也会删除该节点下的所有话题，你确定要这样做？',
     'Successful Operation'              =>          '操作成功',
     'Operation Failure'                 =>          '操作失败',
+    'Operation'                         =>          '操作',
 
     'Login failed'                      =>          '登录失败',
 
@@ -33,6 +34,9 @@ return [
     'Root Node'                         =>          '根节点',
 
 
+    'Blog'                              =>          '博客',
+
+
     'Timeline'                          =>          '公园',
     'Topic'                             =>          '话题',
     'TopicComment'                      =>          '话题评论',
@@ -59,6 +63,7 @@ return [
     'Thumb Down Num'                    =>          '反赞数',
 
     'Close'                             =>          '关闭',
+    'Create'                            =>          '创建',
     'Edit'                              =>          '编辑',
     'Add'                               =>          '添加',
     'Delete'                            =>          '删除',

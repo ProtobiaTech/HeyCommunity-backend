@@ -18,7 +18,7 @@ class OfficialBlogController extends Controller
      */
     public function index()
     {
-        $assign['blogs'] = OfficialBlog::orderBy('created_at', 'desc')->paginate(10);
+        $assign['blogs'] = OfficialBlog::orderBy('created_at', 'desc')->paginate();
         $assign['blog'] = $assign['blogs'][0];
         return view('official-blog.index', $assign);
     }

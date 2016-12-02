@@ -14,7 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
-        Commands\MigrateToV2::class,
+        Commands\HeyCommunityDatabaseDump::class,
+        Commands\HeyCommunityDatabaseRestore::class,
+        Commands\HeyCommunityDatabaseClear::class,
     ];
 
     /**

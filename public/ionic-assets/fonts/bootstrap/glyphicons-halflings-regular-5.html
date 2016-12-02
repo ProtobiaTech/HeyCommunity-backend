@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ionic makes it incredibly easy to build beautiful and interactive mobile apps using HTML5 and AngularJS.">
+<meta name="keywords" content="html5,javascript,mobile,drifty,ionic,hybrid,phonegap,cordova,native,ios,android,angularjs">
+<meta name="author" content="Drifty">
+<meta property="og:image" content="http://ionicframework.com/img/ionic-logo-blog.png"/>
+
+<link href="/css/v2.css?10" rel="stylesheet">
+
+
+
+    
+      <title>404 - Page Not Found</title>
+    
+  </head>
+  <body id="docs-page-404"
+        class="v2 docs page-404"
+        data-spy="scroll"
+        data-offset="100"
+        data-target="#components-index"
+        ng-app="IonicDocs">
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button"
+              class="navbar-toggle collapsed"
+              id="collapse-toggle"
+              aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="ion-md-more"></i>
+      </button>
+      <button type="button"
+              class="sidebar-toggle collapsed"
+              id="sidebar-toggle">
+        <span class="sr-only">Toggle sidebar</span>
+        <i class="ion-md-menu"></i>
+        <i class="ion-md-close"></i>
+      </button>
+      <a class="navbar-brand" href="/docs/v2">
+        <img src="/img/ionic-docs-logo-sm.png" id="ionic-docs-logo" />
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      
+      <form class="navbar-form navbar-left"
+            role="search"
+            data-searchpos="header">
+        <div class="form-group">
+          <input type="text"
+                 class="form-control search-input"
+                 placeholder="Search"
+                 data-searchpos="header"
+                 ng-model="searchTerm">
+        </div>
+      </form>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/docs/v2/getting-started/installation/">Getting Started</a></li>
+        <li class="active"><a href="/docs/v2/">Docs</a></li>
+        <li><a href="http://blog.ionic.io/?utm_source=framework&utm_medium=navbar&utm_campaign=blog%20CTA">Blog</a></li>
+        <li class="hide-sm"><a href="https://forum.ionicframework.com/?utm_source=framework&utm_medium=navbar&utm_campaign=forum%20CTA">Forum</a></li>
+        <li><a target="_blank" href="http://ionic.io/enterprise?utm_source=framework&utm_medium=navbar&utm_campaign=enterprise%20CTA">Enterprise</a></li>
+        <li class="dropdown">
+          <a href="#"
+             class="dropdown-toggle"
+             data-toggle="dropdown"
+             role="button"
+             aria-haspopup="true"
+             aria-expanded="false">
+            More <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="http://ionic.io/?utm_source=framework&utm_medium=navbar&utm_campaign=platform%20CTA">
+              Ionic Cloud</a></li>
+            <li><a target="_blank" href="http://showcase.ionicframework.com/">
+              Showcase</a></li>
+            <li><a target="_blank" href="http://jobs.ionic.io/">
+              Job Board</a></li>
+            <li><a target="_blank" href="http://market.ionic.io/">
+              Market</a></li>
+            <li><a target="_blank" href="http://ionicworldwide.herokuapp.com/">
+              Ionic Worldwide</a></li>
+            <li><a target="_blank" href="http://play.ionic.io/">
+              Playground</a></li>
+            <li><a target="_blank" href="http://creator.ionic.io/">
+              Creator</a></li>
+            <li><a target="_blank" href="http://shop.ionic.io/">Shop</a></li>
+            <li><a target="_blank" href="https://ionic.io/trusted-partners">
+              Trusted Partners</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+    <div class="docs-container"
+         >
+      <nav class="side-nav" id="side-nav">
+        <form class="form-group search" role="search">
+          <input type="text"
+                 class="form-control search-input"
+                 placeholder="Search"
+                 data-searchpos="sidebar"
+                 ng-model="searchTerm">
+        </form>
+        
+          <ul ng-controller="DocsNavCtrl">
+
+  
+  <li class="">
+    <a href="/docs/v2/">Home</a>
+  </li>
+
+  
+  <li class="">
+    <a ng-click="showGettingStarted = !showGettingStarted">Getting Started</a>
+    <ul ng-show="showGettingStarted"
+        >
+      <li class="">
+        <a href="/docs/v2/getting-started">Welcome</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/getting-started/installation">Installation</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/getting-started/tutorial">Tutorial</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/getting-started/migration">Migration</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/getting&#45;started/concepts">Concepts</a>
+      </li>
+      
+    </ul>
+  </li>
+
+  
+
+ 
+  <li id="components-index"
+      class="">
+    <a ng-click="showComponents = !showComponents">Components</a>
+    <ul class="nav"
+        ng-show="showComponents"
+       >
+      <li><a href="/docs/v2/components/#overview">Overview</a></li>
+      <li><a href="/docs/v2/components/#action-sheets">Action Sheets</a></li>
+
+      <li id="components-alerts"><a href="/docs/v2/components/#alert">Alerts</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#alert-confirm"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#alert-prompt"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#alert-radio"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#alert-checkbox"></a></li>
+        </ul>
+
+      <li><a href="/docs/v2/components/#badges">Badges</a></li>
+
+      <li id="components-buttons"><a href="/docs/v2/components/#buttons">Buttons</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#outline-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#clear-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#round-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#block-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#full-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#button-sizes"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#icon-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#buttons-in-components"></a></li>
+        </ul>
+
+      <li id="components-cards"><a href="/docs/v2/components/#cards">Cards</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-header"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-list"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-image"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-background"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#advanced-cards"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-advanced-social"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-advanced-map"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#card-advanced-weather"></a></li>
+        </ul>
+
+      <li><a href="/docs/v2/components/#checkbox">Checkbox</a></li>
+
+      <li><a href="/docs/v2/components/#datetime">DateTime</a></li>
+
+      <li><a href="/docs/v2/components/#fabs">FABs</a></li>
+
+      <li><a href="/docs/v2/components/#gestures">Gestures</a></li>
+
+      <li><a href="/docs/v2/components/#grid">Grid</a></li>
+      <li><a href="/docs/v2/components/#icons">Icons</a></li>
+
+      <li id="components-forms"><a href="/docs/v2/components/#inputs">Inputs</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#fixed-inline-labels"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#floating-labels"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#inline-labels"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#inset-labels"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#placeholder-labels"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#stacked-labels"></a></li>
+        </ul>
+
+      <li id="components-lists"><a href="/docs/v2/components/#lists">Lists</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#list-lines"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#list-no-lines"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#inset-list"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#list-dividers"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#list-headers"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#icon-list"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#avatar-list"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#thumbnail-list"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#sliding-list"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#multiline-list"></a></li>
+        </ul>
+
+
+      <li><a href="/docs/v2/components/#loading">Loading</a></li>
+      <li><a href="/docs/v2/components/#menus">Menus</a></li>
+      <li><a href="/docs/v2/components/#modals">Modals</a></li>
+      <li><a href="/docs/v2/components/#navigation">Navigation</a></li>
+      <li><a href="/docs/v2/components/#popovers">Popover</a></li>
+      <li><a href="/docs/v2/components/#radio">Radio</a></li>
+      <li><a href="/docs/v2/components/#range">Range</a></li>
+      <li><a href="/docs/v2/components/#searchbar">Searchbar</a></li>
+      <li><a href="/docs/v2/components/#segment">Segment</a></li>
+      <li><a href="/docs/v2/components/#select">Select</a></li>
+      <li><a href="/docs/v2/components/#slides">Slides</a></li>
+
+      <li id="components-tabs"><a href="/docs/v2/components/#tabs">Tabs</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#tabs-icon"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#tabs-icon-text"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#tabs-badges"></a></li>
+        </ul>
+
+      <li><a href="/docs/v2/components/#toast">Toast</a></li>
+      <li><a href="/docs/v2/components/#toggle">Toggle</a></li>
+
+      <li id="components-toolbar"><a href="/docs/v2/components/#toolbar">Toolbar</a></li>
+        <ul class="nav">
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#toolbar-buttons"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#toolbar-segment"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#toolbar-searchbar"></a></li>
+          <li class="nav-item-hidden"><a href="/docs/v2/components/#toolbar-colors"></a></li>
+        </ul>
+
+    </ul>
+  </li>
+
+  
+   <li>
+     <a href="/docs/v2/native/">Native</a>
+   </li>
+
+  
+  <li class="">
+    <a ng-click="showTheming = !showTheming">Theming</a>
+    <ul ng-show="showTheming"
+        >
+      <li class="">
+        <a href="/docs/v2/theming/">Intro</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/theming/theming-your-app/">Theming your App</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/theming/sass-variables/">Sass Variables</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/theming/css-utilities/">Utilities Attributes</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/theming/platform-specific-styles/">
+          Platform Styles
+        </a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/theming/overriding-ionic-variables/">
+          Overriding Ionic Variables
+        </a>
+      </li>
+    </ul>
+  </li>
+
+  
+  <li class="">
+    <a href="/docs/v2/ionicons/">Ionicons</a>
+  </li>
+
+  
+  <li class="">
+    <a ng-click="showCli = !showCli">CLI</a>
+    <ul ng-show="showCli"
+        >
+      <li class="">
+        <a href="/docs/v2/cli/">Intro</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/build">build</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/emulate">emulate</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/generate">generate</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/info">info</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/platform">platform</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/run">run</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/serve">serve</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/cli/start">start</a>
+      </li>
+    </ul>
+  </li>
+
+  
+  <li class="">
+    <a href="/docs/v2/faq/">FAQ</a>
+  </li>
+
+  
+  <li>
+    <a href="/docs/v2/api">API</a>
+  </li>
+
+  
+  <li class="">
+    <a href="/docs/v2/resources" >Resources</a>
+    <ul ng-show="showResources"
+        >
+      
+      
+      
+
+      <li class="">
+        <a href="/docs/v2/resources/app-scripts">App Build Scripts</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/books-and-courses/">Books and Online Courses</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/developer-tips/">Developer Tips</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/editors_and_ides/">Editors and IDEs</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/forms/">Ionic 2 and Forms</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/what-is/">Glossary</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/platform-setup/mac-setup.html">Mac OS Setup</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/progressive-web-apps/">Progressive Web Apps</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/third-party-libs">Using Third Party Libraries</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/using-npm/">Using NPM</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/typescript/">Why TypeScript</a>
+      </li>
+      <li class="">
+        <a href="/docs/v2/resources/platform-setup/windows-setup.html">Windows Setup</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+        
+      </nav>
+      
+      <main>
+        <div class="four-oh-four">
+  <img src="/img/framework-four-oh-four.png" />
+  <h2>Ooops. The page you're looking for got lost in space.</h2>
+  <p>The address might be mistyped or the page may have moved.</p>
+  <a href="/">Take me back home</a>
+</div>
+
+      </main>
+    </div>
+    
+    <div id="search-results">
+      <div id="results-api">
+        <h3>API</h3>
+        <ul></ul>
+      </div>
+      <div id="results-native">
+        <h3>Native</h3>
+        <ul></ul>
+      </div>
+      <div id="results-other">
+        <h3>General</h3>
+        <ul></ul>
+      </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
+<script src="/js/ionic-docs.js?6"></script>
+
+
+  </body>
+</html>

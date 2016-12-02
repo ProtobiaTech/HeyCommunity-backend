@@ -12,16 +12,16 @@ class TimelineImgTableSeeder extends Seeder
     public function run()
     {
         $users = \App\User::lists('id')->toArray();
-        $tenants = \App\Tenant::lists('id')->toArray();
-        $timelines = \App\Timeline::lists('id')->toArray();
+        $timelines = \App\Timeline::get()->toArray();
 
         $faker = Faker\Factory::create();
 
         $data = [];
         $imgs = [];
         foreach (range(1, 66) as $index) {
-            $timelineId = $faker->randomElement($timelines);
-            $tenantId = with(\App\Timeline::findOrFail($timelineId))->tenant_id;
+            $timeline   = $faker->randomElement($timelines);
+            $timelineId = $timeline['id'];
+            $tenantId = $timeline['tenant_id'];
             $imgId = $index;
 
             $data[] = [

@@ -193,7 +193,7 @@
   <div class="copy">
     <div class="copy-container">
       <p class="authors hidden-xs">
-        Thinks to the
+        Thanks to the
         <a href="http://ionicframework.com" target="_blank">Ionic Framework</a>
         and
         <a href="http://angular.io" target="_blank">Angular</a>
@@ -201,7 +201,7 @@
         &copy;2016 <a target="_blank" href="http://www.protobia.tech">Protobia.tech</a>
       </p>
       <p class="authors hidden-sm hidden-md hidden-lg" style="text-align:center;">
-        Thinks to the
+        Thanks to the
         <a href="http://ionicframework.com" target="_blank">Ionic Framework</a>
         and
         <a href="http://angular.io" target="_blank">Angular</a>

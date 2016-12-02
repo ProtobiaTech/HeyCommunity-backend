@@ -162,8 +162,9 @@
             height: 140px;
           }
         </style>
-        <form action="http://codiqa.createsend.com/t/t/s/jytylh/" method="post" disabled class="input-group col-md-5">
-          <input disabled name="cm-jytylh-jytylh" class="form-control" type="email" placeholder="通过电子邮箱，订阅我们的动态" required />
+        <form action="//hey-community.us14.list-manage.com/subscribe/post?u=c38ade91e7bc65ef31b9a10bc&amp;id=8d1f766eab" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate input-group col-md-5" target="_blank" novalidate>
+          <input type="hidden" type="text" name="b_c38ade91e7bc65ef31b9a10bc_8d1f766eab" tabindex="-1" value="">
+          <input name="EMAIL" class="form-control" type="email" placeholder="通过电子邮箱，订阅我们的动态" required />
           <span class="input-group-btn">
             <button disabled class="btn btn-default" type="submit">订阅</button>
           </span>

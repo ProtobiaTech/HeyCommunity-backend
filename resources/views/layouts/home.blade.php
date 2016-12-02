@@ -179,10 +179,11 @@
         <div class="sign-up">通过电子邮箱，可以在第一时间获取 产品更新 / 产品研发计划 / 公司动态 等信息</div>
       </div>
 
-      <form action="http://codiqa.createsend.com/t/t/s/jytylh/" method="post" class="input-group col-sm-5">
-        <input disabled id="fieldEmail" name="cm-jytylh-jytylh" class="form-control" type="email" placeholder="Email" required />
+      <form action="//hey-community.us14.list-manage.com/subscribe/post?u=c38ade91e7bc65ef31b9a10bc&amp;id=8d1f766eab" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate input-group col-sm-5" target="_blank" novalidate>
+        <input type="hidden" type="text" name="b_c38ade91e7bc65ef31b9a10bc_8d1f766eab" tabindex="-1" value="">
+        <input id="fieldEmail" name="EMAIL" class="form-control" type="email" placeholder="Email" required />
         <span class="input-group-btn">
-          <button disabled class="btn btn-default" type="submit">订阅</button>
+          <button class="btn btn-default" type="submit">订阅</button>
         </span>
       </form>
     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
 <script src="{{ asset('bower-assets/chart.js/dist/Chart.min.js') }}"></script>

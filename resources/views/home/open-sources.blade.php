@@ -1,4 +1,4 @@
-@extends('layouts.default-home')
+@extends('layouts.home')
 
 @section('content')
 <div id="getting-started">

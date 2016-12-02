@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
@@ -16,16 +16,16 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
-        return view('dashboard.home.index');
+        return view('admin.home.index');
     }
 
     /**
      *
      */
     public function getLogOut() {
-        Auth::tenant()->logout();
+        Auth::admin()->logout();
 
-        return redirect()->to('dashboard/index');
+        return redirect()->to('admin/index');
     }
 
     /**
@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function getLogIn()
     {
-        return view('dashboard.home.login');
+        return view('admin.home.login');
     }
 
     /**
@@ -46,8 +46,8 @@ class HomeController extends Controller
             'password'  =>      'required|string',
         ]);
 
-        if (Auth::tenant()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->to('dashboard');
+        if (Auth::admin()->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->to('admin');
         } else {
             return back()->withInput()->withErrors(['fail' => trans('dashboard.The email or password is incorrect')]);
         }

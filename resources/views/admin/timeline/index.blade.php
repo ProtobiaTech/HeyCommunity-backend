@@ -1,18 +1,18 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-sm-2">
-            @include('dashboard.data._sidenav')
+            @include('admin.timeline._sidenav')
         </div>
 
         <div class="col-sm-10">
             <div id="section-breadcrumb">
                 <ol class="breadcrumb">
-                    <li><a href="{{ url('/dashboard') }}">HeyCommunity</a></li>
-                    <li><a href="{{ url('/dashboard/data') }}">{{ trans('dashboard.Data') }}</a></li>
-                    <li class="active">{{ trans('dashboard.Timeline') }}</li>
+                    <li><a href="{{ url('/admin') }}">HeyCommunity</a></li>
+                    <li><a href="{{ url('/admin/timeline') }}">{{ trans('dashboard.Timeline') }}</a></li>
+                    <li class="active">{{ trans('dashboard.List') }}</li>
                 </ol>
             </div>
 
@@ -52,7 +52,7 @@
                 </table>
 
                 <div>
-                    {{ $timelines->render() }}
+                    {!! $timelines->render() !!}
                 </div>
             </div>
         </div>

@@ -35,6 +35,7 @@ return [
 
     'Timeline'                          =>          '公园',
     'Topic'                             =>          '话题',
+    'TopicComment'                      =>          '话题评论',
     'TimelineImg'                       =>          '公园图片',
     'TimelineLike'                      =>          '公园喜欢',
     'TimelineComment'                   =>          '公园评论',

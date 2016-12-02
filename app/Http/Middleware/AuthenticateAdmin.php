@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-use TenantScope;
 
-class AuthenticateTenant
+class AuthenticateAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,15 +16,14 @@ class AuthenticateTenant
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::tenant()->guest()) {
+        if (Auth::admin()->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('dashboard/log-in');
+                return redirect()->guest('admin/log-in');
             }
         }
 
-        TenantScope::addTenant('tenant_id', Auth::tenant()->user()->id);
         return $next($request);
     }
 }

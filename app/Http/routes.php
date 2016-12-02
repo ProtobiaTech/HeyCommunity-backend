@@ -38,13 +38,28 @@ Route::post('/dashboard/log-in', 'Dashboard\HomeController@postLogIn');
 Route::get('/dashboard/log-out', 'Dashboard\HomeController@getLogOut');
 Route::group(['middleware' => ['auth.tenant'], 'prefix' => 'dashboard'], function() {
     Route::controller('guide', 'Dashboard\GuideController');
-    Route::controller('data', 'Dashboard\DataController');
     Route::controller('timeline', 'Dashboard\TimelineController');
     Route::controller('user', 'Dashboard\UserController');
     Route::controller('topic', 'Dashboard\TopicController');
     Route::controller('setting', 'Dashboard\SettingController');
     Route::controller('trend', 'Dashboard\TrendController');
     Route::controller('/', 'Dashboard\HomeController');
+});
+
+
+
+//
+// Admin
+// ----------------------------
+Route::get('/admin/log-in', 'Admin\HomeController@getLogIn');
+Route::post('/admin/log-in', 'Admin\HomeController@postLogIn');
+Route::get('/admin/log-out', 'Admin\HomeController@getLogOut');
+Route::group(['middleware' => ['auth.admin'], 'prefix' => 'admin'], function() {
+    Route::controller('timeline', 'Admin\TimelineController');
+    Route::controller('user', 'Admin\UserController');
+    Route::controller('topic', 'Admin\TopicController');
+    Route::controller('trend', 'Admin\TrendController');
+    Route::controller('/', 'Admin\HomeController');
 });
 
 

@@ -164,6 +164,11 @@ class HeyCommunityDatabaseRestore extends Command
 
         $state = null;
         $newData = [];
+
+        foreach ($data as $field => $value) {
+            $newData[$field] = $value;
+        }
+
         if (isset($this->$theFields)) {
             $fields = $this->$theFields;
             foreach ($data as $k => $v) {

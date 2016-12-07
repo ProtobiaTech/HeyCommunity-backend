@@ -21,8 +21,8 @@ class TenantDataFilter
         if (!$this->setTenantByHost($request)) {
             if (!$this->setTenantByReferer($request)) {
                 if (!$this->setTenantByParams($request)) {
-                    TenantScope::addTenant('tenant_id', 1);
-                    $GLOBALS['Tenant'] = Tenant::find(1);
+                    $GLOBALS['Tenant'] = Tenant::findOrFail(38);
+                    TenantScope::addTenant('tenant_id', $GLOBALS['Tenant']->id);
                 }
             }
         }

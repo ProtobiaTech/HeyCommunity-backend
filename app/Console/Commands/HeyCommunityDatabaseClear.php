@@ -24,8 +24,6 @@ class HeyCommunityDatabaseClear extends Command
 
     protected $tables = [
         'admins',
-        'systems',
-        'topic_nodes',
         'notice_types',
     ];
 

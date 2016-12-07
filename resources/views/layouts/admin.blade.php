@@ -10,11 +10,11 @@
 
     <link href="{{ asset('/bower-assets/bootswatch-ustclugFonts/flatly/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/bower-assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/style/app-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('/backend-assets/style/app-dashboard.css') }}" rel="stylesheet">
     <script src="{{ asset('/bower-assets/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('/bower-assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('/assets/javascript/helps.js') }}"></script>
+    <script src="{{ asset('/backend-assets/javascript/helps.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('admin') }}">HC Admin <sup>V2.beta</sup></a>
+            <a class="navbar-brand" href="{{ url('/') }}">HC Admin <sup>V2.beta</sup></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -85,20 +85,6 @@
 
 
 @include('layouts.common')
-<div style="display:none">
-  <script src="https://s4.cnzz.com/z_stat.php?id=1260869881&web_id=1260869881" language="JavaScript"></script>
-
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-68392745-10', 'auto');
-    ga('send', 'pageview');
-
-  </script>
-</div>
 
 </body>
 </html>

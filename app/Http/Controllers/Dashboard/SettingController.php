@@ -96,7 +96,7 @@ class SettingController extends Controller
 
         // save verify file
         if ($request->hasFile('wx_verify_file')) {
-            $path = base_path('../');
+            $path = public_path('wx_verify_files');
             $file= $request->file('wx_verify_file');
             $file->move($path, $file->getClientOriginalName());
         }
@@ -144,7 +144,7 @@ class SettingController extends Controller
     /**
      *
      */
-    public function postSearchAdministrator(Request $request)
+    public function anySearchAdministrator(Request $request)
     {
         $this->validate($request, [
             'search_key'        =>      'min:1',
@@ -154,7 +154,12 @@ class SettingController extends Controller
         if ($request->has('search_key')) {
             $request->flash();
             $nicknameStr = '%' . $request->search_key . '%';
-            $assign['users'] = User::where(['id' => $request->search_key])->orWhere(['phone' => $request->search_key])->orWhere('nickname', 'like', $nicknameStr)->get();
+            $assign['users'] = User::where(['id' => $request->search_key, 'tenant_id' => Auth::tenant()->user()->id])
+                ->orWhere(['phone' => $request->search_key, 'tenant_id' => Auth::tenant()->user()->id])
+                ->orWhere(function($query) use ($nicknameStr) {
+                    $query->Where('nickname', 'like', $nicknameStr)
+                        ->where(['tenant_id' => Auth::tenant()->user()->id]);
+                })->get();
         }
         return view('dashboard.setting.search-administrator', $assign);
     }

@@ -27,30 +27,6 @@ class CreateTenantsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        /*
-        Model::unguard();
-
-        \App\Tenant::create([
-            'site_name'     =>  'Dev Community',
-            'domain'        =>  'dev.hey-community.local',
-            'sub_domain'    =>  'dev.hey-community.com',
-            'email'         =>  'dev@hey-community.com',
-            'phone'         =>  '12312341234',
-            'password'      =>  bcrypt('hey community'),
-        ]);
-
-        \App\Tenant::create([
-            'site_name'     =>  'Demo Community',
-            'domain'        =>  'demo.hey-community.com',
-            'sub_domain'    =>  'demo.hey-community.cn',
-            'email'         =>  'demo@hey-community.com',
-            'phone'         =>  '12311112222',
-            'password'      =>  bcrypt('hey community'),
-        ]);
-
-        Model::reguard();
-         */
     }
 
     /**

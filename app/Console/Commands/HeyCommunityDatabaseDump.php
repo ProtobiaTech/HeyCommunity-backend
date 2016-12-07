@@ -50,19 +50,27 @@ class HeyCommunityDatabaseDump extends Command
 
         $this->excel = Excel::create('HeyCommunityData-' . date('Ymdhis'), function($excel) {});
 
+
+        $this->dumpTable('Tenant');
+        $this->dumpTable('TenantInfo');
+
         $this->dumpTable('Admin');
-        $this->dumpTable('System');
+        $this->dumpTable('OfficialBlog');
+
         $this->dumpTable('User');
+
         $this->dumpTable('Timeline');
         $this->dumpTable('TimelineImg');
         $this->dumpTable('TimelineVideo');
         $this->dumpTable('TimelineLike');
         $this->dumpTable('TimelineComment');
+
         $this->dumpTable('TopicNode');
         $this->dumpTable('Topic');
         $this->dumpTable('TopicComment');
         $this->dumpTable('TopicStar');
         $this->dumpTable('TopicThumb');
+
         $this->dumpTable('NoticeType');
         $this->dumpTable('Notice');
 

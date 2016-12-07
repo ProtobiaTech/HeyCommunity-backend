@@ -10,11 +10,11 @@
 
     <link href="{{ asset('/bower-assets/bootswatch-ustclugFonts/flatly/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/bower-assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/style/app-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('/backend-assets/style/app-dashboard.css') }}" rel="stylesheet">
     <script src="{{ asset('/bower-assets/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('/bower-assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('/assets/javascript/helps.js') }}"></script>
+    <script src="{{ asset('/backend-assets/javascript/helps.js') }}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('dashboard') }}">HeyCommunity <sup>V2.beta</sup></a>
+            <a class="navbar-brand" href="{{ url('/') }}">HeyCommunity <sup>V2.beta</sup></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -72,7 +72,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::tenant()->user()->site_name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a target="_blank" href="/">{{ trans('dashboard.Go to domain WebApp') }}</a></li>
+                        <li><a target="_blank" href="//{{ Auth::tenant()->user()->domain }}">{{ trans('dashboard.Go to domain WebApp') }}</a></li>
+                        <li><a target="_blank" href="//{{ Auth::tenant()->user()->sub_domain }}">{{ trans('dashboard.Go to sub_domain WebApp') }}</a></li>
                         <li><a href="{{ url('dashboard/log-out') }}">{{ trans('dashboard.Logout') }}</a></li>
                     </ul>
                 </li>
@@ -87,44 +88,6 @@
 
 
 @include('layouts.common')
-<div style="display:none">
-  <script src="https://s4.cnzz.com/z_stat.php?id=1260869881&web_id=1260869881" language="JavaScript"></script>
 
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-68392745-10', 'auto');
-    ga('send', 'pageview');
-
-  </script>
-</div>
-
-<!-- DaoVoice -->
-<script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/86480a80.js","daovoice");</script>
-@if (Auth::tenant()->guest())
-  <script>
-    daovoice('init', {
-      app_id: "86480a80",
-    });
-    daovoice('update');
-  </script>
-@else
-  <script>
-    daovoice('init', {
-      app_id: "86480a80",
-      private_deployment: "1",
-      domain: "{{ $_SERVER['HTTP_HOST'] }}",
-      ip: "{{ $_SERVER['SERVER_ADDR'] . ':' . $_SERVER['SERVER_PORT'] }}",
-      email: "{{ Auth::tenant()->user()->email }}",
-      user_id: "{{ Auth::tenant()->user()->id }}",
-      signed_up: {{ Auth::tenant()->user()->created_at->getTimestamp() }},
-      name: "{{ Auth::tenant()->user()->nickname }}",
-    });
-    daovoice('update');
-  </script>
-@endif
 </body>
 </html>

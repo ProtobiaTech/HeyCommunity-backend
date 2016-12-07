@@ -68,10 +68,10 @@ class TriggerNoticeListener
 
         $userId = $this->event->target->author->wx_open_id;
         $templateId = Tenant::getWechatTempNoticeId();
-        if (Auth::user()->tenant->domain) {
-            $url = 'http://' . Auth::user()->tenant->domain;
+        if (Auth::user()->user()->tenant->domain) {
+            $url = 'http://' . Auth::user()->user()->tenant->domain;
         } else {
-            $url = 'http://' . Auth::user()->tenant->sub_domain;
+            $url = 'http://' . Auth::user()->user()->tenant->sub_domain;
         }
         $color = '#FF0000';
 
@@ -79,7 +79,7 @@ class TriggerNoticeListener
             'first'        =>  $this->getWechatNoticeFirst(),
             'subject'      =>  $this->getWechatNoticeSubject(),
             'sender'       =>  "HEY社区 机器人",
-            'remark'       =>  '这是来自 ' . Auth::user()->tenant->site_name . ' 的消息，点击了解详情',
+            'remark'       =>  '这是来自 ' . Auth::user()->user()->tenant->site_name . ' 的消息，点击了解详情',
         ];
 
         $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($userId)->send();
@@ -90,7 +90,7 @@ class TriggerNoticeListener
      */
     public function getWechatNoticeFirst()
     {
-        $str = Auth::user()->nickname . ': ';
+        $str = Auth::user()->user()->nickname . ': ';
         $noticeType = NoticeType::getIdByName($this->event->noticeTypeName);
         if ($noticeType == 10) {
             $str .= '喜欢 ❤️';
@@ -107,7 +107,7 @@ class TriggerNoticeListener
      */
     public function getWechatNoticeSubject()
     {
-        $str = Auth::user()->nickname . ' ';
+        $str = Auth::user()->user()->nickname . ' ';
         $noticeType = NoticeType::getIdByName($this->event->noticeTypeName);
         if ($noticeType == 10) {
             $str .= '喜欢你的公园动态';

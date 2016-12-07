@@ -58,7 +58,7 @@
           </div>
           <div class="col-sm-6 feature-img one" style="background-image: url(/ionic-assets/img/homepage/focus-1.png)">
             <a href="http://demo.hey-community.com" target="_blank">
-              <img style="width:84px; height:84px; border-radius:8px; opacity:0.7;" class="app-icon one" src="assets/images/logo.png">
+              <img style="width:84px; height:84px; border-radius:8px; opacity:0.7;" class="app-icon one" src="backend-assets/images/logo.png">
               <span class="demo-link" style="bottom:45px; font-size:12px;">产品演示</span>
             </a>
           </div>
@@ -139,7 +139,7 @@
           <li>
             <span class="li-wechat">
               微信公众号
-              <div class="hc-qrcode"><img src="assets/images/wechat-qrcode.jpg"></div>
+              <div class="hc-qrcode"><img src="backend-assets/images/wechat-qrcode.jpg"></div>
             </span>
             </li>
           <li>用户QQ群: 242078519</li>
@@ -166,7 +166,7 @@
           <input type="hidden" type="text" name="b_c38ade91e7bc65ef31b9a10bc_8d1f766eab" tabindex="-1" value="">
           <input name="EMAIL" class="form-control" type="email" placeholder="通过电子邮箱，订阅我们的动态" required />
           <span class="input-group-btn">
-            <button disabled class="btn btn-default" type="submit">订阅</button>
+            <button class="btn btn-default" type="submit">订阅</button>
           </span>
         </form>
       </div>

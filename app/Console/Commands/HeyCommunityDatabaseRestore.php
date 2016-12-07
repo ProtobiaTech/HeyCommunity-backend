@@ -33,7 +33,7 @@ class HeyCommunityDatabaseRestore extends Command
     ];
 
     protected $AdminTableFields = [
-        'nickname', 'email', 'password', 'remember_token',
+        'nickname', 'avatar', 'bio', 'gender', 'email', 'phone', 'password',
         'id', 'deleted_at', 'created_at', 'updated_at',
     ];
 
@@ -104,6 +104,22 @@ class HeyCommunityDatabaseRestore extends Command
         'id', 'deleted_at', 'created_at', 'updated_at',
     ];
 
+    protected $OfficialBlogTableFields = [
+        'admin_id', 'title', 'content', 'md_content',
+        'thumb_up_num', 'thumb_down_num', 'view_num', 'comment_num',
+        'id', 'deleted_at', 'created_at', 'updated_at',
+    ];
+
+    protected $TenantTableFields = [
+        'site_name', 'domain', 'sub_domain', 'email', 'phone', 'password', 'enable_wechat_pa', 'remember_token',
+        'id', 'deleted_at', 'created_at', 'updated_at',
+    ];
+
+    protected $TenantInfoTableFields = [
+        'tenant_id', 'wx_app_id', 'wx_app_secret', 'wx_temp_notice_id',
+        'id', 'deleted_at', 'created_at', 'updated_at',
+    ];
+
     /**
      * Create a new command instance.
      *
@@ -164,6 +180,11 @@ class HeyCommunityDatabaseRestore extends Command
 
         $state = null;
         $newData = [];
+
+        foreach ($data as $field => $value) {
+            $newData[$field] = $value;
+        }
+
         if (isset($this->$theFields)) {
             $fields = $this->$theFields;
             foreach ($data as $k => $v) {

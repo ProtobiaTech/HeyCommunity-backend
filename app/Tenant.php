@@ -43,7 +43,7 @@ class Tenant extends Model implements AuthenticatableContract,
         if ($Tenant->enable_wechat_pa) {
             return $Tenant->info->wx_app_id;
         } else {
-            return env('WECHAT_APPID');
+            return env('WECHATPA_APPID');
         }
     }
 
@@ -56,7 +56,7 @@ class Tenant extends Model implements AuthenticatableContract,
         if ($Tenant->enable_wechat_pa) {
             return $Tenant->info->wx_app_secret;
         } else {
-            return env('WECHAT_SECRET');
+            return env('WECHATPA_SECRET');
         }
     }
 
@@ -69,7 +69,7 @@ class Tenant extends Model implements AuthenticatableContract,
         if ($Tenant->enable_wechat_pa && $Tenant->info->wx_temp_notice_id) {
             return $Tenant->info->wx_temp_notice_id;
         } else {
-            return env('WECHAT_TEMP_NOTICE_ID');
+            return env('WECHATPA_TEMP_NOTICE_ID');
         }
     }
 }

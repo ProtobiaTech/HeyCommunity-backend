@@ -104,7 +104,7 @@
 
     <div class="collapse navbar-collapse navbar-ex1-collapse" style="height: auto;">
       <ul class="nav navbar-nav navbar-right">
-        <li><a class="nav-link {{ Request::is('feature') ? 'active' : '' }}" href="{{ url('/feature') }}">功能特性</a></li>
+        <li><a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/?v2=true') }}">功能特性</a></li>
         <li><a class="nav-link {{ Request::is('cloud') ? 'active' : '' }}" href="{{ url('/cloud') }}">云社区</a></li>
         <li class="hide"><a class="nav-link {{ Request::is('business') ? 'active' : '' }}" href="{{ url('business') }}">商业解决方案</a></li>
         <li><a class="nav-link {{ Request::is('open-sources') ? 'active' : '' }}" href="{{ url('open-sources') }}">开源软件</a></li>

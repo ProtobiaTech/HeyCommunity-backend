@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+use Input;
 use Auth;
 use Hash, Validator;
 use App\Tenant;
@@ -28,17 +29,11 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
-        return view('home.index');
-    }
-
-    /**
-     * Display feature page
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getFeature()
-    {
-        return view('home.feature');
+        if (Input::get('v2') === 'true') {
+            return view('home.feature');
+        } else {
+            return view('home.index');
+        }
     }
 
     /**

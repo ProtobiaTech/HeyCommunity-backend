@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/') }}">HeyCommunity <sup>V2.beta</sup></a>
+            <a class="navbar-brand" href="{{ url('/feature') }}">HeyCommunity <sup>V2.beta</sup></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

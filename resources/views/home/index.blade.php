@@ -85,7 +85,7 @@
             </div>
 
             <div class="nav">
-                <a href="/docs" target="_blank">Docs</a>
+                <a href="http://docs.hey-community.com" target="_blank">Docs</a>
                 <a href="https://github.com/dev4living/HeyCommunity" target="_blank">OpenSource@Github</a>
                 <a href="/cloud" target="_blank">V2 <sup>beta</sup></a>
             </div>

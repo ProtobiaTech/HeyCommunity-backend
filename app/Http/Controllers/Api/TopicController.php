@@ -98,7 +98,14 @@ class TopicController extends Controller
         //
         $topicIdList = [];
         $strTopics = implode(',', $topics);
-        $strTopics = strstr($strTopics, $request->id, $request->action === 'refresh');
+
+        if ($request->action === 'refresh') {
+            $strTopics = strstr($strTopics, $request->id, true);
+        } else {
+            $strTopics = strstr($strTopics, $request->id);
+            $strTopics = ltrim($strTopics, $request->id);
+        }
+
         $strTopics = trim($strTopics, ',');
         $topicIdList = explode(',', $strTopics);
 

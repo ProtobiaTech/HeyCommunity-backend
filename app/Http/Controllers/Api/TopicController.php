@@ -44,12 +44,30 @@ class TopicController extends Controller
     {
         $this->validate($request, [
             'type'      =>  'required|string',
+            'action'    =>  'string',
             'node_id'   =>  'required|integer',
         ]);
 
         $query = Topic::with('author', 'comments')->limit(10);
 
-        // type
+        // node
+        if ($request->node_id !== '0') {
+            $query->where('topic_node_id', $request->node_id);
+        }
+
+        // action
+        if ($request->has('action')) {
+            $query = $this->setIndexWithMerge($query, $request);
+        } else {
+            $query = $this->setIndexWithNewList($query, $request);
+        }
+
+        $topics = $query->get()->toArray();
+        return $topics;
+    }
+
+    protected function setIndexWithNewList($query, $request)
+    {
         if ($request->type === 'hot') {
             $query->orderBy('comment_num', 'desc');
             $query->orderBy('thumb_up_num', 'desc');
@@ -58,21 +76,34 @@ class TopicController extends Controller
             $query->orderBy('updated_at', 'desc');
         }
 
-        //
-        if ($request->node_id !== '0') {
-            $query->where('topic_node_id', $request->node_id);
+        return $query;
+    }
+
+    protected function setIndexWithMerge($query, $request)
+    {
+        if ($request->type === 'hot') {
+            $topics = Topic::select('id')
+                ->orderBy('comment_num', 'desc')
+                ->orderBy('thumb_up_num', 'desc')
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        } else {
+            $topics = Topic::select('id')
+                ->orderBy('updated_at', 'desc')
+                ->get();
         }
 
+        $topics = array_pluck($topics->toArray(), 'id');
+
         //
-        if ($request->type === 'refresh') {
-            $query->where('id', '>', $request->id);
-        } else if ($request->type === 'infinite') {
-            $query->where('id', '<', $request->id);
-        }
+        $topicIdList = [];
+        $strTopics = implode(',', $topics);
+        $strTopics = strstr($strTopics, $request->id, $request->action === 'refresh');
+        $strTopics = trim($strTopics, ',');
+        $topicIdList = explode(',', $strTopics);
 
-        $topics = $query->get()->toArray();
-
-        return $topics;
+        $query->whereIn('id', $topicIdList);
+        return $query;
     }
 
     /**

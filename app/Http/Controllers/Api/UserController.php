@@ -127,25 +127,19 @@ class UserController extends Controller
             'uploads'   =>      'required',
         ]);
 
-
         $files = $request->file('uploads');
         $file = $files[0];
 
         $uploadPath = '/uploads/avatars/';
-        $path = public_path() . $uploadPath;
-        if (!File::exists($path)) {
-            File::makeDirectory($path);
-        }
-
         $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
-        $filePath = public_path() . $uploadPath . $fileName;
+
         $image = Image::make($file->getRealPath());
         $imageWidth = $image->width();
         $imageHeight = $image->height();
         $resize = $imageWidth < $imageHeight ? $imageWidth : $imageHeight;
+        $contents = $image->crop($resize, $resize, 0, 0)->stream();
 
-        $ret = $image->crop($resize, $resize, 0, 0)->save($filePath);
-        if ($ret) {
+        if (\Storage::put($uploadPath . $fileName, $contents)) {
             $User = Auth::user()->user();
             $User->avatar = $uploadPath . $fileName;
             $User->save();

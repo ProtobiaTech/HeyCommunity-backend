@@ -14,7 +14,8 @@
         "kbwebs/multiauth": "~1.0",
         "baum/baum": "~1.1",
         "edvinaskrucas/notification": "5.*",
-        "maatwebsite/excel": "~2.1.0"
+        "maatwebsite/excel": "~2.1.0",
+        "zgldh/qiniu-laravel-storage": "^0.6.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

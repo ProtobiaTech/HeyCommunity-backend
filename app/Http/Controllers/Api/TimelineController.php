@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Storage;
 use Thumbnail;
 use Auth;
 use App\Timeline;
@@ -243,13 +244,19 @@ class TimelineController extends Controller
      */
     public function postStoreImg(Request $request)
     {
+        $this->validate($request, [
+            'uploads'               =>      'required',
+        ]);
+
         $files = $request->file('uploads');
 
         $ret = [];
         foreach($files as $k => $file) {
             $uploadPath = '/uploads/timeline/';
             $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
-            if ($file->move(public_path() . $uploadPath, $fileName)) {
+
+            $contents = file_get_contents($file->getRealPath());
+            if (Storage::put($uploadPath . $fileName, $contents)) {
                 $TimelineImg = new TimelineImg();
                 $TimelineImg->user_id   =   Auth::user()->user()->id;
                 $TimelineImg->uri       =   $uploadPath . $fileName;
@@ -268,13 +275,18 @@ class TimelineController extends Controller
      */
     public function postStoreVideo(Request $request)
     {
+        $this->validate($request, [
+            'uploads'               =>      'required',
+        ]);
+
         $files = $request->file('uploads');
         $file = $files[0];
 
         $uploadPath = '/uploads/timeline/';
         $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
 
-        if ($file->move(public_path() . $uploadPath, $fileName)) {
+        $contents = file_get_contents($file->getRealPath());
+        if (Storage::put($uploadPath . $fileName, $contents)) {
             $videoPath = $uploadPath . $fileName;
             /*
             $thumbnailImage = $fileName . '.jpg';

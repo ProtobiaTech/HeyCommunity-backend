@@ -130,7 +130,7 @@ class UserController extends Controller
         $files = $request->file('uploads');
         $file = $files[0];
 
-        $uploadPath = '/uploads/avatars/';
+        $uploadPath = 'uploads/avatars/';
         $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
 
         $image = Image::make($file->getRealPath());

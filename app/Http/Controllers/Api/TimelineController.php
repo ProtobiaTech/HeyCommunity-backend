@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class TimelineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postStore',  'postStoreImg', 'postSetLike', 'postDestroy']]);
+        $this->middleware('auth', ['only' => ['postStore',  'postStoreImg', 'postStoreVideo', 'postSetLike', 'postDestroy']]);
     }
 
     /**
@@ -282,29 +283,48 @@ class TimelineController extends Controller
         $files = $request->file('uploads');
         $file = $files[0];
 
-        $uploadPath = '/uploads/timeline/';
+        $uploadPath = 'uploads/timeline/';
         $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
+        $videoPath = $uploadPath . $fileName;
 
         $contents = file_get_contents($file->getRealPath());
-        if (Storage::put($uploadPath . $fileName, $contents)) {
-            $videoPath = $uploadPath . $fileName;
-            /*
-            $thumbnailImage = $fileName . '.jpg';
-            $posterPath = $uploadPath . $thumbnailImage;
-
-            $ffmpeg = \FFMpeg\FFMpeg::create([
-                'ffmpeg.binaries'  => env('BIN_FFMPEG', '/usr/bin/ffmpeg'),
-                'ffprobe.binaries' => env('BIN_FFPROBE', '/usr/bin/ffprobe'),
-            ]);
-            $video = $ffmpeg->open(public_path() . $videoPath);
-            $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(0))->save(public_path() . $posterPath);
-            */
-
+        if (Storage::put($videoPath, $contents)) {
             $TimelineVideo = new TimelineVideo();
+
+            if (config('filesystems.default') === 'qiniu') {
+                $posterPath = $videoPath . '.jpg';
+
+                $encodedEntryURI = base64_encode(env('QINIU_BUCKET') . ':' . $posterPath);
+                $encodedEntryURI = str_replace('+', '-', $encodedEntryURI);
+                $encodedEntryURI = str_replace('/', '_', $encodedEntryURI);
+
+                $fop = ('vframe/jpg/offset/0|saveas/' . $encodedEntryURI);
+                $ret = Storage::getDriver()->persistentFop($videoPath, $fop);
+
+                if ($ret) {
+                    $TimelineVideo->poster    =   $posterPath;
+                } else {
+                    $TimelineVideo->poster    =   '/assets/images/video-poster.png';
+                }
+            } else {
+                if (env('MAKE_VIDEO_POSTER') === true) {
+                    $posterPath = $videoPath . '.jpg';
+
+                    $ffmpeg = \FFMpeg\FFMpeg::create([
+                        'ffmpeg.binaries'  => env('FFMPEG_BIN_PATH', '/usr/bin/ffmpeg'),
+                        'ffprobe.binaries' => env('FFPROBE_BIN_PATH', '/usr/bin/ffprobe'),
+                    ]);
+                    $video = $ffmpeg->open(storage_path('app/') . $videoPath);
+                    $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(0))->save(storage_path('app/') . $posterPath);
+
+                    $TimelineVideo->poster    =   $posterPath;
+                } else {
+                    $TimelineVideo->poster    =   '/assets/images/video-poster.png';
+                }
+            }
+
             $TimelineVideo->user_id   =   Auth::user()->user()->id;
             $TimelineVideo->uri       =   $videoPath;
-
-            $TimelineVideo->poster    =   '/assets/images/video-poster.png';
             $TimelineVideo->save();
 
             return $TimelineVideo;

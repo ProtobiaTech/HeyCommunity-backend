@@ -31,7 +31,7 @@ class UserTableSeeder extends Seeder
         foreach (range(1, 6) as $index) {
 
             if (env('FAKER_IMAGE_SAVE')) {
-                $imgUrl = $faker->image(storage_path('app/uploads/avatars/'), 300, 300, 'people');
+                $imgUrl = $faker->image(storage_path('app/uploads/avatars'), 300, 300, 'people');
                 $imgUrl = strstr($imgUrl, 'uploads/avatars');
             } else {
                 $imgUrl = $faker->imageUrl(300, 300, 'people');

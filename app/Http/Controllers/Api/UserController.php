@@ -132,6 +132,7 @@ class UserController extends Controller
 
         $uploadPath = 'uploads/avatars/';
         $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
+        $imgPath = $uploadPath . $fileName;
 
         $image = Image::make($file->getRealPath());
         $imageWidth = $image->width();
@@ -139,9 +140,9 @@ class UserController extends Controller
         $resize = $imageWidth < $imageHeight ? $imageWidth : $imageHeight;
         $contents = $image->crop($resize, $resize, 0, 0)->stream();
 
-        if (\Storage::put($uploadPath . $fileName, $contents)) {
+        if (\Storage::put($imgPath, $contents)) {
             $User = Auth::user()->user();
-            $User->avatar = $uploadPath . $fileName;
+            $User->avatar = $imgPath;
             $User->save();
 
             return $User;

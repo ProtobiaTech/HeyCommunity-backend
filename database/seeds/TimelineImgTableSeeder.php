@@ -23,7 +23,7 @@ class TimelineImgTableSeeder extends Seeder
             $imgId = $index;
 
             if (env('FAKER_IMAGE_SAVE')) {
-                $imgUrl = $faker->image(storage_path('app/uploads/timeline/'));
+                $imgUrl = $faker->image(storage_path('app/uploads/timeline'));
                 $imgUrl = strstr($imgUrl, 'uploads/timeline');
             } else {
                 $imgUrl = $faker->imageUrl();

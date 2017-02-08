@@ -253,18 +253,19 @@ class TimelineController extends Controller
 
         $ret = [];
         foreach($files as $k => $file) {
-            $uploadPath = '/uploads/timeline/';
+            $uploadPath = 'uploads/timeline/';
             $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
+            $imgPath = $uploadPath . $fileName;
 
             $contents = file_get_contents($file->getRealPath());
-            if (Storage::put($uploadPath . $fileName, $contents)) {
+            if (Storage::put($imgPath, $contents)) {
                 $TimelineImg = new TimelineImg();
                 $TimelineImg->user_id   =   Auth::user()->user()->id;
-                $TimelineImg->uri       =   $uploadPath . $fileName;
+                $TimelineImg->uri       =   $imgPath;
                 $TimelineImg->save();
 
                 $ret['imgs'][$k]['id']  = $TimelineImg->id;
-                $ret['imgs'][$k]['uri'] = $uploadPath . $fileName;
+                $ret['imgs'][$k]['uri'] = $imgPath;
             }
         }
 

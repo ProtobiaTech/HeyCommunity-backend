@@ -48,4 +48,20 @@ class Timeline extends Model
     {
         return $this->hasMany('App\TimelineImg', 'timeline_id');
     }
+
+    /**
+     *
+     */
+    public function getVideoAttribute($url)
+    {
+        return \App\Helpers\FileSystem::getFullUrl($url);
+    }
+
+    /**
+     *
+     */
+    public function getPosterAttribute($url)
+    {
+        return \App\Helpers\FileSystem::getFullUrl($url);
+    }
 }

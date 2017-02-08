@@ -92,4 +92,12 @@ class User extends Model implements AuthenticatableContract,
         }
         return $name;
     }
+
+    /**
+     *
+     */
+    public function getAvatarAttribute($url)
+    {
+        return \App\Helpers\FileSystem::getFullUrl($url);
+    }
 }

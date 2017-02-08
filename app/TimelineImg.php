@@ -40,4 +40,16 @@ class TimelineImg extends Model
             return $domain . $url;
         }
     }
+
+    /**
+     *
+     */
+    public function getUriAttribute($uri)
+    {
+        if (substr($uri, 0, 4) !== 'http' && env('FILESYSTEM_DEFAULT') === 'qiniu' && env('QINIU_DOMAINS_CUSTOM')) {
+            return env('QINIU_DOMAINS_CUSTOM') . '/' . $uri;
+        } else {
+            return $uri;
+        }
+    }
 }

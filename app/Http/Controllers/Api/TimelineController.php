@@ -265,7 +265,7 @@ class TimelineController extends Controller
                 $TimelineImg->save();
 
                 $ret['imgs'][$k]['id']  = $TimelineImg->id;
-                $ret['imgs'][$k]['uri'] = $imgPath;
+                $ret['imgs'][$k]['uri'] = \App\Helpers\FileSystem::getFullUrl($imgPath);
             }
         }
 

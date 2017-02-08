@@ -22,10 +22,17 @@ class TimelineImgTableSeeder extends Seeder
             $timelineId = $faker->randomElement($timelines);
             $imgId = $index;
 
+            if (env('FAKER_IMAGE_SAVE')) {
+                $imgUrl = $faker->image(storage_path('app/uploads/timeline/'));
+                $imgUrl = strstr($imgUrl, 'uploads/timeline');
+            } else {
+                $imgUrl = $faker->imageUrl();
+            }
+
             $data[] = [
                 'id'            =>      $imgId,
                 'user_id'       =>      $faker->randomElement($users),
-                'uri'           =>      $faker->imageUrl(),
+                'uri'           =>      $imgUrl,
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),
                 'updated_at'    =>  $faker->dateTimeThisMonth(),

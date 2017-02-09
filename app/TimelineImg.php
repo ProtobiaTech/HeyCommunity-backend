@@ -44,12 +44,8 @@ class TimelineImg extends Model
     /**
      *
      */
-    public function getUriAttribute($uri)
+    public function getUriAttribute($url)
     {
-        if (substr($uri, 0, 4) !== 'http' && env('FILESYSTEM_DEFAULT') === 'qiniu' && env('QINIU_DOMAINS_CUSTOM')) {
-            return env('QINIU_DOMAINS_CUSTOM') . '/' . $uri;
-        } else {
-            return $uri;
-        }
+        return \App\Helpers\FileSystem::getFullUrl($url);
     }
 }

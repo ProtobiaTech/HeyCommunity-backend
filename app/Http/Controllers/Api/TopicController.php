@@ -62,7 +62,13 @@ class TopicController extends Controller
             $query = $this->setIndexWithNewList($query, $request);
         }
 
-        $topics = $query->get()->toArray();
+        $topics = $query->get()->each(function($item, $Key) {
+            if (Auth::user()->guest()) {
+                $item->is_star = false;
+            } else {
+                $item->is_star = TopicStar::where(['topic_id' => $item->id, 'user_id' => Auth::user()->user()->id])->count() ? true : false;
+            }
+        })->toArray();
         return $topics;
     }
 
@@ -223,27 +229,38 @@ class TopicController extends Controller
     public function postSetStar(Request $request)
     {
         $this->validate($request, [
-             'id'   =>      'required',
+            'id'       =>      'required',
+            'value'    =>      'required',
         ]);
 
         $where = [
             'user_id'   =>  Auth::user()->user()->id,
             'topic_id'  =>  $request->id
         ];
-
-        $oldTopicStar = TopicStar::where($where)->first();
-
-        $TopicStar = new TopicStar;
-        $TopicStar->user_id = Auth::user()->user()->id;
-        $TopicStar->topic_Id = $request->id;
-        $TopicStar->save();
+        $topicStarExist = TopicStar::where($where)->exists();
+        TopicStar::where($where)->delete();
 
         $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
 
-        if ($oldTopicStar) {
-            $oldTopicStar->delete();
+        if ($request->value) {
+            $TopicStar = new TopicStar;
+            $TopicStar->user_id = Auth::user()->user()->id;
+            $TopicStar->topic_Id = $request->id;
+            $TopicStar->save();
+
+            if (!$topicStarExist) {
+                $Topic->increment('star_num');
+                $Topic->save();
+            }
+
+            $Topic->is_star = true;
         } else {
-            $Topic->increment('star_num');
+            if ($topicStarExist) {
+                $Topic->decrement('star_num');
+                $Topic->save();
+            }
+
+            $Topic->is_star = false;
         }
 
         return $Topic;

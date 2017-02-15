@@ -66,10 +66,10 @@ class TriggerNoticeListener
             $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'));
             $push = $JPush->push();
             $push->setPlatform('all')->addAlias($alias);
+            $push->setNotificationAlert($notification);
 
-            $push->send();
-                $push->setNotificationAlert($notification);
             try {
+                $push->send();
             } catch (\JPush\Exceptions\JPushException $e) {
             }
         }

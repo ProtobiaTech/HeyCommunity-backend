@@ -158,7 +158,8 @@ class TopicController extends Controller
              'id'   =>      'required',
         ]);
 
-        $Topic = Topic::findOrFail($request->id);
+        $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
+        $Topic->increment('view_num');
         return $Topic;
     }
 

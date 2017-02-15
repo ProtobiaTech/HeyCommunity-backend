@@ -30,10 +30,16 @@ class CreateTopicNodesTable extends Migration
 
 
         //
-        $node = \App\TopicNode::create([
+        $rootNode = \App\TopicNode::create([
             'name'      =>      env('LOCALE') === 'zh-CN' ? '默认' : 'Default',
         ]);
-        $node->makeRoot();
+        $rootNode->makeRoot();
+
+        $node = \App\TopicNode::create([
+            'name'      =>      env('LOCALE') === 'zh-CN' ? '默认1' : 'Default 1',
+        ]);
+        $node->makeChildOf($rootNode);
+
 
         Model::reguard();
     }

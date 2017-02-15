@@ -49,6 +49,30 @@ class TriggerNoticeListener
         if ($this->event->target->author->wx_open_id) {
             $this->sendWechatNotice();
         }
+
+        // send app push
+        $this->sendAppPush($Notice);
+    }
+
+    /**
+     *
+     */
+    public function sendAppPush($Notice)
+    {
+        if (env('JIGUANG_ENABLE')) {
+            $alias = 'u' . $Notice->user_id;
+            $notification = 'New Notice';
+
+            $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'));
+            $push = $JPush->push();
+            $push->setPlatform('all')->addAlias($alias);
+
+            $push->send();
+                $push->setNotificationAlert($notification);
+            try {
+            } catch (\JPush\Exceptions\JPushException $e) {
+            }
+        }
     }
 
     /**

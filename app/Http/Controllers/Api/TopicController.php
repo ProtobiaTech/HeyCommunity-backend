@@ -13,6 +13,7 @@ use App\TopicNode;
 use App\TopicThumb;
 use App\TopicStar;
 use App\TopicComment;
+use App\Events\TriggerNoticeEvent;
 
 class TopicController extends Controller
 {
@@ -323,7 +324,6 @@ class TopicController extends Controller
         $TopicComment->save();
         $Topic->increment('comment_num');
 
-        /** @todo send notice
         if ($TopicComment->parent_id > 0) {
             if ($TopicComment->parent->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TopicComment, $TopicComment->parent, 'topic_comment_comment'));
@@ -333,7 +333,6 @@ class TopicController extends Controller
                 event(new TriggerNoticeEvent($TopicComment, $Topic, 'topic_comment'));
             }
         }
-        */
 
         $Topic = Topic::with(['author', 'comments'])->findOrFail($request->topic_id);
         return $Topic;

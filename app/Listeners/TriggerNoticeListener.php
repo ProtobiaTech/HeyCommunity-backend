@@ -61,7 +61,7 @@ class TriggerNoticeListener
     {
         if (env('JIGUANG_ENABLE')) {
             $alias = 'u' . $Notice->user_id;
-            $notification = 'New Notice';
+            $notification = $this->getAppPushNotification($Notice);
 
             $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'));
             $push = $JPush->push();
@@ -72,7 +72,46 @@ class TriggerNoticeListener
                 $push->send();
             } catch (\JPush\Exceptions\JPushException $e) {
             }
+        } else {
         }
+    }
+
+    /**
+     *
+     */
+    public function getAppPushNotification($Notice)
+    {
+        $notification = $Notice->author->nickname;
+        $hasContent = true;
+
+        switch ($Notice->type->name) {
+            case 'timeline_like':
+                $notification .= 'Like Your Timeline';
+                $hasContent = false;
+                break;
+            case 'timeline_comment':
+                $notification .= 'Comment Your Timeline: ';
+                break;
+            case 'timeline_comment_comment':
+                $notification .= 'Reply Your TimelineComment: ';
+                break;
+            case 'topic_like':
+                $notification .= 'Like Your Topic';
+                $hasContent = false;
+                break;
+            case 'topic_comment':
+                $notification .= 'Comment Your Topic: ';
+                break;
+            case 'topic_comment_comment':
+                $notification .= 'Reply Your TopicComment: ';
+                break;
+        }
+
+        if ($hasContent) {
+            $notification .= $Notice->entity->content;
+        }
+
+        return $notification;
     }
 
     /**

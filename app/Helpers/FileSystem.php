@@ -10,7 +10,11 @@ class FileSystem
             if (env('FILESYSTEM_DEFAULT') === 'qiniu' && env('QINIU_DOMAINS_CUSTOM')) {
                 return env('QINIU_DOMAINS_CUSTOM') . '/' . $url;
             } else {
-                return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $url;
+                if (isset($_SERVER['REQUEST_SCHEME'])) {
+                    return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $url;
+                } else {
+                    return 'http://' . $_SERVER['HTTP_HOST'] . '/' . $url;
+                }
             }
         } else {
             return $url;

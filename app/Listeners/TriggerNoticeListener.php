@@ -63,7 +63,7 @@ class TriggerNoticeListener
             $alias = 'u' . $Notice->user_id;
             $notification = $this->getAppPushNotification($Notice);
 
-            $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'));
+            $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'), storage_path('logs/jpush.log'));
             $push = $JPush->push();
             $push->setPlatform('all')->addAlias($alias);
             $push->setNotificationAlert($notification);
@@ -71,6 +71,7 @@ class TriggerNoticeListener
             try {
                 $push->send();
             } catch (\JPush\Exceptions\JPushException $e) {
+                \Log::error($e);
             }
         } else {
         }
@@ -86,29 +87,29 @@ class TriggerNoticeListener
 
         switch ($Notice->type->name) {
             case 'timeline_like':
-                $notification .= 'Like Your Timeline';
+                $notification .= trans('notice.Like Your Timeline');
                 $hasContent = false;
                 break;
             case 'timeline_comment':
-                $notification .= 'Comment Your Timeline: ';
+                $notification .= trans('notice.Comment Your Timeline: ');
                 break;
             case 'timeline_comment_comment':
-                $notification .= 'Reply Your TimelineComment: ';
+                $notification .= trans('notice.Reply Your TimelineComment: ');
                 break;
             case 'topic_like':
-                $notification .= 'Like Your Topic';
+                $notification .= trans('notice.Like Your Topic');
                 $hasContent = false;
                 break;
             case 'topic_comment':
-                $notification .= 'Comment Your Topic: ';
+                $notification .= trans('notice.Comment Your Topic: ');
                 break;
             case 'topic_comment_comment':
-                $notification .= 'Reply Your TopicComment: ';
+                $notification .= trans('notice.Reply Your TopicComment: ');
                 break;
         }
 
         if ($hasContent) {
-            $notification .= $Notice->entity->content;
+            $notification .= mb_substr($Notice->entity->content, 0, 50, 'UTF-8');
         }
 
         return $notification;

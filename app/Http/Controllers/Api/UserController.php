@@ -108,10 +108,10 @@ class UserController extends Controller
                 Auth::user()->login($User);
                 return $User;
             } else {
-                return abort(500, 'wechat login fail');
+                return response('wechat login fail', 500);
             }
         } else {
-            return abort(500, 'Do not support WeChat login');
+            return response('Do not support WeChat login', 403);
         }
     }
 

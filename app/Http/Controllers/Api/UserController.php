@@ -20,7 +20,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['postUpdate', 'postUpdateAvatar']]);
-        $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn']]);
+        $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn', 'postLogInWithWechat']]);
     }
 
     /**
@@ -56,6 +56,39 @@ class UserController extends Controller
         } else {
             return response('phone or password err', 403);
         }
+    }
+
+    /**
+     * Log in with wechat
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object|string User model or failure info
+     */
+    public function postLogInWithWechat(Request $request)
+    {
+        $this->validate($request, [
+            'code'      =>  'required',
+        ]);
+
+        $options = [
+            'debug'     => true,
+            'app_id'    => env('WECHATOP_APP_APPID'),
+            'secret'    => env('WECHATOP_APP_SECRET'),
+        ];
+
+        $app = new Application($options);
+        $user = $app->oauth->setRequest($request)->user();
+
+        print_r($user);
+        /*
+        $User = User::where(['phone' => $request->phone])->first();
+        if ($User && Hash::check($request->password, $User->password)) {
+            Auth::user()->login($User);
+            return Auth::user()->user();
+        } else {
+            return response('phone or password err', 403);
+        }
+         */
     }
 
     /**

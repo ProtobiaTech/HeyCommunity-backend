@@ -104,6 +104,7 @@ class UserController extends Controller
                 $User->save();
             }
 
+            Auth::user()->login($User);
             return $User;
         } else {
             abort(500, 'wechat login fail');

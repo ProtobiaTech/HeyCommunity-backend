@@ -152,7 +152,7 @@ class UserController extends Controller
                 return response($User, 500);
             }
         } else {
-            return response('The Verification Invalid', 403);
+            return response('The Verification Code Invalid', 403);
         }
     }
 

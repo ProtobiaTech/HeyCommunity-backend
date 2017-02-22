@@ -82,7 +82,7 @@ class TriggerNoticeListener
      */
     public function getAppPushNotification($Notice)
     {
-        $notification = $Notice->author->nickname;
+        $notification = $Notice->initiator->nickname;
         $hasContent = true;
 
         switch ($Notice->type->name) {

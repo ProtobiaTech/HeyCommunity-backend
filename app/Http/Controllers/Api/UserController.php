@@ -67,47 +67,51 @@ class UserController extends Controller
      */
     public function postLogInWithWechat(Request $request)
     {
-        $this->validate($request, [
-            'code'      =>  'required',
-        ]);
+        if (env('WECHATOP_APP_ENABLE')) {
+            $this->validate($request, [
+                'code'      =>  'required',
+            ]);
 
-        $options = [
-            'debug'     => true,
-            'app_id'    => env('WECHATOP_APP_APPID'),
-            'secret'    => env('WECHATOP_APP_SECRET'),
-        ];
+            $options = [
+                'debug'     => true,
+                'app_id'    => env('WECHATOP_APP_APPID'),
+                'secret'    => env('WECHATOP_APP_SECRET'),
+            ];
 
-        $app = new Application($options);
-        $user = $app->oauth->setRequest($request)->user();
+            $app = new Application($options);
+            $user = $app->oauth->setRequest($request)->user();
 
-        if ($user) {
-            $unionId = $user->getOriginal()['unionid'];
-            $User = User::where('wx_union_id', $unionId)->first();
+            if ($user) {
+                $unionId = $user->getOriginal()['unionid'];
+                $User = User::where('wx_union_id', $unionId)->first();
 
-            if (!$User) {
-                $User = new User;
-                $User->wx_union_id  =   $unionId;
-                $User->nickname     =   $user->getNickname();
-                $User->avatar       =   $user->getAvatar();
+                if (!$User) {
+                    $User = new User;
+                    $User->wx_union_id  =   $unionId;
+                    $User->nickname     =   $user->getNickname();
+                    $User->avatar       =   $user->getAvatar();
 
-                $number = random_int(0, 3);
-                if ($number === 0) {
-                    $User->bio          =   'My name is ' . $user->getNickname();
-                } else if ($number === 1) {
-                    $User->bio          =   'I\'m ' . $user->getNickname();
-                } else if ($number === 2) {
-                    $User->bio          =   $user->getNickname() . ' is me';
-                } else if ($number === 3) {
-                    $User->bio          =   'I love there';
+                    $number = random_int(0, 3);
+                    if ($number === 0) {
+                        $User->bio          =   'My name is ' . $user->getNickname();
+                    } else if ($number === 1) {
+                        $User->bio          =   'I\'m ' . $user->getNickname();
+                    } else if ($number === 2) {
+                        $User->bio          =   $user->getNickname() . ' is me';
+                    } else if ($number === 3) {
+                        $User->bio          =   'I love there';
+                    }
+
+                    $User->save();
                 }
 
-                $User->save();
+                Auth::user()->login($User);
+                return $User;
+            } else {
+                return abort(500, 'wechat login fail');
             }
-
-            Auth::user()->login($User);
-            return $User;
         } else {
-            abort(500, 'wechat login fail');
+            return abort(500, 'Do not support WeChat login');
         }
     }
 
@@ -200,7 +204,7 @@ class UserController extends Controller
 
             return $User;
         } else {
-            abort('Avatar update failed');
+            return abort('Avatar update failed');
         }
     }
 

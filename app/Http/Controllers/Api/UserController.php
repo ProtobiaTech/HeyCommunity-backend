@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Foundation\Application;
 
 use Image, File;
 use Hash, Auth;
@@ -79,16 +80,34 @@ class UserController extends Controller
         $app = new Application($options);
         $user = $app->oauth->setRequest($request)->user();
 
-        print_r($user);
-        /*
-        $User = User::where(['phone' => $request->phone])->first();
-        if ($User && Hash::check($request->password, $User->password)) {
-            Auth::user()->login($User);
-            return Auth::user()->user();
+        if ($user) {
+            $unionId = $user->getOriginal()['unionid'];
+            $User = User::where('wx_union_id', $unionId)->first();
+
+            if (!$User) {
+                $User = new User;
+                $User->wx_union_id  =   $unionId;
+                $User->nickname     =   $user->getNickname();
+                $User->avatar       =   $user->getAvatar();
+
+                $number = random_int(0, 3);
+                if ($number === 0) {
+                    $User->bio          =   'My name is ' . $user->getNickname();
+                } else if ($number === 1) {
+                    $User->bio          =   'I\'m ' . $user->getNickname();
+                } else if ($number === 2) {
+                    $User->bio          =   $user->getNickname() . ' is me';
+                } else if ($number === 3) {
+                    $User->bio          =   'I love there';
+                }
+
+                $User->save();
+            }
+
+            return $User;
         } else {
-            return response('phone or password err', 403);
+            abort(500, 'wechat login fail');
         }
-         */
     }
 
     /**

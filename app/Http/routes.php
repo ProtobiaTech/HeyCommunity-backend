@@ -45,3 +45,4 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
     Route::controller('trend', 'Dashboard\TrendController');
     Route::controller('/', 'Dashboard\HomeController');
 });
+

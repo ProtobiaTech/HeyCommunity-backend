@@ -103,7 +103,7 @@ class WeChatController extends Controller
             $redirect = 'http://' . $request->domain . '/api/wechat/login?wx_open_id=' . $user->getId();
             return redirect($redirect);
         } else {
-            abort(500, 'wechat login fail');
+            return abort(500, 'wechat login fail');
         }
     }
 

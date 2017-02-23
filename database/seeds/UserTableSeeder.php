@@ -28,10 +28,18 @@ class UserTableSeeder extends Seeder
             'password'      =>      Hash::make('123123'),
         ]);
 
-        foreach (range(1, 68) as $index) {
+        foreach (range(1, 6) as $index) {
+
+            if (env('FAKER_IMAGE_SAVE')) {
+                $imgUrl = $faker->image(storage_path('app/uploads/avatars'), 300, 300, 'people');
+                $imgUrl = strstr($imgUrl, 'uploads/avatars');
+            } else {
+                $imgUrl = $faker->imageUrl(300, 300, 'people');
+            }
+
             $data[] = [
                 'nickname'      =>  $faker->name(),
-                'avatar'        =>  $faker->imageUrl(300, 300, 'people'),
+                'avatar'        =>  $imgUrl,
                 'email'         =>  $faker->email(),
                 'phone'         =>  $faker->phoneNumber(),
                 'password'      =>  bcrypt('hey community'),

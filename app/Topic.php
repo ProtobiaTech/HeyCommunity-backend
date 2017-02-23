@@ -22,6 +22,6 @@ class Topic extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\TopicComment', 'topic_id')->orderBy('created_at', 'desc')->with('author');
+        return $this->hasMany('App\TopicComment', 'topic_id')->orderBy('created_at', 'desc')->with('author', 'parent');
     }
 }

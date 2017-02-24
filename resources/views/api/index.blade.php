@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>HeyCommunity</title>
 
-    <link href="http://fonts.useso.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link href="http://fonts.proxy.ustclug.org/css?family=Lato:100" rel="stylesheet" type="text/css">
 
     <style>
         html, body {

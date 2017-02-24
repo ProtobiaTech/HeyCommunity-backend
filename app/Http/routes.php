@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function() {
+    return redirect()->to('/api');
+});
+
 
 //
 // Api

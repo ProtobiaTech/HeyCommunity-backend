@@ -66,6 +66,7 @@ class TriggerNoticeListener
             $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'), storage_path('logs/jpush.log'));
             $push = $JPush->push();
             $push->setPlatform('all')->addAlias($alias);
+            $push->options(['apns_production' => true]);
             $push->setNotificationAlert($notification);
 
             try {

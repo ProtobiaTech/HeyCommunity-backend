@@ -137,7 +137,7 @@ class UserController extends Controller
         ) {
             $User = new User;
             $User->nickname     =   $request->nickname;
-            $User->avatar       =   '/assets/images/userAvatar-default.png';
+            $User->avatar       =   'assets/images/userAvatar-default.png';
             $User->phone        =   $request->phone;
             $User->password     =   Hash::make($request->password);
 

@@ -16,7 +16,9 @@
         "edvinaskrucas/notification": "5.*",
         "maatwebsite/excel": "~2.1.0",
         "zgldh/qiniu-laravel-storage": "^0.6.2",
-        "jpush/jpush": "v3.5.*"
+        "jpush/jpush": "v3.5.*",
+        "barryvdh/laravel-cors": "^0.8.6",
+        "asm89/stack-cors": "^1.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -160,7 +160,7 @@ return [
         // qiniu
         'zgldh\QiniuStorage\QiniuFilesystemServiceProvider',
 
-        //cors
+        // cors
         Barryvdh\Cors\ServiceProvider::class,
     ],
 

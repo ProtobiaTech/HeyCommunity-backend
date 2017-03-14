@@ -50,8 +50,12 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
 //
 // Home
 // ----------------------------
+Route::get('/', function() {
+    return redirect()->to('/timeline');
+});
+
 Route::controller('auth', 'AuthController');
 Route::controller('timeline', 'TimelineController');
 Route::controller('topic', 'TopicController');
 Route::controller('activity', 'ActivityController');
-Route::controller('/', 'TimelineController');
+Route::controller('timeline', 'TimelineController');

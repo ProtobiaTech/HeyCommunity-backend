@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('content')
-<div id="hc-topic" class="page-topic container-fluid pt-4">
+<div id="hc-topic" class="page-topic container pt-4">
   <div class="row">
     <!-- LG 3 -->
     <div class="col-lg-3 hidden-xs-down">

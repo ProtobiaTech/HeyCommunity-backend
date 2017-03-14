@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function() {
-    return redirect()->to('/api');
-});
-
 
 //
 // Api
@@ -50,3 +46,12 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
     Route::controller('/', 'Dashboard\HomeController');
 });
 
+
+//
+// Home
+// ----------------------------
+// Auth
+Route::controller('auth', 'AuthController');
+
+// Timeline
+Route::controller('/', 'TimelineController');

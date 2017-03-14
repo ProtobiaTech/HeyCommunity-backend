@@ -52,6 +52,14 @@ class Timeline extends Model
     /**
      *
      */
+    public function getImgs()
+    {
+        return TimelineImg::getImgs($this->imgs);
+    }
+
+    /**
+     *
+     */
     public function getVideoAttribute($url)
     {
         return \App\Helpers\FileSystem::getFullUrl($url);

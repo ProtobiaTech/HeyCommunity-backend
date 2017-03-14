@@ -50,8 +50,7 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
 //
 // Home
 // ----------------------------
-// Auth
 Route::controller('auth', 'AuthController');
-
-// Timeline
+Route::controller('timeline', 'TimelineController');
+Route::controller('topic', 'TopicController');
 Route::controller('/', 'TimelineController');

@@ -14,6 +14,7 @@
     <link href="{{ asset('bootstrap-assets/css/toolkit.css') }}" rel="stylesheet">
 
     <link href="{{ asset('bootstrap-assets/css/application.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap-assets/css/website.css') }}" rel="stylesheet">
 
     <style>
       /* note: this is a hack for ios iframe for bootstrap themes shopify page */

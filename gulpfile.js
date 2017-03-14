@@ -1,3 +1,4 @@
+var gulp = require('gulp');
 var elixir = require('laravel-elixir');
 
 /*
@@ -12,5 +13,7 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix.sass([
+        'website/index.scss',
+    ], 'public/bootstrap-assets/css/website.css');
 });

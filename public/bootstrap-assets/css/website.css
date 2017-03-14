@@ -1,0 +1,25 @@
+#hc-topic.page-topic .list-topic .avatar {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+
+#hc-topic.page-topic .list-topic .body {
+  margin-left: 52px;
+  overflow: hidden; }
+  #hc-topic.page-topic .list-topic .body .title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+    #hc-topic.page-topic .list-topic .body .title .info {
+      position: absolute;
+      right: 18px;
+      padding-left: 1em;
+      background-color: #fff;
+      font-size: 14px;
+      font-weight: normal;
+      color: #777; }
+
+/*# sourceMappingURL=website.css.map */

@@ -53,4 +53,5 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
 Route::controller('auth', 'AuthController');
 Route::controller('timeline', 'TimelineController');
 Route::controller('topic', 'TopicController');
+Route::controller('activity', 'ActivityController');
 Route::controller('/', 'TimelineController');

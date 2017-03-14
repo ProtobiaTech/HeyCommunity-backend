@@ -22,4 +22,14 @@
       font-weight: normal;
       color: #777; }
 
+#hc-activity.page-activity .list-activity .card-activity {
+  margin-bottom: 20px; }
+  #hc-activity.page-activity .list-activity .card-activity .img-box {
+    height: 200px;
+    overflow: hidden; }
+    #hc-activity.page-activity .list-activity .card-activity .img-box img {
+      width: 100%;
+      min-height: 200px;
+      background-color: #999; }
+
 /*# sourceMappingURL=website.css.map */

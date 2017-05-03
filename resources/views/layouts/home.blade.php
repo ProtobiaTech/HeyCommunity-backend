@@ -49,13 +49,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{ url('/') }}">@lang('hey_web_info.home') <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/topic') }}">Topic</a>
+            <a class="nav-link" href="{{ url('/topic') }}">@lang('hey_web_info.topic')</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/activity') }}">Activity</a>
+            <a class="nav-link" href="{{ url('/activity') }}">@lang('hey_web_info.activity')</a>
           </li>
 
           @if (Auth::user()->check())
@@ -63,13 +63,13 @@
               <a class="nav-link" href="">Notifications</a>
             </li>
             <li class="nav-item hidden-md-up">
-              <a class="nav-link" href="{{ url('/auth/logout') }}">Logout</a>
+              <a class="nav-link" href="{{ url('/auth/logout') }}">@lang('hey_web_info.logout')</a>
             </li>
           @endif
         </ul>
 
         <form class="form-inline float-right hidden-sm-down">
-          <input class="form-control" type="text" data-action="grow" placeholder="Search">
+          <input class="form-control" type="text" data-action="grow" placeholder="@lang('hey_web_info.search')">
         </form>
 
         <ul id="#js-popoverContent" class="nav navbar-nav float-right mr-0 hidden-sm-down">
@@ -91,9 +91,9 @@
 
         <ul class="nav navbar-nav hidden-xs-up" id="js-popoverContent">
           @if (Auth::user()->check())
-            <li class="nav-item"><a class="nav-link" href="{{ url('auth/logout') }}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('auth/logout') }}">@lang('hey_web_info.logout')</a></li>
           @else
-            <li class="nav-item"><a class="nav-link" href="{{ url('auth/login') }}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('auth/login') }}">@lang('hey_web_info.login')</a></li>
           @endif
         </ul>
       </div>

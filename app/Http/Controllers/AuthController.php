@@ -34,7 +34,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'phone'     =>      'required|integer',
+            'phone'     =>      'required|string',
             'password'  =>      'required|string',
         ]);
 

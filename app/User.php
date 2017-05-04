@@ -40,6 +40,11 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token', 'wx_open_id'];
 
+    public function topics()
+    {
+        return $this->hasMany('App\Topic', 'user_id')->orderBy('created_at', 'desc')->with('author');
+    }
+
     /**
      * Related Timeline
      */

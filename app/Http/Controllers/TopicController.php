@@ -8,7 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Topic;
+use Carbon\Carbon;
 
+use Auth;
 class TopicController extends Controller
 {
     /**
@@ -27,9 +29,14 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCreate()
     {
-        //
+        $content = "";
+        $page_image ="";
+        $title = "";
+
+        return view('topic.create', compact('content','title'));
+
     }
 
     /**
@@ -38,9 +45,24 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'     =>      'required|string',
+            'content'  =>      'required|string',
+        ]);
+
+        if(empty($request->input('title')) || empty($request->input('content'))){
+            return redirect()->back();
+        }
+
+        $title = $request->input('title');
+        $content = $request->input('content');
+        $topic = Topic::create(['title' => $title,'content' => $content]);
+
+        $topic_id = Auth::user()->user()->topics()->save($topic)->id;
+
+        return redirect('topic/show/'.$topic_id);
     }
 
     /**
@@ -49,9 +71,13 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $topic = Topic::find($id);
+        $topic_id = $topic->id;
+        $title = $topic->title;
+        $content = $topic->content;
+        return view('topic.show',compact('title','content','topic_id'));
     }
 
     /**
@@ -60,10 +86,17 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function getEdit(Request $request,$id)
     {
-        //
+        $topic = Topic::find($id);
+
+        $topic_id = $topic->id;
+        $content = $topic->content;
+        $title = $topic->title;
+
+        return view('topic.edit',compact('title','content','topic_id'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -72,9 +105,25 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function putUpdate(Request $request,$id)
     {
-        //
+
+        $this->validate($request, [
+            'title'     =>      'required|string',
+            'content'  =>      'required|string',
+        ]);
+
+        if(empty($request->input('title')) || empty($request->input('content'))){
+            return redirect()->back();
+        }
+
+        $topic = Topic::findOrFail($id);
+        $title = $request->input('title');
+        $content = $request->input('content');
+        $topic->fill(['title' => $title , 'content' => $content]);
+        $topic->save();
+        return redirect('topic/show/'.$id)
+            ->withSuccess('Topic saved.');
     }
 
     /**
@@ -83,7 +132,7 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getDestroy($id)
     {
         //
     }

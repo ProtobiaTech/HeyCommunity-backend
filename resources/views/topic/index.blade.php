@@ -16,6 +16,9 @@
 
     <!-- LG 9 -->
     <div class="col-lg-9">
+      <div class="pull-right body">
+        <a class="btn btn-large btn-success" href="{{url('topic/create')}}" style="margin-bottom: 5px" data-method ="POST">  发布  </a>
+      </div>
       <div class="list-group list-topic">
         @foreach ($topics as $topic)
           <div class="list-group-item">

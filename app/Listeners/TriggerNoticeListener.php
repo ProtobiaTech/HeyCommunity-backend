@@ -49,6 +49,71 @@ class TriggerNoticeListener
         if ($this->event->target->author->wx_open_id) {
             $this->sendWechatNotice();
         }
+
+        // send app push
+        $this->sendAppPush($Notice);
+    }
+
+    /**
+     *
+     */
+    public function sendAppPush($Notice)
+    {
+        if (env('JIGUANG_ENABLE')) {
+            $alias = 'u' . $Notice->user_id;
+            $notification = $this->getAppPushNotification($Notice);
+
+            $JPush = new \JPush\Client(env('JIGUANG_APPKEY'), env('JIGUANG_SECRET'), storage_path('logs/jpush.log'));
+            $push = $JPush->push();
+            $push->setPlatform('all')->addAlias($alias);
+            $push->options(['apns_production' => true]);
+            $push->setNotificationAlert($notification);
+
+            try {
+                $push->send();
+            } catch (\JPush\Exceptions\JPushException $e) {
+                \Log::error($e);
+            }
+        } else {
+        }
+    }
+
+    /**
+     *
+     */
+    public function getAppPushNotification($Notice)
+    {
+        $notification = $Notice->initiator->nickname;
+        $hasContent = true;
+
+        switch ($Notice->type->name) {
+            case 'timeline_like':
+                $notification .= trans('notice.Like Your Timeline');
+                $hasContent = false;
+                break;
+            case 'timeline_comment':
+                $notification .= trans('notice.Comment Your Timeline: ');
+                break;
+            case 'timeline_comment_comment':
+                $notification .= trans('notice.Reply Your TimelineComment: ');
+                break;
+            case 'topic_like':
+                $notification .= trans('notice.Like Your Topic');
+                $hasContent = false;
+                break;
+            case 'topic_comment':
+                $notification .= trans('notice.Comment Your Topic: ');
+                break;
+            case 'topic_comment_comment':
+                $notification .= trans('notice.Reply Your TopicComment: ');
+                break;
+        }
+
+        if ($hasContent) {
+            $notification .= mb_substr($Notice->entity->content, 0, 50, 'UTF-8');
+        }
+
+        return $notification;
     }
 
     /**

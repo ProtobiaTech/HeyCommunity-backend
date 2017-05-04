@@ -45,3 +45,17 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
     Route::controller('trend', 'Dashboard\TrendController');
     Route::controller('/', 'Dashboard\HomeController');
 });
+
+
+//
+// Home
+// ----------------------------
+Route::get('/', function() {
+    return redirect()->to('/timeline');
+});
+
+Route::controller('auth', 'AuthController');
+Route::controller('timeline', 'TimelineController');
+Route::controller('topic', 'TopicController');
+Route::controller('activity', 'ActivityController');
+Route::controller('timeline', 'TimelineController');

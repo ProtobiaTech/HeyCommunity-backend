@@ -13,6 +13,7 @@ use App\TopicNode;
 use App\TopicThumb;
 use App\TopicStar;
 use App\TopicComment;
+use App\Events\TriggerNoticeEvent;
 
 class TopicController extends Controller
 {
@@ -62,7 +63,13 @@ class TopicController extends Controller
             $query = $this->setIndexWithNewList($query, $request);
         }
 
-        $topics = $query->get()->toArray();
+        $topics = $query->get()->each(function($item, $Key) {
+            if (Auth::user()->guest()) {
+                $item->is_star = false;
+            } else {
+                $item->is_star = TopicStar::where(['topic_id' => $item->id, 'user_id' => Auth::user()->user()->id])->count() ? true : false;
+            }
+        })->toArray();
         return $topics;
     }
 
@@ -152,7 +159,8 @@ class TopicController extends Controller
              'id'   =>      'required',
         ]);
 
-        $Topic = Topic::findOrFail($request->id);
+        $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
+        $Topic->increment('view_num');
         return $Topic;
     }
 
@@ -223,27 +231,38 @@ class TopicController extends Controller
     public function postSetStar(Request $request)
     {
         $this->validate($request, [
-             'id'   =>      'required',
+            'id'       =>      'required',
+            'value'    =>      'required',
         ]);
 
         $where = [
             'user_id'   =>  Auth::user()->user()->id,
             'topic_id'  =>  $request->id
         ];
-
-        $oldTopicStar = TopicStar::where($where)->first();
-
-        $TopicStar = new TopicStar;
-        $TopicStar->user_id = Auth::user()->user()->id;
-        $TopicStar->topic_Id = $request->id;
-        $TopicStar->save();
+        $topicStarExist = TopicStar::where($where)->exists();
+        TopicStar::where($where)->delete();
 
         $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
 
-        if ($oldTopicStar) {
-            $oldTopicStar->delete();
+        if ($request->value) {
+            $TopicStar = new TopicStar;
+            $TopicStar->user_id = Auth::user()->user()->id;
+            $TopicStar->topic_Id = $request->id;
+            $TopicStar->save();
+
+            if (!$topicStarExist) {
+                $Topic->increment('star_num');
+                $Topic->save();
+            }
+
+            $Topic->is_star = true;
         } else {
-            $Topic->increment('star_num');
+            if ($topicStarExist) {
+                $Topic->decrement('star_num');
+                $Topic->save();
+            }
+
+            $Topic->is_star = false;
         }
 
         return $Topic;
@@ -305,7 +324,6 @@ class TopicController extends Controller
         $TopicComment->save();
         $Topic->increment('comment_num');
 
-        /** @todo send notice
         if ($TopicComment->parent_id > 0) {
             if ($TopicComment->parent->user_id !== Auth::user()->user()->id) {
                 event(new TriggerNoticeEvent($TopicComment, $TopicComment->parent, 'topic_comment_comment'));
@@ -315,7 +333,6 @@ class TopicController extends Controller
                 event(new TriggerNoticeEvent($TopicComment, $Topic, 'topic_comment'));
             }
         }
-        */
 
         $Topic = Topic::with(['author', 'comments'])->findOrFail($request->topic_id);
         return $Topic;

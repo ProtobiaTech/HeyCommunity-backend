@@ -40,4 +40,12 @@ class TimelineImg extends Model
             return $domain . $url;
         }
     }
+
+    /**
+     *
+     */
+    public function getUriAttribute($url)
+    {
+        return \App\Helpers\FileSystem::getFullUrl($url);
+    }
 }

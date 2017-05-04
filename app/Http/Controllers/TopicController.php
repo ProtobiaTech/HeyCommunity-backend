@@ -32,7 +32,6 @@ class TopicController extends Controller
     public function getCreate()
     {
         $content = "";
-        $page_image ="";
         $title = "";
 
         return view('topic.create', compact('content','title'));
@@ -96,6 +95,23 @@ class TopicController extends Controller
 
         return view('topic.edit',compact('title','content','topic_id'));
     }
+
+    /**
+     * @param Request $request
+     * @param $id topic_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function postEdit(Request $request,$id)
+    {
+        $topic = Topic::find($id);
+
+        $topic_id = $topic->id;
+        $content = $topic->content;
+        $title = $topic->title;
+
+        return view('topic.edit',compact('title','content','topic_id'));
+    }
+
 
 
     /**

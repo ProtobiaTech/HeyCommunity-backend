@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $lang = strtolower(trim(env('LOCALE'))) == 'zh-cn' ? 'zh' : 'en';
+        Carbon::setLocale($lang);
     }
 
     /**

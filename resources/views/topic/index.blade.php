@@ -27,7 +27,7 @@
               <div class="title">
                 {{ $topic->title }}
                 <span class="info hidden-xs-down">
-                  20 / 20 / 3 &nbsp; | &nbsp;
+                  <a data-method="POST" href="{{url('topic/thumb-up',[$topic->id,'up'])}}"> &nbsp;{{$topic->thumb_up_num}}赞&nbsp; </a>/ <a href="{{url('topic/show',$topic->id)}}">&nbsp;{{$topic->comment_num}} 评&nbsp; </a>/ <a href="{{url('topic/show',$topic->id)}}">&nbsp;{{$topic->view_num}} 阅 &nbsp; </a>| &nbsp;
                   {{ $topic->created_at->format('m-d') }}
                 </span>
               </div>
@@ -35,6 +35,7 @@
                 {{ mb_substr($topic->content, 0, 200) }}
               </div>
             </div>
+            </p>
           </div>
         @endforeach
       </div>

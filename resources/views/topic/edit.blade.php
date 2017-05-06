@@ -1,19 +1,15 @@
 @extends('layouts.home')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row page-title-row">
-            <div class="col-md-12" style="margin-top: 15px">
-                <h3>Edit Topic</h3>
-            </div>
-        </div>
-
+    <div class="container-fluid" >
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-10" style="float: none;display: block;margin-left: auto;margin-right: auto;">
                 <div class="panel panel-default">
 
                     <div class="panel-body">
-
+                        <div class=" col-sm-10 " style="margin-top: 15px;">
+                            <h3>@lang('hey_web_info.topic_edit')</h3>
+                        </div>
                         @include('common.error')
                         @include('common.success')
 
@@ -26,7 +22,7 @@
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary btn-lg">
                                     <i class="fa fa-disk-o"></i>
-                                    Update Topic
+                                    @lang('hey_web_info.topic_update')
                                 </button>
                             </div>
 

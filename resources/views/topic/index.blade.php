@@ -17,7 +17,7 @@
     <!-- LG 9 -->
     <div class="col-lg-9">
       <div class="pull-right body">
-        <a class="btn btn-large btn-success" href="{{url('topic/create')}}" style="margin-bottom: 5px" data-method ="POST">  发布  </a>
+        <a class="btn btn-large btn-success" href="{{url('topic/create')}}" style="margin-bottom: 5px" data-method ="POST">  @lang('hey_web_info.topic_publish')  </a>
       </div>
       <div class="list-group list-topic">
         @foreach ($topics as $topic)
@@ -25,9 +25,11 @@
             <img class="avatar" src="{{ $topic->author->avatar }}">
             <div class="pull-left body">
               <div class="title">
-                {{ $topic->title }}
+                <a href="{{url('topic/show',$topic->id)}}">{{ $topic->title }}</a>
                 <span class="info hidden-xs-down">
-                  <a data-method="POST" href="{{url('topic/thumb-up',[$topic->id,'up'])}}"> &nbsp;{{$topic->thumb_up_num}}赞&nbsp; </a>/ <a href="{{url('topic/show',$topic->id)}}">&nbsp;{{$topic->comment_num}} 评&nbsp; </a>/ <a href="{{url('topic/show',$topic->id)}}">&nbsp;{{$topic->view_num}} 阅 &nbsp; </a>| &nbsp;
+                   &nbsp;{{$topic->thumb_up_num}}&nbsp; @lang('hey_web_info.thumb_up')&nbsp; / {{$topic->comment_num}}&nbsp;
+                    @lang('hey_web_info.comment_short')&nbsp; /
+                    &nbsp;{{$topic->view_num}} &nbsp;@lang('hey_web_info.view') &nbsp; | &nbsp;
                   {{ $topic->created_at->format('m-d') }}
                 </span>
               </div>

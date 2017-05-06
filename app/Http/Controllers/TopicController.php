@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\TopicThumb;
 use App\Topic;
 use App\TopicComment;
 use App\Events\TriggerNoticeEvent;
@@ -17,6 +18,12 @@ use PhpParser\Comment;
 
 class TopicController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['getIndex','getShow','getThumbUp']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -118,28 +125,27 @@ class TopicController extends Controller
         $TopicThumb->value = $newValue;
 
         if ($TopicThumb->save()) {
-            $Topic = Topic::with('author', 'comments')->findOrFail($request->id);
+            $topic = Topic::with('author', 'comments')->findOrFail($request->id);
 
             switch ($case) {
                 case 'up:null':
-                    $Topic->increment('thumb_up_num');
+                    $topic->increment('thumb_up_num');
                     break;
                 case 'down:null':
-                    $Topic->increment('thumb_down_num');
+                    $topic->increment('thumb_down_num');
                     break;
                 case 'up:down':
-                    $Topic->increment('thumb_up_num');
-                    $Topic->decrement('thumb_down_num');
+                    $topic->increment('thumb_up_num');
+                    $topic->decrement('thumb_down_num');
                     break;
                 case 'down:up':
-                    $Topic->increment('thumb_down_num');
-                    $Topic->decrement('thumb_up_num');
+                    $topic->increment('thumb_down_num');
+                    $topic->decrement('thumb_up_num');
                     break;
                 default:
                     break;
             }
-
-            return $Topic;
+            return redirect()->back()->with('topic',[$topic]);
         } else {
             return response('fail', 500);
         }
@@ -172,10 +178,6 @@ class TopicController extends Controller
             'content'  =>      'required|string',
         ]);
 
-        if(empty($request->input('title')) || empty($request->input('content'))){
-            return redirect()->back();
-        }
-
         $title = $request->input('title');
         $content = $request->input('content');
         $topic = Topic::create(['title' => $title,'content' => $content]);
@@ -197,13 +199,6 @@ class TopicController extends Controller
         $topic->increment('view_num');
 
         return view('topic.show',compact('topic'));
-    }
-
-    public function getThumbUp($id,$action)
-    {
-        $topic = Topic::with('author', 'comments')->findOrFail($id);
-        $topic->increment('thumb_up_num');
-        return redirect()->back();
     }
 
     /**
@@ -282,14 +277,18 @@ class TopicController extends Controller
 
     public function putUpdateComment(Request $request,$id)
     {
+        $this->validate($request, [
+            'topic_comment_id'      =>      'integer',
+            'content'               =>      'required|string',
+        ]);
         $comment = TopicComment::find($id);
         $comment->content = $request->input('content');
         $comment->save();
 
         $topic = $comment->topic()->get()[0];
-//        dd($topic);
+
         return redirect('topic/show/'.$topic->id)
-        ->withSuccess('Topic saved.');
+        ->withSuccess('Commit Updated Successful!');
     }
 
 
@@ -307,10 +306,6 @@ class TopicController extends Controller
             'title'     =>      'required|string',
             'content'  =>      'required|string',
         ]);
-
-        if(empty($request->input('title')) || empty($request->input('content'))){
-            return redirect()->back();
-        }
 
         $topic = Topic::findOrFail($id);
         $title = $request->input('title');

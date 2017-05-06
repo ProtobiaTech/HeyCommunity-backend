@@ -13,19 +13,19 @@ return [
     |
     */
     // Navigation
-    'home'     => 'Home',
-    'topic'    => 'Topic',
-    'activity' => 'Activity',
-    'logout'   => 'Logout',
-    'login'    => 'Login',
-    'search'   => 'Search',
+    'home'                => 'Home',
+    'topic'               => 'Topic',
+    'activity'            => 'Activity',
+    'logout'              => 'Logout',
+    'login'               => 'Login',
+    'search'              => 'Search',
 
     // left welcome login
-    'please_login'  => '>Please Log In',
-    'welcome_first' => 'Welcome to HeyCommunity, please',
-    'welcome_end'   => 'to share your life with us',
-    'friends'       => 'Friends',
-    'level'         => 'Level',
+    'please_login'        => '>Please Log In',
+    'welcome_first'       => 'Welcome to HeyCommunity, please',
+    'welcome_end'         => 'to share your life with us',
+    'friends'             => 'Friends',
+    'level'               => 'Level',
 
     // left about
     'about'               => 'About',
@@ -63,25 +63,25 @@ return [
     'advertise'           => 'Advertise',
 
     // Topic
-    'thumb_up'      => 'Up',
-    'thumb_down'    => 'Down',
-    'comment_short' => 'CMT',
-    'comment_long'  => 'Comment',
-    'view'          => 'View',
-    'favorite'      => 'Favorite',
+    'thumb_up'            => 'Up',
+    'thumb_down'          => 'Down',
+    'comment_short'       => 'CMT',
+    'comment_long'        => 'Comment',
+    'view'                => 'View',
+    'favorite'            => 'Favorite',
 
-    'topic_title'=>'Title:',
-    'topic_content'=>'Content:',
-    'topic_edit'=>'Edit Topic',
-    'topic_update'=>'Update Topic',
-    'topic_add'=>'Add New Topic',
-    'topic_save'=>'Save New Topic',
-    'topic_publish'       => 'Publish Topic',
+    'topic_title'   => 'Title:',
+    'topic_content' => 'Content:',
+    'topic_edit'    => 'Edit Topic',
+    'topic_update'  => 'Update Topic',
+    'topic_add'     => 'Add New Topic',
+    'topic_save'    => 'Save New Topic',
+    'topic_publish' => 'Publish Topic',
 
-    'comment_title'=>'Edit Comment',
-    'comment_content'=>'Content:',
-    'comment_edit'=>'Edit Comment',
-    'comment_update'=>'Update Comment',
-    'comment_publish'=>'Publish CMT',
+    'comment_title'   => 'Edit Comment',
+    'comment_content' => 'Content:',
+    'comment_edit'    => 'Edit Comment',
+    'comment_update'  => 'Update Comment',
+    'comment_publish' => 'Publish CMT',
 
 ];

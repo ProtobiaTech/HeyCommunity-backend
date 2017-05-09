@@ -1,6 +1,27 @@
 #hc-topic {
   // topic page
   &.page-topic {
+    //
+    .card-tools {
+      margin-bottom: 10px;
+    }
+
+
+    //
+    .card-nodes {
+      .nodes-item {
+        span {
+          font-weight:bold;
+          display:inline-block;
+          margin-right:1em;
+        }
+
+        a {
+        }
+      }
+    }
+
+    //
     .list-topic {
       .avatar {
         position: absolute;

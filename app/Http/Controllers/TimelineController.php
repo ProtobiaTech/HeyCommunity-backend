@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
 use App\Timeline;
 
 class TimelineController extends Controller
@@ -18,8 +19,10 @@ class TimelineController extends Controller
      */
     public function getIndex()
     {
-        $assign['timelines'] = Timeline::paginate();
-        return view('timeline.index', $assign);
+        $timelines = Timeline::paginate();
+        $users = User::limit(5)->get();
+
+        return view('timeline.index', compact('timelines', 'users'));
     }
 
     /**

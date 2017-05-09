@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Topic;
+use App\TopicNode;
 
 class TopicController extends Controller
 {
@@ -18,8 +19,9 @@ class TopicController extends Controller
      */
     public function getIndex()
     {
-        $assign['topics'] = Topic::paginate();
-        return view('topic.index', $assign);
+        $topics = Topic::paginate();
+        $topicNodes = TopicNode::rootNodes()->get();
+        return view('topic.index', compact('topics', 'topicNodes'));
     }
 
     /**
@@ -49,9 +51,11 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $topic = Topic::findOrFail($id);
+
+        return view('topic.show', compact('topic'));
     }
 
     /**

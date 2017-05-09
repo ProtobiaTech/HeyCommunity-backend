@@ -48,28 +48,30 @@
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item {{ Request::is('timeline') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/') }}">@lang('hc.home') <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('/topic') }}">Topic</a>
+          <li class="nav-item {{ Request::is('topic*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/topic') }}">@lang('hc.topic')</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('/activity') }}">Activity</a>
+          <!--
+          <li class="nav-item {{ Request::is('activity*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/activity') }}">@lang('hc.activity')</a>
           </li>
+          -->
 
           @if (Auth::user()->check())
             <li class="nav-item hidden-md-up">
               <a class="nav-link" href="">Notifications</a>
             </li>
             <li class="nav-item hidden-md-up">
-              <a class="nav-link" href="{{ url('/auth/logout') }}">Logout</a>
+              <a class="nav-link" href="{{ url('/auth/logout') }}">@lang('hc.logout')</a>
             </li>
           @endif
         </ul>
 
         <form class="form-inline float-right hidden-sm-down">
-          <input class="form-control" type="text" data-action="grow" placeholder="Search">
+          <input class="form-control" type="text" data-action="grow" placeholder="@lang('hc.search')">
         </form>
 
         <ul id="#js-popoverContent" class="nav navbar-nav float-right mr-0 hidden-sm-down">
@@ -91,9 +93,9 @@
 
         <ul class="nav navbar-nav hidden-xs-up" id="js-popoverContent">
           @if (Auth::user()->check())
-            <li class="nav-item"><a class="nav-link" href="{{ url('auth/logout') }}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('auth/logout') }}">@lang('hc.logout')</a></li>
           @else
-            <li class="nav-item"><a class="nav-link" href="{{ url('auth/login') }}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url('auth/login') }}">@lang('hc.login')</a></li>
           @endif
         </ul>
       </div>

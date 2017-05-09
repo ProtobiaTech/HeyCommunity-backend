@@ -26,4 +26,12 @@ class TopicNode extends Node
     {
         return $this->hasMany('App\Topic', 'topic_node_id');
     }
+
+    /**
+     * Root Nodes Scope
+     */
+    public function scopeRootNodes()
+    {
+        return $this->whereNull('parent_id');
+    }
 }

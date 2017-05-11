@@ -35,13 +35,18 @@
           <div class="input-group">
             <div class="input-group-btn">
               <button disabled type="button" class="btn btn-secondary">
-                <span class="icon icon-camera"></span>
+                <span class="icon icon-images"></span>
+              </button>
+            </div>
+            <div class="input-group-btn">
+              <button disabled type="button" class="btn btn-secondary">
+                <span class="icon icon-video"></span>
               </button>
             </div>
             <input type="text" class="form-control" placeholder="Message">
             <div class="input-group-btn">
               <button type="button" class="btn btn-secondary">
-                <span class="icon icon-edit"></span>
+                <span class="icon icon-paper-plane"></span>
               </button>
             </div>
           </div>

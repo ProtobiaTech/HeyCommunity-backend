@@ -71,12 +71,12 @@
         </ul>
 
         <form class="form-inline float-right hidden-sm-down">
-          <input class="form-control" type="text" data-action="grow" placeholder="@lang('hc.search')">
+          <input disabled class="form-control" type="text" data-action="grow" placeholder="@lang('hc.search')">
         </form>
 
         <ul id="#js-popoverContent" class="nav navbar-nav float-right mr-0 hidden-sm-down">
           <li class="nav-item">
-            <a class="app-notifications nav-link" href="">
+            <a class="app-notifications nav-link">
               <span class="icon icon-bell"></span>
             </a>
           </li>

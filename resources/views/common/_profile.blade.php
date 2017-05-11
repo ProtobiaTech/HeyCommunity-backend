@@ -10,23 +10,25 @@
                 <a class="text-inherit" href="profile/index.html">{{ Auth::user()->user()->nickname }}</a>
             </h6>
 
-            <p class="mb-4">{{ Auth::user()->user()->bio }}</p>
+            <p class="mb-4" style="margin-top:6px; margin-bottom:0 !important;">{{ Auth::user()->user()->bio }}</p>
 
-            <ul class="card-menu">
-                <li class="card-menu-item">
-                    <a href="#userModal" class="text-inherit" data-toggle="modal">
-                        @lang('hc.friends')
-                        <h6 class="my-0">0</h6>
-                    </a>
-                </li>
+            {{--
+                <ul class="card-menu">
+                    <li class="card-menu-item">
+                        <a href="#userModal" class="text-inherit" data-toggle="modal">
+                            @lang('hc.friends')
+                            <h6 class="my-0">0</h6>
+                        </a>
+                    </li>
 
-                <li class="card-menu-item">
-                    <a href="#userModal" class="text-inherit" data-toggle="modal">
-                        @lang('hc.level')
-                        <h6 class="my-0">1</h6>
-                    </a>
-                </li>
-            </ul>
+                    <li class="card-menu-item">
+                        <a href="#userModal" class="text-inherit" data-toggle="modal">
+                            @lang('hc.level')
+                            <h6 class="my-0">1</h6>
+                        </a>
+                    </li>
+                </ul>
+            --}}
         </div>
     @else
         <div class="card-header" style="background-image: url(bootstrap-assets/img/iceland.jpg);"></div>

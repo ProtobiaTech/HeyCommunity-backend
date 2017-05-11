@@ -32,24 +32,26 @@
     <div class="col-lg-6">
       <ul class="list-group media-list media-list-stream mb-4">
         <li class=" media list-group-item p-4">
-          <div class="input-group">
-            <div class="input-group-btn">
-              <button disabled type="button" class="btn btn-secondary">
-                <span class="icon icon-images"></span>
-              </button>
+          <form action="{{ url('/timeline/store') }}" method="POST" style="width:100%;">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button disabled type="button" class="btn btn-secondary">
+                  <span class="icon icon-images"></span>
+                </button>
+              </div>
+              <div class="input-group-btn">
+                <button disabled type="button" class="btn btn-secondary">
+                  <span class="icon icon-video"></span>
+                </button>
+              </div>
+              <input type="text" name="content" class="form-control" placeholder="@lang('hc.What\'s news')">
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-secondary">
+                  <span class="icon icon-paper-plane"></span>
+                </button>
+              </div>
             </div>
-            <div class="input-group-btn">
-              <button disabled type="button" class="btn btn-secondary">
-                <span class="icon icon-video"></span>
-              </button>
-            </div>
-            <input type="text" class="form-control" placeholder="Message">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-secondary">
-                <span class="icon icon-paper-plane"></span>
-              </button>
-            </div>
-          </div>
+          </form>
         </li>
 
         @foreach ($timelines as $timeline)
@@ -59,6 +61,10 @@
             <div class="media-body-text">
               <div class="media-heading">
                 <small class="float-right text-muted">{{ $timeline->created_at->format('h-d H:i:m') }}</small>
+                <small class="float-right text-muted">
+                  <i class="fa fa-fire"></i> <span>{{ $timeline->like_num + $timeline->comment_num * 2 }}</span>
+                  &nbsp;&nbsp;
+                </small>
                 <h6>{{ $timeline->author->nickname }}</h6>
               </div>
               <p>{{ $timeline->content }}</p>
@@ -72,6 +78,26 @@
                   @endforeach
                 </div>
               @endif
+
+              <div class="mb-2 text-right">
+                <!-- <a class="btn btn-default btn-xs"><i class="fa fa-heart" style="color:red;"></i></a> -->
+                <a style="font-size:1rem;" class="btn btn-default btn-xs" href="#"><i class="fa fa-comment" style="color:#333"></i></a>
+              </div>
+
+              <div class="mb-2" style="margin-bottom:1rem !important;">
+                {!! Form::open(array('url' => '/timeline/store-comment', 'method' => 'POST')) !!}
+                  {{ csrf_field() }}
+                  {!! Form::hidden('timeline_id', $timeline->id) !!}
+                  <div class="input-group">
+                    <input type="text" name="content" class="form-control" placeholder="">
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-secondary">
+                        <span class="icon icon-paper-plane"></span>
+                      </button>
+                    </div>
+                  </div>
+                  {!! Form::close() !!}
+              </div>
 
               @if ($timeline->comments)
                 <ul class="media-list mb-2">

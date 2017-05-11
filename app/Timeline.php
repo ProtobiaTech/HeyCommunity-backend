@@ -3,12 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Timeline extends Model
+class Timeline extends HeyCommunity
 {
-    use SoftDeletes;
-
     /**
      * Related User
      */

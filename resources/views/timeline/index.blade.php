@@ -79,10 +79,12 @@
                 </div>
               @endif
 
+              {{--
               <div class="mb-2 text-right">
                 <!-- <a class="btn btn-default btn-xs"><i class="fa fa-heart" style="color:red;"></i></a> -->
                 <a style="font-size:1rem;" class="btn btn-default btn-xs" href="#"><i class="fa fa-comment" style="color:#333"></i></a>
               </div>
+              --}}
 
               <div class="mb-2" style="margin-bottom:1rem !important;">
                 {!! Form::open(array('url' => '/timeline/store-comment', 'method' => 'POST')) !!}
@@ -106,7 +108,10 @@
                     <li class="media mb-3">
                       <img class="media-object d-flex align-self-start mr-3" src="{{ $comment->author->avatar }}">
                       <div class="media-body">
-                        <strong>{{ $comment->author->nickname }}: </strong>
+                        <div>
+                          <small class="float-right text-muted">{{ $comment->created_at->format('h-d H:i') }}</small>
+                          <strong>{{ $comment->author->nickname }} </strong>
+                        </div>
                         {{ $comment->content }}
                       </div>
                     </li>

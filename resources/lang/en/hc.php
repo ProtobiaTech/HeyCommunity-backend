@@ -73,4 +73,11 @@ return [
     // topic
     // ===================
     'create topic'                      =>      'Create topic',
+
+
+
+    //
+    // timeline
+    // ===================
+    'What\'s news'                      =>      'What\'s news',
 ];

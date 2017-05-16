@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use EasyWeChat\Foundation\Application;
+use GuzzleHttp\Exception\RequestException;
 
 use Image, File;
 use Hash, Auth;
@@ -20,7 +22,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['postUpdate', 'postUpdateAvatar']]);
-        $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn']]);
+        $this->middleware('guest', ['only' => ['postSignUp', 'postLogIn', 'postLogInWithWechat']]);
     }
 
     /**
@@ -59,6 +61,62 @@ class UserController extends Controller
     }
 
     /**
+     * Log in with wechat
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object|string User model or failure info
+     */
+    public function postLogInWithWechat(Request $request)
+    {
+        if (env('WECHATOP_APP_ENABLE')) {
+            $this->validate($request, [
+                'code'      =>  'required',
+            ]);
+
+            $options = [
+                'debug'     => true,
+                'app_id'    => env('WECHATOP_APP_APPID'),
+                'secret'    => env('WECHATOP_APP_SECRET'),
+            ];
+
+            $app = new Application($options);
+            $user = $app->oauth->setRequest($request)->user();
+
+            if ($user) {
+                $unionId = $user->getOriginal()['unionid'];
+                $User = User::where('wx_union_id', $unionId)->first();
+
+                if (!$User) {
+                    $User = new User;
+                    $User->wx_union_id  =   $unionId;
+                    $User->nickname     =   $user->getNickname();
+                    $User->avatar       =   $user->getAvatar();
+
+                    $number = random_int(0, 3);
+                    if ($number === 0) {
+                        $User->bio          =   'My name is ' . $user->getNickname();
+                    } else if ($number === 1) {
+                        $User->bio          =   'I\'m ' . $user->getNickname();
+                    } else if ($number === 2) {
+                        $User->bio          =   $user->getNickname() . ' is me';
+                    } else if ($number === 3) {
+                        $User->bio          =   'I love there';
+                    }
+
+                    $User->save();
+                }
+
+                Auth::user()->login($User);
+                return $User;
+            } else {
+                return response('wechat login fail', 500);
+            }
+        } else {
+            return response('Do not support WeChat login', 403);
+        }
+    }
+
+    /**
      * Sign up
      *
      * @param \Illuminate\Http\Request $request
@@ -69,20 +127,32 @@ class UserController extends Controller
         $this->validate($request, [
             'nickname'  =>  'required|unique:users',
             'phone'     =>  'required|unique:users',
+            'code'      =>  'required|integer',
             'password'  =>  'required',
         ]);
 
-        $User = new User;
-        $User->nickname     =   $request->nickname;
-        $User->avatar       =   '/assets/images/userAvatar-default.png';
-        $User->phone        =   $request->phone;
-        $User->password     =   Hash::make($request->password);
+        if (session('signUpVerificationExpire') > time() &&
+            session('signUpVerificationCode') == $request->code &&
+            session('signUpVerificationPhone') == $request->phone
+        ) {
+            $User = new User;
+            $User->nickname     =   $request->nickname;
+            $User->avatar       =   'assets/images/userAvatar-default.png';
+            $User->phone        =   $request->phone;
+            $User->password     =   Hash::make($request->password);
 
-        if ($User->save()) {
-            Auth::user()->login($User);
-            return $User;
+            if ($User->save()) {
+                session()->remove('signUpVerificationExpire');
+                session()->remove('signUpVerificationCode');
+                session()->remove('signUpVerificationPhone');
+
+                Auth::user()->login($User);
+                return $User;
+            } else {
+                return response($User, 500);
+            }
         } else {
-            return response($User, 500);
+            return response('The Verification Code Invalid', 403);
         }
     }
 
@@ -127,32 +197,27 @@ class UserController extends Controller
             'uploads'   =>      'required',
         ]);
 
-
         $files = $request->file('uploads');
         $file = $files[0];
 
-        $uploadPath = '/uploads/avatars/';
-        $path = public_path() . $uploadPath;
-        if (!File::exists($path)) {
-            File::makeDirectory($path);
-        }
-
+        $uploadPath = 'uploads/avatars/';
         $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
-        $filePath = public_path() . $uploadPath . $fileName;
+        $imgPath = $uploadPath . $fileName;
+
         $image = Image::make($file->getRealPath());
         $imageWidth = $image->width();
         $imageHeight = $image->height();
         $resize = $imageWidth < $imageHeight ? $imageWidth : $imageHeight;
+        $contents = $image->crop($resize, $resize, 0, 0)->stream();
 
-        $ret = $image->crop($resize, $resize, 0, 0)->save($filePath);
-        if ($ret) {
+        if (\Storage::put($imgPath, $contents)) {
             $User = Auth::user()->user();
-            $User->avatar = $uploadPath . $fileName;
+            $User->avatar = $imgPath;
             $User->save();
 
             return $User;
         } else {
-            abort('Avatar update failed');
+            return abort('Avatar update failed');
         }
     }
 
@@ -183,5 +248,47 @@ class UserController extends Controller
         ]);
 
         return User::findOrFail($id);
+    }
+
+    /**
+     *
+     */
+    public function anyGetVerificationCode(Request $request)
+    {
+        $this->validate($request, [
+            'phone'     =>  'required',
+        ]);
+
+        $tempId = env('JIGUANG_SMS_TEMPID');
+        $code = random_int(111111, 999999);
+        session(['signUpVerificationPhone' => $request->phone]);
+        session(['signUpVerificationCode' => $code]);
+        session(['signUpVerificationExpire' => time() + 600]);
+        $phone = $request->phone;
+
+        $user = (env('JIGUANG_APPKEY'));
+        $password = (env('JIGUANG_SECRET'));
+
+        $body = json_encode([
+            'mobile'    =>      $phone,
+            'temp_id'   =>      $tempId,
+            'temp_para' =>      ['code' => $code],
+        ]);
+
+
+        $client = new \GuzzleHttp\Client();
+        try {
+            $client->request('POST', 'https://api.sms.jpush.cn/v1/messages', [
+                'auth' => [$user, $password],
+                'headers' => [
+                    'Content-Type'      =>      'application/json',
+                ],
+                'body' => $body,
+            ]);
+        } catch (RequestException $e) {
+            return response('get verification code failed', 500);
+        }
+
+        return ['get verification code successful'];
     }
 }

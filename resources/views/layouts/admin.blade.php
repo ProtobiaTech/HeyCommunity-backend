@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('dashboard') }}">HeyCommunity <sup>V2.beta</sup></a>
+            <a class="navbar-brand" href="{{ url('dashboard') }}">HeyCommunity <sup>V3.beta</sup></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -117,7 +117,7 @@
       app_id: "86480a80",
       private_deployment: "1",
       domain: "{{ $_SERVER['HTTP_HOST'] }}",
-      ip: "{{ $_SERVER['SERVER_ADDR'] . ':' . $_SERVER['SERVER_PORT'] }}",
+      ip: "{{ Request::server('SERVER_ADDR') . ':' . Request::server('SERVER_PORT') }}",
       email: "{{ Auth::admin()->user()->email }}",
       user_id: "{{ Auth::admin()->user()->id }}",
       signed_up: {{ Auth::admin()->user()->created_at->getTimestamp() }},

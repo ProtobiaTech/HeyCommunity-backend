@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEM_DEFAULT', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,6 +80,18 @@ return [
             'url_type'  => 'publicURL',
         ],
 
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => env('QINIU_DOMAINS_DEFAULT'),
+                'https'     => env('QINIU_DOMAINS_HTTPS'),
+                'custom'    => env('QINIU_DOMAINS_CUSTOM'),
+             ],
+            'access_key'=> env('QINIU_ACCESS_KEY'),
+            'secret_key'=> env('QINIU_SECRET_KEY'),
+            'bucket'    => env('QINIU_BUCKET'),
+            'notify_url'=> env('QINIU_NOTIFY_URL'),
+        ],
     ],
 
 ];

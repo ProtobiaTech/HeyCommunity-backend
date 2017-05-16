@@ -1,0 +1,52 @@
+.card-tags .tags .l2 {
+  font-size: 16px !important; }
+
+.card-tags .tags .l3 {
+  font-size: 18px !important; }
+
+.card-tags .tags .l3 {
+  font-size: 20px !important; }
+
+#hc-topic.page-topic .card-tools {
+  margin-bottom: 10px; }
+
+#hc-topic.page-topic .card-nodes .nodes-item span {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 1em; }
+
+#hc-topic.page-topic .list-topic .avatar {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+
+#hc-topic.page-topic .list-topic .body {
+  margin-left: 52px;
+  overflow: hidden; }
+  #hc-topic.page-topic .list-topic .body .title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+    #hc-topic.page-topic .list-topic .body .title .info {
+      position: absolute;
+      right: 18px;
+      padding-left: 1em;
+      background-color: #fff;
+      font-size: 14px;
+      font-weight: normal;
+      color: #777; }
+
+#hc-activity.page-activity .list-activity .card-activity {
+  margin-bottom: 20px; }
+  #hc-activity.page-activity .list-activity .card-activity .img-box {
+    height: 200px;
+    overflow: hidden; }
+    #hc-activity.page-activity .list-activity .card-activity .img-box img {
+      width: 100%;
+      min-height: 200px;
+      background-color: #999; }
+
+/*# sourceMappingURL=website.css.map */

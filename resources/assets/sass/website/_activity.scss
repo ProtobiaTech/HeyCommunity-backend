@@ -1,0 +1,21 @@
+#hc-activity {
+  // activity page
+  &.page-activity {
+    .list-activity {
+      .card-activity {
+        margin-bottom: 20px;
+
+        .img-box {
+          height: 200px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            min-height: 200px;
+            background-color: #999;
+          }
+        }
+      }
+    }
+  }
+}

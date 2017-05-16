@@ -156,6 +156,12 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        // qiniu
+        'zgldh\QiniuStorage\QiniuFilesystemServiceProvider',
+
+        // cors
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*

@@ -40,7 +40,7 @@
                             ?>
                             <td>
                                 @foreach ($imgs as $img)
-                                    <img style="width:60px" src="{{ \App\TimelineImg::getImgUrl($img->uri) }}">
+                                    <img style="width:60px" src="{{ $img->uri }}">
                                 @endforeach
                             </td>
                             <td>{{ $timeline->like_num }}</td>

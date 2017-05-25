@@ -100,4 +100,93 @@ class User extends Model implements AuthenticatableContract,
     {
         return \App\Helpers\FileSystem::getFullUrl($url);
     }
+
+    /**
+     * The user's following list
+     */
+    public function following()
+    {
+        return $this->belongsToMany('App\User', 'user_relationship', 'from_user_id', 'to_user_id');
+    }
+
+    /**
+     * The user's follower list
+     */
+    public function followers()
+    {
+        return $this->belongsToMany('App\User', 'user_relationship', 'to_user_id', 'from_user_id');
+    }
+
+    /**
+     * The user's relationship
+     */
+    public function userRelationship()
+    {
+        return $this->hasMany('App\UserRelationship', 'from_user_id');
+    }
+
+    /**
+     * Is someone blocked by current user?
+     * @param int $toUserId
+     */
+    public function isBlock($toUserId)
+    {
+        $relationship = $this->userRelationship()
+                            ->where('to_user_id', $toUserId)
+                            ->where('is_block', UserRelationship::BLOCKED)
+                            ->first();
+        return $relationship ? true : false;
+    }
+
+    /**
+     * Block someone
+     * @param int $toUserId
+     */
+    public function toBlock($toUserId)
+    {
+        $relationship = UserRelationship::where([
+                'from_user_id' => $this->id,
+                'to_user_id' => $toUserId,
+            ])
+            ->first();
+        if (!$relationship) {
+            $relationship = new UserRelationship;
+            $relationship->from_user_id = $this->id;
+            $relationship->to_user_id = $toUserId;
+            $relationship->is_block = UserRelationship::BLOCKED;
+        } else {
+            $relationship->is_block = UserRelationship::BLOCKED;
+        }
+        return $relationship->save();
+    }
+
+    /**
+     * Unblock someone
+     * @param int $userId
+     */
+    public function unBlock($userId)
+    {
+        $relationship = UserRelationship::where([
+                'from_user_id' => $this->id,
+                'to_user_id' => $userId,
+            ])
+            ->firstOrFail();
+        $relationship->is_block = UserRelationship::UNBLOCKED;
+        return $relationship->save();
+    }
+
+    /**
+     * Get block list
+     */
+    public function getBlock()
+    {
+        $relationship = $this->userRelationship()
+                            ->where('from_user_id', $this->id)
+                            ->where('is_block', UserRelationship::BLOCKED)
+                            ->get();
+        $relationship = $relationship->map(function($item){
+            return $item->toUser;
+        });
+        return $relationship;
+    }
 }

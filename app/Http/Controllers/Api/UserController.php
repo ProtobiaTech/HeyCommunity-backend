@@ -290,4 +290,139 @@ class UserController extends Controller
 
         return ['get verification code successful'];
     }
+
+    /**
+     * Get the user following list
+     *
+     * @return array of User model or failure info
+     */
+    public function getFollowing()
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            return $user->following;
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
+     * Get the user's followers list
+     *
+     * @return array of User model or failure info
+     */
+    public function getFollowers()
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            return $user->followers;
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
+     * Add a following relationship
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status model or failure info
+     */
+    public function postFollowing(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            $exist = $user->following()
+                            ->where('to_user_id', $request->toUserId)
+                            ->first();
+            if (!$exist) {
+                $toUser = User::findOrFail($request->toUserId);
+                if ($user->following()->save($toUser)) {
+                    $result = ['status' => true];
+                } else {
+                    $result = ['status' => false];
+                }
+            } else {
+                $result = ['status' => 'has_been_following'];
+            }
+            return $result;
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
+     * Is userId blocked by current user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status or failure info
+     */
+    public function postIsBlock(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->isBlock($request->toUserId)) {
+                return ['status' => true];
+            } else {
+                return ['status' => false];
+            }
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
+     * Add a block user
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object User model or failure info
+     */
+    public function postBlock(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->toBlock($request->toUserId)) {
+                return ['status' => true];
+            } else {
+                return ['status' => false];
+            }
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
+     * unblock a user
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object User model or failure info
+     */
+    public function postUnBlock(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->unBlock($request->toUserId)) {
+                return ['status' => true];
+            } else {
+                return ['status' => false];
+            }
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
+     * get block list
+     *
+     * @return array of object User model or failure info
+     */
+    public function getBlock()
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            $blockList = $user->getBlock();
+            return $blockList;
+        } else {
+            return response('', 404);
+        }
+    }
 }

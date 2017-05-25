@@ -15,14 +15,14 @@ class UserTableSeeder extends Seeder
 
         \App\User::create([
             'nickname'      =>      'Rod',
-            'avatar'        =>      'assets/images/userAvatar-default.png',
+            'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'supgeek.rod@gmail.com',
             'phone'         =>      '17090402884',
             'password'      =>      bcrypt('123123'),
         ]);
         \App\User::create([
             'nickname'      =>      'Test User',
-            'avatar'        =>      'assets/images/userAvatar-default.png',
+            'avatar'        =>      '/assets/images/userAvatar-default.png',
             'email'         =>      'test@hey-community.cn',
             'phone'         =>      '12312341234',
             'password'      =>      Hash::make('123123'),
@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder
 
             if (env('FAKER_IMAGE_SAVE')) {
                 $imgUrl = $faker->image(storage_path('app/uploads/avatars'), 300, 300, 'people');
-                $imgUrl = strstr($imgUrl, 'uploads/avatars');
+                $imgUrl = strstr($imgUrl, '/uploads/avatars');
             } else {
                 $imgUrl = $faker->imageUrl(300, 300, 'people');
             }

@@ -253,7 +253,7 @@ class TimelineController extends Controller
 
         $ret = [];
         foreach($files as $k => $file) {
-            $uploadPath = 'uploads/timeline/';
+            $uploadPath = '/uploads/timeline/';
             $fileName   = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
             $imgPath = $uploadPath . $fileName;
 

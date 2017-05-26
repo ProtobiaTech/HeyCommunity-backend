@@ -387,16 +387,36 @@ class UserController extends Controller
     }
 
     /**
+     * Is userId followed by current user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status or failure info
+     */
+    public function postIsFollowed(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->isFollowed($request->toUserId)) {
+                return ['status' => 'success'];
+            } else {
+                return ['status' => 'failed'];
+            }
+        } else {
+            return response('', 404);
+        }
+    }
+
+    /**
      * Is userId blocked by current user.
      *
      * @param \Illuminate\Http\Request $request
      * @return array of status or failure info
      */
-    public function postIsBlock(Request $request)
+    public function postIsBlocked(Request $request)
     {
         if (Auth::user()->check()) {
             $user = Auth::user()->user();
-            if ($user->isBlock($request->toUserId)) {
+            if ($user->isBlocked($request->toUserId)) {
                 return ['status' => 'success'];
             } else {
                 return ['status' => 'failed'];

@@ -64,6 +64,30 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\TimelineComment', 'user_id')->orderBy('created_at', 'desc')->with('author');
     }
 
+    /**
+     * The user's following list
+     */
+    public function following()
+    {
+        return $this->belongsToMany('App\User', 'user_relationship', 'from_user_id', 'to_user_id');
+    }
+
+    /**
+     * The user's follower list
+     */
+    public function followers()
+    {
+        return $this->belongsToMany('App\User', 'user_relationship', 'to_user_id', 'from_user_id');
+    }
+
+    /**
+     * The user's relationship
+     */
+    public function userRelationship()
+    {
+        return $this->hasMany('App\UserRelationship', 'from_user_id');
+    }
+
     /*
      *
      */
@@ -93,37 +117,25 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * The user's following list
+     * Is someone followed by current user?
+     * @param int $toUserId
      */
-    public function following()
+    public function isFollowed($toUserId)
     {
-        return $this->belongsToMany('App\User', 'user_relationship', 'from_user_id', 'to_user_id');
-    }
-
-    /**
-     * The user's follower list
-     */
-    public function followers()
-    {
-        return $this->belongsToMany('App\User', 'user_relationship', 'to_user_id', 'from_user_id');
-    }
-
-    /**
-     * The user's relationship
-     */
-    public function userRelationship()
-    {
-        return $this->hasMany('App\UserRelationship', 'from_user_id');
+        $relationship = $this->userRelationship()
+                            ->where('to_user_id', $toUserId)
+                            ->first();
+        return $relationship ? true : false;
     }
 
     /**
      * Is someone blocked by current user?
      * @param int $toUserId
      */
-    public function isBlock($toUserId)
+    public function isBlocked($toUserId)
     {
         $relationship = $this->userRelationship()
-                            ->where('to_user_id', $toUserId)
+                            ->where('to_user_id', $userId)
                             ->where('is_block', UserRelationship::BLOCKED)
                             ->first();
         return $relationship ? true : false;

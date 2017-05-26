@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Topic;
 use App\TopicNode;
+use App\Keyword;
 
 class TopicController extends Controller
 {
@@ -21,7 +22,9 @@ class TopicController extends Controller
     {
         $topics = Topic::paginate();
         $topicNodes = TopicNode::rootNodes()->get();
-        return view('topic.index', compact('topics', 'topicNodes'));
+        $keywords = Keyword::latest('topic_count')->take(8)->get();
+
+        return view('topic.index', compact('topics', 'topicNodes', 'keywords'));
     }
 
     /**

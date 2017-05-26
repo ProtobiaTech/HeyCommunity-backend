@@ -69,7 +69,8 @@ class User extends Model implements AuthenticatableContract,
      */
     public function following()
     {
-        return $this->belongsToMany('App\User', 'user_relationship', 'from_user_id', 'to_user_id');
+        return $this->belongsToMany('App\User', 'user_relationship', 'from_user_id', 'to_user_id')
+                    ->withTimestamps();
     }
 
     /**
@@ -77,7 +78,8 @@ class User extends Model implements AuthenticatableContract,
      */
     public function followers()
     {
-        return $this->belongsToMany('App\User', 'user_relationship', 'to_user_id', 'from_user_id');
+        return $this->belongsToMany('App\User', 'user_relationship', 'to_user_id', 'from_user_id')
+                    ->withTimestamps();
     }
 
     /**
@@ -135,7 +137,7 @@ class User extends Model implements AuthenticatableContract,
     public function isBlocked($toUserId)
     {
         $relationship = $this->userRelationship()
-                            ->where('to_user_id', $userId)
+                            ->where('to_user_id', $toUserId)
                             ->where('is_block', UserRelationship::BLOCKED)
                             ->first();
         return $relationship ? true : false;

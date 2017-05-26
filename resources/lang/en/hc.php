@@ -51,6 +51,10 @@ return [
     'view all'                              =>      'View all',
     'follow'                                =>      'Follow',
     'recommended_follow_text'               =>      'These are active users in the community, recommend you pay attention to them',
+    'has_been_following'                    =>      'Has been following',
+    'cancel_following'                      =>      'Cancel following',
+    'following'                             =>      'Following',
+    'followed'                              =>      'Followed',
 
 
     // right bottom

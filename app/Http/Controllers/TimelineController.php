@@ -30,9 +30,31 @@ class TimelineController extends Controller
     public function getIndex()
     {
         $timelines = Timeline::latest()->paginate();
-        $users = User::limit(5)->orderByRaw('RAND()')->get();
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            //remove blocked
+            $timelines = $timelines->reject(function($item)use($user){
+                return $user->isBlocked($item->author->id);
+            });
+            //remove myself
+            $userModel = User::where('id', '!=', $user->id);
+        } else {
+            $userModel = User;
+        }
 
-        return view('timeline.index', compact('timelines', 'users'));
+        $currentUser = isset($user) ? $user : null;
+
+        $users = $userModel->limit(5)
+                    ->orderByRaw('RAND()')
+                    ->get();
+        //remove blocked
+        if (Auth::user()->check()) {
+            $users = $users->reject(function($item)use($user){
+                return $user->isBlocked($item->id);
+            });
+        }
+
+        return view('timeline.index', compact('timelines', 'users', 'currentUser'));
     }
 
     /**

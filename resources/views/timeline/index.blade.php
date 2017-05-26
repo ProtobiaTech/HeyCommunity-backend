@@ -105,6 +105,7 @@
                 <ul class="media-list mb-2">
                   @foreach ($timeline->comments as $index => $comment)
                     <?php if ($index === 3) break; ?>
+                    @if ( $currentUser==null || ($currentUser && !$currentUser->isBlocked($comment->author->id)) )
                     <li class="media mb-3">
                       <img class="media-object d-flex align-self-start mr-3" src="{{ $comment->author->avatar }}">
                       <div class="media-body">
@@ -115,6 +116,7 @@
                         {{ $comment->content }}
                       </div>
                     </li>
+                    @endif
                   @endforeach
                 </ul>
               @endif
@@ -158,8 +160,12 @@
               <div class="media-body">
                 <span>{{ $user->nickname }}</span>
                 <div class="media-body-actions">
-                  <button class="btn btn-outline-primary btn-sm">
-                    <span class="icon icon-add-user"></span> @lang('hc.follow')</button></button>
+                  <button class="btn btn-outline-primary btn-sm tofollow {{ $currentUser->isFollowed($user->id) ? 'hidden' : '' }}" data-id="{{ $user->id }}">
+                    <span class="icon icon-add-user"></span> @lang('hc.follow')
+                  </button>
+                  <button class="btn btn-primary btn-sm hasfollowed {{ $currentUser->isFollowed($user->id) ? '' : 'hidden' }}" data-id="{{ $user->id }}">
+                    <span class="icon icon-add-user"></span> @lang('hc.following')
+                  </button>
                 </div>
               </div>
             </li>

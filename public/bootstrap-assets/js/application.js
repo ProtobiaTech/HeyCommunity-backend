@@ -183,4 +183,29 @@ $(function () {
         }, 1000)
       }
     }
-})
+});
+
+$(function(){
+  $('.tofollow').on('click', function(e){
+    var that = this;
+    $.post('/api/user/following', {toUserId: e.target.dataset.id}, function(res){
+      if (res.status == 'success') {
+        $(that).addClass('hidden');
+        $(that).next().removeClass('hidden');
+      } else {
+        alert(res.status);
+      }
+    }, 'json');
+  });
+  $('.hasfollowed').on('click', function(e){
+    var that = this;
+    $.post('/api/user/un-following', {toUserId: e.target.dataset.id}, function(res){
+      if (res.status == 'success') {
+        $(that).addClass('hidden');
+        $(that).prev().removeClass('hidden');
+      } else {
+        alert(res.status);
+      }
+    }, 'json');
+  });
+});

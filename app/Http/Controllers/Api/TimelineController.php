@@ -58,6 +58,14 @@ class TimelineController extends Controller
             if ($item->imgs) {
                 $item->imgs = TimelineImg::getImgs($item->imgs);
             }
+        })->reject(function($item){
+            if (Auth::user()->check()) {
+                $user = Auth::user()->user();
+                //remove blocked
+                $timelines = $timelines->reject(function($item)use($user){
+                    return $user->isBlocked($item->author->id);
+                });
+            }
         })->toArray();
 
         return $timelines;

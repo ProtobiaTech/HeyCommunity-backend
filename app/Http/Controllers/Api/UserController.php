@@ -296,14 +296,10 @@ class UserController extends Controller
      *
      * @return array of User model or failure info
      */
-    public function getFollowing()
+    public function getFollowing(Request $request)
     {
-        if (Auth::user()->check()) {
-            $user = Auth::user()->user();
-            return $user->following;
-        } else {
-            return response('', 404);
-        }
+        $user = User::findOrFail($request->input('id'));
+        return $user->following;
     }
 
     /**
@@ -311,14 +307,10 @@ class UserController extends Controller
      *
      * @return array of User model or failure info
      */
-    public function getFollowers()
+    public function getFollowers(Request $request)
     {
-        if (Auth::user()->check()) {
-            $user = Auth::user()->user();
-            return $user->followers;
-        } else {
-            return response('', 404);
-        }
+        $user = User::findOrFail($request->input('id'));
+        return $user->followers;
     }
 
     /**
@@ -332,26 +324,23 @@ class UserController extends Controller
         if (Auth::user()->check()) {
             $user = Auth::user()->user();
             
-            if ($user->id == $request->toUserId) {
+            if ($user->id == $request->input('toUserId')) {
                 $result = ['status' => 'cannot_follow_yourself'];
             } else {
                 $exist = $user->following()
-                                ->where('to_user_id', $request->toUserId)
+                                ->where('to_user_id', $request->input('toUserId'))
                                 ->first();
                 if (!$exist) {
-                    $toUser = User::findOrFail($request->toUserId);
-                    if ($user->following()->attach($toUser)) {
-                        $result = ['status' => 'success'];
-                    } else {
-                        $result = ['status' => 'failed'];
-                    }
+                    $toUser = User::findOrFail($request->input('toUserId'));
+                    $user->following()->attach($toUser);
+                    $result = ['status' => 'success'];
                 } else {
                     $result = ['status' => 'has_been_following'];
                 }
             }
             return $result;
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -367,22 +356,19 @@ class UserController extends Controller
             $user = Auth::user()->user();
             
             $exist = $user->following()
-                            ->where('to_user_id', $request->toUserId)
+                            ->where('to_user_id', $request->input('toUserId'))
                             ->first();
             if (!$exist) {
                 $result = ['status' => 'success'];
             } else {
-                $toUser = User::findOrFail($request->toUserId);
-                if ($user->following()->detach($toUser)) {
-                    $result = ['status' => 'success'];
-                } else {
-                    $result = ['status' => 'failed'];
-                }
+                $toUser = User::findOrFail($request->input('toUserId'));
+                $user->following()->detach($toUser);
+                $result = ['status' => 'success'];
             }
 
             return $result;
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -396,13 +382,13 @@ class UserController extends Controller
     {
         if (Auth::user()->check()) {
             $user = Auth::user()->user();
-            if ($user->isFollowed($request->toUserId)) {
+            if ($user->isFollowed($request->input('toUserId'))) {
                 return ['status' => 'success'];
             } else {
                 return ['status' => 'failed'];
             }
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -416,13 +402,13 @@ class UserController extends Controller
     {
         if (Auth::user()->check()) {
             $user = Auth::user()->user();
-            if ($user->isBlocked($request->toUserId)) {
+            if ($user->isBlocked($request->input('toUserId'))) {
                 return ['status' => 'success'];
             } else {
                 return ['status' => 'failed'];
             }
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -436,16 +422,16 @@ class UserController extends Controller
     {
         if (Auth::user()->check()) {
             $user = Auth::user()->user();
-            if ($user->id == $request->toUserId) {
+            if ($user->id == $request->input('toUserId')) {
                 return ['status' => 'cannot_block_yourself'];
             }
-            if ($user->toBlock($request->toUserId)) {
+            if ($user->toBlock($request->input('toUserId'))) {
                 return ['status' => 'success'];
             } else {
                 return ['status' => 'failed'];
             }
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -459,13 +445,13 @@ class UserController extends Controller
     {
         if (Auth::user()->check()) {
             $user = Auth::user()->user();
-            if ($user->unBlock($request->toUserId)) {
+            if ($user->unBlock($request->input('toUserId'))) {
                 return ['status' => 'success'];
             } else {
                 return ['status' => 'failed'];
             }
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -481,7 +467,7 @@ class UserController extends Controller
             $blockList = $user->getBlock();
             return $blockList;
         } else {
-            return response('', 404);
+            return ['status' => 'not_login'];
         }
     }
 
@@ -490,18 +476,14 @@ class UserController extends Controller
      *
      * @return array of relationship nums or failure info
      */
-    public function getRelationshipNums()
+    public function getRelationshipNums(Request $request)
     {
-        if (Auth::user()->check()) {
-            $user = Auth::user()->user();
-            $result = [
-                'follower' => count($user->followers),
-                'following' => count($user->following),
-                'block' => count($user->getBlock())
-            ];
-            return $result;
-        } else {
-            return response('', 404);
-        }
+        $user = User::findOrFail($request->input('id'));
+        $result = [
+            'follower' => count($user->followers),
+            'following' => count($user->following),
+            'block' => count($user->getBlock())
+        ];
+        return $result;
     }
 }

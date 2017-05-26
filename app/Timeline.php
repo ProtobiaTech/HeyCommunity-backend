@@ -47,6 +47,14 @@ class Timeline extends HeyCommunity
     }
 
     /**
+     * Keyword
+     */
+    public function keywords()
+    {
+        return $this->morphMany('App\Keyword', 'keywordable');
+    }
+
+    /**
      *
      */
     public function getImgs()

@@ -11,17 +11,11 @@
           <div class="card-block">
               <h6 class="mb-3">@lang('hc.we are talking about')</h6>
               <div class="tags">
-                <span class="muted">@lang('hc.no content yet')</span>
-                <!--
-                <a href="" class="l1">苹果</a>
-                <a href="" class="l2">马戏团</a>
-                <a href="" class="l2">美国</a>
-                <a href="" class="l1">美国</a>
-                <a href="" class="l3">美国</a>
-                <a href="" class="l1">美国</a>
-                <a href="" class="l4">美国</a>
-                <a href="" class="l4">美国</a>
-                -->
+                {{--<span class="muted">@lang('hc.no content yet')</span>--}}
+                @foreach($keywords as $keyword)
+                  <a href="" class="l1">{{ $keyword->name }}</a>
+                @endforeach
+
               </div>
           </div>
       </div>

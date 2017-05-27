@@ -23,32 +23,40 @@
 
     //
     .list-topic {
-      .avatar {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
-      .body {
-        margin-left: 52px;
-        overflow: hidden;
-        .title {
-          font-size: 16px;
-          font-weight: 500;
-          line-height: 20px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+      @extend %list-topic;
+    }
+  }
+}
 
-          .info {
-            position: absolute;
-            right: 18px;
-            padding-left: 1em;
-            background-color: #fff;
-            font-size: 14px;
-            font-weight: normal;
-            color: #777;
-          }
-        }
+.list-topic {
+  @extend %list-topic;
+}
+
+%list-topic {
+  .avatar {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .body {
+    margin-left: 52px;
+    overflow: hidden;
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .info {
+        position: absolute;
+        right: 18px;
+        padding-left: 1em;
+        background-color: #fff;
+        font-size: 14px;
+        font-weight: normal;
+        color: #777;
       }
     }
   }

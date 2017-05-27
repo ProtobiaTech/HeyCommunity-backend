@@ -13,7 +13,7 @@ use App\User;
 class UserController extends Controller
 {
     /**
-     *
+     * Profile page
      */
     public function getProfile($id)
     {

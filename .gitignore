@@ -4,5 +4,6 @@ Homestead.yaml
 Homestead.json
 .env
 .idea
-
 /public/bower-assets
+.DS_Store
+composer.lock

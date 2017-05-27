@@ -182,25 +182,6 @@
           @lang('hc.recommended_follow_text')
         </div>
       </div>
-
-      <div class="card card-link-list">
-        <div class="card-block">
-          © 2015 - 2017 HeyCommunity <br>
-          <a href="#">@lang('hc.about')</a>
-          <a href="#">@lang('hc.help')</a>
-          <a href="#">@lang('hc.terms')</a>
-          <a href="#">@lang('hc.privacy')</a>
-          <a href="#">@lang('hc.cookies')</a>
-          <a href="#">@lang('hc.ads') </a>
-          <a href="#">@lang('hc.info')</a>
-          <a href="#">@lang('hc.brand')</a>
-          <a href="#">@lang('hc.blog')</a>
-          <a href="#">@lang('hc.status')</a>
-          <a href="#">@lang('hc.apps')</a>
-          <a href="#">@lang('hc.jobs')</a>
-          <a href="#">@lang('hc.advertise')</a>
-        </div>
-      </div>
     </div>
   </div>
 </div>

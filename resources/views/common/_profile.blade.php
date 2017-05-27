@@ -2,7 +2,7 @@
     @if (Auth::user()->check())
         <div class="card-header" style="background-image: url(bootstrap-assets/img/iceland.jpg);"></div>
         <div class="card-block text-center">
-            <a href="profile/index.html">
+            <a href="{{ url('/user/profile/' . Auth::user()->user()->id) }}">
                 <img class="card-profile-img" style="background-color:#eee;" src="{{ Auth::user()->user()->avatar }}">
             </a>
 

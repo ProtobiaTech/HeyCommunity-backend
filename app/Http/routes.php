@@ -59,5 +59,39 @@ Route::controller('timeline', 'TimelineController');
 Route::controller('topic', 'TopicController');
 Route::controller('activity', 'ActivityController');
 Route::controller('timeline', 'TimelineController');
+
 Route::controller('user', 'UserController');
 Route::controller('ucenter', 'UserCenterController');
+
+//
+// Dingo Api
+// ----------------------------
+$api = app('Dingo\Api\Routing\Router');
+$api->version('v1', function ($api) {
+    $api->group(['namespace' => 'App\Http\Controllers\Api'], function ($api) {
+        //auth
+        $api->post(
+            'auth/login',
+            [
+                'as' => 'auth.login',
+                'uses' => 'V1\AuthController@login'
+            ]
+        );
+
+        //timeline
+        $api->get(
+            'timelines',
+            [
+                'as' => 'timelines.index',
+                'uses' => 'V1\TimelineController@index'
+            ]
+        );
+        $api->get(
+            'timelines/{id}',
+            [
+                'as' => 'timelines.detail',
+                'uses' => 'V1\TimelineController@detail'
+            ]
+        );
+    });
+});

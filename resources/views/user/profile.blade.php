@@ -1,19 +1,20 @@
 @extends('layouts.home')
 
 @section('content')
-<div class="container" style="margin-top: 40px;">
+<div class="container pt-4">
     <div class="row">
         <!-- LG 3 -->
         <div class="col-lg-3">
-            <div class="profile-header" style="border-radius:1em; background-image: url({{ asset('assets/img/iceland.jpg') }});">
-                <div class="container">
-                    <div class="container-inner">
-                        <img class="rounded-circle media-object" src="{{ asset($user->avatar) }}" style="border-radius:50%; background-color:#ddd;">
-                        <h3 class="profile-header-user">{{ $user->nickname }}</h3>
-                        <p class="profile-header-bio">
-                            {{ $user->bio }}
-                        </p>
-                    </div>
+            <div class="card card-profile mb-4">
+                <div class="card-header" style="background-image: url({{ asset('bootstrap-assets/img/iceland.jpg') }});"></div>
+                <div class="card-block text-center">
+                    <span>
+                        <img class="card-profile-img" style="background-color:#eee;" src="{{ $user->avatar }}">
+                    </span>
+
+                    <h6 class="card-title">
+                        <span>{{ $user->nickname }}</span>
+                    </h6>
                 </div>
             </div>
         </div>

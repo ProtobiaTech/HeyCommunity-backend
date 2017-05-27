@@ -60,3 +60,4 @@ Route::controller('topic', 'TopicController');
 Route::controller('activity', 'ActivityController');
 Route::controller('timeline', 'TimelineController');
 Route::controller('user', 'UserController');
+Route::controller('ucenter', 'UserCenterController');

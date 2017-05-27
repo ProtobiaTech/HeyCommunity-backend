@@ -29,19 +29,19 @@ class ExtractKeywordsListener
     {
         $object = $event->object;
 
-        $keywords = ExtractKeywords::getKeywords($object->content);
+        $keywords = ExtractKeywords::getKeywords($object->content, 5);
 
         foreach ($keywords as $word => $score) {
             $keyword = Keyword::firstOrNew(['name' => $word]);
 
             switch (get_class($object)) {
                 case 'App\Timeline':
-                    $keyword->increment('timeline_count');
+                    $keyword->timeline_count += 1;
                     $keyword->save();
                     $keyword->timelines()->attach($object->id);
                     break;
                 case 'App\Topic':
-                    $keyword->increment('topic_count');
+                    $keyword->topic_count += 1;
                     $keyword->save();
                     $keyword->topics()->attach($object->id);
                     break;

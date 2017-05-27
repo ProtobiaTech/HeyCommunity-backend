@@ -33,7 +33,7 @@ class TimelineController extends Controller
     {
         $timelines = Timeline::latest()->paginate();
         $users = User::limit(5)->orderByRaw('RAND()')->get();
-        $keywords = Keyword::latest('timeline_count')->take(8)->get();
+        $keywords = Keyword::ofType('timeline_count');
 
         return view('timeline.index', compact('timelines', 'users', 'keywords'));
     }

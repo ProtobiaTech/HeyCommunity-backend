@@ -22,7 +22,7 @@ class TopicController extends Controller
     {
         $topics = Topic::paginate();
         $topicNodes = TopicNode::rootNodes()->get();
-        $keywords = Keyword::latest('topic_count')->take(8)->get();
+        $keywords = Keyword::ofType('topic_count');
 
         return view('topic.index', compact('topics', 'topicNodes', 'keywords'));
     }

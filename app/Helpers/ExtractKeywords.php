@@ -10,6 +10,8 @@ class ExtractKeywords
 {
     public static function getKeywords($content, $topK = 10)
     {
+        ini_set('memory_limit', env('PHP_MEMORY_LIMIT', '600M'));
+
         Jieba::init();
         Finalseg::init();
         JiebaAnalyse::init();

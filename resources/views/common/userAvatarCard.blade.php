@@ -9,7 +9,13 @@
     @if (isset($user))
         <div class="card-header" style="background-image: url({{ asset('assets/img/iceland.jpg') }});"></div>
         <div class="card-block text-center">
-            <a href="{{ url('/user/profile/' . $user->id) }}">
+            <?php
+                $userAvatarUrl = url('/user/profile/' . $user->id);
+                if (Auth::user()->check() && $user->id === Auth::user()->user()->id) {
+                    $userAvatarUrl = url('/ucenter');
+                }
+            ?>
+            <a href="{{ $userAvatarUrl }}">
                 <img class="card-profile-img" style="background-color:#eee;" src="{{ $user->avatar }}">
             </a>
 

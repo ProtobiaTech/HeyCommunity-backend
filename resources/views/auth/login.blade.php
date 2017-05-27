@@ -19,7 +19,7 @@
       @endif
 
       <div class="form-group">
-        <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" placeholder="Username">
+        <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" placeholder="Phone">
       </div>
 
       <div class="form-group mb-3">
@@ -28,11 +28,11 @@
 
       <div class="mb-5 text-center ">
         <button class="btn btn-primary">Log In</button>
-        <button class="btn btn-secondary">Sign up</button>
+        <a class="btn btn-secondary btn-link" href="{{ url('/auth/signup') }}">Sign up</a>
       </div>
 
       <footer class="screen-login text-center">
-        <a href="#" class="text-muted">Forgot password</a>
+        <a class="text-muted">Forgot password</a>
       </footer>
     {!! Form::close() !!}
   </div>

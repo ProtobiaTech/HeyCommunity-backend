@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('wx_open_id', 191)->nullable();
             $table->string('nickname', 191);
-            $table->string('avatar', 191);
+            $table->string('avatar', 191)->default('/assets/images/userAvatar-default.png');
             $table->string('bio', 191);
             $table->integer('gender');
             $table->string('email', 191)->nullable();

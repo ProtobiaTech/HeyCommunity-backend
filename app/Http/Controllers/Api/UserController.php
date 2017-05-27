@@ -137,7 +137,6 @@ class UserController extends Controller
         ) {
             $User = new User;
             $User->nickname     =   $request->nickname;
-            $User->avatar       =   'assets/images/userAvatar-default.png';
             $User->phone        =   $request->phone;
             $User->password     =   Hash::make($request->password);
 
@@ -200,7 +199,7 @@ class UserController extends Controller
         $files = $request->file('uploads');
         $file = $files[0];
 
-        $uploadPath = 'uploads/avatars/';
+        $uploadPath = '/uploads/avatars/';
         $fileName = date('Ymd-His_') . str_random(6) . '_' . $file->getClientOriginalName();
         $imgPath = $uploadPath . $fileName;
 

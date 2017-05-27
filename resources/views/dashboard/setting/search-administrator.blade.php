@@ -53,7 +53,7 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>
-                                <img style="height:20px" src="{{ \App\User::getAvatarUrl($user->avatar) }}">
+                                <img style="height:20px" src="{{ $user->avatar }}">
                             </td>
                             <td>{{ $user->nickname }}</td>
                             <td>{{ $user->phone }}</td>

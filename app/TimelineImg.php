@@ -29,21 +29,6 @@ class TimelineImg extends Model
     /**
      *
      */
-    public static function getImgUrl($url)
-    {
-        $pattern = '/^http[s]?:\/\/.*/';
-        if (preg_match($pattern, $url)) {
-            return $url;
-        } else {
-            // $domain = '//public.hey-community.cn/';
-            $domain = '';
-            return $domain . $url;
-        }
-    }
-
-    /**
-     *
-     */
     public function getUriAttribute($url)
     {
         return \App\Helpers\FileSystem::getFullUrl($url);

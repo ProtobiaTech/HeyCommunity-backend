@@ -6,7 +6,7 @@
     <!-- LG 3 -->
     <div class="col-lg-3 hidden-xs-down">
       <div class="card-tools">
-        <a class="btn btn-primary btn-block" todo-href="{{url('topic/create')}}">@lang('hc.create topic')</a>
+        <a class="btn btn-primary btn-block" href="{{url('topic/create')}}">@lang('hc.create topic')</a>
       </div>
 
       <div class="card card-nodes visible-md-block visible-lg-block mb-4">
@@ -48,6 +48,18 @@
 
     <!-- LG 9 -->
     <div class="col-lg-9">
+      <div class="card-tools">
+        <a class="btn btn-secondary" todo-href="{{url('topic/create')}}">@lang('最近')</a>
+        <a class="btn btn-secondary" todo-href="{{url('topic/create')}}">@lang('最热')</a>
+        <a class="btn btn-secondary" todo-href="{{url('topic/create')}}">@lang('精华')</a>
+        &nbsp;&nbsp;
+        <a class="btn btn-secondary" todo-href="{{url('topic/create')}}">@lang('零回复')</a>
+
+        <div class="pull-right">
+          <a class="btn btn-secondary" todo-href="{{url('topic/create')}}">刷新</a>
+        </div>
+      </div>
+
       <div class="list-group list-topic">
         @foreach ($topics as $topic)
           <div class="list-group-item">

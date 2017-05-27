@@ -65,10 +65,6 @@
                   <i class="fa fa-fire"></i> <span>{{ $timeline->like_num + $timeline->comment_num * 2 }}</span>
                   &nbsp;&nbsp;
                 </small>
-                <small class="float-right text-muted">
-                  <a href="{{ url('/timeline/show/' . $timeline->id) }}">Detail</a>
-                  &nbsp;&nbsp;
-                </small>
                 <h6>{{ $timeline->author->nickname }}</h6>
               </div>
               <p>{{ $timeline->content }}</p>
@@ -83,14 +79,25 @@
                 </div>
               @endif
 
-              {{--
-              <div class="mb-2 text-right">
-                <!-- <a class="btn btn-default btn-xs"><i class="fa fa-heart" style="color:red;"></i></a> -->
-                <a style="font-size:1rem;" class="btn btn-default btn-xs" href="#"><i class="fa fa-comment" style="color:#333"></i></a>
-              </div>
-              --}}
+              <div class="mb-2">
+                <div class="text-muted pull-left">
+                  <a class="btn btn-link btn-xs" href="{{ url('/timeline/show/' . $timeline->id) }}"><i class="fa fa-newspaper-o"></i></a>
+                </div>
 
-              <div class="mb-2" style="margin-bottom:1rem !important;">
+                <div class="pull-right">
+                  @if (true)
+                    <a class="btn btn-link btn-xs" href="#"><i class="fa fa-heart-o" style="color:#333;"></i></a>
+                  @else
+                    <a class="btn btn-link btn-xs" href="#"><i class="fa fa-heart" style="color:red;"></i></a>
+                  @endif
+                  <a style="font-size:1rem;" class="btn btn-link btn-xs" href="javascript:$('.form-timeline-comment-{{ $timeline->id }}').toggle()"><i class="fa fa-comment" style="color:#333"></i></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+              </div>
+
+              <div class="mb-2 form-timeline-comment-{{ $timeline->id }}" style="display:none; margin-bottom:1rem !important;">
                 {!! Form::open(array('url' => '/timeline/store-comment', 'method' => 'POST')) !!}
                   {{ csrf_field() }}
                   {!! Form::hidden('timeline_id', $timeline->id) !!}
@@ -104,6 +111,7 @@
                   </div>
                   {!! Form::close() !!}
               </div>
+              <hr style="margin-top:0;">
 
               @if ($timeline->comments)
                 <ul class="media-list mb-2">

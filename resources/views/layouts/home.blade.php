@@ -49,8 +49,14 @@
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item {{ Request::is('timeline') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/') }}">@lang('hc.home') <span class="sr-only">(current)</span></a>
+          <!--
+          <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/') }}">@lang('hc.home')</a>
+          </li>
+          -->
+
+          <li class="nav-item {{ Request::is('timeline*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/timeline') }}">@lang('hc.timeline')</a>
           </li>
           <li class="nav-item {{ Request::is('topic*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/topic') }}">@lang('hc.topic')</a>

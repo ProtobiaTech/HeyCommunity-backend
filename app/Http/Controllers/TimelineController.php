@@ -97,9 +97,12 @@ class TimelineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $timeline = Timeline::findOrFail($id);
+        $users = User::limit(5)->orderByRaw('RAND()')->get();
+
+        return view('timeline.show', compact('timeline', 'users'));
     }
 
     /**

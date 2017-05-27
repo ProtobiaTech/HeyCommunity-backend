@@ -5,7 +5,7 @@
   <div class="row">
     <!-- LG 3 -->
     <div class="col-lg-3 hidden-xs-down">
-      @include('common._profile')
+      @include('common.userAvatarCard')
 
       <div class="card card-tags visible-md-block visible-lg-block mb-4">
           <div class="card-block">
@@ -63,6 +63,10 @@
                 <small class="float-right text-muted">{{ $timeline->created_at->format('h-d H:i:m') }}</small>
                 <small class="float-right text-muted">
                   <i class="fa fa-fire"></i> <span>{{ $timeline->like_num + $timeline->comment_num * 2 }}</span>
+                  &nbsp;&nbsp;
+                </small>
+                <small class="float-right text-muted">
+                  <a href="{{ url('/timeline/show/' . $timeline->id) }}">Detail</a>
                   &nbsp;&nbsp;
                 </small>
                 <h6>{{ $timeline->author->nickname }}</h6>

@@ -116,7 +116,7 @@
               @if ($timeline->comments)
                 <ul class="media-list mb-2">
                   @foreach ($timeline->comments as $index => $comment)
-                    <?php if ($index === 3) break; ?>
+                    <?php if (false && $index === 3) break; ?>
                     <li class="media mb-3">
                       <img class="media-object d-flex align-self-start mr-3" src="{{ $comment->author->avatar }}">
                       <div class="media-body">

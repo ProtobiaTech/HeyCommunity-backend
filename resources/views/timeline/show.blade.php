@@ -3,16 +3,21 @@
 @section('content')
 <div class="container pt-4">
   <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-2 hidden-sm-down hidden-md-down hidden-xs-down">
       <hr style="margin-top:0;">
 
       <a class="btn btn-block btn-secondary" href="{{ URL::previous() }}"><i class="pull-left fa fa-chevron-left" style="line-height:1.25"></i> 返回</a>
       <br>
 
-      <a class="btn btn-block btn-secondary" href="{{ URL::previous() }}"><i class="pull-left fa fa-reply" style="line-height:1.25"></i> 回复</a>
-      <a class="btn btn-block btn-secondary" href="{{ URL::previous() }}"><i class="pull-left fa fa-thumbs-o-up" style="line-height:1.25"></i> 点赞</a>
-      <a class="btn btn-block btn-secondary" href="{{ URL::previous() }}"><i class="pull-left fa fa-thumbs-o-down" style="line-height:1.25"></i> 点踩</a>
-      <a class="btn btn-block btn-secondary" href="{{ URL::previous() }}"><i class="pull-left fa fa-star-o" style="line-height:1.25"></i> 收藏</a>
+      <a class="btn btn-block btn-secondary" href="javascript:$('.form-timeline-comment .input-content').focus();"><i class="pull-left fa fa-reply" style="line-height:1.25"></i> 回复</a>
+      @if (false)
+        <a class="btn btn-block btn-secondary" href="#"><i class="pull-left fa fa-heart" style="line-height:1.25;"></i> 喜欢</a>
+      @else
+        <a class="btn btn-block btn-secondary" href="#"><i class="pull-left fa fa-heart-o" style="line-height:1.25"></i> 喜欢</a>
+      @endif
+      <!--
+      <a class="btn btn-block btn-secondary" href="#"><i class="pull-left fa fa-star-o" style="line-height:1.25"></i> 收藏</a>
+      -->
     </div>
 
     <!-- LG 7 -->
@@ -26,10 +31,6 @@
                 <small class="float-right text-muted">{{ $timeline->created_at->format('h-d H:i:m') }}</small>
                 <small class="float-right text-muted">
                   <i class="fa fa-fire"></i> <span>{{ $timeline->like_num + $timeline->comment_num * 2 }}</span>
-                  &nbsp;&nbsp;
-                </small>
-                <small class="float-right text-muted">
-                  <a href="{{ url('/timeline/show/' . $timeline->id) }}">Detail</a>
                   &nbsp;&nbsp;
                 </small>
                 <h6>{{ $timeline->author->nickname }}</h6>
@@ -53,12 +54,12 @@
               </div>
               --}}
 
-              <div class="mb-2" style="margin-bottom:1rem !important;">
+              <div class="mb-2 form-timeline-comment" style="margin-bottom:1rem !important;">
                 {!! Form::open(array('url' => '/timeline/store-comment', 'method' => 'POST')) !!}
                   {{ csrf_field() }}
                   {!! Form::hidden('timeline_id', $timeline->id) !!}
                   <div class="input-group">
-                    <input type="text" name="content" class="form-control" placeholder="">
+                    <input type="text" name="content" class="form-control input-content" placeholder="">
                     <div class="input-group-btn">
                       <button type="submit" class="btn btn-secondary">
                         <span class="icon icon-paper-plane"></span>
@@ -67,11 +68,11 @@
                   </div>
                   {!! Form::close() !!}
               </div>
+              <hr style="margin-top:0;">
 
               @if ($timeline->comments)
                 <ul class="media-list mb-2">
                   @foreach ($timeline->comments as $index => $comment)
-                    <?php if ($index === 3) break; ?>
                     <li class="media mb-3">
                       <img class="media-object d-flex align-self-start mr-3" src="{{ $comment->author->avatar }}">
                       <div class="media-body">

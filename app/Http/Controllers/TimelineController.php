@@ -84,7 +84,7 @@ class TimelineController extends Controller
         $timelineComment->content       =   $request->content;
 
         if ($timelineComment->save()) {
-            return redirect()->to('/timeline');
+            return back();
         } else {
             return back();
         }

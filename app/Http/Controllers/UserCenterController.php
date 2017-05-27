@@ -10,6 +10,14 @@ use App\Http\Controllers\Controller;
 class UserCenterController extends Controller
 {
     /**
+     * construct
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => []]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

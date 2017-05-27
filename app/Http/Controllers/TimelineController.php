@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ExtractKeywordsEvent;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use App\Keyword;
 use App\User;
 use App\Timeline;
 use App\TimelineComment;
@@ -31,8 +33,9 @@ class TimelineController extends Controller
     {
         $timelines = Timeline::latest()->paginate();
         $users = User::limit(5)->orderByRaw('RAND()')->get();
+        $keywords = Keyword::ofType('timeline_count');
 
-        return view('timeline.index', compact('timelines', 'users'));
+        return view('timeline.index', compact('timelines', 'users', 'keywords'));
     }
 
     /**
@@ -62,6 +65,8 @@ class TimelineController extends Controller
         $timeline->content = $request->content;
 
         if ($timeline->save()) {
+            event(new ExtractKeywordsEvent($timeline));
+
             return redirect()->to('/timeline');
         } else {
             return back();

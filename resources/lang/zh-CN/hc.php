@@ -3,6 +3,7 @@
 return [
     // Navigation
     'home'     => '首页',
+    'timeline' => '动态',
     'topic'    => '话题',
     'activity' => '活动',
     'logout'   => '退出',
@@ -66,6 +67,10 @@ return [
     'apps'      => 'APP应用',
     'jobs'      => '工作',
     'advertise' => '广告',
+
+
+    // common
+    'detail'                                =>          '详情',
 
 
 

@@ -19,7 +19,7 @@ class TimelineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postStore']]);
+        $this->middleware('auth', ['only' => ['postStore', 'postStoreComment']]);
     }
 
     /**
@@ -84,7 +84,7 @@ class TimelineController extends Controller
         $timelineComment->content       =   $request->content;
 
         if ($timelineComment->save()) {
-            return redirect()->to('/timeline');
+            return back();
         } else {
             return back();
         }
@@ -97,9 +97,12 @@ class TimelineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getShow($id)
     {
-        //
+        $timeline = Timeline::findOrFail($id);
+        $users = User::limit(5)->orderByRaw('RAND()')->get();
+
+        return view('timeline.show', compact('timeline', 'users'));
     }
 
     /**

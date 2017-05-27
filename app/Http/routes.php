@@ -59,6 +59,8 @@ Route::controller('timeline', 'TimelineController');
 Route::controller('topic', 'TopicController');
 Route::controller('activity', 'ActivityController');
 Route::controller('timeline', 'TimelineController');
+Route::controller('user', 'UserController');
+Route::controller('ucenter', 'UserCenterController');
 
 //
 // Dingo Api
@@ -92,5 +94,3 @@ $api->version('v1', function ($api) {
         );
     });
 });
-
-

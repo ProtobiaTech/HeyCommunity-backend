@@ -80,6 +80,9 @@
             </div>
           </div>
         @endforeach
+        <div>
+          {!! $topics->render() !!}
+        </div>
       </div>
     </div>
   </div>

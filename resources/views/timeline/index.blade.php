@@ -134,6 +134,9 @@
           </div>
         </li>
         @endforeach
+        <div>
+          {!! $timelines->render() !!}
+        </div>
       </ul>
     </div>
 

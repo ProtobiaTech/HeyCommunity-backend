@@ -12,7 +12,16 @@ use App\TopicNode;
 
 class TopicController extends Controller
 {
+
     /**
+     * TopicController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['postStore']]);
+    }
+
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,9 +38,10 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCreate()
     {
-        //
+        $nodes = TopicNode::all()->pluck('name', 'id');
+        return view('topic/create', compact('nodes'));
     }
 
     /**
@@ -40,9 +50,26 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function postStore(Request $request)
     {
-        //
+      $this->validate($request, [
+        'title'         =>      'required|string',
+        'content'       =>      'required|string',
+        'topic_node_id' =>      'required|integer',
+      ]);
+
+      $topic = new Topic;
+      $topic->title           =   $request->title;
+      $topic->content         =   $request->content;
+      $topic->topic_node_id   =   $request->topic_node_id;
+      $topic->user_id         =   auth()->id();
+      $topic->save();
+
+      if ($topic->save()) {
+        return redirect()->to('/topic');
+      } else {
+        return back();
+      }
     }
 
     /**

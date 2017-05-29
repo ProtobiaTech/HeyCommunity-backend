@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\TimelineLike;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use Auth;
 use App\User;
 use App\Timeline;
@@ -80,6 +77,11 @@ class TimelineController extends Controller
         ]);
 
         $timelineComment = new TimelineComment();
+
+        if ($request->timeline_comment_id) {
+            $timelineComment->parent_id   =   $request->timeline_comment_id;
+        }
+
         $timelineComment->user_id       =   Auth::user()->user()->id;
         $timelineComment->timeline_id   =   $request->timeline_id;
         $timelineComment->content       =   $request->content;
@@ -102,8 +104,9 @@ class TimelineController extends Controller
     {
         $timeline = Timeline::findOrFail($id);
         $users = User::limit(5)->orderByRaw('RAND()')->get();
+        $comments = $timeline->comments()->paginate();
 
-        return view('timeline.show', compact('timeline', 'users'));
+        return view('timeline.show', compact('timeline', 'users', 'comments'));
     }
 
     public function postSetLike(Request $request)

@@ -10,11 +10,17 @@
       <br>
 
       <a class="btn btn-block btn-secondary" href="javascript:$('.form-timeline-comment .input-content').focus();"><i class="pull-left fa fa-reply" style="line-height:1.25"></i> 回复</a>
-      @if (false)
-        <a class="btn btn-block btn-secondary" href="#"><i class="pull-left fa fa-heart" style="line-height:1.25;"></i> 喜欢</a>
-      @else
-        <a class="btn btn-block btn-secondary" href="#"><i class="pull-left fa fa-heart-o" style="line-height:1.25"></i> 喜欢</a>
-      @endif
+      <a class="btn btn-block btn-secondary"
+         onclick="event.preventDefault();
+                 document.getElementById('timeline-like-form').submit();">
+        <i class="pull-left fa fa-heart{{ $timeline->isLike ? '' : '-o' }}" style="line-height:1.25;"></i> 喜欢
+        <div style="display: none">
+          {!! Form::open(array('url' => '/timeline/set-like', 'method' => 'POST', 'id' => 'timeline-like-form')) !!}
+          {{ csrf_field() }}
+          {!! Form::hidden('id', $timeline->id) !!}
+          {!! Form::close() !!}
+        </div>
+      </a>
       <!--
       <a class="btn btn-block btn-secondary" href="#"><i class="pull-left fa fa-star-o" style="line-height:1.25"></i> 收藏</a>
       -->

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Timeline extends HeyCommunity
 {
+
+    protected $appends = ['isLike'];
+
     /**
      * Related User
      */
@@ -68,5 +71,10 @@ class Timeline extends HeyCommunity
     public function getPosterAttribute($url)
     {
         return \App\Helpers\FileSystem::getFullUrl($url);
+    }
+
+    public function getIsLikeAttribute()
+    {
+        return $this->author_like->where('user_id', auth()->id())->count();
     }
 }

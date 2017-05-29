@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TimelineLike;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -103,6 +104,31 @@ class TimelineController extends Controller
         $users = User::limit(5)->orderByRaw('RAND()')->get();
 
         return view('timeline.show', compact('timeline', 'users'));
+    }
+
+    public function postSetLike(Request $request)
+    {
+        $this->validate($request, [
+           'id' => 'required|numeric',
+        ]);
+
+        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => auth()->id()])->first();
+        $Timeline = Timeline::findOrFail($request->id);
+
+        if ($TimelineLike) {
+            $TimelineLike->delete();
+            $Timeline->decrement('like_num');
+        } else {
+            $TimelineLike = new TimelineLike;
+            $TimelineLike->user_id = auth()->id();
+            $TimelineLike->timeline_id = $request->id;
+            $TimelineLike->save();
+            $Timeline->increment('like_num');
+
+        }
+
+        return back();
+
     }
 
     /**

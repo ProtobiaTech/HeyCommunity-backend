@@ -85,12 +85,20 @@
                 </div>
 
                 <div class="pull-right">
-                  @if (true)
-                    <a class="btn btn-link btn-xs" href="#"><i class="fa fa-heart-o" style="color:#333;"></i></a>
-                  @else
-                    <a class="btn btn-link btn-xs" href="#"><i class="fa fa-heart" style="color:red;"></i></a>
-                  @endif
-                  <a style="font-size:1rem;" class="btn btn-link btn-xs" href="javascript:$('.form-timeline-comment-{{ $timeline->id }}').toggle()"><i class="fa fa-comment" style="color:#333"></i></a>
+
+                    <a class="btn btn-link btn-xs"
+                       onclick="event.preventDefault();
+                       document.getElementById('timeline-like-form-{{$timeline->id}}').submit();">
+                        <i class="fa fa-heart{{ $timeline->isLike ? '' : '-o' }}" style="{{ $timeline->isLike ? 'color:red;' : 'color:#333;' }}"></i>
+                        <div style="display: none">
+                            {!! Form::open(array('url' => '/timeline/set-like', 'method' => 'POST', 'id' => 'timeline-like-form-' . $timeline->id)) !!}
+                            {{ csrf_field() }}
+                            {!! Form::hidden('id', $timeline->id) !!}
+                            {!! Form::close() !!}
+                        </div>
+                    </a>
+
+                    <a style="font-size:1rem;" class="btn btn-link btn-xs" href="javascript:$('.form-timeline-comment-{{ $timeline->id }}').toggle()"><i class="fa fa-comment" style="color:#333"></i></a>
                 </div>
 
                 <div class="clearfix"></div>

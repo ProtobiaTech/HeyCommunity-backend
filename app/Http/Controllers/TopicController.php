@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TopicComment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,7 +22,7 @@ class TopicController extends Controller
         $this->middleware('auth', ['only' => ['postStore']]);
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -47,48 +48,49 @@ class TopicController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postStore(Request $request)
     {
-      $this->validate($request, [
-        'title'         =>      'required|string',
-        'content'       =>      'required|string',
-        'topic_node_id' =>      'required|integer',
-      ]);
+        $this->validate($request, [
+            'title'         => 'required|string',
+            'content'       => 'required|string',
+            'topic_node_id' => 'required|integer',
+        ]);
 
-      $topic = new Topic;
-      $topic->title           =   $request->title;
-      $topic->content         =   $request->content;
-      $topic->topic_node_id   =   $request->topic_node_id;
-      $topic->user_id         =   auth()->id();
-      $topic->save();
+        $topic = new Topic;
+        $topic->title = $request->title;
+        $topic->content = $request->content;
+        $topic->topic_node_id = $request->topic_node_id;
+        $topic->user_id = auth()->id();
+        $topic->save();
 
-      if ($topic->save()) {
-        return redirect()->to('/topic');
-      } else {
-        return back();
-      }
+        if ($topic->save()) {
+            return redirect()->to('/topic');
+        } else {
+            return back();
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function getShow($id)
     {
         $topic = Topic::findOrFail($id);
+        $comments = $topic->comments()->paginate();
 
-        return view('topic.show', compact('topic'));
+        return view('topic.show', compact('topic', 'comments'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -99,8 +101,8 @@ class TopicController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -111,11 +113,36 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
+    }
+
+    public function postStoreComment(Request $request)
+    {
+        $this->validate($request, [
+            'topic_id' => 'required|integer',
+            'content'  => 'required|string',
+        ]);
+
+        $topicComment = new TopicComment();
+
+        if ($request->topic_comment_id) {
+            $topicComment->parent_id = $request->topic_comment_id;
+        }
+
+        $topicComment->user_id = auth()->id();
+        $topicComment->topic_id = $request->topic_id;
+        $topicComment->content = $request->content;
+
+        if ($topicComment->save()) {
+            return back();
+        } else {
+            return back();
+        }
+
     }
 }

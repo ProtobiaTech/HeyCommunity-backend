@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\TopicComment;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use App\Topic;
 use App\TopicNode;
 
@@ -24,13 +21,14 @@ class TopicController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @param Topic $topic
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Topic $topic)
     {
-        $topics = Topic::paginate();
+        $topics = $topic->getTopicsWithFilter(request('filter', 'index'));
         $topicNodes = TopicNode::rootNodes()->get();
+
         return view('topic.index', compact('topics', 'topicNodes'));
     }
 
@@ -128,6 +126,7 @@ class TopicController extends Controller
             'content'  => 'required|string',
         ]);
 
+        $topic = Topic::findOrFail($request->topic_id);
         $topicComment = new TopicComment();
 
         if ($request->topic_comment_id) {
@@ -139,6 +138,7 @@ class TopicController extends Controller
         $topicComment->content = $request->content;
 
         if ($topicComment->save()) {
+            $topic->increment('comment_num');
             return back();
         } else {
             return back();

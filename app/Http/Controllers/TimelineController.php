@@ -76,6 +76,7 @@ class TimelineController extends Controller
             'content'       =>      'required|string',
         ]);
 
+        $timeline = Timeline::findOrFail($request->timeline_id);
         $timelineComment = new TimelineComment();
 
         if ($request->timeline_comment_id) {
@@ -87,6 +88,7 @@ class TimelineController extends Controller
         $timelineComment->content       =   $request->content;
 
         if ($timelineComment->save()) {
+            $timeline->increment('comment_num');
             return back();
         } else {
             return back();

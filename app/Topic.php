@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Filters\TopicFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
     use SoftDeletes;
+    use TopicFilters;
 
     /**
      * Related User

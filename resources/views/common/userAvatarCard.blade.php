@@ -1,16 +1,29 @@
+<?php
+    if (!isset($user) && Auth::user()->check()) {
+        $user = Auth::user()->user();
+    }
+?>
+
+
 <div class="card card-profile mb-4">
-    @if (Auth::user()->check())
-        <div class="card-header" style="background-image: url(bootstrap-assets/img/iceland.jpg);"></div>
+    @if (isset($user))
+        <div class="card-header" style="background-image: url({{ asset('assets/img/iceland.jpg') }});"></div>
         <div class="card-block text-center">
-            <a href="profile/index.html">
-                <img class="card-profile-img" style="background-color:#eee;" src="{{ Auth::user()->user()->avatar }}">
+            <?php
+                $userAvatarUrl = url('/user/profile/' . $user->id);
+                if (Auth::user()->check() && $user->id === Auth::user()->user()->id) {
+                    $userAvatarUrl = url('/ucenter');
+                }
+            ?>
+            <a href="{{ $userAvatarUrl }}">
+                <img class="card-profile-img" style="background-color:#eee;" src="{{ $user->avatar }}">
             </a>
 
             <h6 class="card-title">
-                <a class="text-inherit" href="profile/index.html">{{ Auth::user()->user()->nickname }}</a>
+                <a class="text-inherit" href="profile/index.html">{{ $user->nickname }}</a>
             </h6>
 
-            <p class="mb-4" style="margin-top:6px; margin-bottom:0 !important;">{{ Auth::user()->user()->bio }}</p>
+            <p class="mb-4" style="margin-top:6px; margin-bottom:0 !important;">{{ $user->bio }}</p>
 
             {{--
                 <ul class="card-menu">

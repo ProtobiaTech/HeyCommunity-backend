@@ -15,22 +15,22 @@
   display: inline-block;
   margin-right: 1em; }
 
-#hc-topic.page-topic .list-topic .avatar {
+#hc-topic.page-topic .list-topic .avatar, .list-topic .avatar {
   position: absolute;
   width: 40px;
   height: 40px;
   border-radius: 50%; }
 
-#hc-topic.page-topic .list-topic .body {
+#hc-topic.page-topic .list-topic .body, .list-topic .body {
   margin-left: 52px;
   overflow: hidden; }
-  #hc-topic.page-topic .list-topic .body .title {
+  #hc-topic.page-topic .list-topic .body .title, .list-topic .body .title {
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
     white-space: nowrap;
     text-overflow: ellipsis; }
-    #hc-topic.page-topic .list-topic .body .title .info {
+    #hc-topic.page-topic .list-topic .body .title .info, .list-topic .body .title .info {
       position: absolute;
       right: 18px;
       padding-left: 1em;

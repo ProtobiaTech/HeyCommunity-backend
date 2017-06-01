@@ -3,6 +3,7 @@
 return [
     // Navigation
     'home'     => 'Home',
+    'timeline' => 'Timeline',
     'topic'    => 'Topic',
     'activity' => 'Activity',
     'logout'   => 'Logout',
@@ -70,6 +71,10 @@ return [
     'apps'      => 'Apps',
     'jobs'      => 'Jobs',
     'advertise' => 'Advertise',
+
+
+    // common
+    'detail'                                =>          'Detail',
 
 
 

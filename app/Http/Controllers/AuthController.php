@@ -31,6 +31,14 @@ class AuthController extends Controller
     /**
      *
      */
+    public function getSignup()
+    {
+        return view('auth.signup');
+    }
+
+    /**
+     *
+     */
     public function postLogin(Request $request)
     {
         $this->validate($request, [

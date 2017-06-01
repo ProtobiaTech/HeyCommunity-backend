@@ -49,8 +49,14 @@
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item {{ Request::is('timeline') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/') }}">@lang('hc.home') <span class="sr-only">(current)</span></a>
+          <!--
+          <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/') }}">@lang('hc.home')</a>
+          </li>
+          -->
+
+          <li class="nav-item {{ Request::is('timeline*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/timeline') }}">@lang('hc.timeline')</a>
           </li>
           <li class="nav-item {{ Request::is('topic*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/topic') }}">@lang('hc.topic')</a>
@@ -103,6 +109,33 @@
     </nav>
 
     @yield('content')
+
+
+    <footer class="container">
+      <br>
+      <div class="card card-link-list">
+        <div class="card-block">
+          <div class="text-center">
+            ©2015 - 2017 HeyCommunity
+          </div>
+          <div class="text-center">
+            <a href="#">@lang('hc.about')</a>
+            <a href="#">@lang('hc.help')</a>
+            <a href="#">@lang('hc.terms')</a>
+            <a href="#">@lang('hc.privacy')</a>
+            <a href="#">@lang('hc.cookies')</a>
+            <a href="#">@lang('hc.ads') </a>
+            <a href="#">@lang('hc.info')</a>
+            <a href="#">@lang('hc.brand')</a>
+            <a href="#">@lang('hc.blog')</a>
+            <a href="#">@lang('hc.status')</a>
+            <a href="#">@lang('hc.apps')</a>
+            <a href="#">@lang('hc.jobs')</a>
+            <a href="#">@lang('hc.advertise')</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script src="{{ asset('bootstrap-assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap-assets/js/tether.min.js') }}"></script>

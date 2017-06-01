@@ -5,7 +5,7 @@
   <div class="row">
     <!-- LG 3 -->
     <div class="col-lg-3 hidden-xs-down">
-      @include('common._profile')
+      @include('common.userAvatarCard')
 
       <div class="card card-tags visible-md-block visible-lg-block mb-4">
           <div class="card-block">
@@ -79,14 +79,25 @@
                 </div>
               @endif
 
-              {{--
-              <div class="mb-2 text-right">
-                <!-- <a class="btn btn-default btn-xs"><i class="fa fa-heart" style="color:red;"></i></a> -->
-                <a style="font-size:1rem;" class="btn btn-default btn-xs" href="#"><i class="fa fa-comment" style="color:#333"></i></a>
-              </div>
-              --}}
+              <div class="mb-2">
+                <div class="text-muted pull-left">
+                  <a class="btn btn-link btn-xs" href="{{ url('/timeline/show/' . $timeline->id) }}"><i class="fa fa-newspaper-o"></i></a>
+                </div>
 
-              <div class="mb-2" style="margin-bottom:1rem !important;">
+                <div class="pull-right">
+                  @if (true)
+                    <a class="btn btn-link btn-xs" href="#"><i class="fa fa-heart-o" style="color:#333;"></i></a>
+                  @else
+                    <a class="btn btn-link btn-xs" href="#"><i class="fa fa-heart" style="color:red;"></i></a>
+                  @endif
+                  <a style="font-size:1rem;" class="btn btn-link btn-xs" href="javascript:$('.form-timeline-comment-{{ $timeline->id }}').toggle()"><i class="fa fa-comment" style="color:#333"></i></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+              </div>
+
+              <div class="mb-2 form-timeline-comment-{{ $timeline->id }}" style="display:none; margin-bottom:1rem !important;">
                 {!! Form::open(array('url' => '/timeline/store-comment', 'method' => 'POST')) !!}
                   {{ csrf_field() }}
                   {!! Form::hidden('timeline_id', $timeline->id) !!}
@@ -100,6 +111,7 @@
                   </div>
                   {!! Form::close() !!}
               </div>
+              <hr style="margin-top:0;">
 
               @if ($timeline->comments)
                 <ul class="media-list mb-2">
@@ -174,25 +186,6 @@
         </div>
         <div class="card-footer">
           @lang('hc.recommended_follow_text')
-        </div>
-      </div>
-
-      <div class="card card-link-list">
-        <div class="card-block">
-          © 2015 - 2017 HeyCommunity <br>
-          <a href="#">@lang('hc.about')</a>
-          <a href="#">@lang('hc.help')</a>
-          <a href="#">@lang('hc.terms')</a>
-          <a href="#">@lang('hc.privacy')</a>
-          <a href="#">@lang('hc.cookies')</a>
-          <a href="#">@lang('hc.ads') </a>
-          <a href="#">@lang('hc.info')</a>
-          <a href="#">@lang('hc.brand')</a>
-          <a href="#">@lang('hc.blog')</a>
-          <a href="#">@lang('hc.status')</a>
-          <a href="#">@lang('hc.apps')</a>
-          <a href="#">@lang('hc.jobs')</a>
-          <a href="#">@lang('hc.advertise')</a>
         </div>
       </div>
     </div>

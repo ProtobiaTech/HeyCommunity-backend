@@ -13,8 +13,7 @@ class UserController extends Controller
      */
     public function getProfile($id)
     {
-        $user = User::findOrFail($id);
-        return view('user.profile', compact('user'));
+        return redirect()->to('/user/timeline/' . $id);
     }
 
     /**

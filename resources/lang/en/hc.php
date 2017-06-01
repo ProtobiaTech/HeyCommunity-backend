@@ -9,6 +9,7 @@ return [
     'logout'   => 'Logout',
     'login'    => 'Login',
     'search'   => 'Search',
+    'notice'   => 'Notice',
 
 
     // left welcome login
@@ -71,6 +72,7 @@ return [
 
     // common
     'detail'                                =>          'Detail',
+    'no data'                               =>          'There is no data here',
 
 
 

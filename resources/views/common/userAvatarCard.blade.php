@@ -20,7 +20,7 @@
             </a>
 
             <h6 class="card-title">
-                <a class="text-inherit" href="profile/index.html">{{ $user->nickname }}</a>
+                <a class="text-inherit" href="{{ $userAvatarUrl }}">{{ $user->nickname }}</a>
             </h6>
 
             <p class="mb-4" style="margin-top:6px; margin-bottom:0 !important;">{{ $user->bio }}</p>

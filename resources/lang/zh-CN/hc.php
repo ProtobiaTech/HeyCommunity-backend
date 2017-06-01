@@ -9,6 +9,7 @@ return [
     'logout'   => '退出',
     'login'    => '登录',
     'search'   => '搜索',
+    'notice'   => '通知',
 
 
     // left welcome login
@@ -71,6 +72,7 @@ return [
 
     // common
     'detail'                                =>          '详情',
+    'no data'                               =>          '暂时没有数据',
 
 
 

@@ -15,12 +15,15 @@
                 <div class="pt-4">
                     <!-- Topic -->
                     <ul class="list-group media-list media-list-stream mb-4">
-                        @foreach ($timelines as $timeline)
-                            @include('ucenter._timeline')
-                        @endforeach
-
-                        {!! $timelines->render() !!}
-                    </div>
+                        @if($timelines)
+                            @foreach ($timelines as $timeline)
+                                @include('common.timeline')
+                            @endforeach
+                            {!! $timelines->render() !!}
+                        @else
+                            @include('common.nodata')
+                        @endif
+                    </ul>
                 </div>
             </div>
         </div>

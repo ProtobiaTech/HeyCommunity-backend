@@ -15,11 +15,15 @@
                 <div class="pt-4">
                     <!-- Topic -->
                     <div class="list-group list-topic">
-                        @foreach ($topics as $topic)
-                            @include('ucenter._topic')
-                        @endforeach
+                        @if($topics)
+                            @foreach ($topics as $topic)
+                                @include('common.topic')
+                            @endforeach
 
-                        {!! $topics->render() !!}
+                            {!! $topics->render() !!}
+                        @else
+                            @include('common.nodata')
+                        @endif
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
         <div class="row">
             <!-- LG 3 -->
             <div class="col-lg-3">
-                @include('ucenter._sidebar', ['user' => auth()->user()])
+                @include('ucenter._sidebar', ['user' => Auth::user()->user()])
             </div>
 
             <!-- LG 9 -->
@@ -15,10 +15,14 @@
                 <div class="pt-4">
                     <!-- Timeline -->
                     <ul class="list-group media-list media-list-stream mb-4">
-                        @foreach ($timelines as $timeline)
-                            @include('ucenter._timeline')
-                        @endforeach
-                        {!! $timelines->render() !!}
+                        @if($timelines)
+                            @foreach ($timelines as $timeline)
+                                @include('common.timeline')
+                            @endforeach
+                            {!! $timelines->render() !!}
+                        @else
+                            @include('common.nodata')
+                        @endif
                     </ul>
                 </div>
             </div>

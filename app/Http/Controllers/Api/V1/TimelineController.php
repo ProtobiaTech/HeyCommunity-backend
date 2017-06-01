@@ -53,11 +53,14 @@ class TimelineController extends Controller
 
         $user = $this->auth->user();
 
-        $timelines = $query->get()->each(function($item, $key)use($user){
+        $timelines = $query->get()->each(function($item, $key) use ($user) {
             if (!$user) {
                 $item->is_like = false;
             } else {
-                $item->is_like = TimelineLike::where(['timeline_id' => $item->id, 'user_id' => $user->id])->count() ? true : false;
+                $item->is_like = TimelineLike::where([
+                                    'timeline_id' => $item->id,
+                                    'user_id' => $user->id
+                                ])->exists() ? true : false;
             }
             if ($item->imgs) {
                 $item->imgs = TimelineImg::getImgs($item->imgs);

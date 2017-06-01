@@ -114,7 +114,7 @@ return [
          * Laravel Framework Service Providers...
          */
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
-        // Illuminate\Auth\AuthServiceProvider::class,
+        //Illuminate\Auth\AuthServiceProvider::class,
         Kbwebs\MultiAuth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -162,6 +162,12 @@ return [
 
         // cors
         Barryvdh\Cors\ServiceProvider::class,
+
+        // dingo api
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+
+        //jwt-auth
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
     ],
 
     /*
@@ -219,6 +225,8 @@ return [
         'Html'      =>  Collective\Html\HtmlFacade::class,
         'Notification' => Krucas\Notification\Facades\Notification::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'JWTAuth'   =>  Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

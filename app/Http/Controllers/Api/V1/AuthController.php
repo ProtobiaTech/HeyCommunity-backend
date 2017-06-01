@@ -5,24 +5,36 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Controller;
-use Tymon\JWTAuth\JWTAuth;
+use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Controllers\Api\Transform\UserTransform;
 
-class AuthController extends Controller
+/**
+ * @Resource("User", uri="/auth")
+ */
+class AuthController extends BaseController
 {
-    protected $auth;
-    
-    public function __construct(JWTAuth $auth)
-    {
-        $this->auth = $auth;
-    }
-
-    public function login(Request $request)
+    /**
+     * Get the auth code.
+     *
+     * Get a auth code.
+     *
+     * @Get("/login")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Request({"phone": "your phone number", "password": "your password"}),
+     *      @Response(200, body={"token": "your token"}),
+     * })
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return json
+     */
+    public function authentication(Request $request)
     {
         $credentials = $request->only('phone', 'password');
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = $this->auth->attempt($credentials)) {
+            if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -31,5 +43,49 @@ class AuthController extends Controller
         }
         // all good so return the token
         return response()->json(compact('token'));
+    }
+
+    /**
+     * Get authed user.
+     *
+     * Get authed user info.
+     *
+     * @Get("/user")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Request({"token": "your token"}),
+     *      @Response(200, body={"data": {}}),
+     *      @Response(500, body={"message": "boo", "status_code": 500})
+     * })
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return json
+     */
+    public function getAuthenticatedUser()
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return $this->errorNotFound('user_not_found');
+            }
+
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+            return $this->error('token_expired', $e->getStatusCode());
+
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+            return $this->error('token_invalid', $e->getStatusCode());
+
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+            return $this->error('token_absent', $e->getStatusCode());
+
+        }
+
+        // the token is valid and we have found the user via the sub claim
+        return $this->response
+                    ->item($user, new UserTransform)
+                    ->setStatusCode(200);
     }
 }

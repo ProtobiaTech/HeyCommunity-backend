@@ -69,16 +69,23 @@ Route::controller('ucenter', 'UserCenterController');
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Http\Controllers\Api'], function ($api) {
-        //auth
+        // auth
         $api->post(
             'auth/login',
             [
-                'as' => 'auth.login',
-                'uses' => 'V1\AuthController@login'
+                'as' => 'auth.authentication',
+                'uses' => 'V1\AuthController@authentication'
             ]
         );
-
-        //timeline
+        // user
+        $api->get(
+            'auth/user',
+            [
+                'as' => 'auth.user',
+                'uses' => 'V1\AuthController@getAuthenticatedUser'
+            ]
+        );
+        // timeline
         $api->get(
             'timelines',
             [
@@ -89,8 +96,8 @@ $api->version('v1', function ($api) {
         $api->get(
             'timelines/{id}',
             [
-                'as' => 'timelines.detail',
-                'uses' => 'V1\TimelineController@detail'
+                'as' => 'timelines.show',
+                'uses' => 'V1\TimelineController@show'
             ]
         );
     });

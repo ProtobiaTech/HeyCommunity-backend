@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Timeline;
+use App\Topic;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,7 +42,9 @@ class UserCenterController extends Controller
      */
     public function getTimeline()
     {
-        return view('ucenter.timeline');
+        $timelines = Timeline::latest()->with('author', 'comments')->where('user_id', auth()->id())->paginate();
+
+        return view('ucenter.timeline', compact('timelines'));
     }
 
     /**
@@ -48,7 +52,9 @@ class UserCenterController extends Controller
      */
     public function getTopic()
     {
-        return view('ucenter.topic');
+        $topics = Topic::latest()->with('author')->where('user_id', auth()->id())->paginate();
+
+        return view('ucenter.topic', compact('topics'));
     }
 
 }

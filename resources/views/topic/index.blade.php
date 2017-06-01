@@ -63,7 +63,7 @@
       <div class="list-group list-topic">
         @foreach ($topics as $topic)
           <div class="list-group-item">
-            <img class="avatar" src="{{ $topic->author->avatar }}">
+            <a class="avatar" href="{{ url('/user/profile/' . $topic->author->id) }}"><img class="avatar" src="{{ $topic->author->avatar }}"></a>
             <div class="pull-left body">
               <div class="title">
                 <a href="{{ url('/topic/show', ['id' => $topic->id]) }}">{{ $topic->title }}</a>

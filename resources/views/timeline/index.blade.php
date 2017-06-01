@@ -56,7 +56,7 @@
 
         @foreach ($timelines as $timeline)
         <li class="media list-group-item p-4">
-          <img class="media-object d-flex align-self-start mr-3" src="{{ $timeline->author->avatar }}">
+          <a class="media-object d-flex align-self-start mr-3" href="{{ url('/user/profile/' . $timeline->author->id) }}"><img class="media-object d-flex align-self-start mr-3" src="{{ $timeline->author->avatar }}"></a>
           <div class="media-body">
             <div class="media-body-text">
               <div class="media-heading">
@@ -65,7 +65,7 @@
                   <i class="fa fa-fire"></i> <span>{{ $timeline->like_num + $timeline->comment_num * 2 }}</span>
                   &nbsp;&nbsp;
                 </small>
-                <h6>{{ $timeline->author->nickname }}</h6>
+                <a href="{{ url('/user/profile/' . $timeline->author->id) }}"><h6>{{ $timeline->author->nickname }}</h6></a>
               </div>
               <p>{{ $timeline->content }}</p>
               @if ($timeline->images)
@@ -126,11 +126,11 @@
                   @foreach ($timeline->comments as $index => $comment)
                     <?php if (false && $index === 3) break; ?>
                     <li class="media mb-3">
-                      <img class="media-object d-flex align-self-start mr-3" src="{{ $comment->author->avatar }}">
+                      <a href="{{ url('/user/profile/' . $comment->author->id) }}"><img class="media-object d-flex align-self-start mr-3" src="{{ $comment->author->avatar }}"></a>
                       <div class="media-body">
                         <div>
                           <small class="float-right text-muted">{{ $comment->created_at->format('h-d H:i') }}</small>
-                          <strong>{{ $comment->author->nickname }} </strong>
+                          <strong><a href="{{ url('/user/profile/' . $comment->author->id) }}">{{ $comment->author->nickname }}</a> </strong>
                         </div>
                         {{ $comment->content }}
                       </div>

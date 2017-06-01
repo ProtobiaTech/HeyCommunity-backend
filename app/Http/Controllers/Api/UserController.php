@@ -290,4 +290,200 @@ class UserController extends Controller
 
         return ['get verification code successful'];
     }
+
+    /**
+     * Get the user following list
+     *
+     * @return array of User model or failure info
+     */
+    public function getFollowing(Request $request)
+    {
+        $user = User::findOrFail($request->input('id'));
+        return $user->following;
+    }
+
+    /**
+     * Get the user's followers list
+     *
+     * @return array of User model or failure info
+     */
+    public function getFollowers(Request $request)
+    {
+        $user = User::findOrFail($request->input('id'));
+        return $user->followers;
+    }
+
+    /**
+     * Add a following relationship
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status model or failure info
+     */
+    public function postFollowing(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            
+            if ($user->id == $request->input('toUserId')) {
+                $result = ['status' => 'cannot_follow_yourself'];
+            } else {
+                $exist = $user->following()
+                                ->where('to_user_id', $request->input('toUserId'))
+                                ->first();
+                if (!$exist) {
+                    $toUser = User::findOrFail($request->input('toUserId'));
+                    $user->following()->attach($toUser);
+                    $result = ['status' => 'success'];
+                } else {
+                    $result = ['status' => 'has_been_following'];
+                }
+            }
+            return $result;
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * Remove a following relationship
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status model or failure info
+     */
+    public function postUnFollowing(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            
+            $exist = $user->following()
+                            ->where('to_user_id', $request->input('toUserId'))
+                            ->first();
+            if (!$exist) {
+                $result = ['status' => 'success'];
+            } else {
+                $toUser = User::findOrFail($request->input('toUserId'));
+                $user->following()->detach($toUser);
+                $result = ['status' => 'success'];
+            }
+
+            return $result;
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * Is userId followed by current user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status or failure info
+     */
+    public function postIsFollowed(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->isFollowed($request->input('toUserId'))) {
+                return ['status' => 'success'];
+            } else {
+                return ['status' => 'failed'];
+            }
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * Is userId blocked by current user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array of status or failure info
+     */
+    public function postIsBlocked(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->isBlocked($request->input('toUserId'))) {
+                return ['status' => 'success'];
+            } else {
+                return ['status' => 'failed'];
+            }
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * Add a block user
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object User model or failure info
+     */
+    public function postBlock(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->id == $request->input('toUserId')) {
+                return ['status' => 'cannot_block_yourself'];
+            }
+            if ($user->toBlock($request->input('toUserId'))) {
+                return ['status' => 'success'];
+            } else {
+                return ['status' => 'failed'];
+            }
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * unblock a user
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return object User model or failure info
+     */
+    public function postUnBlock(Request $request)
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            if ($user->unBlock($request->input('toUserId'))) {
+                return ['status' => 'success'];
+            } else {
+                return ['status' => 'failed'];
+            }
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * get block list
+     *
+     * @return array of object User model or failure info
+     */
+    public function getBlock()
+    {
+        if (Auth::user()->check()) {
+            $user = Auth::user()->user();
+            $blockList = $user->getBlock();
+            return $blockList;
+        } else {
+            return ['status' => 'not_login'];
+        }
+    }
+
+    /**
+     * get block list
+     *
+     * @return array of relationship nums or failure info
+     */
+    public function getRelationshipNums(Request $request)
+    {
+        $user = User::findOrFail($request->input('id'));
+        $result = [
+            'follower' => count($user->followers),
+            'following' => count($user->following),
+            'block' => count($user->getBlock())
+        ];
+        return $result;
+    }
 }

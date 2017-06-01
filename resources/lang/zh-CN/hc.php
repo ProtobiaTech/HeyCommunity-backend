@@ -52,6 +52,10 @@ return [
     'view all'                              =>      '查看所有',
     'follow'                                =>      '关注',
     'recommended_follow_text'               =>      '这些都是社区里活跃的用户，推荐你关注他们',
+    'has_been_following'                    =>      '已关注',
+    'cancel_following'                      =>      '取消关注',
+    'following'                             =>      '正在关注',
+    'followed'                              =>      '关注者',
 
 
     // right bottom

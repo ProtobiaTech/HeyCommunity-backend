@@ -16,7 +16,7 @@ class TopicController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postStore', 'getCreate']]);
+        $this->middleware('auth', ['only' => ['postStore', 'getCreate', 'postStoreComment']]);
     }
 
     /**

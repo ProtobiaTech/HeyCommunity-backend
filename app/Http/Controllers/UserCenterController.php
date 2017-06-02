@@ -42,7 +42,7 @@ class UserCenterController extends Controller
      */
     public function getTimeline()
     {
-        $timelines = Timeline::latest()->with('author', 'comments')->where('user_id', auth()->id())->paginate();
+        $timelines = Timeline::latest()->with('author', 'comments')->where('user_id', \Auth::user()->user()->id)->paginate();
 
         return view('ucenter.timeline', compact('timelines'));
     }
@@ -52,7 +52,7 @@ class UserCenterController extends Controller
      */
     public function getTopic()
     {
-        $topics = Topic::latest()->with('author')->where('user_id', auth()->id())->paginate();
+        $topics = Topic::latest()->with('author')->where('user_id', \Auth::user()->user()->id)->paginate();
 
         return view('ucenter.topic', compact('topics'));
     }

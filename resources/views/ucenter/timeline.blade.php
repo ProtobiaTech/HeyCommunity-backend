@@ -15,7 +15,7 @@
                 <div class="pt-4">
                     <!-- Timeline -->
                     <ul class="list-group media-list media-list-stream mb-4">
-                        @if($timelines)
+                        @if($timelines->count())
                             @foreach ($timelines as $timeline)
                                 @include('common.timeline')
                             @endforeach

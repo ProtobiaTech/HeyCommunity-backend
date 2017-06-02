@@ -15,7 +15,7 @@
                 <div class="pt-4">
                     <!-- Topic -->
                     <div class="list-group list-topic">
-                        @if($topics)
+                        @if($topics->count())
                             @foreach ($topics as $topic)
                                 @include('common.topic')
                             @endforeach

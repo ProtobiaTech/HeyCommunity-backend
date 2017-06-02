@@ -119,6 +119,10 @@ class TopicController extends Controller
         //
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postStoreComment(Request $request)
     {
         $this->validate($request, [

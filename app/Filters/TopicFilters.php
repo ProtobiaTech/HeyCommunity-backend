@@ -4,7 +4,11 @@ namespace App\Filters;
 
 trait TopicFilters
 {
-
+    /**
+     * @param $filter
+     * @param int $limit
+     * @return
+     */
     public function getTopicsWithFilter($filter, $limit = 20)
     {
         $filter = $this->getTopicFilter($filter);
@@ -12,6 +16,10 @@ trait TopicFilters
         return $this->applyFilter($filter)->paginate($limit);
     }
 
+    /**
+     * @param $requestFilter
+     * @return string
+     */
     public function getTopicFilter($requestFilter)
     {
         $filters = ['noreply', 'hot', 'excellent','recent'];
@@ -21,6 +29,10 @@ trait TopicFilters
         return 'default';
     }
 
+    /**
+     * @param $filter
+     * @return
+     */
     public function applyFilter($filter)
     {
         switch ($filter) {
@@ -38,6 +50,10 @@ trait TopicFilters
         }
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeRecent($query)
     {
         return $query->orderBy('created_at', 'desc');

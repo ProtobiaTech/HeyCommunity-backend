@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Timeline extends HeyCommunity
 {
@@ -73,8 +74,15 @@ class Timeline extends HeyCommunity
         return \App\Helpers\FileSystem::getFullUrl($url);
     }
 
+    /**
+     *
+     */
     public function getIsLikeAttribute()
     {
-        return !!$this->author_like->where('user_id', \Auth::user()->id())->count();
+        if (Auth::user()->check()) {
+            return $this->author_like->where('user_id', Auth::user()->user()->id)->count();
+        }
+
+        return false;
     }
 }

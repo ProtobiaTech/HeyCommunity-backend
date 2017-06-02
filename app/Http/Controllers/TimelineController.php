@@ -111,6 +111,10 @@ class TimelineController extends Controller
         return view('timeline.show', compact('timeline', 'users', 'comments'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postSetLike(Request $request)
     {
         $this->validate($request, [

@@ -121,11 +121,11 @@ class TimelineController extends Controller
         $Timeline = Timeline::findOrFail($request->id);
 
         if ($TimelineLike) {
-            $TimelineLike->delete();
+            $TimelineLike->forceDelete();
             $Timeline->decrement('like_num');
         } else {
             $TimelineLike = new TimelineLike;
-            $TimelineLike->user_id = auth()->id();
+            $TimelineLike->user_id = Auth::user()->user()->id;
             $TimelineLike->timeline_id = $request->id;
             $TimelineLike->save();
             $Timeline->increment('like_num');

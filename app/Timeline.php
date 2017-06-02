@@ -75,6 +75,6 @@ class Timeline extends HeyCommunity
 
     public function getIsLikeAttribute()
     {
-        return $this->author_like->where('user_id', auth()->id())->count();
+        return !!$this->author_like->where('user_id', \Auth::user()->id())->count();
     }
 }

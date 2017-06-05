@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
     Route::controller('data', 'Dashboard\DataController');
     Route::controller('timeline', 'Dashboard\TimelineController');
     Route::controller('user', 'Dashboard\UserController');
+    Route::controller('keyword', 'Dashboard\KeywordController');
     Route::controller('topic', 'Dashboard\TopicController');
     Route::controller('setting', 'Dashboard\SettingController');
     Route::controller('trend', 'Dashboard\TrendController');

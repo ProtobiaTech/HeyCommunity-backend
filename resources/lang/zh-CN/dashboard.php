@@ -41,6 +41,11 @@ return [
     'User'                              =>          '用户',
     'Notice'                            =>          '通知',
 
+    'Keyword'                           =>          '关键字',
+    'Keyword name'                      =>          '名称',
+    'Keyword timeline'                  =>          '关联公园数',
+    'Keyword topic'                     =>          '关联话题数',
+
     'Author'                            =>          '作者',
     'Content'                           =>          '内容',
     'Imgs'                              =>          '图片',

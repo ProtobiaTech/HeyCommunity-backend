@@ -11,6 +11,15 @@ return [
     'search'   => 'Search',
     'notice'   => 'Notice',
 
+    // Signup
+    'signup nickname'  => 'Nickname',
+    'signup phone'     => 'Phone',
+    'signup code'      => 'Captcha',
+    'get code'         => 'Get Captcha',
+    'signup password'  => 'Password',
+    'signup'           => 'Singup',
+    'cancel'           => '取消',
+
 
     // left welcome login
     'please login'  => 'Please Log In',

@@ -11,6 +11,15 @@ return [
     'search'   => '搜索',
     'notice'   => '通知',
 
+    // Signup
+    'signup nickname'  => '昵称',
+    'signup phone'     => '手机号',
+    'signup code'      => '验证码',
+    'get code'         => '获取验证码',
+    'signup password'  => '密码',
+    'signup'           => '注册',
+    'cancel'           => '取消',
+
 
     // left welcome login
     'please login'  => '请登录',

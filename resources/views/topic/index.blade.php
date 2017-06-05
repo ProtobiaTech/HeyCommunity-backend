@@ -25,21 +25,18 @@
                     </div>
                 </div>
 
+
                 <div class="card card-tags visible-md-block visible-lg-block mb-4">
                     <div class="card-block">
                         <h6 class="mb-3">@lang('hc.we are discussing')</h6>
                         <div class="tags">
-                            <span class="muted">@lang('hc.no content yet')</span>
-                            <!--
-                            <a href="" class="l1">苹果</a>
-                            <a href="" class="l2">马戏团</a>
-                            <a href="" class="l2">美国</a>
-                            <a href="" class="l1">美国</a>
-                            <a href="" class="l3">美国</a>
-                            <a href="" class="l1">美国</a>
-                            <a href="" class="l4">美国</a>
-                            <a href="" class="l4">美国</a>
-                            -->
+                            @if($keywords->count())
+                                @foreach($keywords as $keyword)
+                                    <a href="" class="l1">{{ $keyword->name }}</a>
+                                @endforeach
+                            @else
+                                <span class="muted">@lang('hc.no content yet')</span>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -49,11 +46,15 @@
             <!-- LG 9 -->
             <div class="col-lg-9">
                 <div class="card-tools">
-                    <a class="btn btn-secondary {{ Request::input('filter') == 'recent' ? 'active' : '' }}" href="/topic?filter=recent">@lang('最近')</a>
-                    <a class="btn btn-secondary {{ Request::input('filter') == 'hot' ? 'active' : '' }}" href="/topic?filter=hot">@lang('最热')</a>
-                    <a class="btn btn-secondary {{ Request::input('filter') == 'excellent' ? 'active' : '' }}" href="/topic?filter=excellent">@lang('精华')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'recent' ? 'active' : '' }}"
+                       href="/topic?filter=recent">@lang('最近')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'hot' ? 'active' : '' }}"
+                       href="/topic?filter=hot">@lang('最热')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'excellent' ? 'active' : '' }}"
+                       href="/topic?filter=excellent">@lang('精华')</a>
                     &nbsp;&nbsp;
-                    <a class="btn btn-secondary {{ Request::input('filter') == 'noreply' ? 'active' : '' }}" href="/topic?filter=noreply">@lang('零回复')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'noreply' ? 'active' : '' }}"
+                       href="/topic?filter=noreply">@lang('零回复')</a>
 
                     <div class="pull-right">
                         <a class="btn btn-secondary" href="/topic?filter=default">刷新</a>

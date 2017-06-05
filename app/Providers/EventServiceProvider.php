@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\TriggerNoticeEvent' => [
             'App\Listeners\TriggerNoticeListener',
         ],
+        'App\Events\ExtractKeywordsEvent' => [
+            'App\Listeners\ExtractKeywordsListener',
+        ],
     ];
 
     /**

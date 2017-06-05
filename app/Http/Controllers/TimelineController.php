@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\TimelineLike;
+use App\Events\ExtractKeywordsEvent;
 use Illuminate\Http\Request;
 
 use Auth;
+use App\Keyword;
 use App\User;
 use App\Timeline;
 use App\TimelineComment;
+use App\TimelineLike;
 
 class TimelineController extends Controller
 {
@@ -28,9 +30,10 @@ class TimelineController extends Controller
     public function getIndex()
     {
         $timelines = Timeline::latest()->paginate();
-        $users = User::limit(5)->orderByRaw('RAND()')->get();
+        $users     = User::limit(5)->orderByRaw('RAND()')->get();
+        $keywords  = Keyword::ofType('timeline_count');
 
-        return view('timeline.index', compact('timelines', 'users'));
+        return view('timeline.index', compact('timelines', 'users', 'keywords'));
     }
 
     /**
@@ -60,6 +63,8 @@ class TimelineController extends Controller
         $timeline->content = $request->content;
 
         if ($timeline->save()) {
+            event(new ExtractKeywordsEvent($timeline));
+
             return redirect()->to('/timeline');
         } else {
             return back();
@@ -68,6 +73,8 @@ class TimelineController extends Controller
 
     /**
      * Store Comment
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postStoreComment(Request $request)
     {

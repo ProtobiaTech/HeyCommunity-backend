@@ -26,4 +26,12 @@ class Topic extends Model
     {
         return $this->hasMany('App\TopicComment', 'topic_id')->orderBy('created_at', 'desc')->with('author', 'parent');
     }
+
+    /**
+     * Related Keyword
+     */
+    public function keywords()
+    {
+        return $this->morphMany('App\Keyword', 'keywordable');
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Topic;
 use App\TopicNode;
+use App\Keyword;
 
 class TopicController extends Controller
 {
@@ -26,10 +27,11 @@ class TopicController extends Controller
      */
     public function getIndex(Topic $topic)
     {
-        $topics = $topic->getTopicsWithFilter(request('filter', 'index'));
+        $topics     = $topic->getTopicsWithFilter(request('filter', 'index'));
         $topicNodes = TopicNode::rootNodes()->get();
+        $keywords   = Keyword::ofType('topic_count');
 
-        return view('topic.index', compact('topics', 'topicNodes'));
+        return view('topic.index', compact('topics', 'topicNodes', 'keywords'));
     }
 
     /**
@@ -40,6 +42,7 @@ class TopicController extends Controller
     public function getCreate()
     {
         $nodes = TopicNode::all()->pluck('name', 'id');
+
         return view('topic/create', compact('nodes'));
     }
 

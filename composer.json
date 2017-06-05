@@ -18,7 +18,8 @@
         "zgldh/qiniu-laravel-storage": "^0.6.2",
         "jpush/jpush": "v3.5.*",
         "barryvdh/laravel-cors": "^0.8.6",
-        "asm89/stack-cors": "^1.0.0"
+        "asm89/stack-cors": "^1.0.0",
+        "fukuball/jieba-php": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

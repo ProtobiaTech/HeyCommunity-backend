@@ -78,10 +78,9 @@
             <hr style="margin-top:0;">
 
             @if ($timeline->comments)
-                <ul class="media-list mb-2">
+                <ul class="media-list mb-2 timeline-comment">
                     @foreach ($timeline->comments as $index => $comment)
-                        <?php if (false && $index === 3) break; ?>
-                        <li class="media mb-3">
+                        <li class="media mb-3 timeline-comment-{{ $timeline->id }}">
                             <a href="{{ url('/user/profile/' . $comment->author->id) }}"><img
                                         class="media-object d-flex align-self-start mr-3"
                                         src="{{ $comment->author->avatar }}"></a>
@@ -95,8 +94,30 @@
                             </div>
                         </li>
                     @endforeach
+
+                    @if($timeline->comment_num > 3)
+                        <a href="javascript:void(0)"
+                           class="btn btn-link pull-right timeline-show-more-{{ $timeline->id }}"
+                           onclick="showMore('.timeline-comment-{{ $timeline->id }}', '.timeline-show-more-{{ $timeline->id }}')"
+                        >@lang('hc.show more comments')</a>
+                    @endif
                 </ul>
             @endif
         </div>
     </div>
 </li>
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $('.timeline-comment').each(function () {
+                $(this).find('li').not(':lt(3)').hide();
+            });
+        });
+
+        function showMore(timeline, click) {
+            $(timeline).show();
+            $(click).hide();
+        }
+    </script>
+@endsection

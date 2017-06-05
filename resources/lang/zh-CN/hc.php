@@ -74,6 +74,7 @@ return [
     // common
     'detail'                                =>          '详情',
     'no data'                               =>          '暂时没有数据',
+    'show more comments'                    =>          '点击加载更多评论',
 
 
 

@@ -53,6 +53,7 @@ return [
     'view all'                              =>      'View all',
     'follow'                                =>      'Follow',
     'recommended_follow_text'               =>      'These are active users in the community, recommend you pay attention to them',
+    'active user'                           =>      'Active User',
 
 
     // right bottom

@@ -82,7 +82,7 @@
 
                 <div class="card mb-4 hidden-md-down">
                     <div class="card-block">
-                        <h6 class="mb-3">@lang('推荐关注')</h6>
+                        <h6 class="mb-3">@lang('hc.active user')</h6>
                         <ul class="media-list media-list-stream">
                             @foreach ($users as $user)
                                 <li class="media mb-2">
@@ -93,9 +93,10 @@
                                     <div class="media-body">
                                         <span>{{ $user->nickname }}</span>
                                         <div class="media-body-actions">
-                                            <button class="btn btn-outline-primary btn-sm">
-                                                <span class="icon icon-add-user"></span> @lang('hc.follow')</button>
-                                            </button>
+                                            {{--<button class="btn btn-outline-primary btn-sm">--}}
+                                                {{--<span class="icon icon-add-user"></span> --}}
+                                            <small>{{ $user->bio }}</small>
+                                            {{--</button>--}}
                                         </div>
                                     </div>
                                 </li>

@@ -53,6 +53,7 @@ return [
     'view all'                              =>      '查看所有',
     'follow'                                =>      '关注',
     'recommended_follow_text'               =>      '这些都是社区里活跃的用户，推荐你关注他们',
+    'active user'                           =>      '活跃用户',
 
 
     // right bottom

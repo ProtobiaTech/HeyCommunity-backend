@@ -49,11 +49,11 @@
             <!-- LG 9 -->
             <div class="col-lg-9">
                 <div class="card-tools">
-                    <a class="btn btn-secondary" href="/topic?filter=recent">@lang('最近')</a>
-                    <a class="btn btn-secondary" href="/topic?filter=hot">@lang('最热')</a>
-                    <a class="btn btn-secondary" href="/topic?filter=excellent">@lang('精华')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'recent' ? 'active' : '' }}" href="/topic?filter=recent">@lang('最近')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'hot' ? 'active' : '' }}" href="/topic?filter=hot">@lang('最热')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'excellent' ? 'active' : '' }}" href="/topic?filter=excellent">@lang('精华')</a>
                     &nbsp;&nbsp;
-                    <a class="btn btn-secondary" href="/topic?filter=noreply">@lang('零回复')</a>
+                    <a class="btn btn-secondary {{ Request::input('filter') == 'noreply' ? 'active' : '' }}" href="/topic?filter=noreply">@lang('零回复')</a>
 
                     <div class="pull-right">
                         <a class="btn btn-secondary" href="/topic?filter=default">刷新</a>

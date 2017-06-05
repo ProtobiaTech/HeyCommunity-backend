@@ -97,9 +97,9 @@
 
                     @if($timeline->comment_num > 3)
                         <a href="javascript:void(0)"
-                           class="btn btn-link pull-right timeline-show-more-{{ $timeline->id }}"
-                           onclick="showMore('.timeline-comment-{{ $timeline->id }}', '.timeline-show-more-{{ $timeline->id }}')"
-                        >@lang('hc.show more comments')</a>
+                           class="btn btn-link timeline-show-{{ $timeline->id }}"
+                           onclick="toggleComments('.timeline-comment-{{ $timeline->id }}', '.timeline-show-{{ $timeline->id }}')"
+                        ><small>@lang('hc.show more comments')</small></a>
                     @endif
                 </ul>
             @endif
@@ -115,9 +115,9 @@
             });
         });
 
-        function showMore(timeline, click) {
-            $(timeline).show();
-            $(click).hide();
+        function toggleComments(timeline, click) {
+            $(timeline).not(':lt(3)').toggle();
+            $(click).find('small').text('点击收起评论');
         }
     </script>
 @endsection

@@ -58,7 +58,12 @@
                     <div class="card-block">
                         <h3>{{ $topic->title }}</h3>
                         <div>
-                            <span>Topic / Category</span>
+                            <span>
+                                @lang('dashboard.Node') /
+                                @if($topic->node)
+                                    <a href="/topic?node={{ $topic->node->name }}">{{ $topic->node->name }}</a>
+                                @endif
+                            </span>
 
                             <div class="pull-right">
                                 {{ $topic->created_at->format('Y-m-d H:i:s') }}

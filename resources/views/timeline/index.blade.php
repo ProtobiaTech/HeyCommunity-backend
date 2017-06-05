@@ -85,19 +85,17 @@
                         <h6 class="mb-3">@lang('hc.active user')</h6>
                         <ul class="media-list media-list-stream">
                             @foreach ($users as $user)
-                                <li class="media mb-2">
-                                    <a class="media-left" href="#">
+                                <li class="media mb-3">
+                                    <a class="media-left" href="{{ url('/user/profile/' . $user->id) }}">
                                         <img class="media-object d-flex align-self-start mr-3"
                                              src="{{ $user->avatar }}">
                                     </a>
-                                    <div class="media-body">
-                                        <span>{{ $user->nickname }}</span>
-                                        <div class="media-body-actions">
-                                            {{--<button class="btn btn-outline-primary btn-sm">--}}
-                                                {{--<span class="icon icon-add-user"></span> --}}
-                                            <small>{{ $user->bio ? $user->bio : trans('hc.no bio') }}</small>
-                                            {{--</button>--}}
-                                        </div>
+                                    <div class="media-body" style="margin-top: 8px">
+                                        <a class="media-left" href="{{ url('/user/profile/' . $user->id) }}">
+                                            <strong>{{ $user->nickname }}</strong>
+                                        </a>
+                                        <br>
+                                        <small>{{ $user->bio ? $user->bio : trans('hc.no bio') }}</small>
                                     </div>
                                 </li>
                             @endforeach

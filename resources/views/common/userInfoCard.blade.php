@@ -4,7 +4,7 @@
         <ul class="list-unstyled list-spaced">
             <li><span class="text-muted icon icon-email" style="margin-right: 5px;"></span>{{ $user->email }}</li>
             <li><span class="text-muted icon icon-user" style="margin-right: 5px;"></span>{{ \App\User::getGenderName($user->gender) }}</li>
-            <li><span class="text-muted icon icon-book" style="margin-right: 5px;"></span>{{ $user->bio }}</li>
+            <li><span class="text-muted icon icon-book" style="margin-right: 5px;"></span>{{ $user->bio ? $user->bio : trans('hc.no bio') }}</li>
         </ul>
     </div>
 </div>

@@ -17,7 +17,7 @@
                                 <div class="nodes-item">
                                     <span>{{ $node->name }}</span>
                                     @foreach ($node->children as $childNode)
-                                        <a href="">{{ $childNode->name }}</a>
+                                        <a href="/topic?node={{ $childNode->name }}">{{ $childNode->name }}</a>
                                     @endforeach
                                 </div>
                             @endforeach

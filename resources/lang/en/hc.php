@@ -75,6 +75,7 @@ return [
     'detail'                                =>          'Detail',
     'no data'                               =>          'There is no data here',
     'show more comments'                    =>          'Click to show more comments',
+    'no bio'                                =>          'No bio yet',
 
 
 

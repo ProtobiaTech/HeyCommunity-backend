@@ -37,6 +37,11 @@ class TopicController extends Controller
             $topics = $keyword->topics()->paginate();
         }
 
+        if (request()->has('node')) {
+            $topicNode = TopicNode::where('name', request()->input('node'))->first();
+            $topics = $topicNode->topics()->paginate();
+        }
+
         return view('topic.index', compact('topics', 'topicNodes', 'keywords'));
     }
 

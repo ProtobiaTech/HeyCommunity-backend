@@ -95,7 +95,7 @@
                                         <div class="media-body-actions">
                                             {{--<button class="btn btn-outline-primary btn-sm">--}}
                                                 {{--<span class="icon icon-add-user"></span> --}}
-                                            <small>{{ $user->bio }}</small>
+                                            <small>{{ $user->bio ? $user->bio : trans('hc.no bio') }}</small>
                                             {{--</button>--}}
                                         </div>
                                     </div>

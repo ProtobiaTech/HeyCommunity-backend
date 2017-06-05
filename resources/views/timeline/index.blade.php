@@ -13,7 +13,7 @@
                         <div class="tags">
                             @if($keywords->count())
                                 @foreach($keywords as $keyword)
-                                    <a href="" class="l1">{{ $keyword->name }}</a>
+                                    <a href="/timeline?keyword={{ $keyword->name }}" class="l1">{{ $keyword->name }}</a>
                                 @endforeach
                             @else
                                 <span class="muted">@lang('hc.no content yet')</span>

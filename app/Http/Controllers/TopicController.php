@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ExtractKeywordsEvent;
 use App\TopicComment;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,11 @@ class TopicController extends Controller
         $topics     = $topic->getTopicsWithFilter(request('filter', 'index'));
         $topicNodes = TopicNode::rootNodes()->get();
         $keywords   = Keyword::ofType('topic_count');
+
+        if (request()->has('keyword')) {
+            $keyword = Keyword::where('name', request()->input('keyword'))->first();
+            $topics = $keyword->topics()->paginate();
+        }
 
         return view('topic.index', compact('topics', 'topicNodes', 'keywords'));
     }
@@ -68,6 +74,7 @@ class TopicController extends Controller
         $topic->save();
 
         if ($topic->save()) {
+            event(new ExtractKeywordsEvent($topic));
             return redirect()->to('/topic');
         } else {
             return back();

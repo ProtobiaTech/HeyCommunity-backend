@@ -33,6 +33,11 @@ class TimelineController extends Controller
         $users     = User::limit(5)->orderByRaw('RAND()')->get();
         $keywords  = Keyword::ofType('timeline_count');
 
+        if (request()->has('keyword')) {
+            $keyword = Keyword::where('name', request()->input('keyword'))->first();
+            $timelines = $keyword->timelines()->paginate();
+        }
+
         return view('timeline.index', compact('timelines', 'users', 'keywords'));
     }
 

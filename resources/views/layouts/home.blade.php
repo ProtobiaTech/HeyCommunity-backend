@@ -7,8 +7,8 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-
-    <title>HeyCommunity</title>
+    <?php $title = \App\System::find(1); ?>
+    <title>{{ $title->community_name }}</title>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="{{ asset('bootstrap-assets/css/toolkit.css') }}" rel="stylesheet">

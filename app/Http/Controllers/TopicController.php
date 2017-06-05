@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Events\ExtractKeywordsEvent;
-use App\TopicComment;
 use Illuminate\Http\Request;
+
+use Auth;
 
 use App\Topic;
 use App\TopicNode;
 use App\Keyword;
+use App\TopicStar;
+use App\TopicThumb;
+use App\TopicComment;
 
 class TopicController extends Controller
 {
@@ -18,7 +22,7 @@ class TopicController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postStore', 'getCreate', 'postStoreComment']]);
+        $this->middleware('auth', ['except' => ['getIndex', 'getShow']]);
     }
 
     /**
@@ -94,7 +98,6 @@ class TopicController extends Controller
      */
     public function getShow($id)
     {
-        $topic = Topic::findOrFail($id);
         $comments = $topic->comments()->paginate();
 
         return view('topic.show', compact('topic', 'comments'));
@@ -163,5 +166,96 @@ class TopicController extends Controller
             return back();
         }
 
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postSetStar(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+
+        $topicStar = TopicStar::where(['topic_id' => $request->id, 'user_id' => Auth::user()->user()->id])->first();
+        $topic = Topic::findOrFail($request->id);
+
+        if ($topicStar) {
+            $topicStar->delete();
+            $topic->decrement('star_num');
+        } else {
+            $topicStar = new TopicStar;
+            $topicStar->user_id = Auth::user()->user()->id;
+            $topicStar->topic_id = $request->id;
+            $topicStar->save();
+            $topic->increment('star_num');
+
+        }
+
+        return back();
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postSetThumb(Request $request)
+    {
+        $this->validate($request, [
+            'id'       =>      'required|integer',
+            'value'    =>      'required|string',
+        ]);
+
+        $where = [
+            'user_id'   =>  Auth::user()->user()->id,
+            'topic_id'  =>  $request->id
+        ];
+
+        //
+        $oldValue = 'null';
+        $topicThumb = TopicThumb::where($where)->first();
+        if ($topicThumb) {
+            $oldValue = $topicThumb->value == TopicThumb::VALUE_UP ? 'up' : 'down';
+            $topicThumb->delete();
+        }
+        $case = $request->value . ':' . $oldValue;
+
+        //
+        $newValue = $request->value === 'up' ? TopicThumb::VALUE_UP : TopicThumb::VALUE_DOWN;
+
+        //
+        $topicThumb = new TopicThumb;
+        $topicThumb->user_id = Auth::user()->user()->id;
+        $topicThumb->topic_id = $request->id;
+        $topicThumb->value = $newValue;
+
+        if ($topicThumb->save()) {
+            $topic = Topic::with('author', 'comments')->findOrFail($request->id);
+
+            switch ($case) {
+                case 'up:null':
+                    $topic->increment('thumb_up_num');
+                    break;
+                case 'down:null':
+                    $topic->increment('thumb_down_num');
+                    break;
+                case 'up:down':
+                    $topic->increment('thumb_up_num');
+                    $topic->decrement('thumb_down_num');
+                    break;
+                case 'down:up':
+                    $topic->increment('thumb_down_num');
+                    $topic->decrement('thumb_up_num');
+                    break;
+                default:
+                    break;
+            }
+
+            return back();
+        } else {
+            return response('fail', 500);
+        }
     }
 }

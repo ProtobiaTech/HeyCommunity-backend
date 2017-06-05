@@ -75,7 +75,7 @@ return [
     'detail'                                =>          '详情',
     'no data'                               =>          '暂时没有数据',
     'show more comments'                    =>          '点击加载更多评论',
-    'no bio'                                =>          '暂无个人签名',
+    'no bio'                                =>          '暂无介绍',
 
 
 

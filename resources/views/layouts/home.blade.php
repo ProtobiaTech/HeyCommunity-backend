@@ -11,6 +11,8 @@
 
     <title>{{ $system->community_name }}</title>
 
+    {!! $system->community_statistical_code !!}
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="{{ asset('bootstrap-assets/css/toolkit.css') }}" rel="stylesheet">
 

@@ -37,6 +37,10 @@
                         <td>{{ $system->community_description }}</td>
                     </tr>
                     <tr>
+                        <th style="width:10em;">{{ trans('dashboard.Community Statistical Code') }}</th>
+                        <td>{{ $system->community_statistical_code }}</td>
+                    </tr>
+                    <tr>
                         <th style="width:10em;">{{ trans('dashboard.Created At') }}</th>
                         <td>{{ $system->created_at }}</td>
                     </tr>

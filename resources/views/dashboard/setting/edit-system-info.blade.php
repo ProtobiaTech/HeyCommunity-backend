@@ -42,6 +42,13 @@
                                 <div class="help-block">{{ $errors->first('community_description') }}</div>
                             @endif
                         </div>
+                        <label for="input-site-name" class="col-sm-2 control-label">{{ trans('dashboard.Community Statistical Code') }}</label>
+                        <div class="col-sm-10">
+                            <input type="string" name="community_statistical_code" class="form-control" id="input-site-name" placeholder="" value="{{ old('community_statistical_code', $system->community_statistical_code) }}">
+                            @if ($errors->has('community_statistical_code'))
+                                <div class="help-block">{{ $errors->first('community_statistical_code') }}</div>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="form-group">

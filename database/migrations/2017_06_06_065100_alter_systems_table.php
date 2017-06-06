@@ -15,6 +15,7 @@ class AlterSystemsTable extends Migration
         Schema::table('systems', function (Blueprint $table) {
             $table->string('community_keywords')->nullable();
             $table->string('community_description' )->nullable();
+            $table->string('community_statistical_code' )->nullable();
         });
     }
 
@@ -26,7 +27,7 @@ class AlterSystemsTable extends Migration
     public function down()
     {
         Schema::table('systems', function (Blueprint $table) {
-            $table->dropColumn(['community_keywords', 'community_description']);
+            $table->dropColumn(['community_keywords', 'community_description', 'community_statistical_code']);
         });
     }
 }

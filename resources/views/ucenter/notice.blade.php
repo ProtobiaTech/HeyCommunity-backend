@@ -15,39 +15,14 @@
             <div class="pt-4">
                 <!-- Notices -->
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Rod</strong>: Cras justo odio
-
-                        <div style="position:absolute; right:1rem; top:0.75rem;">
-                            <small>
-                                <a class="" href="">Detail</a>
-                                &nbsp;&nbsp;
-                                <span class="">06-28 12:12:12</span>
-                            </small>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Rod</strong>: Cras justo odio
-
-                        <div style="position:absolute; right:1rem; top:0.75rem;">
-                            <small>
-                                <a class="" href="">Detail</a>
-                                &nbsp;&nbsp;
-                                <span class="">06-28 12:12:12</span>
-                            </small>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Rod</strong>: Cras justo odio
-
-                        <div style="position:absolute; right:1rem; top:0.75rem;">
-                            <small>
-                                <a class="" href="">Detail</a>
-                                &nbsp;&nbsp;
-                                <span class="">06-28 12:12:12</span>
-                            </small>
-                        </div>
-                    </li>
+                    @if($notices->count())
+                        @foreach ($notices as $notice)
+                            @include('ucenter._notice')
+                        @endforeach
+                        {!! $notices->render() !!}
+                    @else
+                        @include('common.nodata')
+                    @endif
                 </ul>
             </div>
         </div>

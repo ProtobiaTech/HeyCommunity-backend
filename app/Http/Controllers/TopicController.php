@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ExtractKeywordsEvent;
+use App\Events\TriggerNoticeEvent;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -79,7 +80,7 @@ class TopicController extends Controller
         $topic->title = $request->title;
         $topic->content = $request->content;
         $topic->topic_node_id = $request->topic_node_id;
-        $topic->user_id = auth()->id();
+        $topic->user_id = Auth::user()->user()->id;
         $topic->save();
 
         if ($topic->save()) {
@@ -156,12 +157,22 @@ class TopicController extends Controller
             $topicComment->parent_id = $request->topic_comment_id;
         }
 
-        $topicComment->user_id = auth()->id();
+        $topicComment->user_id = Auth::user()->user()->id;
         $topicComment->topic_id = $request->topic_id;
         $topicComment->content = $request->content;
 
         if ($topicComment->save()) {
             $topic->increment('comment_num');
+
+            if ($topicComment->parent_id > 0) {
+                if ($topicComment->parent->user_id !== Auth::user()->user()->id) {
+                    event(new TriggerNoticeEvent($topicComment, $topicComment->parent, 'topic_comment_comment'));
+                }
+            } else {
+                if ($topic->user_id !== Auth::user()->user()->id) {
+                    event(new TriggerNoticeEvent($topicComment, $topic, 'topic_comment'));
+                }
+            }
             return back();
         } else {
             return back();

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Notice;
 use App\Timeline;
 use App\Topic;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class UserCenterController extends Controller
 {
@@ -34,7 +32,11 @@ class UserCenterController extends Controller
      */
     public function getNotice()
     {
-        return view('ucenter.notice');
+        $notices = Notice::with(['initiator', 'type', 'entity', 'target'])->where('user_id', Auth::user()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+
+        return view('ucenter.notice', compact('notices'));
     }
 
     /**

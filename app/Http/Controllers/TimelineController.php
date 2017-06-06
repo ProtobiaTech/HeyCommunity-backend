@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ExtractKeywordsEvent;
+use App\Events\TriggerNoticeEvent;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -101,6 +102,17 @@ class TimelineController extends Controller
 
         if ($timelineComment->save()) {
             $timeline->increment('comment_num');
+
+            if ($timelineComment->parent_id > 0) {
+                if ($timelineComment->parent->user_id !== Auth::user()->user()->id) {
+                    event(new TriggerNoticeEvent($timelineComment, $timelineComment->parent, 'timeline_comment_comment'));
+                }
+            } else {
+                if ($timeline->user_id !== Auth::user()->user()->id) {
+                    event(new TriggerNoticeEvent($timelineComment, $timeline, 'timeline_comment'));
+                }
+            }
+
             return back();
         } else {
             return back();
@@ -145,6 +157,10 @@ class TimelineController extends Controller
             $TimelineLike->timeline_id = $request->id;
             $TimelineLike->save();
             $Timeline->increment('like_num');
+
+            if ($Timeline->user_id !== Auth::user()->user()->id) {
+                event(new TriggerNoticeEvent($TimelineLike, $Timeline, 'timeline_like'));
+            }
 
         }
 

@@ -18,7 +18,8 @@ return [
     'get code'         => 'Get Captcha',
     'signup password'  => 'Password',
     'signup'           => 'Singup',
-    'cancel'           => '取消',
+    'cancel'           => 'Cancel',
+    'forgot password'  => 'Forgot Password',
 
 
     // left welcome login

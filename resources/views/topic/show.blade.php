@@ -18,11 +18,13 @@
                 <a class="btn btn-block btn-secondary"
                    onclick="event.preventDefault();
                    document.getElementById('topic-thumb-up').submit();"
-                ><i class="pull-left fa fa-thumbs{{ $topic->thumb_value == 1 ? '' : '-o' }}-up" style="line-height:1.25"></i> 点赞</a>
+                ><i class="pull-left fa fa-thumbs{{ $topic->thumb_value == 1 ? '' : '-o' }}-up"
+                    style="line-height:1.25"></i> 点赞</a>
                 <a class="btn btn-block btn-secondary"
                    onclick="event.preventDefault();
                    document.getElementById('topic-thumb-down').submit();"
-                ><i class="pull-left fa fa-thumbs{{ $topic->thumb_value == 2 ? '' : '-o' }}-down" style="line-height:1.25"></i> 点踩</a>
+                ><i class="pull-left fa fa-thumbs{{ $topic->thumb_value == 2 ? '' : '-o' }}-down"
+                    style="line-height:1.25"></i> 点踩</a>
                 <a class="btn btn-block btn-secondary"
                    onclick="event.preventDefault();
                    document.getElementById('topic-star-form').submit();"
@@ -59,7 +61,9 @@
                         <h3>{{ $topic->title }}</h3>
                         <div>
                             <span>
-                                @lang('dashboard.Node') /
+                                @if($topic->node->parentNode)
+                                    <a href="/topic?node={{ $topic->node->parentNode->name }}">{{ $topic->node->parentNode->name }}</a> /
+                                @endif
                                 @if($topic->node)
                                     <a href="/topic?node={{ $topic->node->name }}">{{ $topic->node->name }}</a>
                                 @endif
@@ -76,7 +80,8 @@
                             <div class="media-body-actions">
                                 <strong>@lang('dashboard.Keyword')</strong>:
                                 @foreach($topic->keywords as $keyword)
-                                    <a class="btn btn-link btn-xs" href="/topic?keyword={{ $keyword->name }}">{{ $keyword->name }}</a>
+                                    <a class="btn btn-link btn-xs"
+                                       href="/topic?keyword={{ $keyword->name }}">{{ $keyword->name }}</a>
                                 @endforeach
                             </div>
                         @endif

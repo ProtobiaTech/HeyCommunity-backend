@@ -19,6 +19,7 @@ return [
     'signup password'  => '密码',
     'signup'           => '注册',
     'cancel'           => '取消',
+    'forgot password'  => '忘记密码',
 
 
     // left welcome login

@@ -99,7 +99,7 @@ class TopicController extends Controller
      */
     public function getShow($id)
     {
-        $topic = Topic::with('node', 'keywords')->findOrFail($id);
+        $topic = Topic::with('node.parentNode', 'keywords')->findOrFail($id);
         $comments = $topic->comments()->paginate();
 
         return view('topic.show', compact('topic', 'comments'));

@@ -84,7 +84,7 @@
 
         <ul id="#js-popoverContent" class="nav navbar-nav float-right mr-0 hidden-sm-down">
             <li class="nav-item">
-                <a class="app-notifications nav-link">
+                <a class="app-notifications nav-link" href="{{ url('/ucenter') }}">
                     <span class="icon icon-bell"></span>
                 </a>
             </li>

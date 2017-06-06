@@ -72,6 +72,14 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany('App\TimelineImg', 'user_id')->orderBy('created_at', 'desc');
     }
 
+    /**
+     * Related Notice
+     */
+    public function notices()
+    {
+        return $this->hasMany('App\Notice', 'user_id')->orderBy('created_at', 'desc');
+    }
+
     /*
      *
      */

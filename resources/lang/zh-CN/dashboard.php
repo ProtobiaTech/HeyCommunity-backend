@@ -75,6 +75,8 @@ return [
     'Community Info'                    =>          '社区信息',
     'Edit Community Info'               =>          '编辑社区信息',
     'Community Name'                    =>          '社区名称',
+    'Community Keywords'                =>          '社区关键字',
+    'Community Description'             =>          '社区描述',
     'Domain'                            =>          '域名',
     'Sub Domain'                        =>          '子域名',
     'Email'                             =>          '邮箱',

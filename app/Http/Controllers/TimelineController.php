@@ -128,7 +128,7 @@ class TimelineController extends Controller
      */
     public function getShow($id)
     {
-        $timeline = Timeline::findOrFail($id);
+        $timeline = Timeline::with('keywords')->findOrFail($id);
         $users = User::limit(5)->orderByRaw('RAND()')->get();
         $comments = $timeline->comments()->paginate();
 

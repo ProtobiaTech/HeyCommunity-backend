@@ -71,6 +71,16 @@
                         </div>
                         <br>
 
+                        <!-- Keywords -->
+                        @if($topic->keywords->count())
+                            <div class="media-body-actions">
+                                <strong>@lang('dashboard.Keyword')</strong>:
+                                @foreach($topic->keywords as $keyword)
+                                    <a class="btn btn-link btn-xs" href="/topic?keyword={{ $keyword->name }}">{{ $keyword->name }}</a>
+                                @endforeach
+                            </div>
+                        @endif
+
                         <p class="content">{!! $topic->content !!}</p>
 
                         <div class="mb-2 form-topic-comment" style="margin-bottom:1rem !important;">

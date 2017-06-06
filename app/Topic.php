@@ -59,7 +59,7 @@ class Topic extends Model
      */
     public function keywords()
     {
-        return $this->morphMany('App\Keyword', 'keywordable');
+        return $this->morphToMany('App\Keyword', 'keywordable');
     }
 
     /**

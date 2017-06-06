@@ -55,7 +55,7 @@ class Timeline extends HeyCommunity
      */
     public function keywords()
     {
-        return $this->morphMany('App\Keyword', 'keywordable');
+        return $this->morphToMany('App\Keyword', 'keywordable');
     }
 
     /**

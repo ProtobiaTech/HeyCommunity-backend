@@ -28,6 +28,8 @@
                             <div class="help-block">{{ $errors->first('community_name') }}</div>
                             @endif
                         </div>
+                    </div>
+                    <div class="form-group {{ $errors->has('community_keywords') ? 'has-error' : '' }}">
                         <label for="input-site-name" class="col-sm-2 control-label">{{ trans('dashboard.Community Keywords') }}</label>
                         <div class="col-sm-10">
                             <input type="string" name="community_keywords" class="form-control" id="input-site-name" placeholder="" value="{{ old('community_keywords', $system->community_keywords) }}">
@@ -35,16 +37,20 @@
                                 <div class="help-block">{{ $errors->first('community_keywords') }}</div>
                             @endif
                         </div>
+                    </div>
+                    <div class="form-group {{ $errors->has('community_description') ? 'has-error' : '' }}">
                         <label for="input-site-name" class="col-sm-2 control-label">{{ trans('dashboard.Community Description') }}</label>
                         <div class="col-sm-10">
-                            <input type="string" name="community_description" class="form-control" id="input-site-name" placeholder="" value="{{ old('community_description', $system->community_description) }}">
+                            <textarea type="string" name="community_description" class="form-control" id="input-site-name" placeholder="" value="{{ old('community_description', $system->community_description) }}"></textarea>
                             @if ($errors->has('community_description'))
                                 <div class="help-block">{{ $errors->first('community_description') }}</div>
                             @endif
                         </div>
+                    </div>
+                    <div class="form-group {{ $errors->has('community_statistical_code') ? 'has-error' : '' }}">
                         <label for="input-site-name" class="col-sm-2 control-label">{{ trans('dashboard.Community Statistical Code') }}</label>
                         <div class="col-sm-10">
-                            <input type="string" name="community_statistical_code" class="form-control" id="input-site-name" placeholder="" value="{{ old('community_statistical_code', $system->community_statistical_code) }}">
+                            <textarea type="string" name="community_statistical_code" class="form-control" id="input-site-name" placeholder="" value="{{ old('community_statistical_code', $system->community_statistical_code) }}"></textarea>
                             @if ($errors->has('community_statistical_code'))
                                 <div class="help-block">{{ $errors->first('community_statistical_code') }}</div>
                             @endif

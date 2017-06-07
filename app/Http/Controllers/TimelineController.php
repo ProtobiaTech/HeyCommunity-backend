@@ -36,7 +36,12 @@ class TimelineController extends Controller
 
         if (request()->has('keyword')) {
             $keyword = Keyword::where('name', request()->input('keyword'))->first();
-            $timelines = $keyword->timelines()->paginate();
+
+            if (is_null($keyword)) {
+                $timelines = Timeline::where('id', 0)->paginate();
+            } else {
+                $timelines = $keyword->timelines()->paginate();
+            }
         }
 
         return view('timeline.index', compact('timelines', 'users', 'keywords'));

@@ -2,7 +2,7 @@
     <a href="{{ url('/user/profile/' . $notice->initiator->id) }}" style="margin-right: 8px"><strong>{{ $notice->initiator->nickname }}</strong></a>
     <?php Carbon\Carbon::setLocale('zh'); ?>
     @if($notice->entity_type == "App\\TimelineLike")
-        @lang('notice.Like Your Timeline')
+        <strong>@lang('notice.Like Your Timeline')</strong>
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/timeline/show/' . $notice->target_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
@@ -11,7 +11,7 @@
             </small>
         </div>
     @elseif($notice->entity_type == "App\\TimelineComment" && $notice->target_type == "App\\TimelineComment")
-        @lang('notice.Reply Your TimelineComment: ') <small style="margin-left: 8px">{{ $notice->entity->content }}</small>
+        <strong>@lang('notice.Reply Your TimelineComment: ') <u style="margin-left: 8px">{{ $notice->entity->content }}</u></strong>
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/timeline/show/' . $notice->entity->timeline_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
@@ -20,7 +20,7 @@
             </small>
         </div>
     @elseif($notice->entity_type == "App\\TimelineComment" && $notice->target_type == "App\\Timeline")
-        @lang('notice.Comment Your Timeline: ') <small style="margin-left: 8px">{{ $notice->entity->content }}</small>
+        <strong>@lang('notice.Comment Your Timeline: ') <u style="margin-left: 8px">{{ $notice->entity->content }}</u></strong>
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/timeline/show/' . $notice->target_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
@@ -29,7 +29,7 @@
             </small>
         </div>
     @elseif($notice->entity_type == "App\\TopicComment" && $notice->target_type == "App\\TopicComment")
-        @lang('notice.Reply Your TopicComment: ') <small style="margin-left: 8px">{{ $notice->entity->content }}</small>
+        <strong>@lang('notice.Reply Your TopicComment: ') <u style="margin-left: 8px">{{ $notice->entity->content }}</u></strong>
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/topic/show/' . $notice->entity->topic_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
@@ -38,7 +38,7 @@
             </small>
         </div>
     @elseif($notice->entity_type == "App\\TopicComment" && $notice->target_type == "App\\Topic")
-        @lang('notice.Comment Your Topic: ') <small style="margin-left: 8px">{{ $notice->entity->content }}</small>
+        <strong>@lang('notice.Comment Your Topic: ') <u style="margin-left: 8px">{{ $notice->entity->content }}</u></strong>
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/topic/show/' . $notice->target_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>

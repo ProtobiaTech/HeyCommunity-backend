@@ -5,7 +5,7 @@
 
 <div class="form-group">
   {!! Form::label('topic_node', '节点') !!}
-  {!! Form::select('topic_node_id', $nodes, null, ['id' => 'topic_node_id', 'class' => 'form-control']) !!}
+  {!! Form::select('topic_node_id', $nodes, null,  ['id' => 'topic_node_id', 'class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">

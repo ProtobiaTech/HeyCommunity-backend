@@ -14,8 +14,8 @@ class AlterSystemsTable extends Migration
     {
         Schema::table('systems', function (Blueprint $table) {
             $table->string('community_keywords')->nullable();
-            $table->string('community_description' )->nullable();
-            $table->string('community_statistical_code' )->nullable();
+            $table->text('community_description' )->nullable();
+            $table->text('community_statistical_code' )->nullable();
         });
     }
 

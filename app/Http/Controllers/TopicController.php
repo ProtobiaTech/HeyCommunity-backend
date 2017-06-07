@@ -33,18 +33,35 @@ class TopicController extends Controller
      */
     public function getIndex(Topic $topic)
     {
-        $topics     = $topic->getTopicsWithFilter(request('filter', 'index'));
+        $topics = $topic->getTopicsWithFilter(request('filter', 'index'));
         $topicNodes = TopicNode::rootNodes()->get();
-        $keywords   = Keyword::ofType('topic_count');
+        $keywords = Keyword::ofType('topic_count');
 
         if (request()->has('keyword')) {
             $keyword = Keyword::where('name', request()->input('keyword'))->first();
-            $topics = $keyword->topics()->paginate();
+
+            if (is_null($keyword)) {
+                $topics = $topic->where('id', 0)->paginate();
+            } else {
+                $topics = $keyword->topics()->paginate();
+            }
         }
 
         if (request()->has('node')) {
-            $topicNode = TopicNode::where('name', request()->input('node'))->first();
-            $topics = $topicNode->topics()->paginate();
+            $topicNode = TopicNode::where('name', request()->input('node'))->with('childNodes')->first();
+
+            if (is_null($topicNode)) {
+                $topics = $topic->where('id', 0)->paginate();
+            } else {
+
+                if ($topicNode->childNodes->count()) {
+                    $topicNodeIds = $topicNode->childNodes->pluck('id');
+                } else {
+                    $topicNodeIds[] = $topicNode->id;
+                }
+
+                $topics = $topic->whereIn('topic_node_id', $topicNodeIds)->paginate();
+            }
         }
 
         return view('topic.index', compact('topics', 'topicNodes', 'keywords'));
@@ -57,7 +74,13 @@ class TopicController extends Controller
      */
     public function getCreate()
     {
-        $nodes = TopicNode::all()->pluck('name', 'id');
+        $nodes = TopicNode::rootNodes()
+            ->with('childNodes')
+            ->get()
+            ->pluck('childNodes', 'name')
+            ->map(function ($items) {
+                return $items->pluck('name', 'id');
+            })->toArray();
 
         return view('topic/create', compact('nodes'));
     }
@@ -216,13 +239,13 @@ class TopicController extends Controller
     public function postSetThumb(Request $request)
     {
         $this->validate($request, [
-            'id'       =>      'required|integer',
-            'value'    =>      'required|string',
+            'id'    => 'required|integer',
+            'value' => 'required|string',
         ]);
 
         $where = [
-            'user_id'   =>  Auth::user()->user()->id,
-            'topic_id'  =>  $request->id
+            'user_id'  => Auth::user()->user()->id,
+            'topic_id' => $request->id,
         ];
 
         //

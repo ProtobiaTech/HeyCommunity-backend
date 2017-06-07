@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container-fluid container-fill-height">
+        <div id="send-success" style="width: 200px; margin-top: 20px; position: fixed; right: 20px; display: none">
+            {!! \Krucas\Notification\Facades\Notification::container('success')
+            ->successInstant(trans('auth.captcha send success')) !!}
+        </div>
+        <div id="send-fail" style="width: 200px; margin-top: 20px; position: fixed; right: 20px; display: none">
+            {!! \Krucas\Notification\Facades\Notification::container('fail')->errorInstant(trans('auth.captcha send fail')) !!}
+        </div>
         <div class="container-content-middle">
             {!! Form::open(array('url' => url('auth/sign-up'), 'method' => 'post', 'class' => 'mx-auto app-login-form')) !!}
             <h2 class="text-center ">
@@ -62,10 +69,19 @@
     <script>
         function signUp() {
             phone = $("[name='phone']").val();
-            $.post('/api/user/get-verification-code', {'phone': phone}, function (result) {
-                $(".alert-dismissible").fadeIn().fadeOut(4000);
-                $(".alert-dismissible").find('small').text(result[0]);
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/user/get-verification-code',
+                data: {'phone': phone},
+                success: function () {
+                    $('#send-success').show().fadeOut(3000);
+                },
+                error: function () {
+                    $('#send-fail').show().fadeOut(3000);
+                }
             });
+
             reset();
         }
 

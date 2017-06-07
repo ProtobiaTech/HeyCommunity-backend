@@ -15,5 +15,6 @@ return [
 
     'failed'   => '用户名或密码错误。',
     'throttle' => '您的尝试登录次数过多. 请 :seconds 秒后再试。',
-
+    'captcha send fail'    => '手机验证码发送失败',
+    'captcha send success' => '手机验证码发送成功',
 ];

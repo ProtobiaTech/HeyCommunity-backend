@@ -50,12 +50,14 @@
                         </form>
                     </li>
 
-                    @foreach ($timelines as $timeline)
-                        @include('common.timeline')
-                    @endforeach
-                    <div>
+                    @if($timelines->count())
+                        @foreach ($timelines as $timeline)
+                            @include('common.timeline')
+                        @endforeach
                         {!! $timelines->render() !!}
-                    </div>
+                    @else
+                        @include('common.nodata')
+                    @endif
                 </ul>
             </div>
 

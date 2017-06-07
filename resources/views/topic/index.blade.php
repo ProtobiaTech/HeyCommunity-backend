@@ -62,12 +62,15 @@
                 </div>
 
                 <div class="list-group list-topic">
-                    @foreach ($topics as $topic)
-                        @include('common.topic')
-                    @endforeach
-                    <div>
+                    @if($topics->count())
+                        @foreach ($topics as $topic)
+                            @include('common.topic')
+                        @endforeach
+
                         {!! $topics->render() !!}
-                    </div>
+                    @else
+                        @include('common.nodata')
+                    @endif
                 </div>
             </div>
         </div>

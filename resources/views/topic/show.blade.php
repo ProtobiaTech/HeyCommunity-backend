@@ -6,7 +6,7 @@
             <div class="col-lg-2">
                 <hr style="margin-top:0;">
 
-                <a class="btn btn-block btn-secondary" href="{{ URL::previous() }}"><i
+                <a class="btn btn-block btn-secondary" href="{{ url('/topic') }}"><i
                             class="pull-left fa fa-chevron-left" style="line-height:1.25"></i> 返回</a>
                 <br>
 

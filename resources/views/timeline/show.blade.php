@@ -6,7 +6,7 @@
             <div class="col-lg-2 hidden-sm-down hidden-md-down hidden-xs-down">
                 <hr style="margin-top:0;">
 
-                <a class="btn btn-block btn-secondary" href="{{ url('/timeline/index') }}"><i
+                <a class="btn btn-block btn-secondary" href="{{ url('/timeline') }}"><i
                             class="pull-left fa fa-chevron-left" style="line-height:1.25"></i> 返回</a>
                 <br>
 
@@ -56,7 +56,7 @@
                                     <div class="media-body-actions">
                                         <strong>@lang('dashboard.Keyword')</strong>:
                                         @foreach($timeline->keywords as $keyword)
-                                            <a class="btn btn-link btn-xs" href="/timeline?keyword={{ $keyword->name }}">{{ $keyword->name }}</a>
+                                            <button class="btn btn-link btn-xs" href="/timeline?keyword={{ $keyword->name }}">{{ $keyword->name }}</button>
                                         @endforeach
                                     </div>
                                 @endif

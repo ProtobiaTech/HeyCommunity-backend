@@ -88,10 +88,8 @@
             <li class="nav-item">
                 <a class="app-notifications nav-link" href="{{ url('/ucenter') }}">
                     <span>
-                        <i class="icon icon-bell"></i>
-                        @if (Auth::user()->check() && Auth::user()->user()->notices->count() > 0)
-                            <strong class="text-danger">{{ Auth::user()->user()->notices->count() }}</strong>
-                        @endif
+                        <?php $isChecked = Auth::user()->check() && Auth::user()->user()->notices->where('is_checked', 0)->count() > 0 ?>
+                        <i class="icon icon-bell {{ $isChecked ? "text-danger" : "" }}"></i>
                     </span>
                 </a>
             </li>

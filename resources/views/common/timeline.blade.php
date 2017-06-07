@@ -1,4 +1,4 @@
-<li class="media list-group-item p-4">
+<li class="media list-group-item p-4" id="timeline-{{ $timeline->id }}" tabindex='1'>
     <a class="media-object d-flex align-self-start mr-3" href="{{ url('/user/profile/' . $timeline->author->id) }}">
         <img class="media-object d-flex align-self-start mr-3" src="{{ $timeline->author->avatar }}">
     </a>
@@ -116,8 +116,24 @@
         });
 
         function toggleComments(timeline, click) {
-            $(timeline).not(':lt(3)').toggle();
+            var text =  $(click).find('small').text();
+
+            if(text === "点击加载更多评论") {
+                showComment(timeline, click);
+            } else {
+                hideComment(timeline, click);
+            }
+        }
+
+        function showComment(timeline, click) {
+            $(timeline).not(':lt(3)').show();
             $(click).find('small').text('点击收起评论');
+        }
+
+        function hideComment(timeline, click) {
+            $(timeline).not(':lt(3)').hide();
+            $('#timeline-' + timeline.split("-").pop()).focus();
+            $(click).find('small').text('点击加载更多评论');
         }
     </script>
 @endsection

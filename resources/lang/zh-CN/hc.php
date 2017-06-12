@@ -100,4 +100,10 @@ return [
     // timeline
     // ===================
     'What\'s news'                      =>      '有什么新鲜事',
+
+    //
+    // Notice
+    // ==============
+    'mark check'                        =>       '标记已读',
+    'mark all check'                    =>       '全部标记为已读',
 ];

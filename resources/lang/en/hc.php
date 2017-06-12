@@ -100,4 +100,10 @@ return [
     // timeline
     // ===================
     'What\'s news'                      =>      'What\'s news',
+
+    //
+    // Notice
+    // ==============
+    'mark check'                        =>       'Mark as Checked',
+    'mark all check'                    =>       'Mark All as Checked',
 ];

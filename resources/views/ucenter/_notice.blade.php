@@ -1,4 +1,8 @@
 <li class="list-group-item" style="{{ $notice->is_checked ? "color: lightgray" : "" }}">
+    <label >
+        <input type="checkbox" class="checkbox" value="{{ $notice->id }}" style="margin-right: 5px">
+    </label>
+
     <a href="{{ url('/user/profile/' . $notice->initiator->id) }}" style="margin-right: 8px"><strong>{{ $notice->initiator->nickname }}</strong></a>
     <?php Carbon\Carbon::setLocale('zh'); ?>
     @if($notice->entity_type == "App\\TimelineLike")

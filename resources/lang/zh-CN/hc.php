@@ -9,6 +9,17 @@ return [
     'logout'   => '退出',
     'login'    => '登录',
     'search'   => '搜索',
+    'notice'   => '通知',
+
+    // Signup
+    'signup nickname'  => '昵称',
+    'signup phone'     => '手机号',
+    'signup code'      => '验证码',
+    'get code'         => '获取验证码',
+    'signup password'  => '密码',
+    'signup'           => '注册',
+    'cancel'           => '取消',
+    'forgot password'  => '忘记密码',
 
 
     // left welcome login
@@ -52,6 +63,7 @@ return [
     'view all'                              =>      '查看所有',
     'follow'                                =>      '关注',
     'recommended_follow_text'               =>      '这些都是社区里活跃的用户，推荐你关注他们',
+    'active user'                           =>      '活跃用户',
 
 
     // right bottom
@@ -71,6 +83,9 @@ return [
 
     // common
     'detail'                                =>          '详情',
+    'no data'                               =>          '暂时没有数据',
+    'show more comments'                    =>          '点击加载更多评论',
+    'no bio'                                =>          '暂无介绍',
 
 
 
@@ -85,4 +100,10 @@ return [
     // timeline
     // ===================
     'What\'s news'                      =>      '有什么新鲜事',
+
+    //
+    // Notice
+    // ==============
+    'mark check'                        =>       '标记已读',
+    'mark all check'                    =>       '全部标记为已读',
 ];

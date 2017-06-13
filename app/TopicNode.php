@@ -22,6 +22,14 @@ class TopicNode extends Node
     /**
      * Related TopicNode
      */
+    public function parentNode()
+    {
+        return $this->belongsTo('App\TopicNode', 'parent_id', 'id');
+    }
+
+    /**
+     * Related Topic
+     */
     public function topics()
     {
         return $this->hasMany('App\Topic', 'topic_node_id');

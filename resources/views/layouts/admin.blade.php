@@ -4,7 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="author" contents="dev4living.com">
-    <title>HeyCommunity | 免费开源的线上社区解决方案</title>
+    <?php $title = \App\System::find(1); ?>
+    <title>{{ $title->community_name }} | 免费开源的线上社区解决方案</title>
     <meta name="keywords" content="HeyCommunity, hey-community, SNS, 社区, 社交网络, 开源社区, 开源社交, 社群">
     <meta name="description" content="HeyCommunity 是为中小社群量身打造的线上社区解决方案，其构建的 app 可适用于 iOS / android / windowPhone / Browser 等终端。让人欣喜的是其 app 是开源的 GPLv3 授权，我们为有需要的用户提供定制开发和运营服务">
 
@@ -57,6 +58,7 @@
             <ul class="nav navbar-nav">
                 @if (Auth::admin()->check())
                 <li class="{{ Request::is('dashboard') ? 'active' : ''}}"><a href="{{ url('dashboard') }}">{{ trans('dashboard.Trend') }}</a></li>
+                <li class="{{ Request::is('dashboard/keyword*') ? 'active' : ''}}"><a href="{{ url('dashboard/keyword') }}">{{ trans('dashboard.Keyword') }}</a></li>
                 <li class="{{ Request::is('dashboard/timeline*') ? 'active' : ''}}"><a href="{{ url('dashboard/timeline') }}">{{ trans('dashboard.Timeline') }}</a></li>
                 <li class="{{ Request::is('dashboard/topic*') ? 'active' : ''}}"><a href="{{ url('dashboard/topic') }}">{{ trans('dashboard.Topic') }}</a></li>
                 <li class="{{ Request::is('dashboard/user*') ? 'active' : ''}}"><a href="{{ url('dashboard/user') }}">{{ trans('dashboard.User') }}</a></li>

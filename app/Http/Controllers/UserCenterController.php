@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Auth;
+use App\Notice;
+use App\Timeline;
+use App\Topic;
 
 class UserCenterController extends Controller
 {
@@ -32,7 +32,11 @@ class UserCenterController extends Controller
      */
     public function getNotice()
     {
-        return view('ucenter.notice');
+        $notices = Notice::with(['initiator', 'type', 'entity', 'target'])->where('user_id', Auth::user()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+
+        return view('ucenter.notice', compact('notices'));
     }
 
     /**
@@ -40,7 +44,9 @@ class UserCenterController extends Controller
      */
     public function getTimeline()
     {
-        return view('ucenter.timeline');
+        $timelines = Timeline::latest()->with('author', 'comments')->where('user_id', \Auth::user()->user()->id)->paginate();
+
+        return view('ucenter.timeline', compact('timelines'));
     }
 
     /**
@@ -48,7 +54,9 @@ class UserCenterController extends Controller
      */
     public function getTopic()
     {
-        return view('ucenter.topic');
+        $topics = Topic::latest()->with('author')->where('user_id', \Auth::user()->user()->id)->paginate();
+
+        return view('ucenter.topic', compact('topics'));
     }
 
 }

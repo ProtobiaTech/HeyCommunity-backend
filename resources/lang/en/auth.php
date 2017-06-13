@@ -15,5 +15,7 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'captcha send fail'    => 'Verification code sent failed.',
+    'captcha send success' => 'Verification code sent successfully.',
 
 ];

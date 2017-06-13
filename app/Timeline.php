@@ -3,9 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Timeline extends HeyCommunity
 {
+    use SearchableTrait;
+
+    protected $appends = ['isLike'];
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'timelines.content'    => 10,
+        ],
+    ];
+
     /**
      * Related User
      */
@@ -47,6 +71,14 @@ class Timeline extends HeyCommunity
     }
 
     /**
+     * Keyword
+     */
+    public function keywords()
+    {
+        return $this->morphToMany('App\Keyword', 'keywordable');
+    }
+
+    /**
      *
      */
     public function getImgs()
@@ -68,5 +100,17 @@ class Timeline extends HeyCommunity
     public function getPosterAttribute($url)
     {
         return \App\Helpers\FileSystem::getFullUrl($url);
+    }
+
+    /**
+     *
+     */
+    public function getIsLikeAttribute()
+    {
+        if (Auth::user()->check()) {
+            return $this->author_like->where('user_id', Auth::user()->user()->id)->count();
+        }
+
+        return false;
     }
 }

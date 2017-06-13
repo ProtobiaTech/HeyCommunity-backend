@@ -27,8 +27,8 @@
       </div>
 
       <div class="mb-5 text-center ">
-        <button class="btn btn-primary">Log In</button>
-        <a class="btn btn-secondary btn-link" href="{{ url('/auth/signup') }}">Sign up</a>
+        <button class="btn btn-primary">@lang('hc.login')</button>
+        <a class="btn btn-secondary btn-link" href="{{ url('/auth/signup') }}">@lang('hc.signup')</a>
       </div>
 
       <footer class="screen-login text-center">

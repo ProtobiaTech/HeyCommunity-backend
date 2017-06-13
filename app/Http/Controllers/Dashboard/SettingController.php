@@ -51,6 +51,9 @@ class SettingController extends Controller
 
         $system = System::findOrFail(1);
         $system->community_name = $request->community_name;
+        $system->community_keywords = $request->community_keywords;
+        $system->community_description = $request->community_description;
+        $system->community_statistical_code = $request->community_statistical_code;
 
         if ($system->save()) {
             Notification::success(trans('dashboard.Successful Operation'));

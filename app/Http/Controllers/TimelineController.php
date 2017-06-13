@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ExtractKeywordsEvent;
+use App\Events\TriggerNoticeEvent;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use Auth;
+use App\Keyword;
 use App\User;
 use App\Timeline;
 use App\TimelineComment;
+use App\TimelineLike;
 
 class TimelineController extends Controller
 {
@@ -19,7 +20,7 @@ class TimelineController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['postStore', 'postStoreComment']]);
+        $this->middleware('auth', ['only' => ['postStore', 'postStoreComment', 'postSetLike']]);
     }
 
     /**
@@ -30,9 +31,20 @@ class TimelineController extends Controller
     public function getIndex()
     {
         $timelines = Timeline::latest()->paginate();
-        $users = User::limit(5)->orderByRaw('RAND()')->get();
+        $users     = User::limit(5)->orderByRaw('RAND()')->get();
+        $keywords  = Keyword::ofType('timeline_count');
 
-        return view('timeline.index', compact('timelines', 'users'));
+        if (request()->has('keyword')) {
+            $keyword = Keyword::where('name', request()->input('keyword'))->first();
+
+            if (is_null($keyword)) {
+                $timelines = Timeline::where('id', 0)->paginate();
+            } else {
+                $timelines = $keyword->timelines()->paginate();
+            }
+        }
+
+        return view('timeline.index', compact('timelines', 'users', 'keywords'));
     }
 
     /**
@@ -62,6 +74,8 @@ class TimelineController extends Controller
         $timeline->content = $request->content;
 
         if ($timeline->save()) {
+            event(new ExtractKeywordsEvent($timeline));
+
             return redirect()->to('/timeline');
         } else {
             return back();
@@ -70,6 +84,8 @@ class TimelineController extends Controller
 
     /**
      * Store Comment
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postStoreComment(Request $request)
     {
@@ -78,12 +94,30 @@ class TimelineController extends Controller
             'content'       =>      'required|string',
         ]);
 
+        $timeline = Timeline::findOrFail($request->timeline_id);
         $timelineComment = new TimelineComment();
+
+        if ($request->timeline_comment_id) {
+            $timelineComment->parent_id   =   $request->timeline_comment_id;
+        }
+
         $timelineComment->user_id       =   Auth::user()->user()->id;
         $timelineComment->timeline_id   =   $request->timeline_id;
         $timelineComment->content       =   $request->content;
 
         if ($timelineComment->save()) {
+            $timeline->increment('comment_num');
+
+            if ($timelineComment->parent_id > 0) {
+                if ($timelineComment->parent->user_id !== Auth::user()->user()->id) {
+                    event(new TriggerNoticeEvent($timelineComment, $timelineComment->parent, 'timeline_comment_comment'));
+                }
+            } else {
+                if ($timeline->user_id !== Auth::user()->user()->id) {
+                    event(new TriggerNoticeEvent($timelineComment, $timeline, 'timeline_comment'));
+                }
+            }
+
             return back();
         } else {
             return back();
@@ -99,10 +133,44 @@ class TimelineController extends Controller
      */
     public function getShow($id)
     {
-        $timeline = Timeline::findOrFail($id);
+        $timeline = Timeline::with('keywords')->findOrFail($id);
         $users = User::limit(5)->orderByRaw('RAND()')->get();
+        $comments = $timeline->comments()->paginate();
 
-        return view('timeline.show', compact('timeline', 'users'));
+        return view('timeline.show', compact('timeline', 'users', 'comments'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postSetLike(Request $request)
+    {
+        $this->validate($request, [
+           'id' => 'required|numeric',
+        ]);
+
+        $TimelineLike = TimelineLike::where(['timeline_id' => $request->id, 'user_id' => Auth::user()->user()->id])->first();
+        $Timeline = Timeline::findOrFail($request->id);
+
+        if ($TimelineLike) {
+            $TimelineLike->forceDelete();
+            $Timeline->decrement('like_num');
+        } else {
+            $TimelineLike = new TimelineLike;
+            $TimelineLike->user_id = Auth::user()->user()->id;
+            $TimelineLike->timeline_id = $request->id;
+            $TimelineLike->save();
+            $Timeline->increment('like_num');
+
+            if ($Timeline->user_id !== Auth::user()->user()->id) {
+                event(new TriggerNoticeEvent($TimelineLike, $Timeline, 'timeline_like'));
+            }
+
+        }
+
+        return back();
+
     }
 
     /**

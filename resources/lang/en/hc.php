@@ -9,6 +9,17 @@ return [
     'logout'   => 'Logout',
     'login'    => 'Login',
     'search'   => 'Search',
+    'notice'   => 'Notice',
+
+    // Signup
+    'signup nickname'  => 'Nickname',
+    'signup phone'     => 'Phone',
+    'signup code'      => 'Captcha',
+    'get code'         => 'Get Captcha',
+    'signup password'  => 'Password',
+    'signup'           => 'Singup',
+    'cancel'           => 'Cancel',
+    'forgot password'  => 'Forgot Password',
 
 
     // left welcome login
@@ -52,6 +63,7 @@ return [
     'view all'                              =>      'View all',
     'follow'                                =>      'Follow',
     'recommended_follow_text'               =>      'These are active users in the community, recommend you pay attention to them',
+    'active user'                           =>      'Active User',
 
 
     // right bottom
@@ -71,6 +83,9 @@ return [
 
     // common
     'detail'                                =>          'Detail',
+    'no data'                               =>          'There is no data here',
+    'show more comments'                    =>          'Click to show more comments',
+    'no bio'                                =>          'No bio yet',
 
 
 
@@ -85,4 +100,10 @@ return [
     // timeline
     // ===================
     'What\'s news'                      =>      'What\'s news',
+
+    //
+    // Notice
+    // ==============
+    'mark check'                        =>       'Mark as Checked',
+    'mark all check'                    =>       'Mark All as Checked',
 ];

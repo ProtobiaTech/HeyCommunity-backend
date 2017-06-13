@@ -41,6 +41,11 @@ return [
     'User'                              =>          '用户',
     'Notice'                            =>          '通知',
 
+    'Keyword'                           =>          '关键词',
+    'Keyword name'                      =>          '名称',
+    'Keyword timeline'                  =>          '关联公园数',
+    'Keyword topic'                     =>          '关联话题数',
+
     'Author'                            =>          '作者',
     'Content'                           =>          '内容',
     'Imgs'                              =>          '图片',
@@ -70,6 +75,9 @@ return [
     'Community Info'                    =>          '社区信息',
     'Edit Community Info'               =>          '编辑社区信息',
     'Community Name'                    =>          '社区名称',
+    'Community Keywords'                =>          '社区关键词',
+    'Community Description'             =>          '社区描述',
+    'Community Statistical Code'        =>          '社区统计代码',
     'Domain'                            =>          '域名',
     'Sub Domain'                        =>          '子域名',
     'Email'                             =>          '邮箱',

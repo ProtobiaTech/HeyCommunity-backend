@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth.admin'], 'prefix' => 'dashboard'], function
     Route::controller('data', 'Dashboard\DataController');
     Route::controller('timeline', 'Dashboard\TimelineController');
     Route::controller('user', 'Dashboard\UserController');
+    Route::controller('keyword', 'Dashboard\KeywordController');
     Route::controller('topic', 'Dashboard\TopicController');
     Route::controller('setting', 'Dashboard\SettingController');
     Route::controller('trend', 'Dashboard\TrendController');
@@ -54,6 +55,7 @@ Route::get('/', function() {
     return redirect()->to('/timeline');
 });
 
+Route::get('search', 'SearchController@index');
 Route::controller('auth', 'AuthController');
 Route::controller('timeline', 'TimelineController');
 Route::controller('topic', 'TopicController');

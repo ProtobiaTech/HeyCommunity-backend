@@ -64,24 +64,6 @@
 
             <!-- LG 3 -->
             <div class="col-lg-3">
-            <!--
-      <div class="hide alert alert-warning alert-dismissible hidden-md-down" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <a class="alert-link" href="profile/index.html">@lang('hc.profile_first')</a> @lang('hc.profile_end')
-                    </div>
-
-                    <div class="card mb-4 hidden-md-down">
-                      <div class="card-block">
-                        <h6 class="mb-3">@lang('hc.sponsored')</h6>
-          <div data-grid="images" data-target-height="150">
-            <img class="media-object" data-width="640" data-height="640" data-action="zoom" src="bootstrap-assets/img/instagram_2.jpg">
-          </div>
-          <p><strong>It might be time to visit Iceland.</strong> Iceland is so chill, and everything looks cool here. Also, we heard the people are pretty nice. What are you waiting for?</p>
-          <button class="btn btn-outline-primary btn-sm">@lang('hc.buy ticket')</button>
-        </div>
-      </div>
-      -->
-
                 <div class="card mb-4 hidden-md-down">
                     <div class="card-block">
                         <h6 class="mb-3">@lang('hc.active user')</h6>
@@ -97,7 +79,7 @@
                                             <strong>{{ $user->nickname }}</strong>
                                         </a>
                                         <br>
-                                        <small>{{ $user->bio ? $user->bio : trans('hc.no bio') }}</small>
+                                        <span class="text-muted" style="font-size:12px;">{{ $user->bio ? $user->bio : trans('hc.no bio') }}</span>
                                     </div>
                                 </li>
                             @endforeach

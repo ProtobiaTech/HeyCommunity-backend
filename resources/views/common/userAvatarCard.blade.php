@@ -54,7 +54,7 @@
                 <a class="text-inherit" href="{{ url('/auth/login') }}">@lang('hc.please login')</a>
             </h6>
 
-            <p class="mb-4">@lang('hc.welcome_first') <a href="{{ url('/auth/login') }}">@lang('hc.login')</a>@lang('hc.welcome_end')</p>
+            <p class="mb-4">@lang('hc.welcome_first') <a href="{{ url('/auth/login') }}">@lang('hc.login')</a> @lang('hc.welcome_end')</p>
         </div>
     @endif
 </div>

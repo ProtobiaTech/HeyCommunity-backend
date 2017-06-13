@@ -10,9 +10,11 @@
                     <i class="fa fa-fire"></i> <span>{{ $timeline->like_num + $timeline->comment_num * 2 }}</span>
                     &nbsp;&nbsp;
                 </small>
-                <a href="{{ url('/user/profile/' . $timeline->author->id) }}">
-                    {{ $timeline->author->nickname }}
-                </a>
+                <strong>
+                    <a href="{{ url('/user/profile/' . $timeline->author->id) }}">
+                        {{ $timeline->author->nickname }}
+                    </a>
+                </strong>
             </div>
 
             <p>{{ $timeline->content }}</p>

@@ -12,12 +12,13 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 // use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Kbwebs\MultiAuth\PasswordResets\Contracts\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, SearchableTrait;
 
     /**
      * The database table used by the model.
@@ -40,12 +41,40 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token', 'wx_open_id'];
 
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'users.nickname'    => 10,
+            'users.bio'         => 7,
+        ],
+    ];
+
     /**
      * Related Timeline
      */
     public function timelines()
     {
         return $this->hasMany('App\Timeline', 'user_id')->orderBy('created_at', 'desc')->with('author');
+    }
+
+    /**
+     * Related Topic
+     */
+    public function topics()
+    {
+        return $this->hasMany('App\Topic', 'user_id')->orderBy('created_at', 'desc')->with('author');
     }
 
     /**

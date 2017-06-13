@@ -4,11 +4,31 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Timeline extends HeyCommunity
 {
+    use SearchableTrait;
 
     protected $appends = ['isLike'];
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'timelines.content'    => 10,
+        ],
+    ];
 
     /**
      * Related User

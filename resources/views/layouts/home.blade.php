@@ -80,8 +80,8 @@
             @endif
         </ul>
 
-        <form class="form-inline float-right hidden-sm-down">
-            <input disabled class="form-control" type="text" data-action="grow" placeholder="@lang('hc.search')">
+        <form class="form-inline float-right hidden-sm-down" action="/search" method="GET">
+            <input class="form-control" type="text" data-action="grow" placeholder="@lang('hc.search')" name="query">
         </form>
 
         <ul id="#js-popoverContent" class="nav navbar-nav float-right mr-0 hidden-sm-down">

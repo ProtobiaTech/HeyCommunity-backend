@@ -55,6 +55,7 @@ Route::get('/', function() {
     return redirect()->to('/timeline');
 });
 
+Route::get('search', 'SearchController@index');
 Route::controller('auth', 'AuthController');
 Route::controller('timeline', 'TimelineController');
 Route::controller('topic', 'TopicController');

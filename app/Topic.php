@@ -6,13 +6,35 @@ use Auth;
 use App\Filters\TopicFilters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Topic extends Model
 {
     use SoftDeletes;
     use TopicFilters;
+    use SearchableTrait;
 
     protected $appends = ['thumb_value', 'is_star'];
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'topics.title'      => 10,
+            'topics.content'    => 10,
+        ],
+    ];
+
 
     /**
      * Related Node

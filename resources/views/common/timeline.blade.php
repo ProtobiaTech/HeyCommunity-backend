@@ -80,24 +80,41 @@
             @if ($timeline->comments)
                 <ul class="media-list mb-2 timeline-comment">
                     @foreach ($timeline->comments as $index => $comment)
-                        <li class="media mb-3 timeline-comment-{{ $timeline->id }}">
-                            <a href="{{ url('/user/profile/' . $comment->author->id) }}"><img
-                                        class="media-object d-flex align-self-start mr-3"
-                                        src="{{ $comment->author->avatar }}"></a>
-                            <div class="media-body">
-                                <div>
-                                    <small class="float-right text-muted">{{ $comment->created_at->format('h-d H:i') }}</small>
-                                    <strong><a href="{{ url('/user/profile/' . $comment->author->id) }}">{{ $comment->author->nickname }}</a>
-                                    </strong>
+                        @if ($index <= 2)
+                            <li class="media mb-3 timeline-comment-{{ $timeline->id }}">
+                                <a href="{{ url('/user/profile/' . $comment->author->id) }}"><img
+                                            class="media-object d-flex align-self-start mr-3"
+                                            src="{{ $comment->author->avatar }}"></a>
+                                <div class="media-body">
+                                    <div>
+                                        <small class="float-right text-muted">{{ $comment->created_at->format('h-d H:i') }}</small>
+                                        <strong><a href="{{ url('/user/profile/' . $comment->author->id) }}">{{ $comment->author->nickname }}</a>
+                                        </strong>
+                                    </div>
+                                    {{ $comment->content }}
                                 </div>
-                                {{ $comment->content }}
-                            </div>
-                        </li>
+                            </li>
+                        @else
+                            <li class="media mb-3 timeline-comment-{{ $timeline->id }}" style="display: none">
+                                <a href="{{ url('/user/profile/' . $comment->author->id) }}"><img
+                                            class="media-object d-flex align-self-start mr-3"
+                                            src="{{ $comment->author->avatar }}"></a>
+                                <div class="media-body">
+                                    <div>
+                                        <small class="float-right text-muted">{{ $comment->created_at->format('h-d H:i') }}</small>
+                                        <strong><a href="{{ url('/user/profile/' . $comment->author->id) }}">{{ $comment->author->nickname }}</a>
+                                        </strong>
+                                    </div>
+                                    {{ $comment->content }}
+                                </div>
+                            </li>
+                        @endif
+
                     @endforeach
 
                     @if($timeline->comment_num > 3)
                         <a href="javascript:void(0)"
-                           class="btn btn-link timeline-show-{{ $timeline->id }}"
+                           class="timeline-show-{{ $timeline->id }} nav-link"
                            onclick="toggleComments('.timeline-comment-{{ $timeline->id }}', '.timeline-show-{{ $timeline->id }}')"
                         ><small>@lang('hc.show more comments')</small></a>
                     @endif
@@ -109,12 +126,6 @@
 
 @section('script')
     <script>
-        $(document).ready(function () {
-            $('.timeline-comment').each(function () {
-                $(this).find('li').not(':lt(3)').hide();
-            });
-        });
-
         function toggleComments(timeline, click) {
             var text =  $(click).find('small').text();
 

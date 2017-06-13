@@ -106,5 +106,7 @@
 @endsection
 
 @section('script')
-    //TODO: 高亮功能
+    <script>
+        //TODO: 高亮功能
+    </script>
 @endsection

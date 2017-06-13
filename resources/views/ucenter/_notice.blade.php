@@ -1,8 +1,6 @@
 <li class="list-group-item" style="{{ $notice->is_checked ? "color: lightgray" : "" }}">
-    <label >
-        <input type="checkbox" class="checkbox" value="{{ $notice->id }}" style="margin-right: 5px">
-    </label>
 
+    {{--TODO: 优化页面--}}
     <a href="{{ url('/user/profile/' . $notice->initiator->id) }}" style="margin-right: 8px"><strong>{{ $notice->initiator->nickname }}</strong></a>
     <?php Carbon\Carbon::setLocale('zh'); ?>
     @if($notice->entity_type == "App\\TimelineLike")
@@ -10,7 +8,7 @@
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/timeline/show/' . $notice->target_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
-                &nbsp;&nbsp;
+                <a href="" onclick="checkNotice({{ $notice->id }})">@lang('hc.mark check')</a>
                 <span class="">{{ $notice->created_at->diffForHumans() }}</span>
             </small>
         </div>
@@ -19,7 +17,7 @@
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/timeline/show/' . $notice->entity->timeline_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
-                &nbsp;&nbsp;
+                <a href="" onclick="checkNotice({{ $notice->id }})">@lang('hc.mark check')</a>
                 <span class="">{{ $notice->created_at->diffForHumans() }}</span>
             </small>
         </div>
@@ -28,7 +26,7 @@
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/timeline/show/' . $notice->target_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
-                &nbsp;&nbsp;
+                <a href="" onclick="checkNotice({{ $notice->id }})">@lang('hc.mark check')</a>
                 <span class="">{{ $notice->created_at->diffForHumans() }}</span>
             </small>
         </div>
@@ -37,7 +35,7 @@
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/topic/show/' . $notice->entity->topic_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
-                &nbsp;&nbsp;
+                <a href="" onclick="checkNotice({{ $notice->id }})">@lang('hc.mark check')</a>
                 <span class="">{{ $notice->created_at->diffForHumans() }}</span>
             </small>
         </div>
@@ -46,7 +44,7 @@
         <div style="position:absolute; right:1rem; top:0.75rem;">
             <small>
                 <a class="" href="{{ url('/topic/show/' . $notice->target_id) }}" onclick="checkNotice({{ $notice->id }})">@lang('hc.detail')</a>
-                &nbsp;&nbsp;
+                <a href="" onclick="checkNotice({{ $notice->id }})">@lang('hc.mark check')</a>
                 <span class="">{{ $notice->created_at->diffForHumans() }}</span>
             </small>
         </div>

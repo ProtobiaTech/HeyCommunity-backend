@@ -1,4 +1,4 @@
-<li class="media list-group-item p-4" id="timeline-{{ $timeline->id }}" tabindex='1'>
+<li class="media list-group-item p-4" id="timeline-{{ $timeline->id }}">
     <a class="media-object d-flex align-self-start mr-3" href="{{ url('/user/profile/' . $timeline->author->id) }}">
         <img class="media-object d-flex align-self-start mr-3" src="{{ $timeline->author->avatar }}">
     </a>
@@ -11,7 +11,7 @@
                     &nbsp;&nbsp;
                 </small>
                 <a href="{{ url('/user/profile/' . $timeline->author->id) }}">
-                    <h6>{{ $timeline->author->nickname }}</h6>
+                    {{ $timeline->author->nickname }}
                 </a>
             </div>
 
@@ -132,7 +132,7 @@
 
         function hideComment(timeline, click) {
             $(timeline).not(':lt(3)').hide();
-            $('#timeline-' + timeline.split("-").pop()).focus();
+            $(document).scrollTop( $('#timeline-' + timeline.split("-").pop()).offset().top );
             $(click).find('small').text('点击加载更多评论');
         }
     </script>

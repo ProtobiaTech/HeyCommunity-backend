@@ -116,9 +116,10 @@
 
                     @if($timeline->comment_num > 3)
                         <a href="javascript:void(0)"
-                           class="timeline-show-{{ $timeline->id }} nav-link"
-                           onclick="toggleComments('.timeline-comment-{{ $timeline->id }}', '.timeline-show-{{ $timeline->id }}')"
-                        ><small>@lang('hc.show more comments')</small></a>
+                           class="timeline-show-{{ $timeline->id }} nav-link text-right"
+                           onclick="toggleComments('.timeline-comment-{{ $timeline->id }}', '.timeline-show-{{ $timeline->id }}')">
+                            <small>@lang('hc.show more comments')</small>
+                        </a>
                     @endif
                 </ul>
             @endif

@@ -1,3 +1,3 @@
 <div class="media list-group-item p-4">
-    <strong>@lang('hc.no data')</strong>
+    <span>@lang('hc.no data')</span>
 </div>

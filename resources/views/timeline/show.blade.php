@@ -6,8 +6,9 @@
             <div class="col-lg-2 hidden-sm-down hidden-md-down hidden-xs-down">
                 <hr style="margin-top:0;">
 
-                <a class="btn btn-block btn-secondary" href="{{ url('/timeline') }}"><i
-                            class="pull-left fa fa-chevron-left" style="line-height:1.25"></i> 返回</a>
+                <a class="btn btn-block btn-secondary" href="{{ url('/timeline') }}">
+                    <i class="pull-left fa fa-chevron-left" style="line-height:1.25"></i> 返回
+                </a>
                 <br>
 
                 <a class="btn btn-block btn-secondary"
@@ -134,7 +135,7 @@
             </div>
 
             <!-- LG 3 -->
-            <div class="col-lg-3 hidden-xs-down">
+            <div class="col-lg-3 hidden-sm-down hidden-md-down hidden-xs-down">
                 @include('common.userAvatarCard', ['user' => $timeline->author])
                 @include('common.userInfoCard', ['user' => $timeline->author])
             </div>

@@ -166,7 +166,7 @@
 
 <!-- analytics code -->
 <div style="display:none">
-  {!! $system->community_statistical_code !!}
+    {!! $system->community_statistical_code !!}
 </div>
 </body>
 </html>

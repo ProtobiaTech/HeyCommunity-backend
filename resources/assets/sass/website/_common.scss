@@ -19,3 +19,15 @@
     }
   }
 }
+
+
+//
+// xs-no-padding
+// ==============================
+@media (max-width: 767px) {
+    .container {
+        padding-right: 0;
+        padding-left: 0;
+        overflow: hidden;
+    }
+}

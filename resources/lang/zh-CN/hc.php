@@ -10,6 +10,7 @@ return [
     'login'    => '登录',
     'search'   => '搜索',
     'notice'   => '通知',
+    'notifications'         => '通知',
 
     // Signup
     'signup nickname'  => '昵称',

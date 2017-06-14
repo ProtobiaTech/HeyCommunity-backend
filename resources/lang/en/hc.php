@@ -10,6 +10,7 @@ return [
     'login'    => 'Login',
     'search'   => 'Search',
     'notice'   => 'Notice',
+    'notifications'         => 'Notifications',
 
     // Signup
     'signup nickname'  => 'Nickname',

@@ -70,7 +70,7 @@
 
             @if (Auth::user()->check())
                 <li class="nav-item hidden-md-up">
-                    <a class="nav-link" href="">Notifications</a>
+                    <a class="nav-link" href="">@lang('hc.notifications')</a>
                 </li>
                 <li class="nav-item hidden-md-up">
                     <a class="nav-link" href="{{ url('/auth/logout') }}">@lang('hc.logout')</a>

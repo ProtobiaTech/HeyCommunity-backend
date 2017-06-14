@@ -11,8 +11,6 @@
 
     <title>{{ $system->community_name }}</title>
 
-    {!! $system->community_statistical_code !!}
-
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href="{{ asset('bootstrap-assets/css/toolkit.css') }}" rel="stylesheet">
 
@@ -47,7 +45,7 @@
     </button>
 
     <a class="navbar-brand" href="{{ url('/') }}">
-        HeyCommunity &nbsp;&nbsp;
+        {{ $system->community_name }} &nbsp;&nbsp;
     </a>
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -120,28 +118,31 @@
 
 
 <footer class="container">
-    <br>
-    <div class="card card-link-list">
-        <div class="card-block">
-            <div class="text-center">
-                ©2015 - 2017 HeyCommunity
-            </div>
-            <div class="text-center">
-                <a href="#">@lang('hc.about')</a>
-                <a href="#">@lang('hc.help')</a>
-                <a href="#">@lang('hc.terms')</a>
-                <a href="#">@lang('hc.privacy')</a>
-                <a href="#">@lang('hc.cookies')</a>
-                <a href="#">@lang('hc.ads') </a>
-                <a href="#">@lang('hc.info')</a>
-                <a href="#">@lang('hc.brand')</a>
-                <a href="#">@lang('hc.blog')</a>
-                <a href="#">@lang('hc.status')</a>
-                <a href="#">@lang('hc.apps')</a>
-                <a href="#">@lang('hc.jobs')</a>
-                <a href="#">@lang('hc.advertise')</a>
-            </div>
-        </div>
+  <hr>
+    <div>
+      <div class="text-center">
+          ©2015 - 2017 {{ $system->community_name }}
+          <div>
+            <small>Powered by HeyCommunity V3</small>
+          </div>
+      </div>
+      <!--
+      <div class="text-center">
+          <a href="#">@lang('hc.about')</a>
+          <a href="#">@lang('hc.help')</a>
+          <a href="#">@lang('hc.terms')</a>
+          <a href="#">@lang('hc.privacy')</a>
+          <a href="#">@lang('hc.cookies')</a>
+          <a href="#">@lang('hc.ads') </a>
+          <a href="#">@lang('hc.info')</a>
+          <a href="#">@lang('hc.brand')</a>
+          <a href="#">@lang('hc.blog')</a>
+          <a href="#">@lang('hc.status')</a>
+          <a href="#">@lang('hc.apps')</a>
+          <a href="#">@lang('hc.jobs')</a>
+          <a href="#">@lang('hc.advertise')</a>
+      </div>
+      -->
     </div>
 </footer>
 
@@ -162,5 +163,10 @@
 </script>
 
 @yield('script')
+
+<!-- analytics code -->
+<div style="display:none">
+  {!! $system->community_statistical_code !!}
+</div>
 </body>
 </html>

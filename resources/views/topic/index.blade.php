@@ -66,11 +66,13 @@
                         @foreach ($topics as $topic)
                             @include('common.topic')
                         @endforeach
-
-                        {!! $topics->render() !!}
                     @else
                         @include('common.nodata')
                     @endif
+                </div>
+                <br>
+                <div>
+                    @include('common.pagination', ['paginator' => $topics])
                 </div>
             </div>
         </div>

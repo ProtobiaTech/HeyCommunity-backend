@@ -10,8 +10,10 @@
 
 <div class="form-group">
   {!! Form::label('content', '正文') !!}
-  {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+  {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'editor']) !!}
 </div>
+
+@include('common.editor')
 
 <div class="form-group">
   {!! Form::submit('确定', ['class' => ' btn btn-primary form-control']) !!}

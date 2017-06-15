@@ -11,7 +11,7 @@
                 <br>
 
                 <a class="btn btn-block btn-secondary"
-                   href="javascript:$('.form-topic-comment .input-content').focus();">
+                   href="javascript:$('.simditor-body').focus();">
                     <i class="pull-left fa fa-reply" style="line-height:1.25"></i> 回复
                 </a>
 
@@ -86,24 +86,27 @@
                             </div>
                         @endif
 
-                        <p class="content">{!! $topic->content !!}</p>
+                        <div class="content">{!! $topic->content !!}</div>
+
+                        <br>
 
                         <div class="mb-2 form-topic-comment" style="margin-bottom:1rem !important;">
-                            {!! Form::open(array('url' => '/topic/store-comment', 'method' => 'POST')) !!}
+                            {!! Form::open(array('url' => '/topic/store-comment', 'method' => 'POST', 'class' => 'form form-horizontal')) !!}
                             {{ csrf_field() }}
                             {!! Form::hidden('topic_id', $topic->id) !!}
                             {!! Form::hidden('topic_comment_id', 0, ['id' => 'parent-id']) !!}
 
-                            <div class="input-group">
-                                <input type="text" name="content" class="form-control input-content" placeholder="">
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-secondary">
-                                        <span class="icon icon-paper-plane"></span>
-                                    </button>
-                                </div>
+                            <div class="form-group">
+                                <textarea id="editor" class="form-control" placeholder=""></textarea>
+                                <br>
+                                <button type="submit" class="btn btn-info form-control">
+                                    @lang('hc.reply')
+                                </button>
                             </div>
                             {!! Form::close() !!}
                         </div>
+
+                        @include('common.editor')
 
                         <hr style="margin-top:0;">
 
@@ -132,20 +135,12 @@
     <script>
         function replyOne(username, parentId) {
             $('#parent-id').val(parentId);
-            replyContent = $(".input-content");
-            oldContent = replyContent.val();
+            replyContent = $(".simditor-body");
+            oldContent = replyContent.text();
             prefix = "@" + username + " ";
-            newContent = '';
 
-            if (oldContent.length > 0) {
-                if (oldContent != prefix) {
-                    newContent = oldContent + "\n" + prefix;
-                }
-            } else {
-                newContent = prefix
-            }
-            replyContent.focus();
-            replyContent.val(newContent);
+            $('.simditor-body').focus();
+            replyContent.prepend(prefix);
         }
     </script>
 @endsection

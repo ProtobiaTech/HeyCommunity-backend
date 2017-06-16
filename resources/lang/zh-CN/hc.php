@@ -87,6 +87,7 @@ return [
     'no data'                               =>          '暂时没有数据',
     'show more comments'                    =>          '点击加载更多评论',
     'no bio'                                =>          '暂无介绍',
+    'reply'                                 =>          '回复',
 
 
 

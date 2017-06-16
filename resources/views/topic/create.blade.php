@@ -28,8 +28,8 @@
 
       <!-- LG 3 -->
       <div class="col-lg-3 hidden-xs-down">
-        @include('common.userAvatarCard', ['user' => auth()->user()])
-        @include('common.userInfoCard', ['user' => auth()->user()])
+        @include('common.userAvatarCard', ['user' => Auth::user()->user()])
+        @include('common.userInfoCard', ['user' => Auth::user()->user()])
       </div>
     </div>
   </div>

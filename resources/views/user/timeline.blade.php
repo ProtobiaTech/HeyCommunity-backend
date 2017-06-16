@@ -19,11 +19,15 @@
                             @foreach ($timelines as $timeline)
                                 @include('common.timeline')
                             @endforeach
-                            {!! $timelines->render() !!}
                         @else
                             @include('common.nodata')
                         @endif
                     </ul>
+
+                    <br>
+                    <div>
+                        @include('common.pagination', ['paginator' => $timelines])
+                    </div>
                 </div>
             </div>
         </div>

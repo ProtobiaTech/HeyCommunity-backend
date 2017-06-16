@@ -12,7 +12,7 @@
                 </span>
         </div>
         <div class="content">
-            {{ mb_substr($topic->content, 0, 200) }}
+            {!! str_limit($topic->content, 200) !!}
         </div>
     </div>
 </div>

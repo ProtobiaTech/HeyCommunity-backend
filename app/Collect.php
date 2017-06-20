@@ -13,4 +13,9 @@ class Collect extends Model
         1   =>  '封闭',
         2   =>  '私密',
     ];
+
+    /**
+     *
+     */
+    protected $guarded = ['id'];
 }

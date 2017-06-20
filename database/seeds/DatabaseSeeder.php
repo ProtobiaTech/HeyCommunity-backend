@@ -16,15 +16,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserTableSeeder::class);
 
+        $this->call(CollectTableSeeder::class);
+
         $this->call(TimelineTableSeeder::class);
         $this->call(TimelineImgTableSeeder::class);
         $this->call(TimelineCommentTableSeeder::class);
-
-        $this->call(TopicNodeTableSeeder::class);
-        $this->call(TopicTableSeeder::class);
-        $this->call(TopicCommentTableSeeder::class);
-        $this->call(TopicStarTableSeeder::class);
-        $this->call(TopicThumbTableSeeder::class);
 
         Model::reguard();
     }

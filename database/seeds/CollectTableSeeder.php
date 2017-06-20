@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TimelineTableSeeder extends Seeder
+class CollectTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,20 +12,20 @@ class TimelineTableSeeder extends Seeder
     public function run()
     {
         $users = \App\User::lists('id')->toArray();
-        $collects = \App\Collect::lists('id')->toArray();
+        $types = array_keys(\App\Collect::$types);
 
         $faker = Faker\Factory::create();
         foreach (range(1, 68) as $index) {
             $data[] = [
                 'user_id'       =>      $faker->randomElement($users),
-                'collect_id'    =>      $faker->randomElement($collects),
-                'content'       =>      implode('', $faker->paragraphs(random_int(1, 5))),
-                'imgs'          =>      null,
+                'type_id'       =>      $faker->randomElement($types),
+                'name'          =>      $faker->word(),
+                'description'   =>      $faker->paragraph(),
 
                 'created_at'    =>  $faker->dateTimeThisMonth(),
                 'updated_at'    =>  $faker->dateTimeThisMonth(),
             ];
         }
-        \App\Timeline::insert($data);
+        \App\Collect::insert($data);
     }
 }

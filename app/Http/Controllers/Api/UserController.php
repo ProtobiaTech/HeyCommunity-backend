@@ -26,6 +26,20 @@ class UserController extends Controller
     }
 
     /**
+     *
+     */
+    public function getLogInByTest()
+    {
+        $user = User::first();
+
+        if ($user) {
+            Auth::user()->login($user);
+        }
+
+        return $user;
+    }
+
+    /**
      * log out
      *
      * @return string True string

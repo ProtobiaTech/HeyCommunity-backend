@@ -17,6 +17,8 @@ class CreateTimelinesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('collect_id')->index()->unsigned();
+            $table->foreign('collect_id')->references('id')->on('collects');
             $table->text('content');
             $table->string('imgs', 191);
             $table->integer('like_num')->default(0);
